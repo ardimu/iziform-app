@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="id" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iziForm — Sulap Google Form Jadi Interaktif & Estetik</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-surface text-slate-800 font-jakarta antialiased selection:bg-brand-500 selection:text-white min-h-screen flex flex-col transition-colors duration-300">
+
+  <!-- TOP PROMO RIBBON -->
+  <div class="bg-gradient-to-r from-brand-600 via-indigo-600 to-amber-500 py-2.5 px-4 text-center text-xs md:text-sm font-semibold text-white shadow-sm flex items-center justify-center gap-2 relative z-50">
+    <span class="inline-flex items-center gap-1 bg-white/20 px-2.5 py-0.5 rounded-full text-[11px] font-bold tracking-wide backdrop-blur-sm">
+      ✨ 100% GRATIS COBA
+    </span>
+    <span>Tempel link Google Form kamu di bawah, seketika berubah jadi form interaktif sekeren Typeform!</span>
+  </div>
+
+  <!-- NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 backdrop-blur-xl bg-white/85 dark:bg-slate-900/85 border-b border-slate-200/80 dark:border-slate-800/80 transition-all">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+      
+      <!-- LOGO -->
+      <a href="#hero" class="flex items-center gap-3 group">
+        <div class="w-11 h-11 rounded-2xl bg-gradient-to-tr from-brand-600 via-brand-500 to-amber-400 p-0.5 shadow-md shadow-brand-500/20 group-hover:scale-105 transition-all">
+          <div class="w-full h-full bg-white dark:bg-slate-900 rounded-[14px] flex items-center justify-center">
+            <svg class="w-6 h-6 text-brand-600 dark:text-brand-400 group-hover:scale-110 transition" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </div>
+        </div>
+        <div>
+          <div class="flex items-center gap-1.5">
+            <span class="text-2xl font-black tracking-tight text-slate-900 dark:text-white">izi<span class="text-brand-600 dark:text-brand-400">Form</span></span>
+            <span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-amber-400/20 text-amber-700 dark:text-amber-300 border border-amber-400/30">GEN 2.0</span>
+          </div>
+          <p class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Bungkus Google Form Jadi Pengalaman Interaktif</p>
+        </div>
+      </a>
+
+      <!-- RIGHT ACTIONS -->
+      <div class="flex items-center gap-2.5 sm:gap-3">
+        <!-- THEME TOGGLE -->
+        <button onclick="toggleDarkMode()" id="btn-theme-toggle" title="Ganti Tampilan Gelap/Terang" class="w-9 h-9 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 hover:scale-105 transition">
+          <span id="theme-toggle-icon" class="text-base">🌙</span>
+        </button>
+
+        <!-- DIRECT JUMP BUTTON -->
+        <a href="#section-transformer" class="px-4 py-2 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-xs shadow-md shadow-brand-600/25 transition flex items-center gap-1.5">
+          <span>⚡</span>
+          <span>Transform GForm Sekarang</span>
+        </a>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <main class="flex-1">
+
+    <!-- HERO & LINK INPUT SECTION -->
+    <section id="section-transformer" class="relative overflow-hidden pt-12 pb-16 border-b border-slate-200/80 dark:border-slate-800/80 bg-dots">
+      
+      <!-- Ambient Glows -->
+      <div class="ambient-glow bg-brand-400/20 w-[550px] h-[350px] top-10 left-1/2 -translate-x-1/2 blur-[100px]"></div>
+      <div class="ambient-glow bg-amber-400/20 w-[350px] h-[350px] top-20 right-10 blur-[90px]"></div>
+
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center relative z-10">
+        
+        <!-- BADGE -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white dark:bg-slate-800 border border-brand-200 dark:border-brand-900/60 text-xs font-bold text-brand-700 dark:text-brand-300 mb-6 shadow-sm">
+          <span>✨ 100% Simpel Tanpa Koding & Tanpa Apps Script</span>
+        </div>
+
+        <h1 class="text-3xl sm:text-5xl font-black tracking-tight text-slate-900 dark:text-white leading-[1.15]">
+          Punya Google Form Jadul? <br>
+          <span class="bg-gradient-to-r from-brand-600 via-indigo-600 to-amber-500 bg-clip-text text-transparent">
+            Tempel Link-nya & Lihat Keajaibannya!
+          </span>
+        </h1>
+
+        <p class="mt-4 text-sm sm:text-base text-slate-600 dark:text-slate-300 max-w-2xl mx-auto">
+          Tetap atur pertanyaan di Google Form akun Gmail Anda. iziForm menyulapnya menjadi <b>tampilan interaktif, hidup, dan jauh dari kata membosankan</b>. Data responden otomatis tetap masuk ke Google Sheet Anda!
+        </p>
+
+        <!-- THE MAIN LINK INPUT TRANSFORMER BOX -->
+        <div class="mt-8 p-3 sm:p-4 rounded-3xl bg-white dark:bg-slate-900 border-2 border-brand-500/80 shadow-2xl shadow-brand-500/15 relative">
+          
+          <div class="flex flex-col sm:flex-row items-stretch gap-2.5">
+            <!-- INPUT FIELD -->
+            <div class="flex-1 relative flex items-center">
+              <span class="absolute left-4 text-slate-400 text-lg">🔗</span>
+              <input type="url" 
+                     id="gform-link-input" 
+                     placeholder="Paste link Google Form kamu di sini (https://docs.google.com/forms/...)" 
+                     class="w-full pl-12 pr-4 py-3.5 rounded-2xl bg-slate-50 dark:bg-slate-850 border border-slate-200 dark:border-slate-700 text-xs sm:text-sm text-slate-900 dark:text-white font-medium outline-none focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 transition">
+            </div>
+
+            <!-- TRANSFORM BUTTON -->
+            <button onclick="handleTransformClick()" id="btn-transform-gform" class="px-7 py-3.5 rounded-2xl bg-gradient-to-r from-brand-600 to-indigo-600 hover:from-brand-500 hover:to-indigo-500 text-white font-extrabold text-xs sm:text-sm shadow-xl shadow-brand-600/30 hover:scale-[1.02] active:scale-95 transition flex items-center justify-center gap-2">
+              <span class="text-amber-300">⚡</span>
+              <span>Generate Form Estetik</span>
+            </button>
+          </div>
+
+          <!-- QUICK DEMO PRESETS BUTTONS -->
+          <div class="mt-4 pt-3.5 border-t border-slate-100 dark:border-slate-800 flex flex-wrap items-center justify-center sm:justify-between gap-2 text-xs">
+            <span class="text-slate-500 dark:text-slate-400 font-bold text-[11px]">Belum punya link? Coba contoh form instan:</span>
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="loadPresetGForm('hr')" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-brand-50 hover:text-brand-600 text-slate-700 dark:text-slate-300 font-bold text-[11px] transition flex items-center gap-1 border border-slate-200 dark:border-slate-700">
+                <span>💼</span> <span>Form HR Rekrutmen</span>
+              </button>
+              <button onclick="loadPresetGForm('marathon')" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-amber-50 hover:text-amber-600 text-slate-700 dark:text-slate-300 font-bold text-[11px] transition flex items-center gap-1 border border-slate-200 dark:border-slate-700">
+                <span>🏃</span> <span>Event Fun Run 10K</span>
+              </button>
+              <button onclick="loadPresetGForm('cafe')" class="px-3 py-1.5 rounded-xl bg-slate-100 dark:bg-slate-800 hover:bg-emerald-50 hover:text-emerald-600 text-slate-700 dark:text-slate-300 font-bold text-[11px] transition flex items-center gap-1 border border-slate-200 dark:border-slate-700">
+                <span>☕</span> <span>Menu Kafe & Order</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TRANSFORMATION PROGRESS ANIMATION (MODAL/STEPPER) -->
+    <div id="transform-animation-overlay" class="hidden fixed inset-0 z-50 bg-black/70 backdrop-blur-md flex items-center justify-center p-4">
+      <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-8 max-w-md w-full shadow-2xl text-center space-y-4">
+        
+        <div class="w-16 h-16 rounded-2xl bg-brand-500/10 text-brand-600 flex items-center justify-center text-3xl mx-auto animate-bounce">
+          ⚡
+        </div>
+        
+        <h3 class="text-xl font-black text-slate-900 dark:text-white">Menyulap Google Form Anda...</h3>
+        <p class="text-xs text-slate-500" id="transform-step-status">Membaca struktur pertanyaan dari link Google Form...</p>
+
+        <!-- Progress Steps -->
+        <div class="space-y-2 text-left pt-2">
+          <div class="flex items-center gap-2 text-xs font-bold text-slate-700 dark:text-slate-300" id="trans-step-1">
+            <span class="w-5 h-5 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center text-[10px]">1</span>
+            <span>Ekstraksi pertanyaan dari Google Form</span>
+          </div>
+          <div class="flex items-center gap-2 text-xs font-bold text-slate-400" id="trans-step-2">
+            <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-[10px]">2</span>
+            <span>Mengganti radio button kaku menjadi kartu interaktif</span>
+          </div>
+          <div class="flex items-center gap-2 text-xs font-bold text-slate-400" id="trans-step-3">
+            <span class="w-5 h-5 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-[10px]">3</span>
+            <span>Menyematkan tipografi modern & fluid transition</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- GENERATED FORM STUDIO & INTERACTIVE PLAYGROUND (THE RESULT!) -->
+    <section id="section-studio" class="py-14 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+      
+      <!-- Studio Header -->
+      <div class="mb-8 flex flex-col lg:flex-row lg:items-center justify-between gap-4 p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 shadow-lg">
+        <div>
+          <div class="inline-flex items-center gap-2 text-xs font-black text-emerald-600 dark:text-emerald-400 uppercase tracking-wider mb-1">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-ping"></span>
+            <span>FORM HASIL GENERATE AKTIF</span>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white flex items-center gap-2">
+            <span id="current-form-title">Pendaftaran Event & Rekrutmen</span>
+          </h2>
+          <p class="text-xs text-slate-500 mt-0.5">Tersambung langsung ke Google Form asli. Responden yang submit otomatis masuk ke Google Sheet Anda.</p>
+        </div>
+
+        <!-- SHARE / LINK READY PILL -->
+        <div class="flex items-center gap-2">
+          <div class="bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-2xl px-3.5 py-2 text-xs font-mono font-bold text-brand-600 dark:text-brand-300">
+            <span id="generated-link-display">iziform.app/f/event-2026</span>
+          </div>
+          <button onclick="copyGeneratedLink()" class="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs shadow transition flex items-center gap-1.5">
+            <span>📋</span> <span>Salin Link</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- MAIN STUDIO WORKSPACE (CONTROLS + CANVAS) -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- LEFT CONTROL BAR (THEME, FONT, LAYOUT SWITCHER) -->
+        <div class="lg:col-span-4 space-y-5">
+          
+          <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl p-6 shadow-xl space-y-6">
+            
+            <!-- 1. LAYOUT MODE SWITCHER (BEYOND BORING GFORM) -->
+            <div>
+              <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2 flex items-center justify-between">
+                <span>1. Pilih Gaya Interaksi Form</span>
+                <span class="text-[10px] text-amber-600 dark:text-amber-400 font-black">Bukan Form Jadul!</span>
+              </label>
+              
+              <div class="space-y-2">
+                <!-- Mode 1: Focus Slide (Typeform Vibe) -->
+                <button onclick="setLayoutMode('focus')" id="btn-layout-focus" class="w-full p-3 rounded-2xl border-2 border-brand-500 bg-brand-50 dark:bg-brand-950/40 text-left transition flex items-start gap-3">
+                  <span class="text-xl p-1 rounded-lg bg-white dark:bg-slate-900 shadow-sm">🎯</span>
+                  <div>
+                    <span class="text-xs font-bold text-slate-900 dark:text-white block">Mode Focus (Typeform Slide)</span>
+                    <span class="text-[10px] text-slate-500 dark:text-slate-400 block">Satu pertanyaan per layar. Sangat adiktif dan fokus.</span>
+                  </div>
+                </button>
+
+                <!-- Mode 2: Multi-Step Card (Clean Stepper) -->
+                <button onclick="setLayoutMode('card')" id="btn-layout-card" class="w-full p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 text-left transition hover:border-slate-300 flex items-start gap-3">
+                  <span class="text-xl p-1 rounded-lg bg-slate-50 dark:bg-slate-900 shadow-sm">📑</span>
+                  <div>
+                    <span class="text-xs font-bold text-slate-900 dark:text-white block">Mode Card Stepper</span>
+                    <span class="text-[10px] text-slate-500 dark:text-slate-400 block">Kelompok pertanyaan dalam kartu melayang estetik.</span>
+                  </div>
+                </button>
+
+                <!-- Mode 3: Chat Conversational Form -->
+                <button onclick="setLayoutMode('chat')" id="btn-layout-chat" class="w-full p-3 rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 text-left transition hover:border-slate-300 flex items-start gap-3">
+                  <span class="text-xl p-1 rounded-lg bg-slate-50 dark:bg-slate-900 shadow-sm">💬</span>
+                  <div>
+                    <span class="text-xs font-bold text-slate-900 dark:text-white block">Mode Percakapan Chat (WhatsApp Style)</span>
+                    <span class="text-[10px] text-slate-500 dark:text-slate-400 block">Tampil seperti chat interaktif yang ramah. Disukai Gen-Z!</span>
+                  </div>
+                </button>
+              </div>
+            </div>
+
+            <!-- 2. FONT CUSTOMIZER -->
+            <div>
+              <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2 flex items-center justify-between">
+                <span>2. Tipografi / Font</span>
+                <span class="text-[10px] text-emerald-600 font-bold">Gratis</span>
+              </label>
+              <div class="grid grid-cols-2 gap-2">
+                <button onclick="applyFont('Plus Jakarta Sans')" class="font-btn p-2 rounded-xl border-2 border-brand-500 bg-brand-50 dark:bg-brand-950/40 text-xs text-left transition font-jakarta">
+                  <span class="font-bold block text-slate-900 dark:text-white">Jakarta Sans</span>
+                </button>
+                <button onclick="applyFont('Outfit')" class="font-btn p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 text-xs text-left transition font-outfit">
+                  <span class="font-bold block text-slate-900 dark:text-white">Outfit</span>
+                </button>
+                <button onclick="applyFont('Space Grotesk')" class="font-btn p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 text-xs text-left transition font-space">
+                  <span class="font-bold block text-slate-900 dark:text-white">Space Grotesk</span>
+                </button>
+                <button onclick="applyFont('Playfair Display')" class="font-btn p-2 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-850 text-xs text-left transition font-playfair">
+                  <span class="font-bold italic block text-slate-900 dark:text-white">Playfair</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- 3. THEME PALETTE -->
+            <div>
+              <label class="block text-xs font-extrabold uppercase tracking-wider text-slate-700 dark:text-slate-300 mb-2">
+                3. Tema Warna & Suasana
+              </label>
+              <div class="grid grid-cols-5 gap-2">
+                <button onclick="applyTheme('sunset')" title="Sunset Ember" class="h-9 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 ring-2 ring-brand-500 transition hover:scale-105"></button>
+                <button onclick="applyTheme('ocean')" title="Ocean Wave" class="h-9 rounded-xl bg-gradient-to-r from-cyan-500 to-blue-600 transition hover:scale-105"></button>
+                <button onclick="applyTheme('emerald')" title="Matcha Mint" class="h-9 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 transition hover:scale-105"></button>
+                <button onclick="applyTheme('violet')" title="Cyber Violet" class="h-9 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 transition hover:scale-105"></button>
+                <button onclick="applyTheme('dark')" title="Obsidian Dark" class="h-9 rounded-xl bg-gradient-to-r from-slate-700 to-slate-900 transition hover:scale-105"></button>
+              </div>
+            </div>
+
+            <!-- 4. WATERMARK STATUS -->
+            <div class="p-3.5 rounded-2xl bg-amber-50 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/50 flex items-center justify-between">
+              <div>
+                <p class="text-xs font-extrabold text-amber-900 dark:text-amber-200">Watermark iziForm</p>
+                <p class="text-[10px] text-amber-700 dark:text-amber-300">Upgrade Rp 19.900 untuk hapus total</p>
+              </div>
+              <button onclick="openPricingModal()" class="px-2.5 py-1 bg-amber-400 text-slate-950 font-black text-[10px] rounded-lg shadow-sm">PRO</button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- RIGHT LIVE PREVIEW CANVAS (INTERACTIVE RENDERER) -->
+        <div class="lg:col-span-8">
+          
+          <div class="flex items-center justify-between mb-3 px-2">
+            <span class="text-xs font-extrabold text-slate-700 dark:text-slate-300 uppercase tracking-wide flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+              <span>Kanvas Interaktif — Coba Isi Langsung!</span>
+            </span>
+            <span class="text-xs text-slate-400" id="layout-indicator-badge">Mode: Typeform Focus</span>
+          </div>
+
+          <!-- THE CANVAS WRAPPER -->
+          <div id="interactive-canvas-container" class="relative rounded-3xl p-4 sm:p-8 bg-slate-100/90 dark:bg-slate-950 border border-slate-200 dark:border-slate-800 shadow-xl min-h-[520px] flex items-center justify-center">
+            
+            <!-- VIEW 1: TYPEFORM FOCUS MODE (DEFAULT) -->
+            <div id="view-mode-focus" class="w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200/80 dark:border-slate-800 transition-all">
+              
+              <!-- TOP PROGRESS & STEP COUNTER -->
+              <div class="flex items-center justify-between text-xs font-bold text-slate-400 mb-4">
+                <span id="focus-step-num">Pertanyaan 1 dari 4</span>
+                <span class="text-brand-600 dark:text-brand-400" id="focus-percent-num">25% Selesai</span>
+              </div>
+              <div class="w-full bg-slate-100 dark:bg-slate-800 h-1.5 rounded-full overflow-hidden mb-8">
+                <div id="focus-progress-line" class="h-full bg-gradient-to-r from-brand-500 to-amber-400 rounded-full transition-all duration-300" style="width: 25%"></div>
+              </div>
+
+              <!-- DYNAMIC QUESTION CONTENT -->
+              <div id="focus-question-box" class="space-y-4 min-h-[180px]">
+                <!-- Injected via JavaScript -->
+              </div>
+
+              <!-- BOTTOM NAVIGATION & ENTER HELPER -->
+              <div class="pt-6 mt-6 border-t border-slate-100 dark:border-slate-800 flex items-center justify-between">
+                <button type="button" onclick="focusPrevQuestion()" id="btn-focus-prev" class="px-3.5 py-2 rounded-xl bg-slate-100 dark:bg-slate-800 text-xs font-bold text-slate-600 dark:text-slate-300 hover:bg-slate-200 transition hidden">
+                  &uarr; Sebelumnya
+                </button>
+                <div class="text-[11px] text-slate-400 hidden sm:block">
+                  Tekan <kbd class="px-1.5 py-0.5 rounded bg-slate-100 dark:bg-slate-800 border font-mono">Enter ↵</kbd> untuk lanjut
+                </div>
+                <button type="button" onclick="focusNextQuestion()" id="btn-focus-next" class="px-6 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-xs shadow-md shadow-brand-500/30 transition flex items-center gap-1.5 ml-auto">
+                  <span>Lanjut</span>
+                  <span>&rarr;</span>
+                </button>
+              </div>
+
+              <!-- WATERMARK -->
+              <div id="focus-watermark" class="mt-4 pt-3 text-center text-slate-400 text-[10px]">
+                Ditenagai oleh <b>iziForm</b> • Kirim data langsung ke Google Sheet pemilik
+              </div>
+
+            </div>
+
+            <!-- VIEW 2: MULTI-STEP CARD MODE -->
+            <div id="view-mode-card" class="hidden w-full max-w-lg bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-8 shadow-2xl border border-slate-200/80 dark:border-slate-800 space-y-5">
+              <div id="card-mode-content" class="space-y-4"></div>
+            </div>
+
+            <!-- VIEW 3: CHAT-FORM MODE (WHATSAPP CONVERSATIONAL STYLE) -->
+            <div id="view-mode-chat" class="hidden w-full max-w-lg bg-slate-50 dark:bg-slate-900 rounded-3xl p-4 sm:p-6 shadow-2xl border border-slate-200 dark:border-slate-800 flex flex-col h-[480px]">
+              
+              <!-- CHAT HEADER -->
+              <div class="flex items-center gap-3 pb-3 border-b border-slate-200 dark:border-slate-800 mb-3">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-tr from-brand-500 to-amber-400 text-white flex items-center justify-center font-bold text-sm shadow">
+                  iF
+                </div>
+                <div>
+                  <h4 class="text-xs font-bold text-slate-900 dark:text-white">iziForm Assistant</h4>
+                  <p class="text-[10px] text-emerald-500 font-semibold flex items-center gap-1">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500"></span> Online • Menghubungkan ke Google Sheet
+                  </p>
+                </div>
+              </div>
+
+              <!-- CHAT MESSAGES SCROLL AREA -->
+              <div id="chat-messages-container" class="flex-1 overflow-y-auto space-y-3 p-1 text-xs">
+                <!-- Injected messages -->
+              </div>
+
+              <!-- CHAT INPUT COMPONENT -->
+              <div id="chat-input-area" class="pt-3 border-t border-slate-200 dark:border-slate-800 flex items-center gap-2">
+                <input type="text" id="chat-response-input" placeholder="Ketik jawabanmu di sini..." class="flex-1 form-input text-xs">
+                <button onclick="handleChatSend()" class="p-2.5 rounded-xl bg-brand-600 text-white hover:bg-brand-500 shadow transition">
+                  ➤
+                </button>
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- SUBMISSION SIMULATION SUCCESS POPUP -->
+          <div id="submission-success-modal" class="hidden mt-4 p-5 rounded-3xl bg-emerald-50 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-700 text-emerald-900 dark:text-emerald-100 shadow-xl flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <span class="text-3xl">🎉</span>
+              <div>
+                <h4 class="text-sm font-black text-emerald-900 dark:text-white">Data Berhasil Terkirim ke Google Sheet!</h4>
+                <p class="text-xs text-emerald-700 dark:text-emerald-300">Data jawaban responden langsung tercatat di spreadsheet akun Gmail Anda.</p>
+              </div>
+            </div>
+            <button onclick="resetSubmissionExperience()" class="px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs shadow">
+              Isi Form Lagi
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- PRICING MODAL -->
+  <div id="pricing-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-3xl w-full max-w-lg p-6 sm:p-8 shadow-2xl relative">
+      <button onclick="closePricingModal()" class="absolute top-5 right-5 text-slate-400 hover:text-white p-1">✕</button>
+
+      <div class="text-center mb-6">
+        <span class="text-[11px] font-black text-amber-800 dark:text-amber-300 bg-amber-100 dark:bg-amber-950/60 px-3 py-1 rounded-full border border-amber-300 uppercase">UPGRADE PRO</span>
+        <h3 class="text-2xl font-black text-slate-900 dark:text-white mt-2">Hapus Watermark & Fitur Lengkap</h3>
+        <p class="text-xs text-slate-500 mt-1">Cuma Rp 19.900 sekali bayar via QRIS instan.</p>
+      </div>
+
+      <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 text-center space-y-3">
+        <p class="text-xs font-bold text-slate-800 dark:text-white">Scan QRIS dari BCA, GoPay, OVO, ShopeePay, DANA:</p>
+        <div class="bg-white p-3 rounded-2xl inline-block shadow-inner mx-auto">
+          <!-- QR SVG -->
+          <svg class="w-36 h-36 mx-auto" viewBox="0 0 100 100">
+            <rect width="100" height="100" fill="#ffffff" />
+            <rect x="10" y="10" width="25" height="25" fill="#000000" /><rect x="14" y="14" width="17" height="17" fill="#ffffff" /><rect x="17" y="17" width="11" height="11" fill="#000000" />
+            <rect x="65" y="10" width="25" height="25" fill="#000000" /><rect x="69" y="14" width="17" height="17" fill="#ffffff" /><rect x="72" y="17" width="11" height="11" fill="#000000" />
+            <rect x="10" y="65" width="25" height="25" fill="#000000" /><rect x="14" y="69" width="17" height="17" fill="#ffffff" /><rect x="17" y="72" width="11" height="11" fill="#000000" />
+            <rect x="42" y="42" width="16" height="16" fill="#1e1b4b" />
+          </svg>
+        </div>
+        <p class="text-xs font-black text-amber-600">Total: Rp 19.900</p>
+      </div>
+
+      <button onclick="simulateSuccessfulPayment()" class="mt-4 w-full py-3 rounded-2xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-xs uppercase tracking-wider shadow-lg">
+        ⚡ Simulasi Pembayaran Sukses
+      </button>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toast-box" class="fixed bottom-6 right-6 z-50 pointer-events-none flex flex-col gap-2"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
