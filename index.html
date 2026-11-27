@@ -575,20 +575,10 @@
                   <span class="hr-template-label" data-i18n="hr.uiPreviewLabel">Pratinjau langsung</span>
                 </div>
                 <div id="hr-ui-template-grid" class="hr-ui-template-grid"></div>
-                <div class="hr-template-builder">
-                  <div class="hr-template-builder-copy">
-                    <span class="hr-template-label" data-i18n="hr.templateBuilderTitle">Buat Template dari Gambar</span>
-                    <small class="hr-template-builder-hint" data-i18n="hr.templateBuilderHint">Gambar dipakai sebagai gaya &amp; thumbnail; teks portal tetap dari data HR/PDF.</small>
-                  </div>
-                  <div class="hr-template-builder-actions">
-                    <input type="file" id="hr-template-upload-input" accept="image/*" onchange="handleHrTemplateUploadInput(this)" class="hr-logo-native">
-                    <label for="hr-template-upload-input" class="hr-logo-choose" data-i18n="common.chooseFile">Choose File</label>
-                  </div>
-                </div>
-                <div id="hr-ui-preview" class="hr-ui-preview" data-tier="free" data-template="clean01">
+                <div id="hr-ui-preview" class="hr-ui-preview">
                   <span class="hr-ui-preview-bar"></span>
                   <span class="hr-ui-preview-logo">iF</span>
-                  <span class="hr-ui-preview-copy"><b id="hr-ui-preview-name">Minimal Stack</b><i id="hr-ui-preview-tier">Free</i></span>
+                  <span class="hr-ui-preview-copy"><b id="hr-ui-preview-name">Netral</b><i id="hr-ui-preview-tier">Free</i></span>
                 </div>
               </div>
             </div>
@@ -734,7 +724,6 @@
               <div class="career-hero-meta">
                 <span class="verified-badge"><span data-i18n="form.verified">Terverifikasi</span></span>
                 <span id="showcase-industry"></span>
-                <span><span data-i18n="portal.templateBadge">Template</span>: <b id="showcase-template-name"></b> · <b id="showcase-template-tier"></b></span>
               </div>
               <div class="career-profile-note">
                 <span data-i18n="portal.companyProfile">Profil Perusahaan</span>
@@ -1016,30 +1005,6 @@
       </div>
 
       <button id="checkout-confirm-btn" onclick="confirmQrisPayment()" class="modal-primary" data-i18n="qris.confirm">Saya sudah transfer</button>
-    </div>
-  </div>
-
-  <div id="hr-template-preview-modal" class="modal-overlay hidden" role="dialog" aria-modal="true">
-    <div class="modal-card hr-template-preview-card">
-      <button type="button" onclick="closeTemplatePreview()" class="modal-close" data-i18n-aria="common.close" aria-label="Tutup">&#10005;</button>
-      <span class="modal-eyebrow" data-i18n="hr.templatePreview">Pratinjau template besar</span>
-      <h3 id="hr-template-preview-name" class="modal-title"></h3>
-      <div class="hr-template-preview-meta">
-        <span id="hr-template-preview-index" class="hr-template-preview-index"></span>
-        <span id="hr-template-preview-tier" class="hr-template-preview-tier"></span>
-      </div>
-      <p id="hr-template-preview-note" class="modal-description"></p>
-      <div class="checkout-switch hr-template-preview-switch" role="group" data-i18n-aria="hr.templatePreview" aria-label="Pratinjau template">
-        <button type="button" id="hr-template-preview-web" class="payment-option active" aria-pressed="true" onclick="setTemplatePreviewDevice('web')" data-i18n="hr.templatePreviewWeb">Web</button>
-        <button type="button" id="hr-template-preview-mobile" class="payment-option" aria-pressed="false" onclick="setTemplatePreviewDevice('mobile')" data-i18n="hr.templatePreviewMobile">HP</button>
-      </div>
-      <div id="hr-template-preview-frame" class="hr-template-preview-frame" data-device="web">
-        <img id="hr-template-preview-image" src="" alt="">
-      </div>
-      <div class="hr-template-preview-actions">
-        <button type="button" onclick="closeTemplatePreview()" class="hr-template-preview-cancel" data-i18n="hr.templatePreviewCancel">Batal</button>
-        <button type="button" onclick="confirmTemplatePreview()" class="modal-primary hr-template-preview-confirm" data-i18n="hr.templatePreviewSelect">Pilih Template Ini</button>
-      </div>
     </div>
   </div>
 

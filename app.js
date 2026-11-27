@@ -27,10 +27,6 @@ const state = {
   hrCompanyBanner: '',
   hrUiTemplate: 'clean01',
   hrUiTier: 'free',
-  templatePreviewKey: '',
-  templatePreviewDevice: 'web',
-  hrUploadedTemplates: [],
-  hrTemplateCount: 0,
   hrTemplateKey: 'tech',
   hrSelectionStatus: 'new',
   hrLastCandidate: null,
@@ -555,58 +551,8 @@ const HR_COMPANY_PRESETS = {
 };
 
 const HR_UI_TEMPLATES = [
-  { key: 'clean01', tier: 'free', layout: 'saasSlate', labelKey: 'hr.uiTemplate.clean01' },
-  { key: 'clean02', tier: 'free', layout: 'modernBlue', labelKey: 'hr.uiTemplate.clean02' },
-  { key: 'clean03', tier: 'free', layout: 'darkHeader', labelKey: 'hr.uiTemplate.clean03' },
-  { key: 'glass05', tier: 'pro', layout: 'warmEditorial', labelKey: 'hr.uiTemplate.glass05' },
-  { key: 'glass06', tier: 'pro', layout: 'warmEditorial', labelKey: 'hr.uiTemplate.glass06', asset: false },
-  { key: 'glass07', tier: 'pro', layout: 'modernBlue', labelKey: 'hr.uiTemplate.glass07', asset: false },
-  { key: 'exec08', tier: 'business', layout: 'warmEditorial', labelKey: 'hr.uiTemplate.exec08', asset: false },
-  { key: 'exec09', tier: 'business', layout: 'saasSlate', labelKey: 'hr.uiTemplate.exec09', asset: false },
-  { key: 'exec10', tier: 'business', layout: 'darkHeader', labelKey: 'hr.uiTemplate.exec10', asset: false },
-  { key: 'exec11', tier: 'business', layout: 'modernBlue', labelKey: 'hr.uiTemplate.exec11', asset: false }
+  { key: 'clean01', tier: 'free', labelKey: 'hr.uiTemplate.clean01' }
 ];
-
-const HR_TEMPLATE_ASSETS = {
-  saasSlate: {
-    web: [
-      'assets/templates/HR-WEB-free-01-saas-slate.jpg',
-      'assets/templates/HR-Web-free-01-saas-slate.jpg'
-    ],
-    phone: [
-      'assets/templates/HR-Phone-free-01-saas-slate.jpg'
-    ]
-  },
-  modernBlue: {
-    web: [
-      'assets/templates/HR-Web-free-02-modern-blue.jpg'
-    ],
-    phone: [
-      'assets/templates/HR-Phone-free-02-modern-blue.jpg'
-    ]
-  },
-  darkHeader: {
-    web: [
-      'assets/templates/HR-Web-fee-03-dark-header.jpg',
-      'assets/templates/HR-Web-free-03-dark-header.jpg'
-    ],
-    phone: [
-      'assets/templates/HR-Phone-03-dark-header.jpg',
-      'assets/templates/HR-Phone-fee-03-dark-header.jpg',
-      'assets/templates/HR-Phone-free-03-dark-header.jpg'
-    ]
-  },
-  warmEditorial: {
-    web: [
-      'assets/templates/HR-Web-pro-01-warm-editorial.jpg'
-    ],
-    phone: [
-      'assets/templates/HR-Phone-pro-01-warm-editorial.jpg'
-    ]
-  }
-};
-
-const HR_UPLOAD_LAYOUTS = ['saasSlate', 'warmEditorial', 'modernBlue', 'darkHeader'];
 
 const HR_TEMPLATES = {
   tech: {
@@ -1095,28 +1041,8 @@ const I18N = {
     'hr.matchThreshold': 'Batas kriteria Match Score',
     'hr.uiTemplateLabel': 'Template UI HR',
     'hr.uiPreviewLabel': 'Pratinjau langsung',
-    'hr.templateIndex': 'Template {index}',
-    'hr.templateDirect': 'Pakai',
-    'hr.templatePreview': 'Pratinjau template besar',
-    'hr.templatePreviewHint': 'Tinjau dulu tampilan Web/HP sebelum memilih.',
-    'hr.templatePreviewWeb': 'Web',
-    'hr.templatePreviewMobile': 'HP',
-    'hr.templatePreviewSelect': 'Pilih Template Ini',
-    'hr.templatePreviewCancel': 'Batal',
-    'hr.templateBuilderTitle': 'Buat Template dari Gambar',
-    'hr.templateBuilderHint': 'Gambar dipakai sebagai gaya & thumbnail; teks portal tetap dari data HR/PDF.',
     'hr.uiTier': 'Tier',
-    'hr.uiTemplate.clean01': 'Minimal Stack',
-    'hr.uiTemplate.clean02': 'Editorial White',
-    'hr.uiTemplate.clean03': 'Mono Header',
-    'hr.uiTemplate.clean04': 'Mono Line',
-    'hr.uiTemplate.glass05': 'Corporate Glass',
-    'hr.uiTemplate.glass06': 'Aurora Glass',
-    'hr.uiTemplate.glass07': 'Modular Glass',
-    'hr.uiTemplate.exec08': 'Executive Board',
-    'hr.uiTemplate.exec09': 'Enterprise Split',
-    'hr.uiTemplate.exec10': 'Premium Dark',
-    'hr.uiTemplate.exec11': 'Eksekutif Biru',
+    'hr.uiTemplate.clean01': 'Netral',
     'portal.applyNow': 'Lamar Sekarang',
     'portal.aboutCompany': 'Tentang Perusahaan',
     'portal.jobOverview': 'Ringkasan Posisi',
@@ -1135,7 +1061,6 @@ const I18N = {
     'portal.cvDropHint': 'atau klik untuk memilih berkas • auto-fill otomatis',
     'portal.cvDragActive': 'Lepaskan untuk memindai CV',
     'portal.applicationPanel': 'Formulir Lamaran',
-    'portal.templateBadge': 'Template',
     'portal.companyLabel': 'Perusahaan',
     'portal.companyProfile': 'Profil Perusahaan',
     'portal.positionApplied': 'Posisi yang dilamar',
@@ -1193,8 +1118,6 @@ const I18N = {
     'cv.levelHigh': 'Tinggi',
     'cv.levelMedium': 'Sedang',
     'toast.hrTemplate': 'Template diterapkan',
-    'toast.hrTemplateUploaded': 'Template dibuat: {name}',
-    'toast.hrTemplateUploadError': 'Gagal membaca gambar template.',
     'toast.hrStatus': 'Status seleksi diperbarui',
     'showcase.hrBuilderTitle': 'Alur HR Builder',
     'showcase.hrBuilderDesc': 'Requirement HR otomatis tercermin di portal kandidat.',
@@ -1406,7 +1329,7 @@ const I18N = {
     'toast.pdfUnreadable': 'Teks PDF tidak terbaca. Silakan isi data manual.',
     'toast.pdfError': 'PDF gagal dibaca. Silakan isi data manual.',
     'toast.cvRequired': 'CV PDF wajib diunggah sebelum melanjutkan.',
-    'toast.hrFreeMode': 'Mode dasar Free aktif — template Minimal Stack dipilih.',
+    'toast.hrFreeMode': 'Mode dasar Free aktif — template Netral dipilih.',
     'toast.theme': 'Tema UI diubah: {name}',
     'toast.font': 'Font aktif: {name}',
     'toast.language': 'Bahasa diubah: {name}',
@@ -1538,28 +1461,8 @@ const I18N = {
     'hr.matchThreshold': 'Match Score threshold',
     'hr.uiTemplateLabel': 'HR UI template',
     'hr.uiPreviewLabel': 'Live preview',
-    'hr.templateIndex': 'Template {index}',
-    'hr.templateDirect': 'Use',
-    'hr.templatePreview': 'Large template preview',
-    'hr.templatePreviewHint': 'Review Web/Mobile view before selecting.',
-    'hr.templatePreviewWeb': 'Web',
-    'hr.templatePreviewMobile': 'Mobile',
-    'hr.templatePreviewSelect': 'Select This Template',
-    'hr.templatePreviewCancel': 'Cancel',
-    'hr.templateBuilderTitle': 'Build Template from Image',
-    'hr.templateBuilderHint': 'Image is used for style & thumbnail; portal text still comes from HR/PDF data.',
     'hr.uiTier': 'Tier',
-    'hr.uiTemplate.clean01': 'Minimal Stack',
-    'hr.uiTemplate.clean02': 'Editorial White',
-    'hr.uiTemplate.clean03': 'Mono Header',
-    'hr.uiTemplate.clean04': 'Mono Line',
-    'hr.uiTemplate.glass05': 'Corporate Glass',
-    'hr.uiTemplate.glass06': 'Aurora Glass',
-    'hr.uiTemplate.glass07': 'Modular Glass',
-    'hr.uiTemplate.exec08': 'Executive Board',
-    'hr.uiTemplate.exec09': 'Enterprise Split',
-    'hr.uiTemplate.exec10': 'Premium Dark',
-    'hr.uiTemplate.exec11': 'Executive Blue',
+    'hr.uiTemplate.clean01': 'Neutral',
     'portal.applyNow': 'Apply Now',
     'portal.aboutCompany': 'About the Company',
     'portal.jobOverview': 'Job Overview',
@@ -1578,7 +1481,6 @@ const I18N = {
     'portal.cvDropHint': 'or click to choose a file • automatic auto-fill',
     'portal.cvDragActive': 'Release to scan the CV',
     'portal.applicationPanel': 'Application Form',
-    'portal.templateBadge': 'Template',
     'portal.companyLabel': 'Company',
     'portal.companyProfile': 'Company Profile',
     'portal.positionApplied': 'Applied position',
@@ -1636,8 +1538,6 @@ const I18N = {
     'cv.levelHigh': 'High',
     'cv.levelMedium': 'Medium',
     'toast.hrTemplate': 'Template applied',
-    'toast.hrTemplateUploaded': 'Template created: {name}',
-    'toast.hrTemplateUploadError': 'Could not read the template image.',
     'toast.hrStatus': 'Selection status updated',
     'showcase.hrBuilderTitle': 'HR Builder flow',
     'showcase.hrBuilderDesc': 'HR requirements are reflected automatically in the candidate portal.',
@@ -1849,7 +1749,7 @@ const I18N = {
     'toast.pdfUnreadable': 'PDF text could not be read. Please fill in the details manually.',
     'toast.pdfError': 'The PDF could not be processed. Please fill in the details manually.',
     'toast.cvRequired': 'A PDF CV is required before continuing.',
-    'toast.hrFreeMode': 'Free basic mode enabled — Minimal Stack template selected.',
+    'toast.hrFreeMode': 'Free basic mode enabled — Neutral template selected.',
     'toast.theme': 'UI theme changed: {name}',
     'toast.font': 'Active font: {name}',
     'toast.language': 'Language changed: {name}',
@@ -1981,28 +1881,8 @@ const I18N = {
     'hr.matchThreshold': '匹配分门槛',
     'hr.uiTemplateLabel': 'HR 界面模板',
     'hr.uiPreviewLabel': '实时预览',
-    'hr.templateIndex': '模板 {index}',
-    'hr.templateDirect': '使用',
-    'hr.templatePreview': '模板大图预览',
-    'hr.templatePreviewHint': '选择前先查看网页/手机效果。',
-    'hr.templatePreviewWeb': '网页',
-    'hr.templatePreviewMobile': '手机',
-    'hr.templatePreviewSelect': '选择此模板',
-    'hr.templatePreviewCancel': '取消',
-    'hr.templateBuilderTitle': '从图片生成模板',
-    'hr.templateBuilderHint': '图片仅用于风格与缩略图；门户文字仍来自 HR/PDF 数据。',
     'hr.uiTier': '层级',
-    'hr.uiTemplate.clean01': '极简叠层',
-    'hr.uiTemplate.clean02': '编辑留白',
-    'hr.uiTemplate.clean03': '单色页眉',
-    'hr.uiTemplate.clean04': '单色线条',
-    'hr.uiTemplate.glass05': '企业玻璃',
-    'hr.uiTemplate.glass06': '极光玻璃',
-    'hr.uiTemplate.glass07': '模块玻璃',
-    'hr.uiTemplate.exec08': '高管董事会',
-    'hr.uiTemplate.exec09': '企业分栏',
-    'hr.uiTemplate.exec10': '尊享深色',
-    'hr.uiTemplate.exec11': '行政蓝',
+    'hr.uiTemplate.clean01': '中性',
     'portal.applyNow': '立即申请',
     'portal.aboutCompany': '关于公司',
     'portal.jobOverview': '职位概览',
@@ -2021,7 +1901,6 @@ const I18N = {
     'portal.cvDropHint': '或点击选择文件 • 自动填充',
     'portal.cvDragActive': '松开以扫描简历',
     'portal.applicationPanel': '申请表',
-    'portal.templateBadge': '模板',
     'portal.companyLabel': '公司',
     'portal.companyProfile': '公司简介',
     'portal.positionApplied': '申请职位',
@@ -2079,8 +1958,6 @@ const I18N = {
     'cv.levelHigh': '高',
     'cv.levelMedium': '中',
     'toast.hrTemplate': '模板已应用',
-    'toast.hrTemplateUploaded': '模板已生成：{name}',
-    'toast.hrTemplateUploadError': '无法读取模板图片。',
     'toast.hrStatus': '筛选状态已更新',
     'showcase.hrBuilderTitle': 'HR 构建器流程',
     'showcase.hrBuilderDesc': 'HR 要求会自动反映在候选人门户中。',
@@ -2292,7 +2169,7 @@ const I18N = {
     'toast.pdfUnreadable': '无法读取 PDF 文本，请手动填写信息。',
     'toast.pdfError': 'PDF 处理失败，请手动填写信息。',
     'toast.cvRequired': '继续之前必须上传 PDF 简历。',
-    'toast.hrFreeMode': '免费基础模式已启用 — 已选择极简叠层模板。',
+    'toast.hrFreeMode': '免费基础模式已启用 — 已选择中性模板。',
     'toast.theme': '界面主题已更改：{name}',
     'toast.font': '当前字体：{name}',
     'toast.language': '语言已更改：{name}',
@@ -2960,61 +2837,19 @@ function applyCompanyPreset(presetKey) {
   if (state.view === 'form' && state.activePresetKey === 'recruit') renderActivePresetHeader();
 }
 
-function getAllHrTemplates() {
-  return HR_UI_TEMPLATES.concat(state.hrUploadedTemplates);
-}
-
 function getHrUiTemplate() {
-  return getAllHrTemplates().find((item) => item.key === state.hrUiTemplate) || HR_UI_TEMPLATES[0];
-}
-
-function getHrTemplateAssetList(template, device) {
-  const group = HR_TEMPLATE_ASSETS[template.layout] || {};
-  return device === 'mobile' ? (group.phone || []) : (group.web || []);
-}
-
-function getHrTemplateThumb(template, device) {
-  if (template.asset === false) return '';
-  if (template.thumb) return template.thumb;
-  return getHrTemplateAssetList(template, device)[0] || '';
-}
-
-function getHrTemplateThumbFallbacks(template, device) {
-  if (template.asset === false || template.thumb) return '';
-  return getHrTemplateAssetList(template, device).slice(1).join('|');
+  return HR_UI_TEMPLATES[0];
 }
 
 function getHrTemplateLabel(template) {
   return template.label || (template.labelKey ? t(template.labelKey) : template.key);
 }
 
-function getHrTemplateNumber(templateKey) {
-  const index = getAllHrTemplates().findIndex((item) => item.key === templateKey);
-  return index >= 0 ? index + 1 : 1;
-}
-
-function setHrTemplateAccent(template) {
-  const accent = template.accent || '';
-  const targets = [document.body, document.getElementById('career-portal-shell'), document.getElementById('candidate-company-sticky')];
-  targets.forEach((element) => {
-    if (!element || !element.style) return;
-    if (typeof element.style.setProperty === 'function') {
-      if (accent) element.style.setProperty('--career-accent', accent);
-      else element.style.removeProperty('--career-accent');
-    } else if (accent) {
-      element.style['--career-accent'] = accent;
-    } else {
-      delete element.style['--career-accent'];
-    }
-  });
-}
-
 function selectHrUiTemplate(templateKey) {
-  const template = getAllHrTemplates().find((item) => item.key === templateKey);
+  const template = HR_UI_TEMPLATES.find((item) => item.key === templateKey);
   if (!template) return;
   state.hrUiTemplate = template.key;
   state.hrUiTier = template.tier;
-  setHrTemplateAccent(template);
   renderHrUiTemplateGallery();
   renderHrUiPreview();
   renderCompanyIdentity();
@@ -3029,199 +2864,23 @@ function activateHrFreeMode() {
   showToast(t('toast.hrFreeMode'));
 }
 
-function handleTemplateThumbError(image) {
-  if (!image) return;
-  const wrapper = image.parentElement;
-  const fallbacks = String(image.getAttribute('data-fallback') || '').split('|').filter(Boolean);
-  if (fallbacks.length) {
-    image.setAttribute('data-fallback', fallbacks.slice(1).join('|'));
-    image.src = fallbacks[0];
-    image.style.display = '';
-    if (wrapper) wrapper.classList.remove('thumb-missing');
-    return;
-  }
-  if (wrapper) wrapper.classList.add('thumb-missing');
-  image.style.display = 'none';
-}
-
-function selectHrUiTemplateDirect(event, templateKey) {
-  if (event && typeof event.stopPropagation === 'function') event.stopPropagation();
-  selectHrUiTemplate(templateKey);
-}
-
-function handleTemplateCardKey(event, templateKey) {
-  if (!event || !['Enter', ' '].includes(event.key)) return;
-  if (typeof event.preventDefault === 'function') event.preventDefault();
-  openTemplatePreview(templateKey);
-}
-
-function refreshTemplatePreviewImage() {
-  const template = getAllHrTemplates().find((item) => item.key === state.templatePreviewKey);
-  const frame = document.getElementById('hr-template-preview-frame');
-  const image = document.getElementById('hr-template-preview-image');
-  if (!template || !image) return;
-  const thumb = getHrTemplateThumb(template, state.templatePreviewDevice);
-  const fallbacks = getHrTemplateThumbFallbacks(template, state.templatePreviewDevice);
-  if (frame) {
-    frame.classList.toggle('thumb-missing', !thumb);
-    frame.dataset.device = state.templatePreviewDevice;
-  }
-  image.style.display = thumb ? '' : 'none';
-  image.src = thumb;
-  image.alt = `${getHrTemplateLabel(template)} ${state.templatePreviewDevice === 'mobile' ? 'HP' : 'Web'}`;
-  if (thumb) image.setAttribute('data-fallback', fallbacks);
-  else image.removeAttribute('data-fallback');
-  updateTemplatePreviewDeviceButtons();
-}
-
-function openTemplatePreview(templateKey) {
-  const template = getAllHrTemplates().find((item) => item.key === templateKey);
-  if (!template) return;
-  const modal = document.getElementById('hr-template-preview-modal');
-  if (!modal) return;
-  state.templatePreviewKey = template.key;
-  state.templatePreviewDevice = 'web';
-  setTextById('hr-template-preview-name', getHrTemplateLabel(template));
-  setTextById('hr-template-preview-index', t('hr.templateIndex', { index: getHrTemplateNumber(template.key) }));
-  setTextById('hr-template-preview-tier', t(`pricing.${template.tier}`));
-  setTextById('hr-template-preview-note', t('hr.templatePreviewHint'));
-  modal.classList.remove('hidden');
-  refreshTemplatePreviewImage();
-}
-
-function closeTemplatePreview() {
-  state.templatePreviewKey = '';
-  const modal = document.getElementById('hr-template-preview-modal');
-  if (modal) modal.classList.add('hidden');
-}
-
-function confirmTemplatePreview() {
-  const templateKey = state.templatePreviewKey;
-  if (!templateKey) return;
-  selectHrUiTemplate(templateKey);
-  closeTemplatePreview();
-}
-
-function setTemplatePreviewDevice(device) {
-  state.templatePreviewDevice = device === 'mobile' ? 'mobile' : 'web';
-  refreshTemplatePreviewImage();
-}
-
-function updateTemplatePreviewDeviceButtons() {
-  const frame = document.getElementById('hr-template-preview-frame');
-  if (frame) frame.dataset.device = state.templatePreviewDevice;
-  [['hr-template-preview-web', 'web'], ['hr-template-preview-mobile', 'mobile']].forEach(([id, device]) => {
-    const button = document.getElementById(id);
-    if (!button) return;
-    const active = state.templatePreviewDevice === device;
-    button.classList.toggle('active', active);
-    button.setAttribute('aria-pressed', String(active));
-  });
-}
-
-function deriveUploadLayout(name) {
-  const lower = String(name || '').toLowerCase();
-  if (/dark|mono|slate|hitam|黑/.test(lower)) return 'saasSlate';
-  if (/editorial|warm|aurora|cream|kertas|编辑|暖/.test(lower)) return 'warmEditorial';
-  if (/blue|modular|soft|biru|蓝/.test(lower)) return 'modernBlue';
-  if (/header|glass|corporate|玻璃/.test(lower)) return 'darkHeader';
-  return HR_UPLOAD_LAYOUTS[state.hrUploadedTemplates.length % HR_UPLOAD_LAYOUTS.length];
-}
-
-function deriveUploadTier(name) {
-  const lower = String(name || '').toLowerCase();
-  if (/business|exec|premium|商务/.test(lower)) return 'business';
-  if (/pro|glass|professional|专业/.test(lower)) return 'pro';
-  return ['free', 'pro', 'business'].includes(state.hrUiTier) ? state.hrUiTier : 'free';
-}
-
-function analyzeTemplateAccent(template) {
-  if (typeof document.createElement !== 'function') return;
-  const image = document.createElement('img');
-  image.onload = () => {
-    try {
-      const canvas = document.createElement('canvas');
-      if (!canvas || typeof canvas.getContext !== 'function') return;
-      const context2d = canvas.getContext('2d');
-      if (!context2d || typeof context2d.getImageData !== 'function') return;
-      canvas.width = 1;
-      canvas.height = 1;
-      context2d.drawImage(image, 0, 0, 1, 1);
-      const pixel = context2d.getImageData(0, 0, 1, 1).data;
-      template.accent = `rgb(${pixel[0]} ${pixel[1]} ${pixel[2]})`;
-      if (state.hrUiTemplate === template.key) renderCompanyIdentity();
-    } catch (error) {
-      return;
-    }
-  };
-  image.onerror = () => {};
-  image.src = template.thumb;
-}
-
-function handleHrTemplateUploadInput(input) {
-  const file = input && input.files && input.files[0];
-  if (!file || !/^image\//.test(file.type)) {
-    showToast(t('toast.hrTemplateUploadError'));
-    if (input) input.value = '';
-    return;
-  }
-  const reader = new FileReader();
-  reader.onload = () => {
-    state.hrTemplateCount += 1;
-    const baseName = String(file.name || `template-${state.hrTemplateCount}`).replace(/\.[^.]+$/, '');
-    const template = {
-      key: `upload${state.hrTemplateCount}`,
-      tier: deriveUploadTier(baseName),
-      layout: deriveUploadLayout(baseName),
-      label: baseName.slice(0, 36) || t('hr.templateIndex', { index: HR_UI_TEMPLATES.length + state.hrTemplateCount }),
-      thumb: String(reader.result || '')
-    };
-    state.hrUploadedTemplates.push(template);
-    renderHrUiTemplateGallery();
-    selectHrUiTemplate(template.key);
-    analyzeTemplateAccent(template);
-    showToast(t('toast.hrTemplateUploaded', { name: template.label }));
-    if (input) input.value = '';
-  };
-  reader.onerror = () => {
-    showToast(t('toast.hrTemplateUploadError'));
-    if (input) input.value = '';
-  };
-  reader.readAsDataURL(file);
-}
-
 function renderHrUiTemplateGallery() {
   const grid = document.getElementById('hr-ui-template-grid');
   if (!grid) return;
-  grid.innerHTML = getAllHrTemplates().map((template) => {
-    const number = getHrTemplateNumber(template.key);
+  grid.innerHTML = HR_UI_TEMPLATES.map((template) => {
     const label = escapeHtml(getHrTemplateLabel(template));
-    const thumb = getHrTemplateThumb(template);
-    const fallbacks = getHrTemplateThumbFallbacks(template);
-    const thumbMarkup = thumb
-      ? `<span class="hr-ui-template-thumb"><img src="${escapeHtml(thumb)}" data-fallback="${escapeHtml(fallbacks)}" alt="" onerror="handleTemplateThumbError(this)"></span>`
-      : '<span class="hr-ui-template-thumb thumb-missing"></span>';
     return `
-    <div role="button" tabindex="0" onclick="openTemplatePreview('${template.key}')" onkeydown="handleTemplateCardKey(event, '${template.key}')" id="hr-ui-template-${template.key}" class="hr-ui-template-btn hr-ui-template-card ${template.key === state.hrUiTemplate ? 'active' : ''}" data-tier="${template.tier}" data-layout="${template.layout}" data-key="${template.key}">
-      ${thumbMarkup}
-      <span class="hr-ui-template-index">${escapeHtml(t('hr.templateIndex', { index: number }))}</span>
+    <button type="button" onclick="selectHrUiTemplate('${template.key}')" id="hr-ui-template-${template.key}" class="hr-ui-template-btn ${template.key === state.hrUiTemplate ? 'active' : ''}" data-key="${template.key}">
       <span class="hr-ui-template-tier">${escapeHtml(t(`pricing.${template.tier}`))}</span>
       <strong>${label}</strong>
       <span class="hr-ui-template-lines"><i></i><i></i><i></i></span>
-      <button type="button" onclick="selectHrUiTemplateDirect(event, '${template.key}')" class="hr-ui-template-direct" data-i18n="hr.templateDirect">Pakai</button>
-    </div>
+    </button>
   `;
   }).join('');
 }
 
 function renderHrUiPreview() {
   const template = getHrUiTemplate();
-  const preview = document.getElementById('hr-ui-preview');
-  if (preview) {
-    preview.dataset.tier = template.tier;
-    preview.dataset.template = template.key;
-    preview.dataset.layout = template.layout;
-  }
   setTextById('hr-ui-preview-name', getHrTemplateLabel(template));
   setTextById('hr-ui-preview-tier', t(`pricing.${template.tier}`));
 }
@@ -3234,15 +2893,8 @@ function setTextById(id, value) {
 function renderCompanyIdentity() {
   const r = currentHrRequirement();
   const profile = state.hrCompanyProfile;
-  const template = getHrUiTemplate();
   const name = state.hrCompanyName || getPreset('recruit').companyName;
   const setText = (id, value) => setTextById(id, value);
-  document.body.dataset.hrTemplate = template.key;
-  document.body.dataset.hrTier = template.tier;
-  document.body.dataset.hrLayout = template.layout;
-  setHrTemplateAccent(template);
-  const careerShell = document.getElementById('career-portal-shell');
-  if (careerShell) careerShell.dataset.layout = template.layout;
   setCompanyLogoMarkup(document.getElementById('candidate-company-logo'), state.hrCompanyLogo, name);
   setCompanyLogoMarkup(document.getElementById('company-logo-box'), state.hrCompanyLogo, name);
   setCompanyLogoMarkup(document.getElementById('career-company-logo'), state.hrCompanyLogo, name);
@@ -3263,8 +2915,6 @@ function renderCompanyIdentity() {
   setText('showcase-certification', r.certification);
   setText('showcase-plus-points', r.plusPoints);
   setText('showcase-match-threshold', t(`cv.level${r.matchThreshold === 'high' ? 'High' : r.matchThreshold === 'low' ? 'Low' : 'Medium'}`));
-  setText('showcase-template-name', getHrTemplateLabel(template));
-  setText('showcase-template-tier', t(`pricing.${template.tier}`));
   const banner = document.getElementById('career-company-banner');
   if (banner) banner.style.backgroundImage = state.hrCompanyBanner ? `url("${state.hrCompanyBanner}")` : '';
 }
