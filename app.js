@@ -472,14 +472,14 @@ const PRICING_PLANS = {
         oldPrice: 'Rp50rb',
         price: 'Rp29rb',
         periodKey: 'pricing.perForm',
-        ctaKey: 'pricing.proCtaIdr',
+        ctaKey: 'pricing.choosePro',
         checkoutUrl: ''
       },
       usd: {
         oldPrice: '$4',
         price: '$2',
         periodKey: 'pricing.perForm',
-        ctaKey: 'pricing.proCtaUsd',
+        ctaKey: 'pricing.choosePro',
         checkoutUrl: 'https://checkout.example.com/iziform-pro-usd'
       }
     }
@@ -491,14 +491,14 @@ const PRICING_PLANS = {
         oldPrice: 'Rp150rb',
         price: 'Rp99rb',
         periodKey: 'pricing.perProject',
-        ctaKey: 'pricing.businessCtaIdr',
+        ctaKey: 'pricing.chooseBusiness',
         checkoutUrl: ''
       },
       usd: {
         oldPrice: '$10',
         price: '$7',
         periodKey: 'pricing.perProject',
-        ctaKey: 'pricing.businessCtaUsd',
+        ctaKey: 'pricing.chooseBusiness',
         checkoutUrl: 'https://checkout.example.com/iziform-business-usd'
       }
     }
@@ -904,7 +904,7 @@ const I18N = {
     'pricing.eyebrow': 'Harga',
     'pricing.title': 'Bayar sekali, langsung pakai.',
     'pricing.desc': 'Fokus paket Sekali Pakai (Single Pass). Data tetap masuk ke Google Sheet akun Anda sendiri.',
-    'pricing.singlePassNote': 'Tanpa langganan. Pilih QRIS (IDR) atau Global / USD; Free tetap tersedia sebagai paket awal.',
+    'pricing.compactNote': 'Sekali pakai tanpa langganan · Free tetap tersedia',
     'pricing.singlePass': 'Sekali Pakai',
     'pricing.promoBadge': 'PROMO NEW LAUNCHING',
     'pricing.perForm': '/form',
@@ -925,21 +925,22 @@ const I18N = {
     'pricing.proBenefit3': 'PDF CV Auto-Fill',
     'pricing.proBenefit4': 'Semua Tipe Input',
     'pricing.proBenefit5': 'Branding Kustom',
-    'pricing.proCtaIdr': 'Bayar QRIS Rp29rb',
-    'pricing.proCtaUsd': 'Checkout $2',
+    'pricing.choosePro': 'Pilih Pro',
     'pricing.businessRibbon': 'Business',
     'pricing.business': 'Business',
     'pricing.businessBenefit1': 'Semua Fitur PRO + AI Candidate Match Score & Ranking',
     'pricing.businessBenefit2': 'Akses Multi-Admin/Tim',
     'pricing.businessBenefit3': 'Multi-Form 1 Proyek',
     'pricing.businessBenefit4': 'Prioritas Support',
-    'pricing.businessCtaIdr': 'Bayar QRIS Rp99rb',
-    'pricing.businessCtaUsd': 'Checkout $7',
-    'payment.label': 'Metode Pembayaran',
+    'pricing.chooseBusiness': 'Pilih Business',
     'payment.aria': 'Pilih metode pembayaran dan mata uang',
-    'payment.idr': 'QRIS (IDR)',
-    'payment.usd': 'Global / USD ($)',
-    'payment.note': 'Bahasa tidak mengubah metode pembayaran. Pilih bebas QRIS IDR atau Global USD.',
+    'payment.idr': 'QRIS · IDR',
+    'payment.usd': 'Global · USD',
+    'checkout.eyebrow': 'Checkout Paket',
+    'checkout.title': 'Pilih metode pembayaran',
+    'checkout.desc': 'Ringkasan paket terpilih dan harga sesuai kurs aktif. Anda bisa mengganti metode di sini.',
+    'checkout.webDesc': 'Lanjutkan pembayaran Global / USD melalui halaman checkout.',
+    'checkout.webCta': 'Lanjutkan ke Web ($)',
     'toast.paymentMethod': 'Metode pembayaran: {name}',
     'qris.paymentEyebrow': 'Pembayaran QRIS',
     'qris.paymentTitle': 'Bayar paket iziForm',
@@ -1171,7 +1172,7 @@ const I18N = {
     'pricing.eyebrow': 'Pricing',
     'pricing.title': 'Pay once, use it right away.',
     'pricing.desc': 'Focused on Single Pass packages. Your data still flows into your own Google Sheet account.',
-    'pricing.singlePassNote': 'No subscription. Choose QRIS (IDR) or Global / USD; Free stays available as the starter plan.',
+    'pricing.compactNote': 'Single pass, no subscription · Free stays available',
     'pricing.singlePass': 'Single Pass',
     'pricing.promoBadge': 'PROMO NEW LAUNCHING',
     'pricing.perForm': '/form',
@@ -1192,21 +1193,22 @@ const I18N = {
     'pricing.proBenefit3': 'PDF CV Auto-Fill',
     'pricing.proBenefit4': 'All Input Types',
     'pricing.proBenefit5': 'Custom Branding',
-    'pricing.proCtaIdr': 'Pay QRIS Rp29rb',
-    'pricing.proCtaUsd': 'Checkout $2',
+    'pricing.choosePro': 'Choose Pro',
     'pricing.businessRibbon': 'Business',
     'pricing.business': 'Business',
     'pricing.businessBenefit1': 'All PRO features + AI Candidate Match Score & Ranking',
     'pricing.businessBenefit2': 'Multi-Admin/Team Access',
     'pricing.businessBenefit3': 'Multi-Form in 1 Project',
     'pricing.businessBenefit4': 'Priority Support',
-    'pricing.businessCtaIdr': 'Pay QRIS Rp99rb',
-    'pricing.businessCtaUsd': 'Checkout $7',
-    'payment.label': 'Payment Method',
+    'pricing.chooseBusiness': 'Choose Business',
     'payment.aria': 'Choose payment method and currency',
-    'payment.idr': 'QRIS (IDR)',
-    'payment.usd': 'Global / USD ($)',
-    'payment.note': 'Language never changes payment method. Pick QRIS IDR or Global USD freely.',
+    'payment.idr': 'QRIS · IDR',
+    'payment.usd': 'Global · USD',
+    'checkout.eyebrow': 'Package checkout',
+    'checkout.title': 'Choose a payment method',
+    'checkout.desc': 'Review your selected package and active-currency price. You can switch methods here.',
+    'checkout.webDesc': 'Continue Global / USD payment on the checkout page.',
+    'checkout.webCta': 'Continue to Web ($)',
     'toast.paymentMethod': 'Payment method: {name}',
     'qris.paymentEyebrow': 'QRIS Payment',
     'qris.paymentTitle': 'Pay for your iziForm package',
@@ -1438,7 +1440,7 @@ const I18N = {
     'pricing.eyebrow': '价格',
     'pricing.title': '一次付费，立即使用。',
     'pricing.desc': '专注于一次性（Single Pass）套餐。数据仍会写入您自己的 Google Sheet 账号。',
-    'pricing.singlePassNote': '无需订阅。可选择 QRIS（IDR）或 Global / USD；Free 仍作为免费起步套餐。',
+    'pricing.compactNote': '一次性购买，无订阅 · 免费套餐仍可使用',
     'pricing.singlePass': '一次性',
     'pricing.promoBadge': 'PROMO NEW LAUNCHING',
     'pricing.perForm': '/表单',
@@ -1459,21 +1461,22 @@ const I18N = {
     'pricing.proBenefit3': 'PDF 简历自动填充',
     'pricing.proBenefit4': '所有输入类型',
     'pricing.proBenefit5': '自定义品牌',
-    'pricing.proCtaIdr': 'QRIS 支付 Rp29rb',
-    'pricing.proCtaUsd': '结账 $2',
+    'pricing.choosePro': '选择 Pro',
     'pricing.businessRibbon': 'Business',
     'pricing.business': 'Business',
     'pricing.businessBenefit1': '包含全部 PRO 功能 + AI 候选人匹配评分与排名',
     'pricing.businessBenefit2': '多管理员/团队访问',
     'pricing.businessBenefit3': '1 个项目内多表单',
     'pricing.businessBenefit4': '优先支持',
-    'pricing.businessCtaIdr': 'QRIS 支付 Rp99rb',
-    'pricing.businessCtaUsd': '结账 $7',
-    'payment.label': '支付方式',
+    'pricing.chooseBusiness': '选择 Business',
     'payment.aria': '选择支付方式和货币',
-    'payment.idr': 'QRIS (IDR)',
-    'payment.usd': 'Global / USD ($)',
-    'payment.note': '语言不会改变支付方式。QRIS IDR 或 Global USD 可自由选择。',
+    'payment.idr': 'QRIS · IDR',
+    'payment.usd': 'Global · USD',
+    'checkout.eyebrow': '套餐结账',
+    'checkout.title': '选择支付方式',
+    'checkout.desc': '查看已选套餐及当前币种价格。您可以在此处切换支付方式。',
+    'checkout.webDesc': '通过结账页面继续 Global / USD 支付。',
+    'checkout.webCta': '前往网页支付 ($)',
     'toast.paymentMethod': '支付方式：{name}',
     'qris.paymentEyebrow': 'QRIS 支付',
     'qris.paymentTitle': '支付 iziForm 套餐',
@@ -2053,18 +2056,17 @@ function scrollToSection(sectionId) {
 
 function renderPaymentMethod() {
   [
-    ['payment-idr-btn', 'idr'],
-    ['payment-usd-btn', 'usd']
-  ].forEach(([id, method]) => {
-    const button = document.getElementById(id);
-    if (!button) return;
+    ['payment-idr-btn', 'checkout-idr-btn', 'idr'],
+    ['payment-usd-btn', 'checkout-usd-btn', 'usd']
+  ].forEach(([headerId, checkoutId, method]) => {
     const active = method === state.paymentMethod;
-    button.classList.toggle('active', active);
-    button.setAttribute('aria-pressed', String(active));
+    [headerId, checkoutId].forEach((id) => {
+      const button = document.getElementById(id);
+      if (!button) return;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-pressed', String(active));
+    });
   });
-
-  const note = document.getElementById('payment-note');
-  if (note) note.textContent = t('payment.note');
 }
 
 function setPaymentMethod(method, manual = true) {
@@ -2073,7 +2075,12 @@ function setPaymentMethod(method, manual = true) {
   if (manual) state.paymentMethodManuallySet = true;
   renderPaymentMethod();
   renderPricing();
+  renderCheckoutPayment();
   showToast(t('toast.paymentMethod', { name: t(nextMethod === 'usd' ? 'payment.usd' : 'payment.idr') }));
+}
+
+function setCheckoutPaymentMethod(method) {
+  setPaymentMethod(method, true);
 }
 
 function renderPricing() {
@@ -2093,7 +2100,7 @@ function renderPricing() {
     });
   };
 
-  setText('pricing-payment-note', t('pricing.singlePassNote'));
+  setText('pricing-payment-note', t('pricing.compactNote'));
   setText('free-amount', state.paymentMethod === 'usd' ? '$0' : 'Rp0');
   setText('free-scope', t('pricing.freeScope'));
   setBenefits('free-benefits', PRICING_PLANS.free.benefitKeys.map((key) => t(key)));
@@ -2110,38 +2117,57 @@ function renderPricing() {
 
     const cta = document.getElementById(`${planKey}-cta`);
     if (!cta) return;
-    if (state.paymentMethod === 'idr') {
-      cta.setAttribute('href', '#');
-      cta.removeAttribute('target');
-      cta.removeAttribute('rel');
-      cta.onclick = () => {
-        openQrisPayment(planKey);
-        return false;
-      };
-    } else {
-      cta.setAttribute('href', data.checkoutUrl);
-      cta.setAttribute('target', '_blank');
-      cta.setAttribute('rel', 'noopener');
-      cta.onclick = null;
-    }
+    cta.onclick = () => {
+      openCheckoutModal(planKey);
+      return false;
+    };
   });
 }
 
-function openQrisPayment(planKey) {
+function renderCheckoutPayment() {
+  const planKey = state.qrisPaymentPlan || 'pro';
   const plan = PRICING_PLANS[planKey];
-  if (!plan || state.paymentMethod !== 'idr') return;
+  if (!plan) return;
+  const data = plan.methods[state.paymentMethod];
+  const isUsd = state.paymentMethod === 'usd';
+  const setText = (id, value) => {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+  };
+
+  setText('qris-payment-plan', t(`pricing.${planKey}`));
+  setText('qris-payment-price', `${data.price} ${t(data.periodKey)}`);
+  setText('qris-payment-merchant', state.qrisMerchant || t('qris.merchantFallback'));
+
+  const qrisPanel = document.getElementById('checkout-qris-panel');
+  const webPanel = document.getElementById('checkout-web-panel');
+  const merchantLabel = document.getElementById('checkout-merchant-label');
+  const merchantValue = document.getElementById('qris-payment-merchant');
+  const confirmButton = document.getElementById('checkout-confirm-btn');
+  const webLink = document.getElementById('checkout-web-link');
+
+  if (qrisPanel) qrisPanel.classList.toggle('hidden', isUsd);
+  if (webPanel) webPanel.classList.toggle('hidden', !isUsd);
+  if (merchantLabel) merchantLabel.classList.toggle('hidden', isUsd);
+  if (merchantValue) merchantValue.classList.toggle('hidden', isUsd);
+  if (confirmButton) confirmButton.classList.toggle('hidden', isUsd);
+  if (webLink) webLink.setAttribute('href', data.checkoutUrl);
+  renderPaymentMethod();
+}
+
+function openCheckoutModal(planKey) {
+  const plan = PRICING_PLANS[planKey];
+  if (!plan) return;
   clearAdvanceTimer();
   state.qrisPaymentPlan = planKey;
-  const data = plan.methods.idr;
-  const planLabel = document.getElementById('qris-payment-plan');
-  const priceLabel = document.getElementById('qris-payment-price');
-  const merchantLabel = document.getElementById('qris-payment-merchant');
-  if (planLabel) planLabel.textContent = t(`pricing.${planKey}`);
-  if (priceLabel) priceLabel.textContent = `${data.price} ${t(data.periodKey)}`;
-  if (merchantLabel) merchantLabel.textContent = state.qrisMerchant || t('qris.merchantFallback');
+  renderCheckoutPayment();
   updateQrisPreview('payment-qris-preview');
   const modal = document.getElementById('payment-qris-modal');
   if (modal) modal.classList.remove('hidden');
+}
+
+function openQrisPayment(planKey) {
+  openCheckoutModal(planKey);
 }
 
 function closeQrisPaymentModal() {

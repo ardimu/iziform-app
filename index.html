@@ -156,21 +156,19 @@
         </section>
 
         <section id="harga" class="landing-section">
-          <div class="section-heading">
-            <span class="section-eyebrow" data-i18n="pricing.eyebrow">Harga</span>
-            <h2 data-i18n="pricing.title">Mulai gratis, scale saat dibutuhkan.</h2>
-            <p data-i18n="pricing.desc">Semua paket tetap mengutamakan data di Google Sheet akun Anda sendiri.</p>
-          </div>
-          <div class="pricing-controls">
-            <div class="control-group payment-control payment-control-pricing">
-              <span class="control-label" data-i18n="payment.label">Metode Pembayaran</span>
-              <div class="payment-switch" role="group" data-i18n-aria="payment.aria" aria-label="Pilih metode pembayaran dan mata uang">
-                <button type="button" id="payment-idr-btn" class="payment-option active" aria-pressed="true" onclick="setPaymentMethod('idr')" data-i18n="payment.idr">QRIS (IDR)</button>
-                <button type="button" id="payment-usd-btn" class="payment-option" aria-pressed="false" onclick="setPaymentMethod('usd')" data-i18n="payment.usd">Global / USD ($)</button>
-              </div>
+          <div class="pricing-header">
+            <div class="section-heading">
+              <span class="section-eyebrow" data-i18n="pricing.eyebrow">Harga</span>
+              <h2 data-i18n="pricing.title">Mulai gratis, scale saat dibutuhkan.</h2>
+              <p data-i18n="pricing.desc">Semua paket tetap mengutamakan data di Google Sheet akun Anda sendiri.</p>
             </div>
-            <p class="payment-note" id="payment-note" data-i18n="payment.note">Bahasa tidak mengubah metode pembayaran. Pilih bebas QRIS IDR atau Global USD.</p>
-            <p class="pricing-single-note" id="pricing-payment-note" data-i18n="pricing.singlePassNote">Tanpa langganan. Pilih QRIS (IDR) atau Global / USD; Free tetap tersedia sebagai paket awal.</p>
+            <div class="pricing-header-tools">
+              <div class="payment-switch payment-switch-compact" role="group" data-i18n-aria="payment.aria" aria-label="Pilih metode pembayaran dan mata uang">
+                <button type="button" id="payment-idr-btn" class="payment-option active" aria-pressed="true" onclick="setPaymentMethod('idr')" data-i18n="payment.idr">QRIS · IDR</button>
+                <button type="button" id="payment-usd-btn" class="payment-option" aria-pressed="false" onclick="setPaymentMethod('usd')" data-i18n="payment.usd">Global · USD</button>
+              </div>
+              <p class="pricing-compact-note" id="pricing-payment-note" data-i18n="pricing.compactNote">Sekali pakai tanpa langganan · Free tetap tersedia</p>
+            </div>
           </div>
           <div class="pricing-grid">
             <article class="price-card">
@@ -192,7 +190,7 @@
               </span>
               <span class="price-scope" id="pro-scope">Sekali Pakai</span>
               <ul id="pro-benefits"><li>Respon Tanpa Batas</li><li>Hapus Watermark iziForm</li><li>PDF CV Auto-Fill</li><li>Semua Tipe Input</li><li>Branding Kustom</li></ul>
-              <a href="#" id="pro-cta" class="btn btn-primary btn-block">Bayar QRIS Rp29rb</a>
+              <button type="button" id="pro-cta" class="btn btn-primary btn-block">Pilih Pro</button>
             </article>
             <article class="price-card price-business">
               <span class="price-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
@@ -204,7 +202,7 @@
               </span>
               <span class="price-scope" id="business-scope">Sekali Pakai</span>
               <ul id="business-benefits"><li>Semua Fitur PRO + AI Candidate Match Score &amp; Ranking</li><li>Akses Multi-Admin/Tim</li><li>Multi-Form 1 Proyek</li><li>Prioritas Support</li></ul>
-              <a href="#" id="business-cta" class="btn btn-primary btn-block">Bayar QRIS Rp99rb</a>
+              <button type="button" id="business-cta" class="btn btn-primary btn-block">Pilih Business</button>
             </article>
           </div>
         </section>
@@ -530,26 +528,38 @@
   <div id="payment-qris-modal" class="modal-overlay hidden">
     <div class="modal-card">
       <button onclick="closeQrisPaymentModal()" class="modal-close" data-i18n-aria="common.close" aria-label="Tutup">&#10005;</button>
-      <span class="modal-eyebrow" data-i18n="qris.paymentEyebrow">Pembayaran QRIS</span>
-      <h3 class="modal-title" data-i18n="qris.paymentTitle">Bayar paket iziForm</h3>
-      <p class="modal-description" data-i18n="qris.paymentDesc">Scan kode QRIS, transfer sesuai nominal, lalu konfirmasi. Bukti transfer opsional dan hanya disimpan di browser Anda.</p>
+      <span class="modal-eyebrow" data-i18n="checkout.eyebrow">Checkout Paket</span>
+      <h3 class="modal-title" data-i18n="checkout.title">Pilih metode pembayaran</h3>
+      <p class="modal-description" data-i18n="checkout.desc">Ringkasan paket terpilih dan harga sesuai kurs aktif. Anda bisa mengganti metode di sini.</p>
 
       <div class="payment-summary">
         <span class="payment-summary-label" data-i18n="qris.paymentSummary">Ringkasan Pembayaran</span>
         <strong id="qris-payment-plan">Pro</strong>
         <span class="payment-summary-price" id="qris-payment-price">Rp29rb /form</span>
-        <span class="payment-summary-merchant" data-i18n="qris.paymentMerchant">Merchant / QMID</span>
+        <span id="checkout-merchant-label" class="payment-summary-merchant" data-i18n="qris.paymentMerchant">Merchant / QMID</span>
         <span id="qris-payment-merchant">IZIFORM-QRIS</span>
       </div>
 
-      <div class="qris-panel">
-        <div id="payment-qris-preview" class="qris-preview" data-i18n="qris.empty">QRIS belum dipasang. Unggah gambar kode QRIS Anda.</div>
-        <label for="payment-proof-input" class="modal-label" data-i18n="qris.proofLabel">Bukti transfer (opsional)</label>
-        <input type="file" id="payment-proof-input" class="modal-input modal-input-plain" accept="image/*,application/pdf">
-        <p class="modal-hint" data-i18n="qris.transferHint">Jika QRIS belum dipasang, atur gambar kode QRIS melalui menu Dukung Kami terlebih dahulu.</p>
+      <div class="checkout-switch" role="group" data-i18n-aria="payment.aria" aria-label="Pilih metode pembayaran dan mata uang">
+        <button type="button" id="checkout-idr-btn" class="payment-option active" aria-pressed="true" onclick="setCheckoutPaymentMethod('idr')" data-i18n="payment.idr">QRIS · IDR</button>
+        <button type="button" id="checkout-usd-btn" class="payment-option" aria-pressed="false" onclick="setCheckoutPaymentMethod('usd')" data-i18n="payment.usd">Global · USD</button>
       </div>
 
-      <button onclick="confirmQrisPayment()" class="modal-primary" data-i18n="qris.confirm">Saya sudah transfer</button>
+      <div id="checkout-qris-panel" class="checkout-panel">
+        <div class="qris-panel">
+          <div id="payment-qris-preview" class="qris-preview" data-i18n="qris.empty">QRIS belum dipasang. Unggah gambar kode QRIS Anda.</div>
+          <label for="payment-proof-input" class="modal-label" data-i18n="qris.proofLabel">Bukti transfer (opsional)</label>
+          <input type="file" id="payment-proof-input" class="modal-input modal-input-plain" accept="image/*,application/pdf">
+          <p class="modal-hint" data-i18n="qris.transferHint">Jika QRIS belum dipasang, atur gambar kode QRIS melalui menu Dukung Kami terlebih dahulu.</p>
+        </div>
+      </div>
+
+      <div id="checkout-web-panel" class="checkout-panel hidden">
+        <p class="modal-description" data-i18n="checkout.webDesc">Lanjutkan pembayaran Global / USD melalui halaman checkout.</p>
+        <a id="checkout-web-link" href="https://checkout.example.com/iziform-pro-usd" target="_blank" rel="noopener" class="modal-primary support-web-link" data-i18n="checkout.webCta">Lanjutkan ke Web ($)</a>
+      </div>
+
+      <button id="checkout-confirm-btn" onclick="confirmQrisPayment()" class="modal-primary" data-i18n="qris.confirm">Saya sudah transfer</button>
     </div>
   </div>
 
