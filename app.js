@@ -553,6 +553,8 @@ const HR_COMPANY_PRESETS = {
 
 const HR_UI_TEMPLATES = [
   { key: 'clean01', tier: 'free', theme: 'clean', ornament: 'none', fontPair: 'clean', labelKey: 'hr.uiTemplate.clean01' },
+  { key: 'clean02', tier: 'free', theme: 'paper-simple', ornament: 'none', fontPair: 'clean', labelKey: 'hr.uiTemplate.clean02' },
+  { key: 'soft-dusk', tier: 'free', theme: 'soft-dusk', ornament: 'none', fontPair: 'clean', labelKey: 'hr.uiTemplate.softDusk' },
   { key: 'editorial02', tier: 'pro', theme: 'warm-editorial', ornament: 'batik', fontPair: 'editorial', labelKey: 'hr.uiTemplate.pro01' },
   { key: 'pro02', tier: 'pro', theme: 'studio-frame', ornament: 'frame', fontPair: 'studio', labelKey: 'hr.uiTemplate.pro02' },
   { key: 'pro03', tier: 'pro', theme: 'soft-executive', ornament: 'heritage', fontPair: 'executive', labelKey: 'hr.uiTemplate.pro03' },
@@ -1061,6 +1063,13 @@ const I18N = {
     'hr.uiPreviewLabel': 'Pratinjau langsung',
     'hr.uiTier': 'Tier',
     'hr.uiTemplate.clean01': 'Netral',
+    'hr.uiTemplate.clean02': 'Free 2 — Kertas Simpel',
+    'hr.uiTemplate.softDusk': 'Free 3 — Gelap Lembut',
+    'hr.uiTemplateSelect': 'Pilih template UI',
+    'hr.uiPreviewLarge': 'Preview besar',
+    'hr.uiPreviewLargeTitle': 'Pratinjau template UI',
+    'hr.uiApplyPortal': 'Terapkan ke Sisi B',
+    'hr.uiPreviewTagline': 'Tampilan portal kandidat mengikuti template yang dipilih.',
     'hr.uiTemplate.pro01': 'Pro 1 — Warm Editorial Batik Accent',
     'hr.uiTemplate.pro02': 'Pro 2 — Crisp Studio Frame',
     'hr.uiTemplate.pro03': 'Pro 3 — Soft Executive Heritage',
@@ -1495,6 +1504,13 @@ const I18N = {
     'hr.uiPreviewLabel': 'Live preview',
     'hr.uiTier': 'Tier',
     'hr.uiTemplate.clean01': 'Neutral',
+    'hr.uiTemplate.clean02': 'Free 2 — Simple Paper',
+    'hr.uiTemplate.softDusk': 'Free 3 — Soft Dusk',
+    'hr.uiTemplateSelect': 'Choose UI template',
+    'hr.uiPreviewLarge': 'Large preview',
+    'hr.uiPreviewLargeTitle': 'UI template preview',
+    'hr.uiApplyPortal': 'Apply to candidate portal',
+    'hr.uiPreviewTagline': 'The candidate portal follows the selected template.',
     'hr.uiTemplate.pro01': 'Pro 1 — Warm Editorial Batik Accent',
     'hr.uiTemplate.pro02': 'Pro 2 — Crisp Studio Frame',
     'hr.uiTemplate.pro03': 'Pro 3 — Soft Executive Heritage',
@@ -1929,6 +1945,13 @@ const I18N = {
     'hr.uiPreviewLabel': '实时预览',
     'hr.uiTier': '层级',
     'hr.uiTemplate.clean01': '中性',
+    'hr.uiTemplate.clean02': 'Free 2 — 简洁纸张',
+    'hr.uiTemplate.softDusk': 'Free 3 — 柔和暗色',
+    'hr.uiTemplateSelect': '选择界面模板',
+    'hr.uiPreviewLarge': '大图预览',
+    'hr.uiPreviewLargeTitle': '界面模板预览',
+    'hr.uiApplyPortal': '应用到候选人端',
+    'hr.uiPreviewTagline': '候选人门户将跟随所选模板。',
     'hr.uiTemplate.pro01': 'Pro 1 — 暖色编辑蜡染',
     'hr.uiTemplate.pro02': 'Pro 2 — 清晰工作室框线',
     'hr.uiTemplate.pro03': 'Pro 3 — 柔和传承行政风',
@@ -2984,24 +3007,21 @@ function activateHrFreeMode() {
   setHrActiveSide('a', true);
   delete state.hrFontPairOverrides.clean01;
   selectHrUiTemplate('clean01');
-  const grid = document.getElementById('hr-ui-template-grid');
-  if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const target = document.getElementById('hr-ui-template-select') || document.getElementById('hr-ui-preview');
+  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
   showToast(t('toast.hrFreeMode'));
 }
 
 function renderHrUiTemplateGallery() {
-  const grid = document.getElementById('hr-ui-template-grid');
-  if (!grid) return;
-  grid.innerHTML = HR_UI_TEMPLATES.map((template) => {
-    const label = escapeHtml(getHrTemplateLabel(template));
-    return `
-    <button type="button" onclick="selectHrUiTemplate('${template.key}')" id="hr-ui-template-${template.key}" class="hr-ui-template-btn ${template.key === state.hrUiTemplate ? 'active' : ''}" data-key="${template.key}" data-template="${template.theme}">
-      <span class="hr-ui-template-tier">${escapeHtml(t(`pricing.${template.tier}`))}</span>
-      <strong>${label}</strong>
-      <span class="hr-ui-template-lines"><i></i><i></i><i></i></span>
-    </button>
-  `;
+  const select = document.getElementById('hr-ui-template-select');
+  if (!select) return;
+  select.innerHTML = ['free', 'pro', 'business'].map((tier) => {
+    const options = HR_UI_TEMPLATES.filter((template) => template.tier === tier).map((template) => {
+      return `<option value="${template.key}" data-template="${template.theme}">${escapeHtml(getHrTemplateLabel(template))}</option>`;
+    }).join('');
+    return `<optgroup label="${escapeHtml(t(`pricing.${tier}`))}">${options}</optgroup>`;
   }).join('');
+  select.value = state.hrUiTemplate;
 }
 
 function renderHrUiPreview() {
@@ -3014,6 +3034,63 @@ function renderHrUiPreview() {
   }
   setTextById('hr-ui-preview-name', getHrTemplateLabel(template));
   setTextById('hr-ui-preview-tier', t(`pricing.${template.tier}`));
+  renderHrTemplatePreviewStage();
+}
+
+function renderHrTemplatePreviewStage() {
+  const stage = document.getElementById('hr-template-preview-stage');
+  if (!stage) return;
+  const template = getHrUiTemplate();
+  const r = currentHrRequirement();
+  const companyName = state.hrCompanyName || getPreset('recruit').companyName;
+  stage.dataset.template = template.theme;
+  stage.dataset.ornament = template.ornament;
+  stage.dataset.fontPair = getHrFontPair();
+  stage.innerHTML = `
+    <div class="hr-template-stage-hero">
+      <span class="hr-template-stage-logo">iF</span>
+      <span class="hr-template-stage-hero-copy"><b>${escapeHtml(companyName)}</b><i>${escapeHtml(r.position)}</i></span>
+      <span class="hr-template-stage-badge">${escapeHtml(t('portal.applyNow'))}</span>
+    </div>
+    <div class="hr-template-stage-grid">
+      <article>
+        <span>${escapeHtml(t('portal.jobOverview'))}</span>
+        <b>${escapeHtml(r.position)}</b>
+        <i>${escapeHtml(r.jobType)} · ${escapeHtml(r.location)}</i>
+      </article>
+      <article>
+        <span>${escapeHtml(t('portal.requirements'))}</span>
+        <b>${escapeHtml(r.skills)}</b>
+        <i>${escapeHtml(t('hr.minYears'))}: ${escapeHtml(r.minYears)}</i>
+      </article>
+    </div>
+    <div class="hr-template-stage-form">
+      <span>${escapeHtml(t('portal.applicationPanel'))}</span>
+      <b>${escapeHtml(t('portal.title'))}</b>
+    </div>
+  `;
+  setTextById('hr-template-preview-title', getHrTemplateLabel(template));
+  setTextById('hr-template-preview-tier', t(`pricing.${template.tier}`));
+}
+
+function openHrTemplatePreviewModal() {
+  renderHrTemplatePreviewStage();
+  const modal = document.getElementById('hr-template-preview-modal');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeHrTemplatePreviewModal() {
+  const modal = document.getElementById('hr-template-preview-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function applyUiTemplateToCandidate() {
+  closeHrTemplatePreviewModal();
+  setHrActiveSide('b', true);
+  renderCandidatePortal();
+  const portal = document.getElementById('candidate-portal');
+  if (portal) portal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  showToast(`${t('toast.hrTemplate')}: ${getHrTemplateLabel(getHrUiTemplate())}`);
 }
 
 function setTextById(id, value) {

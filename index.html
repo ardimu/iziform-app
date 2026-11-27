@@ -574,7 +574,6 @@
                   <h3 class="hr-block-title" data-i18n="hr.uiTemplateLabel">Template UI HR</h3>
                   <span class="hr-template-label" data-i18n="hr.uiPreviewLabel">Pratinjau langsung</span>
                 </div>
-                <div id="hr-ui-template-grid" class="hr-ui-template-grid"></div>
                 <label class="hr-form-field hr-form-wide hr-font-pair-field">
                   <span data-i18n="hr.fontPairLabel">Font pairing Sisi B</span>
                   <select id="hr-font-pair-select" onchange="setHrFontPair(this.value)">
@@ -586,10 +585,19 @@
                   </select>
                   <small id="hr-font-pair-hint" class="hr-font-pair-hint"></small>
                 </label>
+                <label class="hr-form-field hr-form-wide hr-template-select-field">
+                  <span data-i18n="hr.uiTemplateSelect">Pilih template UI</span>
+                  <select id="hr-ui-template-select" onchange="selectHrUiTemplate(this.value)"></select>
+                </label>
                 <div id="hr-ui-preview" class="hr-ui-preview">
                   <span class="hr-ui-preview-bar"></span>
                   <span class="hr-ui-preview-logo">iF</span>
                   <span class="hr-ui-preview-copy"><b id="hr-ui-preview-name">Netral</b><i id="hr-ui-preview-tier">Free</i></span>
+                </div>
+                <p class="hr-ui-preview-caption" data-i18n="hr.uiPreviewTagline">Tampilan portal kandidat mengikuti template yang dipilih.</p>
+                <div class="hr-ui-preview-actions">
+                  <button type="button" onclick="applyUiTemplateToCandidate()" class="btn btn-primary" data-i18n="hr.uiApplyPortal">Terapkan ke Sisi B</button>
+                  <button type="button" onclick="openHrTemplatePreviewModal()" class="btn btn-secondary" data-i18n="hr.uiPreviewLarge">Preview besar</button>
                 </div>
               </div>
             </div>
@@ -1017,6 +1025,19 @@
       </div>
 
       <button id="checkout-confirm-btn" onclick="confirmQrisPayment()" class="modal-primary" data-i18n="qris.confirm">Saya sudah transfer</button>
+    </div>
+  </div>
+
+  <div id="hr-template-preview-modal" class="modal-overlay hidden" onclick="if (event.target === this) closeHrTemplatePreviewModal()">
+    <div class="modal-card modal-card-wide hr-template-preview-modal">
+      <button onclick="closeHrTemplatePreviewModal()" class="modal-close" data-i18n-aria="common.close" aria-label="Tutup">&#10005;</button>
+      <span class="modal-eyebrow" id="hr-template-preview-tier">Free</span>
+      <h3 class="modal-title" id="hr-template-preview-title">Netral</h3>
+      <div id="hr-template-preview-stage" class="hr-template-preview-stage"></div>
+      <div class="hr-template-preview-actions">
+        <button type="button" onclick="applyUiTemplateToCandidate()" class="modal-primary" data-i18n="hr.uiApplyPortal">Terapkan ke Sisi B</button>
+        <button type="button" onclick="closeHrTemplatePreviewModal()" class="btn btn-secondary" data-i18n="common.close">Tutup</button>
+      </div>
     </div>
   </div>
 
