@@ -578,16 +578,45 @@
               </div>
             </div>
             <aside class="hr-preview-column">
-              <article class="hr-price-card">
-                <span class="price-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
-                <span class="hr-price-label" data-i18n="hr.builderEyebrow">HR Builder</span>
-                <span class="start-from"><i aria-hidden="true"></i><span data-i18n="pricing.startFrom">Mulai dari</span></span>
-                <div class="price-amount-wrap">
-                  <del class="price-old" id="hr-price-old">Rp79rb</del>
-                  <strong class="price-new" id="hr-price-new">Rp49rb</strong>
+              <section id="hr-pricing-compact" class="hr-pricing-compact">
+                <div class="hr-pricing-head">
+                  <span class="hr-price-label" data-i18n="hr.pricingTitle">Paket HR &amp; Rekrutmen</span>
+                  <button type="button" onclick="activateHrFreeMode()" id="hr-free-try-btn" class="hr-free-chip" data-i18n="hr.freeTry">Free tersedia · coba</button>
                 </div>
-                <p class="hr-price-desc" data-i18n="hr.priceDesc">Akses builder + portal kandidat sekali pakai.</p>
-              </article>
+                <p class="hr-free-note" data-i18n="hr.freeNote">Mode dasar gratis tetap tersedia untuk mencoba alur Sisi A ↔ Sisi B.</p>
+                <div class="hr-pricing-mini-grid">
+                  <article class="hr-pricing-mini-card">
+                    <span class="hr-pricing-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
+                    <strong class="hr-pricing-mini-name" data-i18n="hr.starterName">Paket Mulai</strong>
+                    <span class="start-from"><i aria-hidden="true"></i><span data-i18n="pricing.startFrom">Mulai dari</span></span>
+                    <span class="price-amount-wrap hr-pricing-amount">
+                      <del class="price-old" id="hr-price-old">Rp79.000</del>
+                      <strong class="price-new" id="hr-price-new">Rp49.000</strong>
+                    </span>
+                    <span class="hr-pricing-scope" data-i18n="pricing.singlePass">Sekali Pakai</span>
+                    <ul class="hr-pricing-benefits">
+                      <li data-i18n="hr.benefitPortal">Portal lamaran Sisi B aktif</li>
+                      <li data-i18n="hr.benefitCv">Auto-fill PDF CV + kecocokan Tinggi/Sedang/Rendah</li>
+                      <li data-i18n="hr.benefitSheet">Rekap 1 Google Sheet HR</li>
+                    </ul>
+                  </article>
+                  <article class="hr-pricing-mini-card hr-pricing-mini-business">
+                    <span class="hr-pricing-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
+                    <strong class="hr-pricing-mini-name" data-i18n="pricing.business">Business</strong>
+                    <span class="start-from"><i aria-hidden="true"></i><span data-i18n="pricing.startFrom">Mulai dari</span></span>
+                    <span class="price-amount-wrap hr-pricing-amount">
+                      <del class="price-old" id="hr-business-price-old">Rp150.000</del>
+                      <strong class="price-new" id="hr-business-price-new">Rp99.000</strong>
+                    </span>
+                    <span class="hr-pricing-scope" data-i18n="pricing.singlePass">Sekali Pakai</span>
+                    <ul class="hr-pricing-benefits">
+                      <li data-i18n="hr.benefitMultiRole">Multi-posisi &amp; tim HR</li>
+                      <li data-i18n="hr.benefitBusinessTemplate">Template portal karier Business</li>
+                      <li data-i18n="hr.benefitFilter">Rekap &amp; penyaringan kandidat lebih leluasa</li>
+                    </ul>
+                  </article>
+                </div>
+              </section>
               <article class="hr-recap-card">
                 <span class="custom-track-label" data-i18n="hr.previewTitle">Pratinjau rekap Google Sheet HR</span>
                 <p class="hr-recap-desc" data-i18n="hr.previewDesc">Kolom ini yang masuk ke Sheet HR, termasuk kecocokan dan status seleksi kandidat.</p>

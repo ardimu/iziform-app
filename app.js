@@ -593,8 +593,8 @@ Object.values(HR_TEMPLATES).forEach((entry) => {
 });
 
 const HR_PRICING = {
-  idr: { old: 'Rp79rb', price: 'Rp49rb' },
-  usd: { old: '$6', price: '$4' }
+  idr: { old: 'Rp79.000', price: 'Rp49.000', businessOld: 'Rp150.000', businessPrice: 'Rp99.000' },
+  usd: { old: '$6', price: '$4', businessOld: '$10', businessPrice: '$7' }
 };
 
 const HR_STATUS_KEYS = ['new', 'shortlist', 'interview', 'accepted', 'rejected'];
@@ -1105,6 +1105,16 @@ const I18N = {
     'hr.openPortal': 'Buka Portal Kandidat',
     'hr.demoPortal': 'Demo Portal Kandidat',
     'hr.priceDesc': 'Akses builder + portal kandidat sekali pakai.',
+    'hr.pricingTitle': 'Paket HR & Rekrutmen',
+    'hr.freeTry': 'Free tersedia · coba',
+    'hr.freeNote': 'Mode dasar gratis tetap tersedia untuk mencoba alur Sisi A ↔ Sisi B.',
+    'hr.starterName': 'Paket Mulai',
+    'hr.benefitPortal': 'Portal lamaran Sisi B aktif',
+    'hr.benefitCv': 'Auto-fill PDF CV + kecocokan Tinggi/Sedang/Rendah',
+    'hr.benefitSheet': 'Rekap 1 Google Sheet HR',
+    'hr.benefitMultiRole': 'Multi-posisi & tim HR',
+    'hr.benefitBusinessTemplate': 'Template portal karier Business',
+    'hr.benefitFilter': 'Rekap & penyaringan kandidat lebih leluasa',
     'hr.noCandidate': 'Belum ada kandidat masuk. Kirim link portal untuk mulai menerima lamaran.',
     'hr.colCandidate': 'Kandidat',
     'hr.colMatch': 'Kecocokan',
@@ -1333,6 +1343,7 @@ const I18N = {
     'toast.pdfUnreadable': 'Teks PDF tidak terbaca. Silakan isi data manual.',
     'toast.pdfError': 'PDF gagal dibaca. Silakan isi data manual.',
     'toast.cvRequired': 'CV PDF wajib diunggah sebelum melanjutkan.',
+    'toast.hrFreeMode': 'Mode dasar Free aktif — template Minimal Stack dipilih.',
     'toast.theme': 'Tema UI diubah: {name}',
     'toast.font': 'Font aktif: {name}',
     'toast.language': 'Bahasa diubah: {name}',
@@ -1519,6 +1530,16 @@ const I18N = {
     'hr.openPortal': 'Open Candidate Portal',
     'hr.demoPortal': 'Candidate Portal Demo',
     'hr.priceDesc': 'One-time builder + candidate portal access.',
+    'hr.pricingTitle': 'HR & Recruitment Plans',
+    'hr.freeTry': 'Free available · try it',
+    'hr.freeNote': 'The free basic mode still works for trying the Sisi A ↔ Sisi B flow.',
+    'hr.starterName': 'Starter',
+    'hr.benefitPortal': 'Sisi B application portal enabled',
+    'hr.benefitCv': 'PDF CV auto-fill + High/Medium/Low match',
+    'hr.benefitSheet': 'Recap in 1 HR Google Sheet',
+    'hr.benefitMultiRole': 'Multiple roles & HR team support',
+    'hr.benefitBusinessTemplate': 'Business career portal templates',
+    'hr.benefitFilter': 'Flexible recap and candidate filtering',
     'hr.noCandidate': 'No candidate yet. Share the portal link to start receiving applications.',
     'hr.colCandidate': 'Candidate',
     'hr.colMatch': 'Match',
@@ -1747,6 +1768,7 @@ const I18N = {
     'toast.pdfUnreadable': 'PDF text could not be read. Please fill in the details manually.',
     'toast.pdfError': 'The PDF could not be processed. Please fill in the details manually.',
     'toast.cvRequired': 'A PDF CV is required before continuing.',
+    'toast.hrFreeMode': 'Free basic mode enabled — Minimal Stack template selected.',
     'toast.theme': 'UI theme changed: {name}',
     'toast.font': 'Active font: {name}',
     'toast.language': 'Language changed: {name}',
@@ -1933,6 +1955,16 @@ const I18N = {
     'hr.openPortal': '打开候选人门户',
     'hr.demoPortal': '候选人门户演示',
     'hr.priceDesc': '一次性开通构建器 + 候选人门户。',
+    'hr.pricingTitle': 'HR 与招聘套餐',
+    'hr.freeTry': '免费可用 · 立即试用',
+    'hr.freeNote': '免费基础模式仍可体验 A 侧 ↔ B 侧完整流程。',
+    'hr.starterName': '入门套餐',
+    'hr.benefitPortal': '启用 B 侧申请门户',
+    'hr.benefitCv': 'PDF 简历自动填充 + 高/中/低匹配',
+    'hr.benefitSheet': '汇总至 1 个 HR Google Sheet',
+    'hr.benefitMultiRole': '多职位与 HR 团队支持',
+    'hr.benefitBusinessTemplate': 'Business 级招聘门户模板',
+    'hr.benefitFilter': '更灵活的汇总与候选人筛选',
     'hr.noCandidate': '暂无候选人。分享门户链接即可开始接收申请。',
     'hr.colCandidate': '候选人',
     'hr.colMatch': '匹配度',
@@ -2161,6 +2193,7 @@ const I18N = {
     'toast.pdfUnreadable': '无法读取 PDF 文本，请手动填写信息。',
     'toast.pdfError': 'PDF 处理失败，请手动填写信息。',
     'toast.cvRequired': '继续之前必须上传 PDF 简历。',
+    'toast.hrFreeMode': '免费基础模式已启用 — 已选择极简叠层模板。',
     'toast.theme': '界面主题已更改：{name}',
     'toast.font': '当前字体：{name}',
     'toast.language': '语言已更改：{name}',
@@ -2298,13 +2331,18 @@ function applyTranslations() {
 }
 
 function defaultPaymentMethodForLanguage(lang) {
-  return lang === 'en' ? 'usd' : 'idr';
+  return lang === 'id' ? 'idr' : 'usd';
 }
 
 function setLanguage(lang) {
   if (!I18N[lang]) return;
   state.currentLanguage = lang;
-  if (!state.paymentMethodManuallySet) state.paymentMethod = defaultPaymentMethodForLanguage(lang);
+  if (lang === 'zh') {
+    state.paymentMethod = 'usd';
+    state.paymentMethodManuallySet = false;
+  } else if (!state.paymentMethodManuallySet) {
+    state.paymentMethod = defaultPaymentMethodForLanguage(lang);
+  }
   if (state.hrTemplateKey !== 'custom') applyHrTemplate(state.hrTemplateKey, true);
   applyTranslations();
   updateDisplayTrigger();
@@ -2838,6 +2876,14 @@ function selectHrUiTemplate(templateKey) {
   if (state.view === 'form' && state.activePresetKey === 'recruit') renderActivePresetHeader();
 }
 
+function activateHrFreeMode() {
+  setHrActiveSide('a', true);
+  selectHrUiTemplate('clean01');
+  const grid = document.getElementById('hr-ui-template-grid');
+  if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  showToast(t('toast.hrFreeMode'));
+}
+
 function renderHrUiTemplateGallery() {
   const grid = document.getElementById('hr-ui-template-grid');
   if (!grid) return;
@@ -3004,10 +3050,16 @@ function renderHrPreview() {
 
 function renderHrPricing() {
   const data = HR_PRICING[state.paymentMethod] || HR_PRICING.idr;
-  const oldPrice = document.getElementById('hr-price-old');
-  const price = document.getElementById('hr-price-new');
-  if (oldPrice) oldPrice.textContent = data.old;
-  if (price) price.textContent = data.price;
+  const prices = [
+    ['hr-price-old', data.old],
+    ['hr-price-new', data.price],
+    ['hr-business-price-old', data.businessOld],
+    ['hr-business-price-new', data.businessPrice]
+  ];
+  prices.forEach(([id, value]) => {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+  });
 }
 
 function renderHrBuilder() {
