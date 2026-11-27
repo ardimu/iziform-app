@@ -1,4 +1,4 @@
-# iziForm 2.0 — Google Form Supercharger (Drive D)
+# iziForm 3.0 — Google Form Supercharger
 
 > **"Harga 10 ribuan bisa adjust Google Form semaumu!"**  
 > *(Global: "For about one dollar you can customize your Gform without limits")*
@@ -6,9 +6,8 @@
 ---
 
 ## 📍 Lokasi Proyek
-Proyek ini telah dipindahkan sepenuhnya ke **Drive D:**  
-📂 **`D:\iziform-app`**  
-*(Seluruh file di Drive C telah dibersihkan untuk menghemat ruang disk).*
+Jalankan proyek dari folder kerja aktif:
+📂 **`C:\Users\Ardi WIrawan\Documents\iziform-app`**
 
 ---
 
@@ -43,7 +42,7 @@ Proyek ini telah dipindahkan sepenuhnya ke **Drive D:**
 ### Opsi A: Jalankan dengan Node.js Server
 Buka PowerShell atau Command Prompt:
 ```powershell
-cd "D:\iziform-app"
+cd "C:\Users\Ardi WIrawan\Documents\iziform-app"
 node server.js
 ```
 Lalu buka browser Anda di:  
@@ -51,4 +50,4 @@ Lalu buka browser Anda di:
 
 ### Opsi B: Buka Langsung File HTML
 Klik dua kali file berikut untuk langsung dibuka di Google Chrome / Edge:  
-👉 `D:\iziform-app\index.html`
+👉 `C:\Users\Ardi WIrawan\Documents\iziform-app\index.html`

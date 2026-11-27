@@ -788,7 +788,8 @@
               <div id="candidate-step-list" class="candidate-step-list"></div>
             </div>
           </div>
-          <div id="candidate-cv-dropzone" class="candidate-cv-card candidate-cv-dropzone" onclick="jumpToCandidateStep(10)" ondragover="handleCvDragOver(event)" ondragleave="handleCvDragLeave(event)" ondrop="handleCvDrop(event)">
+          <input type="file" id="candidate-cv-picker" accept=".pdf,application/pdf" class="hidden" onchange="handleCvPickerChange(event)">
+          <div id="candidate-cv-dropzone" class="candidate-cv-card candidate-cv-dropzone" onclick="openCandidateCvPicker()" ondragover="handleCvDragOver(event)" ondragleave="handleCvDragLeave(event)" ondrop="handleCvDrop(event)">
             <div class="candidate-cv-drop-icon">PDF</div>
             <div class="candidate-cv-drop-copy">
               <strong id="candidate-cv-drop-title" data-i18n="portal.cvDropTitle">Tarik &amp; lepas CV PDF di sini</strong>

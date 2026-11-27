@@ -54,8 +54,8 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   console.log(`\n======================================================`);
-  console.log(`🚀 iziForm 2.0 Web App is running successfully!`);
-  console.log(`📁 Directory: D:\\iziform-app`);
+  console.log(`🚀 iziForm 3.0 Web App is running successfully!`);
+  console.log(`📁 Directory: ${BASE_DIR}`);
   console.log(`📡 Local URL: http://localhost:${PORT}`);
   console.log(`✨ Friendly & Aesthetic UI Active!`);
   console.log(`======================================================\n`);

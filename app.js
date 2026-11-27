@@ -551,7 +551,9 @@ const HR_COMPANY_PRESETS = {
 };
 
 const HR_UI_TEMPLATES = [
-  { key: 'clean01', tier: 'free', labelKey: 'hr.uiTemplate.clean01' }
+  { key: 'clean01', tier: 'free', theme: 'clean', labelKey: 'hr.uiTemplate.clean01' },
+  { key: 'editorial02', tier: 'free', theme: 'editorial', labelKey: 'hr.uiTemplate.editorial02' },
+  { key: 'noir03', tier: 'business', theme: 'noir', labelKey: 'hr.uiTemplate.noir03' }
 ];
 
 const HR_TEMPLATES = {
@@ -1043,6 +1045,8 @@ const I18N = {
     'hr.uiPreviewLabel': 'Pratinjau langsung',
     'hr.uiTier': 'Tier',
     'hr.uiTemplate.clean01': 'Netral',
+    'hr.uiTemplate.editorial02': 'Editorial Hangat',
+    'hr.uiTemplate.noir03': 'Elegan Gelap',
     'portal.applyNow': 'Lamar Sekarang',
     'portal.aboutCompany': 'Tentang Perusahaan',
     'portal.jobOverview': 'Ringkasan Posisi',
@@ -1463,6 +1467,8 @@ const I18N = {
     'hr.uiPreviewLabel': 'Live preview',
     'hr.uiTier': 'Tier',
     'hr.uiTemplate.clean01': 'Neutral',
+    'hr.uiTemplate.editorial02': 'Warm Editorial',
+    'hr.uiTemplate.noir03': 'Dark Elegant',
     'portal.applyNow': 'Apply Now',
     'portal.aboutCompany': 'About the Company',
     'portal.jobOverview': 'Job Overview',
@@ -1883,6 +1889,8 @@ const I18N = {
     'hr.uiPreviewLabel': '实时预览',
     'hr.uiTier': '层级',
     'hr.uiTemplate.clean01': '中性',
+    'hr.uiTemplate.editorial02': '暖色编辑风',
+    'hr.uiTemplate.noir03': '暗色雅致',
     'portal.applyNow': '立即申请',
     'portal.aboutCompany': '关于公司',
     'portal.jobOverview': '职位概览',
@@ -2321,6 +2329,8 @@ function setLanguage(lang) {
   }
   if (state.hrTemplateKey !== 'custom') applyHrTemplate(state.hrTemplateKey, true);
   applyTranslations();
+  renderHrUiTemplateGallery();
+  renderHrUiPreview();
   updateDisplayTrigger();
   renderPaymentMethod();
   renderPricing();
@@ -2838,7 +2848,26 @@ function applyCompanyPreset(presetKey) {
 }
 
 function getHrUiTemplate() {
-  return HR_UI_TEMPLATES[0];
+  return HR_UI_TEMPLATES.find((item) => item.key === state.hrUiTemplate) || HR_UI_TEMPLATES[0];
+}
+
+function applyHrUiTemplate(isRecruitForm = false) {
+  const formView = document.getElementById('form-view');
+  const shell = document.getElementById('career-portal-shell');
+  const sticky = document.getElementById('candidate-company-sticky');
+  const theme = getHrUiTemplate().theme;
+  if (formView) {
+    if (isRecruitForm) formView.dataset.hrUiTemplate = theme;
+    else formView.removeAttribute('data-hr-ui-template');
+  }
+  if (shell) {
+    if (isRecruitForm) shell.dataset.hrUiTemplate = theme;
+    else shell.removeAttribute('data-hr-ui-template');
+  }
+  if (sticky) {
+    if (isRecruitForm) sticky.dataset.hrUiTemplate = theme;
+    else sticky.removeAttribute('data-hr-ui-template');
+  }
 }
 
 function getHrTemplateLabel(template) {
@@ -2854,6 +2883,8 @@ function selectHrUiTemplate(templateKey) {
   renderHrUiPreview();
   renderCompanyIdentity();
   if (state.view === 'form' && state.activePresetKey === 'recruit') renderActivePresetHeader();
+  renderCandidatePortal();
+  showToast(`${t('toast.hrTemplate')}: ${getHrTemplateLabel(template)}`);
 }
 
 function activateHrFreeMode() {
@@ -2870,7 +2901,7 @@ function renderHrUiTemplateGallery() {
   grid.innerHTML = HR_UI_TEMPLATES.map((template) => {
     const label = escapeHtml(getHrTemplateLabel(template));
     return `
-    <button type="button" onclick="selectHrUiTemplate('${template.key}')" id="hr-ui-template-${template.key}" class="hr-ui-template-btn ${template.key === state.hrUiTemplate ? 'active' : ''}" data-key="${template.key}">
+    <button type="button" onclick="selectHrUiTemplate('${template.key}')" id="hr-ui-template-${template.key}" class="hr-ui-template-btn ${template.key === state.hrUiTemplate ? 'active' : ''}" data-key="${template.key}" data-template="${template.theme}">
       <span class="hr-ui-template-tier">${escapeHtml(t(`pricing.${template.tier}`))}</span>
       <strong>${label}</strong>
       <span class="hr-ui-template-lines"><i></i><i></i><i></i></span>
@@ -2881,6 +2912,8 @@ function renderHrUiTemplateGallery() {
 
 function renderHrUiPreview() {
   const template = getHrUiTemplate();
+  const preview = document.getElementById('hr-ui-preview');
+  if (preview) preview.dataset.template = template.theme;
   setTextById('hr-ui-preview-name', getHrTemplateLabel(template));
   setTextById('hr-ui-preview-tier', t(`pricing.${template.tier}`));
 }
@@ -3131,6 +3164,7 @@ function renderCandidatePortal() {
   if (!portal) return;
   const isRecruitForm = state.view === 'form' && state.activePresetKey === 'recruit';
   portal.classList.toggle('hidden', !isRecruitForm);
+  applyHrUiTemplate(isRecruitForm);
   if (!isRecruitForm) return;
 
   const r = currentHrRequirement();
@@ -3598,6 +3632,22 @@ function selectRating(qId, value) {
   }, 320);
 }
 
+function openCandidateCvPicker() {
+  if (state.view !== 'form' || state.activePresetKey !== 'recruit') return;
+  const input = document.getElementById('candidate-cv-picker');
+  if (!input) return;
+  input.value = '';
+  input.click();
+}
+
+function handleCvPickerChange(event) {
+  const input = event && event.target;
+  const file = input && input.files ? input.files[0] : null;
+  if (!file) return;
+  jumpToCandidateStep(getPreset('recruit').questions.length - 1);
+  handleFileInput('recruit_cv', file);
+}
+
 function handleCvDragOver(event) {
   if (!event) return;
   if (event.preventDefault) event.preventDefault();
@@ -3623,7 +3673,9 @@ function handleCvDrop(event) {
   if (event.preventDefault) event.preventDefault();
   handleCvDragLeave(event);
   const file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
-  if (file) handleFileInput('recruit_cv', file);
+  if (!file) return;
+  jumpToCandidateStep(getPreset('recruit').questions.length - 1);
+  handleFileInput('recruit_cv', file);
 }
 
 async function handleFileInput(qId, file) {
