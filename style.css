@@ -1396,11 +1396,17 @@ body[data-hr-layout="saasSlate"] .career-showcase-card, body[data-hr-layout="mod
   background: var(--accent-color); color: var(--accent-contrast, #ffffff); font-size: 0.5625rem; font-weight: 900;
   letter-spacing: 0.08em; text-transform: uppercase;
 }
+.price-ribbon.promo-badge { top: -0.55rem; right: 0.75rem; max-width: calc(100% - 1.5rem); overflow: hidden; text-overflow: ellipsis; }
 .price-ribbon-free { background: var(--surface-soft); border: 1px solid var(--border-subtle); color: var(--text-faint); }
 .promo-badge {
-  background: linear-gradient(120deg, var(--accent-color), color-mix(in srgb, var(--accent-color) 65%, #f59e0b));
+  background-color: var(--accent-color);
+  background: linear-gradient(120deg, color-mix(in srgb, var(--accent-color) 82%, #000000), color-mix(in srgb, var(--accent-color) 50%, #b45309));
   border: 1px solid color-mix(in srgb, var(--accent-color) 70%, #ffffff);
   box-shadow: 0 10px 24px -10px var(--accent-ring);
+  color: #ffffff;
+  font-weight: 900;
+  line-height: 1.2;
+  text-shadow: 0 1px 2px rgba(2, 6, 23, 0.85);
 }
 .price-name { font-size: 0.75rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-color); }
 .start-from { display: inline-flex; align-items: center; gap: 0.35rem; margin-top: 0.75rem; font-size: 0.5625rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); }
