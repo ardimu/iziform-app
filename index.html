@@ -183,6 +183,7 @@
             <article class="price-card price-popular">
               <span class="price-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
               <span class="price-name" data-i18n="pricing.pro">Pro</span>
+              <span class="start-from"><i aria-hidden="true"></i><span data-i18n="pricing.startFrom">Mulai dari</span></span>
               <span class="price-amount-wrap">
                 <s class="price-old" id="pro-old-price">Rp50rb</s>
                 <span class="price-new" id="pro-price">Rp29rb</span>
@@ -195,6 +196,7 @@
             <article class="price-card price-business">
               <span class="price-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
               <span class="price-name" data-i18n="pricing.business">Business</span>
+              <span class="start-from"><i aria-hidden="true"></i><span data-i18n="pricing.startFrom">Mulai dari</span></span>
               <span class="price-amount-wrap">
                 <s class="price-old" id="business-old-price">Rp150rb</s>
                 <span class="price-new" id="business-price">Rp99rb</span>
@@ -321,6 +323,72 @@
               <strong data-i18n="showcase.surveyTitle">Survei Pelanggan</strong>
               <span data-i18n="showcase.surveyDesc">Rating, masukan, dan ringkasan otomatis.</span>
             </button>
+          </div>
+          <button type="button" onclick="closeInfoPanel()" class="btn btn-secondary panel-inline-cta" data-i18n="panel.back">Kembali ke Kategori</button>
+        </section>
+
+        <section id="panel-custom" class="info-panel hidden">
+          <div class="panel-heading">
+            <button type="button" onclick="closeInfoPanel()" class="panel-back-btn"><span aria-hidden="true">&larr;</span> <span data-i18n="panel.back">Kembali ke Kategori</span></button>
+            <span class="section-eyebrow" data-i18n="custom.eyebrow">Jalur Custom</span>
+            <h2 data-i18n="custom.title">Pilih jalur custom yang paling pas.</h2>
+            <p data-i18n="custom.desc">Custom Sendiri dikerjakan mandiri; Custom Request memakai scope dan estimasi load yang terkunci sejak awal.</p>
+            <div class="custom-currency-row">
+              <div class="payment-switch payment-switch-compact">
+                <button type="button" id="custom-idr-btn" onclick="setPaymentMethod('idr')" class="payment-option active"><span data-i18n="payment.idr">QRIS · IDR</span></button>
+                <button type="button" id="custom-usd-btn" onclick="setPaymentMethod('usd')" class="payment-option"><span data-i18n="payment.usd">Global · USD</span></button>
+              </div>
+              <p class="pricing-compact-note" data-i18n="pricing.compactNote">Sekali pakai tanpa langganan · Free tetap tersedia</p>
+            </div>
+          </div>
+          <div class="custom-track-grid">
+            <article class="custom-track">
+              <span class="custom-track-label" data-i18n="custom.selfLabel">Custom Sendiri</span>
+              <h3 data-i18n="custom.selfTitle">Dikerjakan mandiri oleh pengguna</h3>
+              <p data-i18n="custom.selfDesc">Pilih level dasar atau kapasitas mandiri yang lebih lengkap tanpa menunggu pengerjaan tim.</p>
+              <div class="custom-tier-grid">
+                <article class="custom-tier">
+                  <span class="custom-tier-name" data-i18n="custom.free">Free (dasar)</span>
+                  <span class="start-from"><i aria-hidden="true"></i><span data-i18n="pricing.startFrom">Mulai dari</span></span>
+                  <strong class="custom-tier-price" id="custom-self-free-price">Rp0</strong>
+                  <p data-i18n="custom.selfFreeDesc">Struktur field standar, 1 form aktif, dan 50 respon/bulan.</p>
+                </article>
+                <article class="custom-tier custom-tier-paid">
+                  <span class="custom-tier-name" data-i18n="custom.paid">Berbayar</span>
+                  <span class="start-from"><i aria-hidden="true"></i><span data-i18n="pricing.startFrom">Mulai dari</span></span>
+                  <strong class="custom-tier-price" id="custom-self-paid-price">Rp79rb</strong>
+                  <p data-i18n="custom.selfPaidDesc">Field tambahan, kapasitas lebih besar, dan opsi branding mandiri.</p>
+                </article>
+              </div>
+            </article>
+            <article class="custom-track">
+              <span class="custom-track-label" data-i18n="custom.requestLabel">Custom Request</span>
+              <h3 data-i18n="custom.requestTitle">Khusus berbayar dengan scope terkunci sejak awal</h3>
+              <p data-i18n="custom.requestDesc">Cocok saat struktur data atau alur perlu disiapkan tim dengan batas scope yang jelas.</p>
+              <div class="custom-tier-grid">
+                <article class="custom-tier">
+                  <span class="custom-tier-name" data-i18n="custom.light">Ringan</span>
+                  <span class="start-from"><i aria-hidden="true"></i><span data-i18n="pricing.startFrom">Mulai dari</span></span>
+                  <strong class="custom-tier-price" id="custom-request-light-price">Rp149rb</strong>
+                  <p data-i18n="custom.lightDesc">Penyesuaian field &amp; struktur kolom Google Sheet terarah.</p>
+                  <div class="custom-meta"><span data-i18n="custom.bordering">Batas ruang lingkup</span><b data-i18n="custom.lightBorder">Scope &amp; revisi ringan: 1 putaran terarah.</b></div>
+                  <div class="custom-meta"><span data-i18n="custom.load">Estimasi load</span><b id="custom-light-load">1–3 hari kerja</b></div>
+                </article>
+                <article class="custom-tier custom-tier-paid">
+                  <span class="custom-tier-name" data-i18n="custom.complex">Kompleks</span>
+                  <span class="start-from"><i aria-hidden="true"></i><span data-i18n="pricing.startFrom">Mulai dari</span></span>
+                  <strong class="custom-tier-price" id="custom-request-complex-price">Rp299rb</strong>
+                  <p data-i18n="custom.complexDesc">Logika/alur form &amp; struktur data lebih mendalam.</p>
+                  <div class="custom-meta"><span data-i18n="custom.bordering">Batas ruang lingkup</span><b data-i18n="custom.complexBorder">Scope terkunci di awal &amp; revisi terarah 2 putaran.</b></div>
+                  <div class="custom-meta"><span data-i18n="custom.load">Estimasi load</span><b id="custom-complex-load">3–5 hari kerja / sesuai slot</b></div>
+                </article>
+              </div>
+            </article>
+          </div>
+          <p class="custom-border-note" data-i18n="custom.borderNote">Perubahan di luar scope yang disepakati akan masuk penyesuaian terpisah.</p>
+          <div class="custom-actions">
+            <button type="button" onclick="chooseCategory('custom', false)" class="btn btn-primary" data-i18n="custom.startSelf">Buka Custom Sendiri</button>
+            <button type="button" onclick="previewCategory('custom')" class="btn btn-secondary" data-i18n="custom.preview">Pratinjau Form</button>
           </div>
           <button type="button" onclick="closeInfoPanel()" class="btn btn-secondary panel-inline-cta" data-i18n="panel.back">Kembali ke Kategori</button>
         </section>

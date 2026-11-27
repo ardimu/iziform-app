@@ -505,6 +505,13 @@ const PRICING_PLANS = {
   }
 };
 
+const CUSTOM_PRICING = {
+  selfFree: { id: 'custom-self-free-price', idr: 'Rp0', usd: '$0' },
+  selfPaid: { id: 'custom-self-paid-price', idr: 'Rp79rb', usd: '$6' },
+  requestLight: { id: 'custom-request-light-price', idr: 'Rp149rb', usd: '$12' },
+  requestComplex: { id: 'custom-request-complex-price', idr: 'Rp299rb', usd: '$24' }
+};
+
 const PRESET_LOCALE = {
   en: {
     recruit: {
@@ -778,7 +785,8 @@ const MAIN_SECTION_IDS = ['top', 'kategori', 'harga', 'faq'];
 const INFO_PANEL_IDS = {
   security: 'panel-keamanan',
   how: 'panel-cara',
-  demo: 'panel-demo'
+  demo: 'panel-demo',
+  custom: 'panel-custom'
 };
 
 const ROLE_KEYWORDS = {
@@ -842,6 +850,34 @@ const I18N = {
     'categories.desc': 'Klik kartu untuk membuka form, atau gunakan Pratinjau Cepat untuk mencoba alurnya dulu. Termasuk kategori Pilihan Sendiri.',
     'categories.preview': 'Pratinjau Cepat',
     'categories.open': 'Buka Form',
+    'pricing.startFrom': 'Mulai dari',
+    'custom.eyebrow': 'Jalur Custom',
+    'custom.title': 'Pilih jalur custom yang paling pas.',
+    'custom.desc': 'Custom Sendiri dikerjakan mandiri; Custom Request memakai scope dan estimasi load yang terkunci sejak awal.',
+    'custom.options': 'Lihat Opsi Custom',
+    'custom.selfLabel': 'Custom Sendiri',
+    'custom.selfTitle': 'Dikerjakan mandiri oleh pengguna',
+    'custom.selfDesc': 'Pilih level dasar atau kapasitas mandiri yang lebih lengkap tanpa menunggu pengerjaan tim.',
+    'custom.free': 'Free (dasar)',
+    'custom.selfFreeDesc': 'Struktur field standar, 1 form aktif, dan 50 respon/bulan.',
+    'custom.paid': 'Berbayar',
+    'custom.selfPaidDesc': 'Field tambahan, kapasitas lebih besar, dan opsi branding mandiri.',
+    'custom.requestLabel': 'Custom Request',
+    'custom.requestTitle': 'Khusus berbayar dengan scope terkunci sejak awal',
+    'custom.requestDesc': 'Cocok saat struktur data atau alur perlu disiapkan tim dengan batas scope yang jelas.',
+    'custom.light': 'Ringan',
+    'custom.lightDesc': 'Penyesuaian field & struktur kolom Google Sheet terarah.',
+    'custom.lightBorder': 'Scope & revisi ringan: 1 putaran terarah.',
+    'custom.load': 'Estimasi load',
+    'custom.loadLight': '1–3 hari kerja',
+    'custom.complex': 'Kompleks',
+    'custom.complexDesc': 'Logika/alur form & struktur data lebih mendalam.',
+    'custom.complexBorder': 'Scope terkunci di awal & revisi terarah 2 putaran.',
+    'custom.loadComplex': '3–5 hari kerja / sesuai slot',
+    'custom.bordering': 'Batas ruang lingkup',
+    'custom.borderNote': 'Perubahan di luar scope yang disepakati akan masuk penyesuaian terpisah.',
+    'custom.startSelf': 'Buka Custom Sendiri',
+    'custom.preview': 'Pratinjau Form',
     'sync.eyebrow': 'Google Account & Sheet Sync',
     'sync.title': 'Data Anda, Sheet Anda sendiri.',
     'sync.desc': 'Hubungkan email Google dan webhook Google Sheet Anda. Setiap submission dikirim sebagai payload JSON langsung ke sheet milik masing-masing pengguna.',
@@ -1110,6 +1146,34 @@ const I18N = {
     'categories.desc': 'Click a card to open the form, or use Quick Preview to try the flow first. Includes a Custom category.',
     'categories.preview': 'Quick preview',
     'categories.open': 'Open form',
+    'pricing.startFrom': 'Start from',
+    'custom.eyebrow': 'Custom Paths',
+    'custom.title': 'Choose the custom path that fits.',
+    'custom.desc': 'DIY Custom is self-served; Custom Request uses a locked scope and workload estimate from the start.',
+    'custom.options': 'View Custom Options',
+    'custom.selfLabel': 'DIY Custom',
+    'custom.selfTitle': 'Completed by the user',
+    'custom.selfDesc': 'Choose a basic level or a richer self-serve capacity without waiting for the team.',
+    'custom.free': 'Free (basic)',
+    'custom.selfFreeDesc': 'Standard fields, 1 active form, and 50 responses/month.',
+    'custom.paid': 'Paid',
+    'custom.selfPaidDesc': 'Extra fields, larger capacity, and self-serve branding options.',
+    'custom.requestLabel': 'Custom Request',
+    'custom.requestTitle': 'Paid only with scope locked from the start',
+    'custom.requestDesc': 'For cases where the team prepares the data structure or flow within clear scope limits.',
+    'custom.light': 'Light',
+    'custom.lightDesc': 'Targeted field and Google Sheet column structure adjustments.',
+    'custom.lightBorder': 'Scope & light revision: 1 focused round.',
+    'custom.load': 'Estimated load',
+    'custom.loadLight': '1–3 business days',
+    'custom.complex': 'Complex',
+    'custom.complexDesc': 'Deeper form logic/flow and data structure.',
+    'custom.complexBorder': 'Scope locked up front & 2 focused revision rounds.',
+    'custom.loadComplex': '3–5 business days / by slot',
+    'custom.bordering': 'Scope boundary',
+    'custom.borderNote': 'Changes outside the agreed scope are handled as a separate adjustment.',
+    'custom.startSelf': 'Open DIY Custom',
+    'custom.preview': 'Preview Form',
     'sync.eyebrow': 'Google Account & Sheet Sync',
     'sync.title': 'Your data, your own Sheet.',
     'sync.desc': 'Connect your Google email and Google Sheet webhook. Each submission is sent as JSON directly to each user’s own sheet.',
@@ -1378,6 +1442,34 @@ const I18N = {
     'categories.desc': '点击卡片打开表单，或使用快速预览先体验流程。也包含“自选分类”。',
     'categories.preview': '快速预览',
     'categories.open': '打开表单',
+    'pricing.startFrom': '起价',
+    'custom.eyebrow': '定制路径',
+    'custom.title': '选择最适合您的定制路径。',
+    'custom.desc': '自选定制由您自行完成；定制请求从一开始就锁定范围与工期预估。',
+    'custom.options': '查看定制选项',
+    'custom.selfLabel': '自选定制',
+    'custom.selfTitle': '由用户自行完成',
+    'custom.selfDesc': '选择基础版本或更完整的自助容量，无需等待团队处理。',
+    'custom.free': '免费（基础）',
+    'custom.selfFreeDesc': '标准字段、1 个使用中表单、每月 50 份回复。',
+    'custom.paid': '付费',
+    'custom.selfPaidDesc': '更多字段、更大容量及自助品牌选项。',
+    'custom.requestLabel': '定制请求',
+    'custom.requestTitle': '仅付费，范围从一开始即锁定',
+    'custom.requestDesc': '适用于需要团队在明确范围内准备数据结构或流程的情况。',
+    'custom.light': '轻量',
+    'custom.lightDesc': '针对性调整字段与 Google Sheet 列结构。',
+    'custom.lightBorder': '范围与轻量修订：1 轮定向调整。',
+    'custom.load': '预计工期',
+    'custom.loadLight': '1–3 个工作日',
+    'custom.complex': '复杂',
+    'custom.complexDesc': '更深入的表单逻辑/流程与数据结构。',
+    'custom.complexBorder': '范围先行锁定，含 2 轮定向修订。',
+    'custom.loadComplex': '3–5 个工作日 / 视排期',
+    'custom.bordering': '范围边界',
+    'custom.borderNote': '超出约定范围的修改将按单独调整处理。',
+    'custom.startSelf': '打开自选定制',
+    'custom.preview': '预览表单',
     'sync.eyebrow': 'Google 账号与表格同步',
     'sync.title': '您的数据，您自己的表格。',
     'sync.desc': '连接您的 Google 邮箱和 Google Sheet Webhook。每次提交都会以 JSON 直接发送到每位用户自己的表格。',
@@ -2032,6 +2124,7 @@ function renderDashboard() {
           <button type="button" onclick="previewCategory('${key}')" class="simulate-btn">
             ${escapeHtml(t('categories.preview'))}
           </button>
+          ${key === 'custom' ? `<button type="button" onclick="openInfoPanel('custom')" class="custom-options-btn">${escapeHtml(t('custom.options'))}</button>` : ''}
         </article>
       `;
     }).join('');
@@ -2056,17 +2149,18 @@ function scrollToSection(sectionId) {
 
 function renderPaymentMethod() {
   [
-    ['payment-idr-btn', 'checkout-idr-btn', 'idr'],
-    ['payment-usd-btn', 'checkout-usd-btn', 'usd']
-  ].forEach(([headerId, checkoutId, method]) => {
+    ['payment-idr-btn', 'checkout-idr-btn', 'custom-idr-btn', 'idr'],
+    ['payment-usd-btn', 'checkout-usd-btn', 'custom-usd-btn', 'usd']
+  ].forEach(([headerId, checkoutId, customId, method]) => {
     const active = method === state.paymentMethod;
-    [headerId, checkoutId].forEach((id) => {
+    [headerId, checkoutId, customId].forEach((id) => {
       const button = document.getElementById(id);
       if (!button) return;
       button.classList.toggle('active', active);
       button.setAttribute('aria-pressed', String(active));
     });
   });
+  renderCustomTiers();
 }
 
 function setPaymentMethod(method, manual = true) {
@@ -2081,6 +2175,17 @@ function setPaymentMethod(method, manual = true) {
 
 function setCheckoutPaymentMethod(method) {
   setPaymentMethod(method, true);
+}
+
+function renderCustomTiers() {
+  Object.values(CUSTOM_PRICING).forEach((plan) => {
+    const element = document.getElementById(plan.id);
+    if (element) element.textContent = plan[state.paymentMethod];
+  });
+  const lightLoad = document.getElementById('custom-light-load');
+  if (lightLoad) lightLoad.textContent = t('custom.loadLight');
+  const complexLoad = document.getElementById('custom-complex-load');
+  if (complexLoad) complexLoad.textContent = t('custom.loadComplex');
 }
 
 function renderPricing() {
