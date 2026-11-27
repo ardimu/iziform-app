@@ -6,22 +6,26 @@
 const state = {
   currentTheme: 'silicon',
   currentFont: 'Plus Jakarta Sans',
-  activePresetKey: 'hr',
+  view: 'dashboard',
+  activePresetKey: 'recruit',
   currentStepIndex: 0,
   userResponses: {},
   gformUrl: '',
   webhookUrl: '',
   presets: {
-    hr: {
+    recruit: {
       companyName: 'PT Digital Nusantara Indonesia',
       subText: 'Official Career Portal • Talenta Teknologi 2026 • Data tersambung aman ke Google Sheet',
       logo: '🏢',
       categoryTag: 'OFFICIAL CAREER PORTAL',
+      categoryLabel: 'Rekrutmen & Lamaran Kerja',
+      categoryDesc: 'Form lamaran kandidat, portofolio, dan jadwal interview.',
+      categoryIcon: '💼',
       coverImg: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
       slug: 'rekrutmen-digital-2026',
       questions: [
         {
-          id: 'hr_name',
+          id: 'recruit_name',
           category: '01 • IDENTITAS KANDIDAT',
           title: 'Siapa nama lengkap Anda?',
           subtitle: 'Masukkan nama resmi Anda sesuai yang tertera pada resume atau KTP.',
@@ -30,7 +34,7 @@ const state = {
           defaultValue: 'Nadia Utami'
         },
         {
-          id: 'hr_wa',
+          id: 'recruit_wa',
           category: '02 • KONTAK LANGSUNG',
           title: 'Berapa nomor WhatsApp aktif Anda?',
           subtitle: 'Tim People & Culture kami akan mengabari jadwal interview via WhatsApp.',
@@ -39,7 +43,7 @@ const state = {
           defaultValue: '0812-3456-7890'
         },
         {
-          id: 'hr_role',
+          id: 'recruit_role',
           category: '03 • POSISI PILIHAN',
           title: 'Pilih spesialisasi posisi yang ingin Anda lamar:',
           subtitle: 'Pilih salah satu posisi yang paling relevan dengan pengalaman terbaik Anda.',
@@ -52,7 +56,7 @@ const state = {
           defaultIndex: 0
         },
         {
-          id: 'hr_start_date',
+          id: 'recruit_start_date',
           category: '04 • KESIAPAN BERGABUNG',
           title: 'Kapan tanggal mulai Anda tersedia?',
           subtitle: 'Tanggal awal kerja atau tanggal Anda siap bergabung dengan tim.',
@@ -60,7 +64,7 @@ const state = {
           defaultValue: '2026-12-01'
         },
         {
-          id: 'hr_cv',
+          id: 'recruit_cv',
           category: '05 • DOKUMEN PENDUKUNG',
           title: 'Unggah CV atau tempel link dokumen Anda:',
           subtitle: 'Pilih file dari perangkat atau berikan link Google Drive/portfolio.',
@@ -75,6 +79,9 @@ const state = {
       subText: 'Official Event Registration Portal • Terhubung ke Google Sheet Panitia',
       logo: '🏃‍♂️',
       categoryTag: 'EVENT REGISTRATION 2026',
+      categoryLabel: 'Registrasi Event & Lomba',
+      categoryDesc: 'Pendaftaran lari, seminar, komunitas, dan tiket digital.',
+      categoryIcon: '🏃',
       coverImg: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?auto=format&fit=crop&w=1200&q=80',
       slug: 'event-sunset-run-jakarta',
       questions: [
@@ -128,19 +135,22 @@ const state = {
       ]
     },
 
-    preorder: {
-      companyName: 'Ruang Kreasi Pre-Order & Client Brief',
-      subText: 'Portal Pre-Order & Brief Klien • Langsung Tercatat di Google Sheet',
-      logo: '🛍️',
-      categoryTag: 'PRE-ORDER & CLIENT BRIEF',
-      coverImg: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
-      slug: 'pre-order-client-brief',
+    order: {
+      companyName: 'Ruang Kreasi Pre-Order & Pesanan',
+      subText: 'Portal Pesanan & Pre-Order • Langsung Tercatat di Google Sheet',
+      logo: '📦',
+      categoryTag: 'PRE-ORDER & ORDER',
+      categoryLabel: 'Pesanan & Pre-Order (PO)',
+      categoryDesc: 'Order produk, pre-order, booking, dan konfirmasi pembayaran.',
+      categoryIcon: '🛍️',
+      coverImg: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80',
+      slug: 'pesanan-pre-order',
       questions: [
         {
           id: 'order_name',
-          category: '01 • IDENTITAS KLIEN',
-          title: 'Siapa nama klien atau bisnis Anda?',
-          subtitle: 'Nama ini akan dipakai sebagai identitas pada brief dan invoice.',
+          category: '01 • IDENTITAS PEMESAN',
+          title: 'Siapa nama pemesan atau bisnis Anda?',
+          subtitle: 'Nama ini dipakai untuk identitas pesanan dan invoice.',
           type: 'text',
           placeholder: 'contoh: Nadia Creative Studio',
           defaultValue: 'Nadia Creative Studio'
@@ -148,8 +158,8 @@ const state = {
         {
           id: 'order_item',
           category: '02 • JENIS PESANAN',
-          title: 'Pilih layanan yang ingin dipesan:',
-          subtitle: 'Pilih satu layanan utama yang paling sesuai dengan kebutuhan Anda.',
+          title: 'Pilih produk atau layanan yang ingin dipesan:',
+          subtitle: 'Pilih satu pesanan utama yang paling sesuai dengan kebutuhan Anda.',
           type: 'choice',
           options: [
             { hotkey: 'A', icon: '🎨', title: 'Desain Brand & Logo', desc: 'Identity kit, panduan brand, dan aset dasar' },
@@ -160,26 +170,220 @@ const state = {
         },
         {
           id: 'order_brief',
-          category: '03 • BRIEF SINGKAT',
-          title: 'Ceritakan kebutuhan dan target pesanan Anda:',
-          subtitle: 'Jelaskan tujuan, audiens, gaya yang disukai, dan hal yang harus dihindari.',
+          category: '03 • DETAIL PESANAN',
+          title: 'Ceritakan detail pesanan Anda:',
+          subtitle: 'Jelaskan jumlah, ukuran, preferensi, dan catatan khusus untuk penjual.',
           type: 'textarea',
-          placeholder: 'Contoh: ingin kemasan ramah lingkungan untuk kopi specialty, target anak muda 20-35 tahun...',
+          placeholder: 'Contoh: 50 box kemasan kopi, finishing matte, ada stiker logo di bagian depan...',
           defaultValue: 'Ingin kemasan ramah lingkungan untuk produk kopi specialty dengan kesan modern dan hangat.'
         },
         {
           id: 'order_deadline',
           category: '04 • TARGET PENGIRIMAN',
-          title: 'Kapan tanggal target pengiriman desain?',
+          title: 'Kapan tanggal target pengiriman pesanan?',
           subtitle: 'Kami akan menyesuaikan jadwal produksi berdasarkan tanggal ini.',
           type: 'date',
           defaultValue: '2026-12-15'
         },
         {
           id: 'order_reference',
-          category: '05 • REFERENSI DOKUMEN',
-          title: 'Unggah moodboard atau tempel link referensi:',
-          subtitle: 'Boleh file gambar/PDF atau linkDrive/Figma yang sudah Anda siapkan.',
+          category: '05 • REFERENSI PESANAN',
+          title: 'Unggah referensi atau tempel link dokumen:',
+          subtitle: 'Boleh file gambar/PDF atau link Drive/Figma yang sudah Anda siapkan.',
+          type: 'file',
+          placeholder: 'https://drive.google.com/...'
+        }
+      ]
+    },
+
+    class: {
+      companyName: 'Akademi Kreatif Nusantara',
+      subText: 'Pendaftaran Kelas & Pelatihan • Tersambung ke Google Sheet',
+      logo: '🎓',
+      categoryTag: 'CLASS REGISTRATION 2026',
+      categoryLabel: 'Pendaftaran Kelas / Kursus',
+      categoryDesc: 'Pendaftaran kelas, pelatihan, workshop, dan program belajar.',
+      categoryIcon: '📚',
+      coverImg: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
+      slug: 'pendaftaran-kelas-2026',
+      questions: [
+        {
+          id: 'class_name',
+          category: '01 • DATA PESERTA',
+          title: 'Siapa nama lengkap calon peserta?',
+          subtitle: 'Nama ini akan tercantum pada sertifikat dan daftar kelas.',
+          type: 'text',
+          placeholder: 'Nama lengkap peserta...',
+          defaultValue: 'Raka Pratama'
+        },
+        {
+          id: 'class_wa',
+          category: '02 • KONTAK PESERTA',
+          title: 'Nomor WhatsApp untuk info jadwal kelas:',
+          subtitle: 'Pengumuman kelas dan materi akan dikirimkan ke nomor ini.',
+          type: 'tel',
+          placeholder: '0812-xxxx-xxxx',
+          defaultValue: '0812-2222-3333'
+        },
+        {
+          id: 'class_program',
+          category: '03 • PROGRAM PILIHAN',
+          title: 'Pilih program belajar yang ingin diikuti:',
+          subtitle: 'Setiap program memiliki mentor, modul, dan studi kasus berbeda.',
+          type: 'choice',
+          options: [
+            { hotkey: 'A', icon: '🎨', title: 'UI/UX Design Fundamentals', desc: 'Riset, wireframe, prototype, dan desain visual' },
+            { hotkey: 'B', icon: '💻', title: 'Fullstack Development', desc: 'Frontend, backend, database, dan deployment' },
+            { hotkey: 'C', icon: '📈', title: 'Digital Marketing', desc: 'SEO, iklan berbayar, analytics, dan konten' }
+          ],
+          defaultIndex: 0
+        },
+        {
+          id: 'class_start_date',
+          category: '04 • MULAI BELAJAR',
+          title: 'Kapan Anda ingin mulai belajar?',
+          subtitle: 'Kami akan menempatkan Anda pada angkatan terdekat.',
+          type: 'date',
+          defaultValue: '2026-12-05'
+        },
+        {
+          id: 'class_motivation',
+          category: '05 • MOTIVASI BELAJAR',
+          title: 'Ceritakan singkat target belajar Anda:',
+          subtitle: 'Ceritakan yang ingin Anda capai setelah mengikuti program ini.',
+          type: 'textarea',
+          placeholder: 'Contoh: ingin membangun portofolio UI/UX dan siap melamar kerja...',
+          defaultValue: 'Ingin menguasai desain produk digital dan membangun portofolio profesional.'
+        }
+      ]
+    },
+
+    survey: {
+      companyName: 'Tim Riset & Pengalaman Pelanggan',
+      subText: 'Survei Singkat & Masukan Pelanggan • Data masuk Google Sheet',
+      logo: '📊',
+      categoryTag: 'CUSTOMER INSIGHT SURVEY',
+      categoryLabel: 'Survei & Masukan Pelanggan',
+      categoryDesc: 'Feedback, ulasan, survei singkat, dan pengukuran kepuasan.',
+      categoryIcon: '💬',
+      coverImg: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80',
+      slug: 'survei-masukan-pelanggan',
+      questions: [
+        {
+          id: 'survey_name',
+          category: '01 • IDENTITAS RESPONDEN',
+          title: 'Nama responden (boleh anonim):',
+          subtitle: 'Isi dengan nama panggilan atau biarkan kosong jika ingin anonim.',
+          type: 'text',
+          placeholder: 'Contoh: Pelanggan Setia',
+          defaultValue: 'Pelanggan Setia'
+        },
+        {
+          id: 'survey_channel',
+          category: '02 • SUMBER INFORMASI',
+          title: 'Dari mana Anda pertama kali mengenal kami?',
+          subtitle: 'Pilih satu sumber yang paling mengingat Anda.',
+          type: 'choice',
+          options: [
+            { hotkey: 'A', icon: '📱', title: 'Media Sosial', desc: 'Instagram, TikTok, atau platform serupa' },
+            { hotkey: 'B', icon: '🤝', title: 'Rekomendasi Teman', desc: 'Cerita dari teman, keluarga, atau rekan kerja' },
+            { hotkey: 'C', icon: '📧', title: 'Iklan / Email', desc: 'Iklan digital, newsletter, atau promosi email' },
+            { hotkey: 'D', icon: '✨', title: 'Lainnya', desc: 'Sumber lain yang tidak tercantum di sini' }
+          ],
+          defaultIndex: 0
+        },
+        {
+          id: 'survey_rating',
+          category: '03 • PENILAIAN',
+          title: 'Seberapa puas Anda dengan layanan kami? (1–5)',
+          subtitle: '1 = kurang memuaskan, 5 = sangat memuaskan.',
+          type: 'rating',
+          defaultValue: 4
+        },
+        {
+          id: 'survey_visit_date',
+          category: '04 • TANGGAL KUNJUNGAN',
+          title: 'Kapan terakhir kali Anda menggunakan layanan kami?',
+          subtitle: 'Membantu kami mengaitkan masukan dengan periode tertentu.',
+          type: 'date',
+          defaultValue: '2026-11-20'
+        },
+        {
+          id: 'survey_comment',
+          category: '05 • MASUKAN TERBUKA',
+          title: 'Apa yang bisa kami perbaiki?',
+          subtitle: 'Ceritakan pengalaman Anda dengan bahasa sendiri.',
+          type: 'textarea',
+          placeholder: 'Tulis masukan, saran, atau apresiasi Anda di sini...',
+          defaultValue: 'Pelayanan ramah dan proses cepat. Semakin banyak variasi menu akan lebih baik.'
+        }
+      ]
+    },
+
+    brief: {
+      companyName: 'Studio Brief & Jasa Kreatif',
+      subText: 'Portal Brief Proyek & Permintaan Jasa • Tersambung ke Google Sheet',
+      logo: '✍️',
+      categoryTag: 'CLIENT BRIEF PORTAL',
+      categoryLabel: 'Client Brief & Permintaan Jasa',
+      categoryDesc: 'Brief proyek, permintaan layanan jasa, dan target pesanan klien.',
+      categoryIcon: '🧾',
+      coverImg: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
+      slug: 'client-brief-jasa',
+      questions: [
+        {
+          id: 'brief_name',
+          category: '01 • KONTAK KLIEN',
+          title: 'Siapa nama Anda?',
+          subtitle: 'Nama ini dipakai untuk komunikasi tindak lanjut proyek.',
+          type: 'text',
+          placeholder: 'Nama lengkap atau panggilan...',
+          defaultValue: 'Dimas Kreatif'
+        },
+        {
+          id: 'brief_company',
+          category: '02 • NAMA BISNIS',
+          title: 'Apa nama bisnis atau brand Anda?',
+          subtitle: 'Isi dengan nama brand, usaha, atau organisasi Anda.',
+          type: 'text',
+          placeholder: 'Contoh: Kopi Senja Roastery',
+          defaultValue: 'Studio Dimas'
+        },
+        {
+          id: 'brief_service',
+          category: '03 • JENIS LAYANAN',
+          title: 'Pilih layanan jasa yang dibutuhkan:',
+          subtitle: 'Pilih satu layanan utama sebagai fokus pengerjaan.',
+          type: 'choice',
+          options: [
+            { hotkey: 'A', icon: '🎨', title: 'Brand & Logo', desc: 'Identitas visual, panduan brand, dan aset dasar' },
+            { hotkey: 'B', icon: '🌐', title: 'Website & Landing Page', desc: 'Desain dan pengembangan web responsif' },
+            { hotkey: 'C', icon: '📣', title: 'Konten & Kampanye', desc: 'Materi promosi, feed, dan iklan digital' }
+          ],
+          defaultIndex: 0
+        },
+        {
+          id: 'brief_deadline',
+          category: '04 • TARGET SELESAI',
+          title: 'Kapan target pengiriman proyek?',
+          subtitle: 'Kami akan menyesuaikan estimasi dan jadwal produksi.',
+          type: 'date',
+          defaultValue: '2026-12-20'
+        },
+        {
+          id: 'brief_description',
+          category: '05 • DETAIL BRIEF',
+          title: 'Ceritakan kebutuhan proyek Anda:',
+          subtitle: 'Jelaskan tujuan, audiens, gaya, dan hal yang harus dihindari.',
+          type: 'textarea',
+          placeholder: 'Contoh: ingin identitas brand minimalis untuk produk kopi lokal...',
+          defaultValue: 'Membutuhkan identitas brand minimalis untuk produk kopi lokal dengan kesan hangat dan modern.'
+        },
+        {
+          id: 'brief_attachment',
+          category: '06 • LAMPIRAN BRIEF',
+          title: 'Unggah lampiran atau tempel link referensi:',
+          subtitle: 'Boleh file PDF/gambar atau link Drive/Figma berisi referensi.',
           type: 'file',
           placeholder: 'https://drive.google.com/...'
         }
@@ -192,28 +396,84 @@ let advanceTimer = null;
 
 // Initialize on Load
 document.addEventListener('DOMContentLoaded', () => {
-  renderActivePresetHeader();
-  renderCurrentQuestion();
+  renderDashboard();
   setupKeyboardNavigation();
 });
 
-// Switch Active Preset (HR, Event, Pre-Order)
+function toggleViews() {
+  const dashboard = document.getElementById('dashboard-view');
+  const form = document.getElementById('form-view');
+  const dock = document.getElementById('form-dock');
+  const ribbon = document.getElementById('hr-career-ribbon');
+
+  if (dashboard) dashboard.classList.toggle('hidden', state.view !== 'dashboard');
+  if (form) form.classList.toggle('hidden', state.view !== 'form');
+  if (dock) dock.classList.toggle('hidden', state.view !== 'form');
+  if (ribbon) ribbon.classList.toggle('hidden', !(state.view === 'form' && state.activePresetKey === 'recruit'));
+}
+
+function renderDashboard() {
+  clearAdvanceTimer();
+  state.view = 'dashboard';
+  state.currentStepIndex = 0;
+  state.userResponses = {};
+  document.body.dataset.preset = 'dashboard';
+
+  const grid = document.getElementById('category-grid');
+  if (grid) {
+    grid.innerHTML = Object.entries(state.presets).map(([key, p]) => `
+      <button type="button" onclick="chooseCategory('${key}')"
+              class="category-card" aria-label="Buat form ${p.categoryLabel}">
+        <span class="category-icon" aria-hidden="true">${p.categoryIcon}</span>
+        <span class="category-card-copy">
+          <span class="category-card-label">${p.categoryLabel}</span>
+          <span class="category-card-desc">${p.categoryDesc}</span>
+        </span>
+        <span class="category-arrow" aria-hidden="true">&rarr;</span>
+      </button>
+    `).join('');
+  }
+
+  toggleViews();
+
+  const headerPill = document.getElementById('header-link-pill');
+  if (headerPill) headerPill.innerText = 'iziform.app';
+}
+
+function chooseCategory(presetKey) {
+  if (!state.presets[presetKey]) return;
+  clearAdvanceTimer();
+  state.activePresetKey = presetKey;
+  state.currentStepIndex = 0;
+  state.userResponses = {};
+  state.view = 'form';
+
+  toggleViews();
+  renderActivePresetHeader();
+  renderCurrentQuestion();
+  showToast(`Kategori dipilih: ${state.presets[presetKey].categoryLabel}`);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function backToDashboard() {
+  clearAdvanceTimer();
+  renderDashboard();
+  showToast('Kembali ke dashboard kategori');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
 function switchActivePreset(presetKey) {
   if (!state.presets[presetKey]) return;
   clearAdvanceTimer();
   state.activePresetKey = presetKey;
   state.currentStepIndex = 0;
   state.userResponses = {};
+  state.view = 'form';
 
-  // Update demo buttons
-  ['hr', 'event', 'preorder'].forEach(k => {
-    const btn = document.getElementById(`demo-btn-${k}`);
-    if (btn) btn.classList.toggle('active', k === presetKey);
-  });
-
+  toggleViews();
   renderActivePresetHeader();
   renderCurrentQuestion();
-  showToast(`Beralih ke template: ${state.presets[presetKey].companyName}`);
+  showToast(`Beralih ke kategori: ${state.presets[presetKey].categoryLabel}`);
 }
 
 // Render Header Banner & Company Profile
@@ -239,10 +499,15 @@ function renderActivePresetHeader() {
 
 // Render Current Question Card (Breathable & Luxurious)
 function renderCurrentQuestion() {
+  if (state.view !== 'form') return;
+
   const p = state.presets[state.activePresetKey];
   const qList = p.questions;
   const idx = state.currentStepIndex;
   const q = qList[idx];
+
+  const formCategory = document.getElementById('form-category-label');
+  if (formCategory) formCategory.innerText = p.categoryLabel;
 
   // Update question header tags
   const catTag = document.getElementById('q-category-tag');
@@ -408,6 +673,7 @@ function handleDocLinkInput(qId, value) {
 
 // Dock Navigation
 function nextStepQuestion() {
+  if (state.view !== 'form') return;
   clearAdvanceTimer();
   const p = state.presets[state.activePresetKey];
   if (state.currentStepIndex < p.questions.length - 1) {
@@ -420,6 +686,7 @@ function nextStepQuestion() {
 }
 
 function prevStepQuestion() {
+  if (state.view !== 'form') return;
   clearAdvanceTimer();
   if (state.currentStepIndex > 0) {
     state.currentStepIndex--;
@@ -463,6 +730,7 @@ function buildSubmissionPayload() {
   return {
     submittedAt: new Date().toISOString(),
     preset: state.activePresetKey,
+    category: p.categoryLabel,
     formTitle: p.companyName,
     formSlug: p.slug,
     sourceUrl: state.gformUrl,
@@ -499,6 +767,7 @@ async function sendToGoogleSheet(payload, webhookUrl) {
 
 // Form Submission Success
 async function triggerFormSubmissionSuccess() {
+  if (state.view !== 'form') return;
   clearAdvanceTimer();
   triggerConfetti();
   const modal = document.getElementById('success-submit-modal');
@@ -523,9 +792,7 @@ function closeSuccessModal() {
   clearAdvanceTimer();
   const modal = document.getElementById('success-submit-modal');
   if (modal) modal.classList.add('hidden');
-  state.currentStepIndex = 0;
-  state.userResponses = {};
-  renderCurrentQuestion();
+  renderDashboard();
 }
 
 // UI Theme Switcher (Silicon, Midnight, Cyber, Terracotta)
@@ -558,6 +825,7 @@ function setupKeyboardNavigation() {
   window.addEventListener('keydown', (e) => {
     const activeModal = document.querySelector('#paste-link-modal:not(.hidden), #success-submit-modal:not(.hidden)');
     if (activeModal) return;
+    if (state.view !== 'form') return;
 
     const p = state.presets[state.activePresetKey];
     const q = p.questions[state.currentStepIndex];
