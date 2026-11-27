@@ -525,11 +525,6 @@
                     <span data-i18n="hr.mustHave">Syarat mutlak / wajib</span>
                     <textarea id="hr-must-have-input" rows="2" oninput="updateHrRequirement('mustHave', this.value)"></textarea>
                   </label>
-                  <label class="hr-form-field hr-form-wide">
-                    <span data-i18n="hr.benefit">Benefit / tunjangan</span>
-                    <textarea id="hr-benefit-input" rows="2" data-i18n-placeholder="hr.benefitPlaceholder" placeholder="Contoh: BPJS, asuransi, flexible working, learning budget" oninput="updateHrRequirement('benefit', this.value)"></textarea>
-                    <small class="hr-field-hint" data-i18n="hr.benefitHint">Kosongkan untuk menyembunyikan bagian Benefit di portal kandidat.</small>
-                  </label>
                 </div>
               </div>
               <div class="hr-block">
@@ -574,6 +569,16 @@
                   </label>
                 </div>
               </div>
+              <div class="hr-block hr-benefit-block">
+                <h3 class="hr-block-title" data-i18n="hr.block.benefit">6. Benefit</h3>
+                <div class="hr-form-grid">
+                  <label class="hr-form-field hr-form-wide">
+                    <span data-i18n="hr.benefit">Benefit / tunjangan</span>
+                    <textarea id="hr-benefit-input" rows="2" data-i18n-placeholder="hr.benefitPlaceholder" placeholder="Contoh: BPJS, asuransi, flexible working, learning budget" oninput="updateHrRequirement('benefit', this.value)"></textarea>
+                    <small class="hr-field-hint" data-i18n="hr.benefitHint">Kosongkan untuk menyembunyikan bagian Benefit di portal kandidat.</small>
+                  </label>
+                </div>
+              </div>
               <div class="hr-block hr-custom-fields-block">
                 <div class="hr-ui-head">
                   <h3 class="hr-block-title" data-i18n="hr.customFieldsTitle">Kolom tambahan pelamar</h3>
@@ -581,6 +586,16 @@
                 </div>
                 <p class="hr-block-desc" data-i18n="hr.customFieldsDesc">Tambah field di luar standar; tampil otomatis di Sisi B dan rekap Sheet HR.</p>
                 <div id="hr-custom-fields-list" class="hr-custom-fields-list"></div>
+              </div>
+              <div class="hr-block hr-cardbox-block">
+                <div class="hr-ui-head">
+                  <h3 class="hr-block-title" data-i18n="hr.block.cardbox">7. Daftar Cardbox Isian Pelamar</h3>
+                  <button type="button" onclick="resetHrCardboxSettings()" id="hr-cardbox-reset" class="hr-cardbox-reset" data-i18n="hr.cardboxReset">Reset tampilan</button>
+                </div>
+                <p class="hr-block-desc" data-i18n="hr.cardboxDesc">Semua cardbox yang diisi pelamar di Sisi B, lengkap dengan status tampil, wajib/opsional, sumber field, dan hubungannya dengan rekap Google Sheet HR.</p>
+                <div id="hr-cardbox-summary" class="hr-cardbox-summary"></div>
+                <div id="hr-cardbox-list" class="hr-cardbox-list"></div>
+                <p class="hr-cardbox-footnote" data-i18n="hr.cardboxFootnote">Perubahan di sini langsung diterapkan ke cardbox Sisi B dan payload Sheet HR. Status wajib CV tetap mengikuti Bagian 5.</p>
               </div>
               <div class="hr-block hr-ui-block">
                 <div class="hr-ui-head">
@@ -778,7 +793,6 @@
             <h2 id="candidate-position"></h2>
             <p><b data-i18n="hr.roleSummary">Ringkasan peran</b><span id="showcase-role-summary"></span></p>
             <p><b data-i18n="portal.responsibilitiesLabel">Tanggung jawab</b><span id="showcase-responsibilities"></span></p>
-            <p data-hr-benefit-wrap class="career-benefit-line hidden"><b data-i18n="hr.benefit">Benefit / tunjangan</b><span data-hr-benefit-value></span></p>
             <div class="career-fact-row">
               <span><b data-i18n="portal.jobTypeLabel">Tipe kerja</b><i id="showcase-job-type"></i></span>
               <span><b data-i18n="hr.location">Domisili / lokasi kerja</b><i id="candidate-location"></i></span>
@@ -806,6 +820,11 @@
               <span><b data-i18n="portal.plusPointsLabel">Nilai plus</b><i id="showcase-plus-points"></i></span>
               <span><b data-i18n="hr.screening">Pertanyaan penyaring</b><i id="candidate-screening"></i></span>
             </div>
+          </article>
+          <article class="career-content-section career-showcase-card career-card-benefit" data-hr-benefit-wrap hidden>
+            <span class="section-eyebrow" data-i18n="hr.benefit">Benefit / tunjangan</span>
+            <h2 data-i18n="hr.benefit">Benefit / tunjangan</h2>
+            <p class="career-benefit-line"><span data-hr-benefit-value></span></p>
           </article>
         </section>
         </div>

@@ -20,6 +20,7 @@ const state = {
   isSimulation: false,
   cvParse: null,
   hrRequirement: null,
+  hrCardboxSettings: {},
   hrActiveSide: 'a',
   hrCompanyName: 'PT Digital Nusantara Indonesia',
   hrCompanyProfile: { industry: 'Teknologi & Digital', description: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', website: 'https://iziform.app' },
@@ -1037,6 +1038,8 @@ const I18N = {
     'hr.block.requirement': '3. Requirement',
     'hr.block.qualification': '4. Qualification',
     'hr.block.screening': '5. Screening Questions & Form Rules',
+    'hr.block.benefit': '6. Benefit',
+    'hr.block.cardbox': '7. Daftar Cardbox Isian Pelamar',
     'hr.industry': 'Industri / bidang usaha',
     'hr.description': 'Deskripsi singkat perusahaan',
     'hr.website': 'Website resmi',
@@ -1151,6 +1154,20 @@ const I18N = {
     'hr.customFieldAdd': 'Tambah kolom',
     'hr.customFieldRemove': 'Hapus',
     'hr.customFieldsEmpty': 'Belum ada kolom tambahan.',
+    'hr.cardboxReset': 'Reset tampilan',
+    'hr.cardboxDesc': 'Semua cardbox yang diisi pelamar di Sisi B, lengkap dengan status tampil, wajib/opsional, sumber field, dan hubungannya dengan rekap Google Sheet HR.',
+    'hr.cardboxFootnote': 'Perubahan di sini langsung diterapkan ke cardbox Sisi B dan payload Sheet HR. Status wajib CV tetap mengikuti Bagian 5.',
+    'hr.cardboxCount': '{visible} dari {total} cardbox tampil di Sisi B',
+    'hr.cardboxVisible': 'Tampil di Sisi B',
+    'hr.cardboxHidden': 'Disembunyikan',
+    'hr.cardboxSourceStandard': 'Field standar HR',
+    'hr.cardboxSourceCustom': 'Kolom kustom HR',
+    'hr.cardboxSheetIncluded': 'Masuk rekap & Sheet',
+    'hr.cardboxSheetExcluded': 'Tidak masuk Sheet',
+    'hr.cardboxCvRule': 'diatur di Bagian 5',
+    'hr.cardboxShow': 'Tampil',
+    'hr.cardboxAtLeastOne': 'Minimal satu cardbox harus tetap tampil di Sisi B.',
+    'hr.cardboxResetDone': 'Status cardbox dikembalikan ke pengaturan awal',
     'hr.additionalQuestions': 'INFORMASI TAMBAHAN',
     'hr.customFieldInputPlaceholder': 'Tulis jawaban Anda',
     'hr.customFieldNotePlaceholder': 'Tulis jawaban Anda dengan detail',
@@ -1502,6 +1519,8 @@ const I18N = {
     'hr.block.requirement': '3. Requirement',
     'hr.block.qualification': '4. Qualification',
     'hr.block.screening': '5. Screening Questions & Form Rules',
+    'hr.block.benefit': '6. Benefits',
+    'hr.block.cardbox': '7. Candidate Form Cardbox List',
     'hr.industry': 'Industry / field',
     'hr.description': 'Company short description',
     'hr.website': 'Official website',
@@ -1616,6 +1635,20 @@ const I18N = {
     'hr.customFieldAdd': 'Add field',
     'hr.customFieldRemove': 'Remove',
     'hr.customFieldsEmpty': 'No additional fields yet.',
+    'hr.cardboxReset': 'Reset view',
+    'hr.cardboxDesc': 'Every cardbox filled by candidates on Side B, with visibility, required/optional status, field source, and its link to the HR Google Sheet recap.',
+    'hr.cardboxFootnote': 'Changes here apply instantly to the Side B cardboxes and the Sheet payload. The CV required rule still follows Section 5.',
+    'hr.cardboxCount': '{visible} of {total} cardboxes shown on Side B',
+    'hr.cardboxVisible': 'Shown on Side B',
+    'hr.cardboxHidden': 'Hidden',
+    'hr.cardboxSourceStandard': 'Standard HR field',
+    'hr.cardboxSourceCustom': 'HR custom field',
+    'hr.cardboxSheetIncluded': 'In recap & Sheet',
+    'hr.cardboxSheetExcluded': 'Excluded from Sheet',
+    'hr.cardboxCvRule': 'set in Section 5',
+    'hr.cardboxShow': 'Show',
+    'hr.cardboxAtLeastOne': 'At least one cardbox must stay visible on Side B.',
+    'hr.cardboxResetDone': 'Cardbox statuses restored to defaults',
     'hr.additionalQuestions': 'ADDITIONAL INFORMATION',
     'hr.customFieldInputPlaceholder': 'Write your answer',
     'hr.customFieldNotePlaceholder': 'Write your answer with details',
@@ -1967,6 +2000,8 @@ const I18N = {
     'hr.block.requirement': '3. 任职要求',
     'hr.block.qualification': '4. 资格条件',
     'hr.block.screening': '5. 筛选问题与表单规则',
+    'hr.block.benefit': '6. 福利 / 待遇',
+    'hr.block.cardbox': '7. 候选人表单卡片列表',
     'hr.industry': '行业 / 业务领域',
     'hr.description': '公司简介',
     'hr.website': '官方网站',
@@ -2081,6 +2116,20 @@ const I18N = {
     'hr.customFieldAdd': '添加字段',
     'hr.customFieldRemove': '删除',
     'hr.customFieldsEmpty': '暂无附加字段。',
+    'hr.cardboxReset': '重置显示',
+    'hr.cardboxDesc': '候选人在 B 侧填写的所有卡片，包含显示状态、必填/选填、字段来源，以及与 HR Google Sheet 汇总的关联。',
+    'hr.cardboxFootnote': '此处的更改会立即应用到 B 侧卡片与 Sheet 数据。简历必填规则仍以第 5 节为准。',
+    'hr.cardboxCount': 'B 侧显示 {visible} / {total} 张卡片',
+    'hr.cardboxVisible': '在 B 侧显示',
+    'hr.cardboxHidden': '已隐藏',
+    'hr.cardboxSourceStandard': 'HR 标准字段',
+    'hr.cardboxSourceCustom': 'HR 自定义字段',
+    'hr.cardboxSheetIncluded': '进入汇总与 Sheet',
+    'hr.cardboxSheetExcluded': '不进入 Sheet',
+    'hr.cardboxCvRule': '由第 5 节设置',
+    'hr.cardboxShow': '显示',
+    'hr.cardboxAtLeastOne': 'B 侧至少需要保留一张可见卡片。',
+    'hr.cardboxResetDone': '卡片状态已恢复默认',
     'hr.additionalQuestions': '附加信息',
     'hr.customFieldInputPlaceholder': '请输入您的答案',
     'hr.customFieldNotePlaceholder': '请详细描述您的答案',
@@ -2394,7 +2443,7 @@ function getPreset(key) {
     const requirement = state.hrRequirement || HR_TEMPLATES.tech[state.currentLanguage] || HR_TEMPLATES.tech.id;
     const buildQuestions = HR_QUESTION_COPY[state.currentLanguage] || HR_QUESTION_COPY.id;
     const fixedQuestions = buildQuestions(requirement);
-    const customQuestions = getHrCustomFields().map((field, index) => ({
+    const customQuestions = getHrCustomFieldsRaw().map((field, index) => ({
       id: field.id,
       category: `${String(fixedQuestions.length + index + 1).padStart(2, '0')} • ${t('hr.additionalQuestions')}`,
       title: field.label,
@@ -2404,13 +2453,21 @@ function getPreset(key) {
       defaultValue: '',
       required: field.required
     }));
+    const questionMap = new Map([...fixedQuestions, ...customQuestions].map((question) => [question.id, question]));
+    const questions = getHrCardboxManifest()
+      .filter((item) => item.visible)
+      .map((item) => {
+        const question = questionMap.get(item.id);
+        return question ? { ...question, required: item.required } : null;
+      })
+      .filter(Boolean);
     result = {
       ...result,
       companyName: state.hrCompanyName || result.companyName,
       companyLogo: state.hrCompanyLogo,
       logo: getHrCompanyInitials(),
       subText: `Official Career Portal • ${requirement.position} • ${requirement.location}`,
-      questions: [...fixedQuestions, ...customQuestions]
+      questions
     };
   }
   return result;
@@ -2490,6 +2547,7 @@ function setLanguage(lang) {
   renderHrUiTemplateGallery();
   renderHrFontPairControl();
   renderHrUiPreview();
+  renderHrCardboxOverview();
   updateDisplayTrigger();
   renderPaymentMethod();
   renderPricing();
@@ -2912,7 +2970,7 @@ function cloneHrRequirement(source = currentHrRequirement()) {
   };
 }
 
-function getHrCustomFields() {
+function getHrCustomFieldsRaw() {
   const fields = currentHrRequirement().customFields;
   if (!Array.isArray(fields)) return [];
   return fields
@@ -2923,6 +2981,112 @@ function getHrCustomFields() {
       type: field.type === 'textarea' ? 'textarea' : 'text',
       required: Boolean(field.required)
     }));
+}
+
+function getHrCardboxSetting(id) {
+  return state.hrCardboxSettings[id] || {};
+}
+
+function isHrCardboxVisible(id) {
+  return getHrCardboxSetting(id).visible !== false;
+}
+
+function getHrCardboxManifest() {
+  const requirement = currentHrRequirement();
+  const buildQuestions = HR_QUESTION_COPY[state.currentLanguage] || HR_QUESTION_COPY.id;
+  const fixed = buildQuestions(requirement).map((question) => ({
+    id: question.id,
+    category: question.category,
+    title: question.title,
+    source: 'standard',
+    required: question.id === 'recruit_cv' ? requirement.cvRequired !== false : Boolean(getHrCardboxSetting(question.id).required),
+    customIndex: -1
+  }));
+  const custom = getHrCustomFieldsRaw().map((field, index) => ({
+    id: field.id,
+    category: `${String(fixed.length + index + 1).padStart(2, '0')} • ${t('hr.additionalQuestions')}`,
+    title: field.label,
+    source: 'custom',
+    required: field.required,
+    customIndex: index
+  }));
+  return [...fixed, ...custom].map((item) => ({ ...item, visible: isHrCardboxVisible(item.id) }));
+}
+
+function getHrCustomFields() {
+  return getHrCustomFieldsRaw().filter((field) => isHrCardboxVisible(field.id));
+}
+
+function renderHrCardboxOverview() {
+  const list = document.getElementById('hr-cardbox-list');
+  if (!list) return;
+  const manifest = getHrCardboxManifest();
+  const visibleCount = manifest.filter((item) => item.visible).length;
+  const summary = document.getElementById('hr-cardbox-summary');
+  if (summary) {
+    summary.innerHTML = `<span class="hr-cardbox-summary-pill">${escapeHtml(t('hr.cardboxCount', { visible: visibleCount, total: manifest.length }))}</span>`;
+  }
+  list.innerHTML = manifest.map((item) => {
+    const requiredLabel = item.required ? t('form.required') : t('form.optional');
+    const statusLabel = item.visible ? t('hr.cardboxVisible') : t('hr.cardboxHidden');
+    const sourceLabel = item.source === 'custom' ? t('hr.cardboxSourceCustom') : t('hr.cardboxSourceStandard');
+    const sheetLabel = item.visible ? t('hr.cardboxSheetIncluded') : t('hr.cardboxSheetExcluded');
+    const cvLocked = item.id === 'recruit_cv';
+    const visibleChecked = item.visible ? ' checked' : '';
+    const requiredChecked = item.required ? ' checked' : '';
+    return `
+      <div class="hr-cardbox-row ${item.visible ? '' : 'is-hidden'}">
+        <div class="hr-cardbox-main">
+          <b>${escapeHtml(item.title)}</b>
+          <small>${escapeHtml(item.category)} · ${escapeHtml(sourceLabel)}</small>
+        </div>
+        <div class="hr-cardbox-tags">
+          <span class="hr-cardbox-tag ${item.visible ? 'active' : 'muted'}">${escapeHtml(statusLabel)}</span>
+          <span class="hr-cardbox-tag">${escapeHtml(requiredLabel)}${cvLocked ? ` · ${escapeHtml(t('hr.cardboxCvRule'))}` : ''}</span>
+          <span class="hr-cardbox-tag ${item.visible ? '' : 'muted'}">${escapeHtml(sheetLabel)}</span>
+        </div>
+        <div class="hr-cardbox-controls">
+          <label class="hr-cardbox-control"><input type="checkbox"${visibleChecked} onchange="setHrCardboxVisible('${escapeHtml(item.id)}', this.checked)"> <span>${escapeHtml(t('hr.cardboxShow'))}</span></label>
+          <label class="hr-cardbox-control"><input type="checkbox"${requiredChecked}${cvLocked ? ' disabled' : ''} onchange="setHrCardboxRequired('${escapeHtml(item.id)}', this.checked)"> <span>${escapeHtml(t('form.required'))}</span></label>
+        </div>
+      </div>`;
+  }).join('');
+}
+
+function setHrCardboxVisible(id, visible) {
+  if (!visible) {
+    const manifest = getHrCardboxManifest();
+    if (manifest.filter((item) => item.visible).length <= 1) {
+      renderHrCardboxOverview();
+      showToast(t('hr.cardboxAtLeastOne'));
+      return;
+    }
+  }
+  if (!state.hrCardboxSettings[id]) state.hrCardboxSettings[id] = {};
+  state.hrCardboxSettings[id].visible = Boolean(visible);
+  refreshHrRequirementViews();
+  updateFloatingDock();
+}
+
+function setHrCardboxRequired(id, required) {
+  const item = getHrCardboxManifest().find((entry) => entry.id === id);
+  if (!item || item.customIndex < 0) {
+    if (!state.hrCardboxSettings[id]) state.hrCardboxSettings[id] = {};
+    state.hrCardboxSettings[id].required = Boolean(required);
+  } else if (state.hrRequirement && Array.isArray(state.hrRequirement.customFields)) {
+    const field = state.hrRequirement.customFields[item.customIndex];
+    if (field) field.required = Boolean(required);
+    renderHrCustomFieldEditor();
+  }
+  refreshHrRequirementViews();
+}
+
+function resetHrCardboxSettings() {
+  state.hrCardboxSettings = {};
+  renderHrCustomFieldEditor();
+  refreshHrRequirementViews();
+  updateFloatingDock();
+  showToast(t('hr.cardboxResetDone'));
 }
 
 function renderBenefitDisplays() {
@@ -3309,6 +3473,7 @@ function updateHrRequirement(field, value) {
   renderHrTemplateButtons();
   renderHrPreview();
   renderBenefitDisplays();
+  renderHrCardboxOverview();
   renderHrPricing();
   renderHrRecap();
   renderCompanyIdentity();
@@ -3322,6 +3487,7 @@ function refreshHrRequirementViews() {
   renderHrTemplateButtons();
   renderHrPreview();
   renderBenefitDisplays();
+  renderHrCardboxOverview();
   renderHrRecap();
   renderCompanyIdentity();
   if (state.view === 'form' && state.activePresetKey === 'recruit') {
@@ -3333,7 +3499,7 @@ function refreshHrRequirementViews() {
 function renderHrCustomFieldEditor() {
   const list = document.getElementById('hr-custom-fields-list');
   if (!list) return;
-  const fields = getHrCustomFields();
+  const fields = getHrCustomFieldsRaw();
   if (!fields.length) {
     list.innerHTML = `<p class="hr-custom-fields-empty">${escapeHtml(t('hr.customFieldsEmpty'))}</p>`;
     return;
@@ -3489,6 +3655,7 @@ function renderHrBuilder() {
   renderHrUiPreview();
   renderHrPreview();
   renderHrCustomFieldEditor();
+  renderHrCardboxOverview();
   renderHrPricing();
   renderHrStatusList();
   renderHrRecap();
@@ -3512,6 +3679,7 @@ function setHrSelectionStatus(status) {
 }
 
 function getHrAnswerValue(id) {
+  if (!isHrCardboxVisible(id)) return '';
   const question = getPreset('recruit').questions.find((item) => item.id === id);
   const raw = state.userResponses[id];
   if (raw && typeof raw === 'object') return raw.url || raw.name || '';
@@ -3560,7 +3728,8 @@ function renderCandidatePortal() {
     if (element) element.textContent = value;
   };
   const questions = getPreset('recruit').questions;
-  const index = Math.min(state.currentStepIndex, questions.length - 1);
+  const total = Math.max(questions.length, 1);
+  const index = Math.max(0, Math.min(state.currentStepIndex, total - 1));
 
   setText('candidate-position', r.position);
   setText('candidate-location', r.location);
@@ -3570,10 +3739,10 @@ function renderCandidatePortal() {
   setText('candidate-salary', r.salary);
   setText('candidate-notice', r.noticePeriod);
   setText('candidate-screening', r.screening);
-  setText('candidate-progress-text', `${index + 1} / ${questions.length}`);
+  setText('candidate-progress-text', `${index + 1} / ${total}`);
 
   const progressBar = document.getElementById('candidate-progress-bar');
-  if (progressBar) progressBar.style.width = `${Math.round(((index + 1) / questions.length) * 100)}%`;
+  if (progressBar) progressBar.style.width = `${Math.round(((index + 1) / total) * 100)}%`;
 
   const steps = document.getElementById('candidate-step-list');
   if (steps) {
@@ -3601,7 +3770,7 @@ function renderCandidatePortal() {
 
 function jumpToCandidateStep(index) {
   if (state.view !== 'form' || state.activePresetKey !== 'recruit') return;
-  const total = getPreset('recruit').questions.length;
+  const total = Math.max(getPreset('recruit').questions.length, 1);
   clearAdvanceTimer();
   state.currentStepIndex = Math.max(0, Math.min(index, total - 1));
   renderCurrentQuestion();
@@ -4169,8 +4338,8 @@ function prevStepQuestion() {
 
 function updateFloatingDock() {
   const p = getPreset(state.activePresetKey);
-  const total = p.questions.length;
-  const idx = state.currentStepIndex;
+  const total = Math.max(p.questions.length, 1);
+  const idx = Math.max(0, state.currentStepIndex);
   const percent = Math.round(((idx + 1) / total) * 100);
 
   const prevBtn = document.getElementById('question-btn-prev');
@@ -4218,6 +4387,14 @@ function buildSubmissionPayload() {
     benefit: isRecruit ? String(currentHrRequirement().benefit || '').trim() : '',
     customFieldDefinitions: customFields.map((field) => ({ ...field })),
     customAnswers,
+    cardbox: isRecruit ? getHrCardboxManifest().map((item) => ({
+      id: item.id,
+      category: item.category,
+      source: item.source,
+      visible: item.visible,
+      required: item.required,
+      includedInSheet: item.visible
+    })) : [],
     sourceUrl: state.gformUrl,
     simulation: state.isSimulation,
     hrRequirement: isRecruit ? cloneHrRequirement(currentHrRequirement()) : null,

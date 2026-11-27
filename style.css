@@ -2409,9 +2409,32 @@ body[data-preset="recruit"] #form-view .recruit-apply-column::-webkit-scrollbar-
   font-family: inherit; font-size: 0.625rem; font-weight: 900; cursor: pointer; transition: all 0.2s ease;
 }
 .hr-custom-field-remove:hover { border-color: var(--accent-color); color: var(--accent-color); }
+.hr-benefit-block { margin-top: 0.25rem; }
+.hr-cardbox-block { margin-top: 0.25rem; }
+.hr-cardbox-reset { padding: 0.35rem 0.7rem; border-radius: 999px; border: 1px solid var(--border-subtle); background: var(--surface-raised); color: var(--text-faint); font-family: inherit; font-size: 0.5625rem; font-weight: 900; cursor: pointer; transition: all 0.2s ease; }
+.hr-cardbox-reset:hover { border-color: var(--accent-color); color: var(--accent-color); }
+.hr-cardbox-summary { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.hr-cardbox-summary-pill { padding: 0.3rem 0.65rem; border-radius: 999px; border: 1px solid var(--accent-ring); background: var(--accent-soft); color: var(--accent-color); font-size: 0.5625rem; font-weight: 900; }
+.hr-cardbox-list { display: grid; gap: 0.55rem; margin-top: 0.8rem; }
+.hr-cardbox-row { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.15fr) auto; align-items: center; gap: 0.7rem; padding: 0.7rem 0.8rem; border: 1px solid var(--border-subtle); border-radius: 0.95rem; background: var(--surface-raised); transition: opacity 0.2s ease, border-color 0.2s ease; }
+.hr-cardbox-row.is-hidden { opacity: 0.68; border-style: dashed; }
+.hr-cardbox-main { display: flex; flex-direction: column; min-width: 0; gap: 0.2rem; }
+.hr-cardbox-main b { font-size: 0.6875rem; font-weight: 900; line-height: 1.4; color: var(--text-headline); overflow-wrap: anywhere; }
+.hr-cardbox-main small { font-size: 0.5625rem; line-height: 1.45; color: var(--text-faint); overflow-wrap: anywhere; }
+.hr-cardbox-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
+.hr-cardbox-tag { padding: 0.2rem 0.45rem; border-radius: 999px; border: 1px solid var(--border-subtle); font-size: 0.5rem; font-weight: 900; line-height: 1.4; color: var(--text-faint); }
+.hr-cardbox-tag.active { border-color: var(--accent-ring); background: var(--accent-soft); color: var(--accent-color); }
+.hr-cardbox-tag.muted { opacity: 0.7; }
+.hr-cardbox-controls { display: flex; align-items: center; gap: 0.55rem; }
+.hr-cardbox-control { display: inline-flex; align-items: center; gap: 0.25rem; font-size: 0.5625rem; font-weight: 900; color: var(--text-faint); white-space: nowrap; cursor: pointer; }
+.hr-cardbox-control input { width: auto; padding: 0; margin: 0; accent-color: var(--accent-color); cursor: pointer; }
+.hr-cardbox-control input:disabled { cursor: not-allowed; opacity: 0.5; }
+.hr-cardbox-footnote { margin-top: 0.7rem; font-size: 0.5625rem; line-height: 1.5; color: var(--text-faint); }
 .career-benefit-line { display: flex; align-items: baseline; gap: 0.75rem; margin-top: 0.85rem; padding: 0.7rem 0.85rem; border-left: 2px solid var(--career-accent); background: color-mix(in srgb, var(--career-accent) 8%, transparent); border-radius: 0 0.75rem 0.75rem 0; }
 .career-benefit-line b { flex: 0 0 auto; font-size: 0.5625rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--career-hero-muted); }
 .career-benefit-line span { min-width: 0; font-size: 0.8125rem; line-height: 1.6; font-weight: 750; color: var(--career-hero-ink); overflow-wrap: anywhere; }
+.career-card-benefit .career-benefit-line { margin-top: 0.85rem; background: transparent; border-left-color: color-mix(in srgb, var(--career-accent) 70%, transparent); }
+.career-card-benefit .career-benefit-line span { font-size: 0.875rem; color: var(--career-card-ink); }
 body[data-preset="recruit"] #form-view .recruit-apply-column { padding-top: 0.75rem; }
 body[data-preset="recruit"] #form-view .recruit-portal-layout .open-question-card { scroll-margin-top: calc(var(--sticky-portal-top) + 1rem); }
 #form-view[data-hr-ui-tier] .question-nav-row { border-color: color-mix(in srgb, var(--career-accent) 34%, var(--border-subtle)); }
@@ -2428,6 +2451,8 @@ body[data-preset="recruit"] #form-view .recruit-portal-layout .open-question-car
   .hr-custom-field-row { grid-template-columns: 1fr; align-items: stretch; }
   .hr-custom-field-row .hr-check-field { align-self: stretch; }
   .hr-custom-field-remove { justify-self: start; }
+  .hr-cardbox-row { grid-template-columns: 1fr; align-items: start; }
+  .hr-cardbox-controls { flex-wrap: wrap; }
   body[data-preset="recruit"] #form-view .recruit-portal-layout .open-question-card { scroll-margin-top: calc(var(--sticky-portal-top) + 0.75rem); }
 }
 @media (prefers-reduced-motion: reduce) {
