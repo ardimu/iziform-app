@@ -136,8 +136,8 @@
         <div class="flex items-center gap-1.5 pb-1">
           <span class="text-[10px] font-bold text-slate-400 uppercase hidden sm:inline">Pilih Demo:</span>
           <button onclick="switchActivePreset('hr')" id="demo-btn-hr" class="px-2.5 py-1 rounded-lg bg-brand-600 text-white font-bold text-xs shadow-sm">💼 HR</button>
-          <button onclick="switchActivePreset('marathon')" id="demo-btn-marathon" class="px-2.5 py-1 rounded-lg bg-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-300">🏃 Lari 10K</button>
-          <button onclick="switchActivePreset('cafe')" id="demo-btn-cafe" class="px-2.5 py-1 rounded-lg bg-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-300">☕ Kafe</button>
+          <button onclick="switchActivePreset('event')" id="demo-btn-event" class="px-2.5 py-1 rounded-lg bg-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-300">🏃 Event 10K</button>
+          <button onclick="switchActivePreset('preorder')" id="demo-btn-preorder" class="px-2.5 py-1 rounded-lg bg-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-300">🛍️ Pre-Order</button>
         </div>
 
       </div>
@@ -218,6 +218,11 @@
           <span class="absolute left-3.5 text-base">🔗</span>
           <input type="url" id="modal-gform-input" placeholder="https://docs.google.com/forms/d/e/.../viewform" class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-slate-200 text-xs font-semibold outline-none focus:border-brand-600">
         </div>
+        <div>
+          <label for="modal-webhook-input" class="block text-[10px] font-black text-slate-500 uppercase mb-1">Google Sheet Sync URL / Webhook</label>
+          <input type="url" id="modal-webhook-input" placeholder="https://script.google.com/macros/s/.../exec" class="w-full pl-3 pr-4 py-3 rounded-xl border-2 border-slate-200 text-xs font-semibold outline-none focus:border-brand-600">
+          <p id="paste-sync-status" class="text-[10px] text-slate-400 mt-1">Webhook: belum diisi (mode simulasi)</p>
+        </div>
         <button onclick="applyPastedGForm()" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg transition">
           ⚡ Terapkan & Transformasi Sekarang
         </button>
@@ -233,12 +238,13 @@
       </div>
       <h3 class="text-2xl font-black text-slate-900">Pendaftaran Berhasil!</h3>
       <p class="text-xs text-slate-600 leading-relaxed">
-        Jawaban responden telah otomatis dikirimkan ke <b>Google Form resmi</b> dan langsung tersimpan di baris <b>Google Sheet akun Gmail Anda</b>.
+        Payload JSON jawaban responden dikirim ke <b>webhook Google Sheet</b> yang Anda isi di pengaturan link. Jika webhook kosong, statusnya adalah simulasi lokal.
       </p>
 
       <div class="p-3.5 rounded-2xl bg-slate-50 border text-left text-xs space-y-1">
         <p class="font-bold text-slate-700">Data Ringkasan:</p>
-        <p class="text-slate-500" id="summary-payload-text">Nama: Budi Pratama • Status: Terverifikasi</p>
+        <p class="text-slate-500" id="summary-payload-text">Nama: Budi Pratama • Status: Menyiapkan</p>
+        <p class="text-[11px] font-bold text-slate-500" id="sync-status-text">Status sync: menunggu pengiriman...</p>
       </div>
 
       <button onclick="closeSuccessModal()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md">

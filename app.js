@@ -9,6 +9,8 @@ const state = {
   activePresetKey: 'hr',
   currentStepIndex: 0,
   userResponses: {},
+  gformUrl: '',
+  webhookUrl: '',
   presets: {
     hr: {
       companyName: 'PT Digital Nusantara Indonesia',
@@ -19,7 +21,7 @@ const state = {
       slug: 'rekrutmen-digital-2026',
       questions: [
         {
-          id: 'q_name',
+          id: 'hr_name',
           category: '01 • IDENTITAS KANDIDAT',
           title: 'Siapa nama lengkap Anda?',
           subtitle: 'Masukkan nama resmi Anda sesuai yang tertera pada resume atau KTP.',
@@ -28,7 +30,7 @@ const state = {
           defaultValue: 'Nadia Utami'
         },
         {
-          id: 'q_wa',
+          id: 'hr_wa',
           category: '02 • KONTAK LANGSUNG',
           title: 'Berapa nomor WhatsApp aktif Anda?',
           subtitle: 'Tim People & Culture kami akan mengabari jadwal interview via WhatsApp.',
@@ -37,7 +39,7 @@ const state = {
           defaultValue: '0812-3456-7890'
         },
         {
-          id: 'q_role',
+          id: 'hr_role',
           category: '03 • POSISI PILIHAN',
           title: 'Pilih spesialisasi posisi yang ingin Anda lamar:',
           subtitle: 'Pilih salah satu posisi yang paling relevan dengan pengalaman terbaik Anda.',
@@ -50,136 +52,143 @@ const state = {
           defaultIndex: 0
         },
         {
-          id: 'q_salary',
-          category: '04 • EKSPEKTASI KOMPENSASI',
-          title: 'Berapa perkiraan rentang gaji bulanan yang Anda harapkan?',
-          subtitle: 'Ekspektasi gaji kotor (Gross) yang diharapkan per bulan.',
-          type: 'choice',
-          options: [
-            { hotkey: 'A', icon: '💵', title: 'Rp 10.000.000 - Rp 15.000.000', desc: 'Mid-Level Specialist Tier' },
-            { hotkey: 'B', icon: '💎', title: 'Rp 16.000.000 - Rp 25.000.000', desc: 'Senior / Lead Specialist Tier' },
-            { hotkey: 'C', icon: '👑', title: 'Di atas Rp 25.000.000', desc: 'Principal / Department Lead Tier' }
-          ],
-          defaultIndex: 1
+          id: 'hr_start_date',
+          category: '04 • KESIAPAN BERGABUNG',
+          title: 'Kapan tanggal mulai Anda tersedia?',
+          subtitle: 'Tanggal awal kerja atau tanggal Anda siap bergabung dengan tim.',
+          type: 'date',
+          defaultValue: '2026-12-01'
+        },
+        {
+          id: 'hr_cv',
+          category: '05 • DOKUMEN PENDUKUNG',
+          title: 'Unggah CV atau tempel link dokumen Anda:',
+          subtitle: 'Pilih file dari perangkat atau berikan link Google Drive/portfolio.',
+          type: 'file',
+          placeholder: 'https://drive.google.com/...'
         }
       ]
     },
 
-    marathon: {
-      companyName: 'Jakarta Sunset 10K Marathon 2026',
-      subText: 'Official Race Registration Portal • Terhubung ke Google Sheet Panitia',
+    event: {
+      companyName: 'Jakarta Sunset 10K Event 2026',
+      subText: 'Official Event Registration Portal • Terhubung ke Google Sheet Panitia',
       logo: '🏃‍♂️',
-      categoryTag: 'RACE REGISTRATION 2026',
+      categoryTag: 'EVENT REGISTRATION 2026',
       coverImg: 'https://images.unsplash.com/photo-1530549387789-4c1017266635?auto=format&fit=crop&w=1200&q=80',
-      slug: 'sunset-run-jakarta',
+      slug: 'event-sunset-run-jakarta',
       questions: [
         {
-          id: 'q_name',
-          category: '01 • DATA PELARI',
+          id: 'event_name',
+          category: '01 • DATA PESERTA',
           title: 'Siapa nama lengkap Anda untuk sertifikat?',
           subtitle: 'Nama ini akan dicetak resmi pada Nomor Dada (BIB) dan E-Finisher Medal.',
           type: 'text',
-          placeholder: 'Nama lengkap pelari...',
+          placeholder: 'Nama lengkap peserta...',
           defaultValue: 'Budi Pratama'
         },
         {
-          id: 'q_wa',
+          id: 'event_wa',
           category: '02 • KONFIRMASI E-TIKET',
-          title: 'Nomor WhatsApp untuk pengiriman tiket lari:',
+          title: 'Nomor WhatsApp untuk pengiriman tiket event:',
           subtitle: 'QR Code pengambilan Race Pack Finisher akan dikirimkan langsung ke nomor ini.',
           type: 'tel',
           placeholder: '0813-xxxx-xxxx',
           defaultValue: '0813-9988-7766'
         },
         {
-          id: 'q_category',
+          id: 'event_category',
           category: '03 • KATEGORI TANTANGAN',
-          title: 'Pilih jarak tantangan lari Anda:',
-          subtitle: 'Semua pelari yang finish sebelum Cut-Off Time berhak atas Medali Resmi.',
+          title: 'Pilih jarak tantangan event Anda:',
+          subtitle: 'Semua peserta yang finish sebelum Cut-Off Time berhak atas Medali Resmi.',
           type: 'choice',
           options: [
             { hotkey: 'A', icon: '👟', title: '5K Fun Run', desc: 'Rute santai & ramah pemula (COT: 60 Menit)' },
             { hotkey: 'B', icon: '🏅', title: '10K Challenge Run', desc: 'Rute kompetitif resmi (COT: 120 Menit)' },
-            { hotkey: 'C', icon: '⚡', title: '21K Half Marathon', desc: 'Tantangan endurance pelari terlatih (COT: 3 Jam)' }
+            { hotkey: 'C', icon: '⚡', title: '21K Half Marathon', desc: 'Tantangan endurance peserta terlatih (COT: 3 Jam)' }
           ],
           defaultIndex: 1
         },
         {
-          id: 'q_jersey',
-          category: '04 • UKURAN JERSEY',
-          title: 'Pilih ukuran Jersey Finisher Dry-Fit Anda:',
-          subtitle: 'Bahan dry-fit premium berstandar internasional.',
-          type: 'choice',
-          options: [
-            { hotkey: 'A', icon: '👕', title: 'Ukuran S (Lebar 47 cm)', desc: 'Ideal untuk berat badan 45 - 55 kg' },
-            { hotkey: 'B', icon: '👕', title: 'Ukuran M (Lebar 50 cm)', desc: 'Ideal untuk berat badan 56 - 68 kg' },
-            { hotkey: 'C', icon: '👕', title: 'Ukuran L (Lebar 53 cm)', desc: 'Ideal untuk berat badan 69 - 80 kg' },
-            { hotkey: 'D', icon: '👕', title: 'Ukuran XL (Lebar 56 cm)', desc: 'Ideal untuk berat badan 81 - 92 kg' }
-          ],
-          defaultIndex: 2
+          id: 'event_birth_date',
+          category: '04 • TANGGAL LAHIR',
+          title: 'Kapan tanggal lahir Anda?',
+          subtitle: 'Dipakai untuk validasi kategori usia dan penerbitan sertifikat.',
+          type: 'date',
+          defaultValue: '1994-08-15'
+        },
+        {
+          id: 'event_experience',
+          category: '05 • PENGALAMAN LARI',
+          title: 'Seberapa sering Anda berlari? (1–5)',
+          subtitle: '1 = pemula, 5 = rutin berlari lebih dari 3 kali seminggu.',
+          type: 'rating',
+          defaultValue: 3
         }
       ]
     },
 
-    cafe: {
-      companyName: 'Kopi Senja Roastery & Bistro',
-      subText: 'Menu Digital & Order Cepat • Langsung Tercatat di Google Sheet Kasir',
-      logo: '☕',
-      categoryTag: 'DIGITAL ORDER MENU',
-      coverImg: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=80',
-      slug: 'kopi-senja-order',
+    preorder: {
+      companyName: 'Ruang Kreasi Pre-Order & Client Brief',
+      subText: 'Portal Pre-Order & Brief Klien • Langsung Tercatat di Google Sheet',
+      logo: '🛍️',
+      categoryTag: 'PRE-ORDER & CLIENT BRIEF',
+      coverImg: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
+      slug: 'pre-order-client-brief',
       questions: [
         {
-          id: 'q_name',
-          category: '01 • NAMA PEMESAN',
-          title: 'Siapa nama panggilan Anda untuk antrean?',
-          subtitle: 'Barista kami akan memanggil nama Anda begitu pesanan siap dinikmati.',
+          id: 'order_name',
+          category: '01 • IDENTITAS KLIEN',
+          title: 'Siapa nama klien atau bisnis Anda?',
+          subtitle: 'Nama ini akan dipakai sebagai identitas pada brief dan invoice.',
           type: 'text',
-          placeholder: 'contoh: Kak Dimas',
-          defaultValue: 'Kak Dimas'
+          placeholder: 'contoh: Nadia Creative Studio',
+          defaultValue: 'Nadia Creative Studio'
         },
         {
-          id: 'q_coffee',
-          category: '02 • PILIHAN KOPI',
-          title: 'Pilih minuman favorit Anda hari ini:',
-          subtitle: 'Biji kopi arabika segar pilihan yang digiling sesaat sebelum diseduh.',
+          id: 'order_item',
+          category: '02 • JENIS PESANAN',
+          title: 'Pilih layanan yang ingin dipesan:',
+          subtitle: 'Pilih satu layanan utama yang paling sesuai dengan kebutuhan Anda.',
           type: 'choice',
           options: [
-            { hotkey: 'A', icon: '🥤', title: 'Kopi Susu Aren Signature (Ice)', desc: 'Rp 22.000 • Creamy, manis legit aren asli' },
-            { hotkey: 'B', icon: '☕', title: 'Caramel Macchiato (Hot/Ice)', desc: 'Rp 28.000 • Espresso kaya rasa dengan drizzle karamel' },
-            { hotkey: 'C', icon: '✨', title: 'Manual Brew V60 Single Origin', desc: 'Rp 26.000 • Biji Gayo / Toraja dengan rasa floral buah' }
+            { hotkey: 'A', icon: '🎨', title: 'Desain Brand & Logo', desc: 'Identity kit, panduan brand, dan aset dasar' },
+            { hotkey: 'B', icon: '📦', title: 'Kemasan Produk', desc: 'Desain box, label, dan mockup siap cetak' },
+            { hotkey: 'C', icon: '📱', title: 'Konten Digital & Kampanye', desc: 'Feed Instagram, banner, dan materi iklan' }
           ],
           defaultIndex: 0
         },
         {
-          id: 'q_sugar',
-          category: '03 • LEVEL KEMANISAN',
-          title: 'Pilih tingkat kemanisan (Sugar Level):',
-          subtitle: 'Atur takaran pemanis sesuai selera kesehatan Anda.',
-          type: 'choice',
-          options: [
-            { hotkey: 'A', icon: '🍯', title: 'Normal Sweet (100%)', desc: 'Resep standar racikan barista' },
-            { hotkey: 'B', icon: '🍃', title: 'Less Sweet (50%)', desc: 'Paling favorit! Rasa kopi lebih menonjol' },
-            { hotkey: 'C', icon: '☕', title: 'Zero Sugar (0%)', desc: 'Murni tanpa tambahan pemanis' }
-          ],
-          defaultIndex: 1
+          id: 'order_brief',
+          category: '03 • BRIEF SINGKAT',
+          title: 'Ceritakan kebutuhan dan target pesanan Anda:',
+          subtitle: 'Jelaskan tujuan, audiens, gaya yang disukai, dan hal yang harus dihindari.',
+          type: 'textarea',
+          placeholder: 'Contoh: ingin kemasan ramah lingkungan untuk kopi specialty, target anak muda 20-35 tahun...',
+          defaultValue: 'Ingin kemasan ramah lingkungan untuk produk kopi specialty dengan kesan modern dan hangat.'
         },
         {
-          id: 'q_payment',
-          category: '04 • METODE BAYAR',
-          title: 'Pilih cara pembayaran Anda:',
-          subtitle: 'Pesanan akan otomatis tercatat di Google Sheet dapur.',
-          type: 'choice',
-          options: [
-            { hotkey: 'A', icon: '💳', title: 'QRIS Instan', desc: 'BCA, GoPay, OVO, ShopeePay, DANA' },
-            { hotkey: 'B', icon: '💵', title: 'Bayar Tunai / EDC di Kasir', desc: 'Selesaikan transaksi langsung saat ambil pesanan' }
-          ],
-          defaultIndex: 0
+          id: 'order_deadline',
+          category: '04 • TARGET PENGIRIMAN',
+          title: 'Kapan tanggal target pengiriman desain?',
+          subtitle: 'Kami akan menyesuaikan jadwal produksi berdasarkan tanggal ini.',
+          type: 'date',
+          defaultValue: '2026-12-15'
+        },
+        {
+          id: 'order_reference',
+          category: '05 • REFERENSI DOKUMEN',
+          title: 'Unggah moodboard atau tempel link referensi:',
+          subtitle: 'Boleh file gambar/PDF atau linkDrive/Figma yang sudah Anda siapkan.',
+          type: 'file',
+          placeholder: 'https://drive.google.com/...'
         }
       ]
     }
   }
 };
+
+let advanceTimer = null;
 
 // Initialize on Load
 document.addEventListener('DOMContentLoaded', () => {
@@ -191,11 +200,13 @@ document.addEventListener('DOMContentLoaded', () => {
 // Switch Active Preset (HR, Marathon, Cafe)
 function switchActivePreset(presetKey) {
   if (!state.presets[presetKey]) return;
+  clearAdvanceTimer();
   state.activePresetKey = presetKey;
   state.currentStepIndex = 0;
+  state.userResponses = {};
 
   // Update demo buttons
-  ['hr', 'marathon', 'cafe'].forEach(k => {
+  ['hr', 'event', 'preorder'].forEach(k => {
     const btn = document.getElementById(`demo-btn-${k}`);
     if (btn) {
       if (k === presetKey) {
@@ -267,6 +278,47 @@ function renderCurrentQuestion() {
                class="large-open-input">
       </div>
     `;
+  } else if (q.type === 'textarea') {
+    const val = state.userResponses[q.id] !== undefined ? state.userResponses[q.id] : q.defaultValue;
+    bodyHtml = `
+      <div>
+        <textarea id="large-textarea-field" rows="4"
+                  placeholder="${q.placeholder}"
+                  oninput="state.userResponses['${q.id}'] = this.value"
+                  class="large-open-input large-textarea">${val}</textarea>
+      </div>
+    `;
+  } else if (q.type === 'date') {
+    const val = state.userResponses[q.id] !== undefined ? state.userResponses[q.id] : q.defaultValue;
+    bodyHtml = `
+      <div>
+        <input type="date" id="large-date-field" value="${val}"
+               onchange="state.userResponses['${q.id}'] = this.value"
+               class="large-open-input date-input">
+      </div>
+    `;
+  } else if (q.type === 'rating') {
+    const selected = state.userResponses[q.id] !== undefined ? state.userResponses[q.id] : q.defaultValue;
+    bodyHtml = `
+      <div class="rating-stars">
+        ${[1, 2, 3, 4, 5].map(n => `
+          <button type="button" onclick="selectRating('${q.id}', ${n})" class="rating-star ${selected >= n ? 'active' : ''}">★</button>
+        `).join('')}
+        <span class="rating-caption">${selected ? `${selected} / 5` : 'Pilih rating'}</span>
+      </div>
+    `;
+  } else if (q.type === 'file') {
+    const val = state.userResponses[q.id];
+    const currentLabel = val ? (val.url || val.name) : 'Belum ada dokumen dipilih';
+    const linkValue = val && val.kind === 'link' ? val.url : '';
+    bodyHtml = `
+      <div class="file-input-row">
+        <input type="file" id="large-file-input" onchange="handleFileInput('${q.id}', this.files[0])" class="file-input-native">
+        <input type="url" placeholder="${q.placeholder}" value="${linkValue}"
+               oninput="handleDocLinkInput('${q.id}', this.value)" class="large-open-input doc-link-input">
+        <p id="file-link-label" class="file-name-label">${currentLabel}</p>
+      </div>
+    `;
   } else if (q.type === 'choice') {
     const selectedIdx = state.userResponses[q.id] !== undefined ? state.userResponses[q.id] : q.defaultIndex;
     const isMultiCol = q.options.length > 2;
@@ -311,24 +363,57 @@ function renderCurrentQuestion() {
 
   // Auto focus input
   setTimeout(() => {
-    const inp = document.getElementById('large-input-field');
+    const inp = document.getElementById('large-input-field') || document.getElementById('large-textarea-field') || document.getElementById('large-date-field');
     if (inp) inp.focus();
   }, 80);
 }
 
+function clearAdvanceTimer() {
+  if (advanceTimer !== null) {
+    clearTimeout(advanceTimer);
+    advanceTimer = null;
+  }
+}
+
 // Select Option Tile Handler
 function selectOptionTile(qId, optIdx) {
+  clearAdvanceTimer();
   state.userResponses[qId] = optIdx;
   renderCurrentQuestion();
-  
+
   // Smoothly auto advance to next question on card selection!
-  setTimeout(() => {
+  advanceTimer = setTimeout(() => {
+    advanceTimer = null;
     nextStepQuestion();
   }, 260);
 }
 
+function selectRating(qId, value) {
+  clearAdvanceTimer();
+  state.userResponses[qId] = value;
+  renderCurrentQuestion();
+  advanceTimer = setTimeout(() => {
+    advanceTimer = null;
+    nextStepQuestion();
+  }, 320);
+}
+
+function handleFileInput(qId, file) {
+  if (!file) return;
+  clearAdvanceTimer();
+  state.userResponses[qId] = { kind: 'upload', name: file.name, size: file.size, type: file.type, url: '' };
+  renderCurrentQuestion();
+}
+
+function handleDocLinkInput(qId, value) {
+  state.userResponses[qId] = { kind: 'link', name: '', size: 0, type: 'url', url: value };
+  const label = document.getElementById('file-link-label');
+  if (label) label.innerText = value ? `Link: ${value}` : 'Belum ada dokumen dipilih';
+}
+
 // Dock Navigation
 function nextStepQuestion() {
+  clearAdvanceTimer();
   const p = state.presets[state.activePresetKey];
   if (state.currentStepIndex < p.questions.length - 1) {
     state.currentStepIndex++;
@@ -340,6 +425,7 @@ function nextStepQuestion() {
 }
 
 function prevStepQuestion() {
+  clearAdvanceTimer();
   if (state.currentStepIndex > 0) {
     state.currentStepIndex--;
     renderCurrentQuestion();
@@ -377,26 +463,73 @@ function updateFloatingDock() {
   if (percentText) percentText.innerText = `${percent}%`;
 }
 
+function buildSubmissionPayload() {
+  const p = state.presets[state.activePresetKey];
+  return {
+    submittedAt: new Date().toISOString(),
+    preset: state.activePresetKey,
+    formTitle: p.companyName,
+    formSlug: p.slug,
+    sourceUrl: state.gformUrl,
+    answers: p.questions.map(q => {
+      const raw = state.userResponses[q.id] !== undefined ? state.userResponses[q.id] : null;
+      let display = raw;
+      if (q.type === 'choice' && Number.isInteger(raw)) display = q.options[raw] ? q.options[raw].title : raw;
+      if (q.type === 'rating' && Number.isInteger(raw)) display = `${raw}/5`;
+      if (raw && typeof raw === 'object') display = raw.url || raw.name || raw;
+      return { id: q.id, type: q.type, question: q.title, value: raw, display: display };
+    })
+  };
+}
+
+async function sendToGoogleSheet(payload, webhookUrl) {
+  if (!webhookUrl || !webhookUrl.trim()) {
+    return { ok: false, simulated: true, message: 'Webhook belum diisi — data tersimpan sebagai simulasi lokal.' };
+  }
+
+  try {
+    const res = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+    if (!res.ok) {
+      return { ok: false, simulated: false, message: `Gagal mengirim ke webhook (HTTP ${res.status}).` };
+    }
+    return { ok: true, simulated: false, message: 'Data JSON berhasil dikirim ke webhook Google Sheet.' };
+  } catch (err) {
+    return { ok: false, simulated: false, message: 'Webhook tidak dapat dijangkau — periksa URL atau CORS.' };
+  }
+}
+
 // Form Submission Success
-function triggerFormSubmissionSuccess() {
+async function triggerFormSubmissionSuccess() {
+  clearAdvanceTimer();
   triggerConfetti();
   const modal = document.getElementById('success-submit-modal');
   const p = state.presets[state.activePresetKey];
   const summaryText = document.getElementById('summary-payload-text');
+  const statusText = document.getElementById('sync-status-text');
+  const nameKey = `${state.activePresetKey}_name`;
+  const nameVal = state.userResponses[nameKey] || p.questions[0].defaultValue;
 
-  if (summaryText) {
-    const nameVal = state.userResponses['q_name'] || p.questions[0].defaultValue;
-    summaryText.innerText = `Responden: ${nameVal} • Form: ${p.companyName} • Status: Terkirim`;
-  }
-
+  if (summaryText) summaryText.innerText = `Responden: ${nameVal} • Form: ${p.companyName}`;
+  if (statusText) statusText.innerText = 'Status sync: menyiapkan payload...';
   if (modal) modal.classList.remove('hidden');
-  showToast('🎉 Data responden berhasil dikirim langsung ke Google Sheet!');
+  showToast('🎉 Form selesai. Menyiapkan pengiriman data...');
+
+  const result = await sendToGoogleSheet(buildSubmissionPayload(), state.webhookUrl);
+  if (statusText) statusText.innerText = `Status sync: ${result.message}`;
+  if (summaryText) summaryText.innerText += ` • ${result.ok ? 'Terkirim' : result.simulated ? 'Simulasi' : 'Gagal'}`;
+  showToast(result.message);
 }
 
 function closeSuccessModal() {
+  clearAdvanceTimer();
   const modal = document.getElementById('success-submit-modal');
   if (modal) modal.classList.add('hidden');
   state.currentStepIndex = 0;
+  state.userResponses = {};
   renderCurrentQuestion();
 }
 
@@ -420,14 +553,15 @@ function setUITheme(themeKey) {
 // Font Family Switcher
 function changeFontFamily(fontName) {
   state.currentFont = fontName;
+  document.body.className = `theme-${state.currentTheme} font-${fontName === 'Plus Jakarta Sans' ? 'jakarta' : fontName.toLowerCase().replace(/\s+/g, '-')}`;
   document.body.style.fontFamily = `'${fontName}', sans-serif`;
   showToast(`Font aktif: ${fontName}`);
 }
 
-// Setup Keyboard Hotkeys (A, B, C, D & Enter ↵)
+// Setup Keyboard Hotkeys (A, B, C, D, 1-5 & Enter ↵)
 function setupKeyboardNavigation() {
   window.addEventListener('keydown', (e) => {
-    const activeModal = document.querySelector('#paste-link-modal:not(.hidden)');
+    const activeModal = document.querySelector('#paste-link-modal:not(.hidden), #success-submit-modal:not(.hidden)');
     if (activeModal) return;
 
     const p = state.presets[state.activePresetKey];
@@ -440,17 +574,26 @@ function setupKeyboardNavigation() {
     } else if (q.type === 'choice') {
       const keyUpper = e.key.toUpperCase();
       const matchedIdx = q.options.findIndex(opt => opt.hotkey === keyUpper);
-      if (matchedIdx !== -1) {
-        selectOptionTile(q.id, matchedIdx);
-      }
+      if (matchedIdx !== -1) selectOptionTile(q.id, matchedIdx);
+    } else if (q.type === 'rating') {
+      const ratingValue = Number(e.key);
+      if (ratingValue >= 1 && ratingValue <= 5) selectRating(q.id, ratingValue);
     }
   });
 }
 
 // Paste GForm Modal Handlers
 function openPasteModal() {
+  clearAdvanceTimer();
   const m = document.getElementById('paste-link-modal');
   if (m) m.classList.remove('hidden');
+
+  const gformInput = document.getElementById('modal-gform-input');
+  if (gformInput) gformInput.value = state.gformUrl;
+  const webhookInput = document.getElementById('modal-webhook-input');
+  if (webhookInput) webhookInput.value = state.webhookUrl;
+  const syncStatus = document.getElementById('paste-sync-status');
+  if (syncStatus) syncStatus.innerText = state.webhookUrl ? 'Webhook: aktif' : 'Webhook: belum diisi (mode simulasi)';
 }
 
 function closePasteModal() {
@@ -460,14 +603,19 @@ function closePasteModal() {
 
 function applyPastedGForm() {
   const inp = document.getElementById('modal-gform-input');
+  const hook = document.getElementById('modal-webhook-input');
   if (!inp || !inp.value.trim()) {
     showToast('Mohon masukkan tautan Google Form.');
     return;
   }
 
+  state.gformUrl = inp.value.trim();
+  state.webhookUrl = hook && hook.value.trim() ? hook.value.trim() : '';
   closePasteModal();
   triggerConfetti();
-  showToast('✨ Berhasil membaca Google Form! Tampilan telah disulap.');
+  showToast(state.webhookUrl
+    ? '✨ Link tersimpan. Webhook aktif — data dikirim saat submit.'
+    : '✨ Link tersimpan. Webhook belum diisi — submission berstatus simulasi.');
 }
 
 function copyFormLink() {
