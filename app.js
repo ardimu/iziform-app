@@ -13,6 +13,7 @@ const state = {
   googleEmail: '',
   gformUrl: '',
   webhookUrl: '',
+  pricingMode: 'monthly',
   presets: {
     recruit: {
       companyName: 'PT Digital Nusantara Indonesia',
@@ -393,12 +394,74 @@ const state = {
   }
 };
 
+const PRICING_PLANS = {
+  monthly: {
+    note: 'Tagihan bulanan, bisa dibatalkan kapan saja. Free tetap tersedia sebagai paket awal tanpa biaya.',
+    pro: {
+      price: 'Rp49rb',
+      period: '/bulan',
+      scope: 'Fokus: 1 form aktif',
+      note: 'Untuk individu, UMKM, atau satu event/batch tunggal.',
+      cta: 'Pilih Pro Bulanan',
+      benefits: [
+        '1 form aktif dengan kategori pilihan',
+        'Tampilan premium & semua tipe input lengkap',
+        'Sheet webhook aktif + link form unik',
+        'Cocok untuk UMKM dan event tunggal'
+      ]
+    },
+    business: {
+      price: 'Rp149rb',
+      period: '/bulan',
+      scope: 'Fokus: tim & kampanye besar',
+      note: 'Untuk tim, perusahaan, dan kampanye/event berulang.',
+      cta: 'Konsultasi Tim',
+      benefits: [
+        'Semua fitur Pro + multi-form & multi-kategori',
+        'Akses dan kolaborasi tim (admin/editor)',
+        'Ringkasan submission & kerapian data Sheet',
+        'Prioritas kustomisasi & pendampingan integrasi'
+      ]
+    }
+  },
+  onetime: {
+    note: 'Bayar sekali untuk satu form, batch, atau proyek tanpa langganan. Free tetap tersedia sebagai paket awal tanpa biaya.',
+    pro: {
+      price: 'Rp99rb',
+      period: '/form',
+      scope: 'Fokus: 1 form sekali pakai',
+      note: 'Untuk satu kebutuhan individu, UMKM, atau event/batch tunggal.',
+      cta: 'Pilih Pro Sekali Pakai',
+      benefits: [
+        '1 form sekali pakai tanpa langganan',
+        'Tampilan premium & semua tipe input lengkap',
+        'Sheet webhook aktif + link form unik',
+        'Cocok untuk pendaftaran dan event tunggal'
+      ]
+    },
+    business: {
+      price: 'Rp349rb',
+      period: '/proyek',
+      scope: 'Fokus: proyek/event besar',
+      note: 'Untuk tim yang menjalankan satu kampanye atau event besar.',
+      cta: 'Konsultasi Proyek',
+      benefits: [
+        '1 proyek besar tanpa langganan',
+        'Multi-form & multi-kategori dalam satu proyek',
+        'Akses dan kolaborasi tim (admin/editor)',
+        'Kerapian operasional & struktur Sheet rapi'
+      ]
+    }
+  }
+};
+
 let advanceTimer = null;
 
 // Initialize on Load
 document.addEventListener('DOMContentLoaded', () => {
   renderDashboard();
   renderSyncStatus();
+  setPricingMode(state.pricingMode);
   setupKeyboardNavigation();
 });
 
@@ -454,6 +517,60 @@ function renderDashboard() {
 function scrollToSection(sectionId) {
   const target = document.getElementById(sectionId);
   if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function setPricingMode(mode) {
+  state.pricingMode = mode === 'onetime' ? 'onetime' : 'monthly';
+  const plans = PRICING_PLANS[state.pricingMode];
+  const monthlyActive = state.pricingMode === 'monthly';
+
+  [
+    [document.getElementById('pricing-monthly-btn'), monthlyActive],
+    [document.getElementById('pricing-onetime-btn'), !monthlyActive]
+  ].forEach(([button, active]) => {
+    if (!button) return;
+    button.classList.toggle('active', active);
+    button.setAttribute('aria-pressed', String(active));
+  });
+
+  const setText = (id, value) => {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+  };
+
+  const setPrice = (id, price, period) => {
+    const element = document.getElementById(id);
+    if (!element) return;
+    element.textContent = '';
+    element.appendChild(document.createTextNode(price));
+    const periodLabel = document.createElement('small');
+    periodLabel.className = 'price-period';
+    periodLabel.textContent = period;
+    element.appendChild(periodLabel);
+  };
+
+  const setBenefits = (id, benefits) => {
+    const element = document.getElementById(id);
+    if (!element) return;
+    element.textContent = '';
+    benefits.forEach((benefit) => {
+      const item = document.createElement('li');
+      item.textContent = benefit;
+      element.appendChild(item);
+    });
+  };
+
+  setText('pricing-mode-note', plans.note);
+  setPrice('pro-price', plans.pro.price, plans.pro.period);
+  setText('pro-scope', plans.pro.scope);
+  setText('pro-note', plans.pro.note);
+  setText('pro-cta', plans.pro.cta);
+  setBenefits('pro-benefits', plans.pro.benefits);
+  setPrice('business-price', plans.business.price, plans.business.period);
+  setText('business-scope', plans.business.scope);
+  setText('business-note', plans.business.note);
+  setText('business-cta', plans.business.cta);
+  setBenefits('business-benefits', plans.business.benefits);
 }
 
 function isValidEmail(value) {
