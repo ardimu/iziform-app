@@ -21,6 +21,7 @@ const state = {
   qrisImageUrl: '',
   qrisPaymentPlan: '',
   qrisMerchant: '',
+  supportMethod: 'qris',
   presets: {
     recruit: {
       companyName: 'PT Digital Nusantara Indonesia',
@@ -938,11 +939,18 @@ const I18N = {
     'qris.paymentMerchant': 'Merchant / QMID',
     'qris.merchantFallback': 'IZIFORM-QRIS',
     'qris.proofLabel': 'Bukti transfer (opsional)',
-    'qris.transferHint': 'Jika QRIS belum dipasang, atur gambar kode QRIS melalui menu Traktir Kopi terlebih dahulu.',
+    'qris.transferHint': 'Jika QRIS belum dipasang, atur gambar kode QRIS melalui menu Dukung iziForm terlebih dahulu.',
     'qris.confirm': 'Saya sudah transfer',
     'toast.qrisPaymentConfirmed': 'Konfirmasi diterima untuk {plan}. Cek Google Sheet Anda setelah pembayaran diverifikasi.',
     'toast.qrisProofSaved': 'Bukti transfer dipilih: {name}',
     'toast.qrisMerchantSaved': 'Merchant QRIS tersimpan.',
+    'support.aria': 'Pilih metode dukungan',
+    'support.qris': 'QRIS (IDR)',
+    'support.web': 'Web / Global ($)',
+    'support.webDesc': 'Dukung iziForm lewat halaman Web / Global dengan kartu atau metode pembayaran internasional.',
+    'support.webCta': 'Dukung via Web ($)',
+    'support.webHint': 'Tautan ini adalah placeholder checkout sampai tautan pembayaran final tersedia.',
+    'toast.supportMethod': 'Metode dukungan: {name}',
     'faq.eyebrow': 'FAQ',
     'faq.title': 'Pertanyaan yang paling sering ditanyakan.',
     'faq.q1': 'Apakah data tersimpan di Google Sheet saya sendiri?',
@@ -956,7 +964,7 @@ const I18N = {
     'faq.q5': 'Apa bedanya Pro dan Business?',
     'faq.a5': 'Pro fokus pada satu form atau satu batch. Business untuk tim serta kampanye/event besar, dengan multi-form, kolaborasi tim, dan kerapian operasional.',
     'faq.q6': 'Apakah Free benar-benar tetap tersedia?',
-    'faq.a6': 'Ya. Free adalah paket awal tanpa biaya dan tidak berubah saat Anda memilih mode Bulanan atau Sekali Pakai untuk Pro dan Business.',
+    'faq.a6': 'Ya. Free adalah paket awal tanpa biaya dan tetap tersedia saat Anda memilih paket Sekali Pakai untuk Pro atau Business.',
     'faq.q7': 'Apakah CV PDF dibaca di perangkat saya?',
     'faq.a7': 'Ya. Upaya pembacaan PDF dilakukan di browser. Jika teks tidak dapat diekstrak, iziForm menampilkan fallback agar data pelamar tetap bisa diisi manual.',
     'sim.badge': 'Mode Simulasi',
@@ -994,11 +1002,11 @@ const I18N = {
     'success.sent': 'Terkirim',
     'success.simulated': 'Simulasi',
     'success.failed': 'Gagal',
-    'qris.supportButton': 'Traktir Kopi',
+    'qris.supportButton': 'Dukung iziForm',
     'qris.supportNote': 'Dukungan sukarela, tidak memengaruhi fitur.',
     'qris.eyebrow': 'Dukungan Sukarela',
-    'qris.title': 'Traktir Kopi untuk iziForm',
-    'qris.desc': 'Jika iziForm membantu pekerjaan Anda, Anda bisa mengirim dukungan kecil lewat QRIS. Sepenuhnya opsional dan tidak memengaruhi fitur apa pun.',
+    'qris.title': 'Dukung iziForm',
+    'qris.desc': 'Jika iziForm membantu pekerjaan Anda, Anda bisa memberi dukungan lewat QRIS atau tautan Web / Global. Sepenuhnya opsional dan tidak memengaruhi fitur apa pun.',
     'qris.empty': 'QRIS belum dipasang. Unggah gambar kode QRIS Anda.',
     'qris.merchant': 'Nama merchant / QMID',
     'qris.merchantPlaceholder': 'Contoh: IZIFORM-QRIS',
@@ -1197,11 +1205,18 @@ const I18N = {
     'qris.paymentMerchant': 'Merchant / QMID',
     'qris.merchantFallback': 'IZIFORM-QRIS',
     'qris.proofLabel': 'Payment proof (optional)',
-    'qris.transferHint': 'If QRIS is not set yet, install your QR code first from the Traktir Kopi menu.',
+    'qris.transferHint': 'If QRIS is not set yet, install your QR code first from the Support iziForm menu.',
     'qris.confirm': 'I have transferred',
     'toast.qrisPaymentConfirmed': 'Confirmation received for {plan}. Check your Google Sheet after payment verification.',
     'toast.qrisProofSaved': 'Payment proof selected: {name}',
     'toast.qrisMerchantSaved': 'QRIS merchant saved.',
+    'support.aria': 'Choose support method',
+    'support.qris': 'QRIS (IDR)',
+    'support.web': 'Web / Global ($)',
+    'support.webDesc': 'Support iziForm through the Web / Global page with a card or international payment method.',
+    'support.webCta': 'Support via Web ($)',
+    'support.webHint': 'This link is a checkout placeholder until the final payment link is available.',
+    'toast.supportMethod': 'Support method: {name}',
     'faq.eyebrow': 'FAQ',
     'faq.title': 'Questions people ask most.',
     'faq.q1': 'Is my data stored in my own Google Sheet?',
@@ -1215,7 +1230,7 @@ const I18N = {
     'faq.q5': 'What is the difference between Pro and Business?',
     'faq.a5': 'Pro focuses on one form or one batch. Business is for teams and larger campaigns/events, with multi-form flows, team collaboration, and tidy operations.',
     'faq.q6': 'Is Free really still available?',
-    'faq.a6': 'Yes. Free is the no-cost starting plan and never changes when you choose Monthly or One-time for Pro and Business.',
+    'faq.a6': 'Yes. Free is the no-cost starting plan and stays available when you choose a Single Pass package for Pro or Business.',
     'faq.q7': 'Is the PDF CV read on my device?',
     'faq.a7': 'Yes. Text extraction is attempted in your browser. If the PDF cannot be read, iziForm shows a clear fallback so details can still be filled manually.',
     'sim.badge': 'Simulation mode',
@@ -1253,11 +1268,11 @@ const I18N = {
     'success.sent': 'Sent',
     'success.simulated': 'Simulation',
     'success.failed': 'Failed',
-    'qris.supportButton': 'Buy me a coffee',
-    'qris.supportNote': 'Voluntary support; no feature is affected.',
+    'qris.supportButton': 'Support iziForm',
+    'qris.supportNote': 'Voluntary support, does not affect any feature.',
     'qris.eyebrow': 'Voluntary support',
-    'qris.title': 'Buy iziForm a coffee',
-    'qris.desc': 'If iziForm helped your work, you can send a small QRIS tip. Completely optional and it never affects any feature.',
+    'qris.title': 'Support iziForm',
+    'qris.desc': 'If iziForm helped your work, you can support it via QRIS or the Web / Global link. Completely optional and it never affects any feature.',
     'qris.empty': 'No QRIS installed yet. Upload your QR code image.',
     'qris.merchant': 'Merchant name / QMID',
     'qris.merchantPlaceholder': 'Example: IZIFORM-QRIS',
@@ -1456,11 +1471,18 @@ const I18N = {
     'qris.paymentMerchant': '商户 / QMID',
     'qris.merchantFallback': 'IZIFORM-QRIS',
     'qris.proofLabel': '支付凭证（可选）',
-    'qris.transferHint': '如果尚未设置 QRIS，请先从“Traktir Kopi”菜单安装二维码图片。',
+    'qris.transferHint': '如果尚未设置 QRIS，请先从“支持 iziForm”菜单安装二维码图片。',
     'qris.confirm': '我已转账',
     'toast.qrisPaymentConfirmed': '已收到 {plan} 的确认。付款验证后请查看您的 Google Sheet。',
     'toast.qrisProofSaved': '已选择支付凭证：{name}',
     'toast.qrisMerchantSaved': 'QRIS 商户已保存。',
+    'support.aria': '选择支持方式',
+    'support.qris': 'QRIS (IDR)',
+    'support.web': 'Web / Global ($)',
+    'support.webDesc': '通过 Web / Global 页面使用银行卡或国际支付方式支持 iziForm。',
+    'support.webCta': '通过 Web 支持 ($)',
+    'support.webHint': '该链接为结账占位链接，最终支付链接可用后即可替换。',
+    'toast.supportMethod': '支持方式：{name}',
     'faq.eyebrow': '常见问题',
     'faq.title': '大家最常问的问题。',
     'faq.q1': '数据会保存在我自己的 Google Sheet 吗？',
@@ -1474,7 +1496,7 @@ const I18N = {
     'faq.q5': 'Pro 和 Business 有什么区别？',
     'faq.a5': 'Pro 聚焦一个表单或一次批次。Business 面向团队与更大型活动，支持多表单、团队协作和整齐的运营管理。',
     'faq.q6': 'Free 真的仍然可用吗？',
-    'faq.a6': '是的。Free 是免费起步套餐，选择 Pro/Business 的按月或一次性计费都不会改变它。',
+    'faq.a6': '是的。Free 是免费起步套餐，为 Pro 或 Business 选择一次性套餐时它依然可用。',
     'faq.q7': 'PDF 简历是在我的设备上读取吗？',
     'faq.a7': '是的。文本提取会在浏览器中尝试完成。如果无法读取 PDF，iziForm 会给出明确提示，您仍可手动填写。',
     'sim.badge': '模拟模式',
@@ -1512,11 +1534,11 @@ const I18N = {
     'success.sent': '已发送',
     'success.simulated': '模拟',
     'success.failed': '失败',
-    'qris.supportButton': '请我喝咖啡',
+    'qris.supportButton': '支持 iziForm',
     'qris.supportNote': '自愿支持，不影响任何功能。',
     'qris.eyebrow': '自愿支持',
-    'qris.title': '给 iziForm 请杯咖啡',
-    'qris.desc': '如果 iziForm 帮到了您，可以通过 QRIS 发送一点心意。完全自愿，不会影响任何功能。',
+    'qris.title': '支持 iziForm',
+    'qris.desc': '如果 iziForm 帮到了您，可以通过 QRIS 或 Web / Global 链接给予支持。完全自愿，不会影响任何功能。',
     'qris.empty': '尚未安装 QRIS。请上传您的二维码图片。',
     'qris.merchant': '商户名称 / QMID',
     'qris.merchantPlaceholder': '示例：IZIFORM-QRIS',
@@ -1643,6 +1665,8 @@ function closeDisplayMenu() {
 function applyTranslations() {
   document.title = t('meta.title');
   document.documentElement.lang = state.currentLanguage === 'zh' ? 'zh-CN' : state.currentLanguage;
+  document.documentElement.dataset.langTheme = state.currentLanguage;
+  document.body.dataset.langTheme = state.currentLanguage;
 
   document.querySelectorAll('[data-i18n]').forEach((element) => {
     element.innerHTML = t(element.getAttribute('data-i18n'));
@@ -1717,11 +1741,36 @@ function finishSimulation() {
   setTimeout(() => triggerFormSubmissionSuccess(), 140);
 }
 
-function openQrisModal() {
+function setSupportMethod(method, silent = false) {
+  const nextMethod = method === 'web' ? 'web' : 'qris';
+  state.supportMethod = nextMethod;
+  [
+    ['qris', 'support-tab-qris', 'support-panel-qris'],
+    ['web', 'support-tab-web', 'support-panel-web']
+  ].forEach(([key, tabId, panelId]) => {
+    const tab = document.getElementById(tabId);
+    const panel = document.getElementById(panelId);
+    const active = key === nextMethod;
+    if (tab) {
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-selected', String(active));
+    }
+    if (panel) panel.classList.toggle('hidden', !active);
+  });
+  if (!silent) showToast(t('toast.supportMethod', { name: t(nextMethod === 'web' ? 'support.web' : 'support.qris') }));
+}
+
+function openSupportModal() {
   clearAdvanceTimer();
+  setSupportMethod(state.paymentMethod === 'usd' ? 'web' : 'qris', true);
   const modal = document.getElementById('qris-modal');
   if (modal) modal.classList.remove('hidden');
   updateQrisPreview();
+}
+
+function openQrisModal() {
+  openSupportModal();
+  setSupportMethod('qris', true);
 }
 
 function closeQrisModal() {
@@ -1986,17 +2035,6 @@ function renderPricing() {
     if (element) element.textContent = value;
   };
 
-  const setPrice = (id, price, period) => {
-    const element = document.getElementById(id);
-    if (!element) return;
-    element.textContent = '';
-    element.appendChild(document.createTextNode(price));
-    const periodLabel = document.createElement('small');
-    periodLabel.className = 'price-period';
-    periodLabel.textContent = period;
-    element.appendChild(periodLabel);
-  };
-
   const setBenefits = (id, benefits) => {
     const element = document.getElementById(id);
     if (!element) return;
@@ -2015,11 +2053,17 @@ function renderPricing() {
   ['pro', 'business'].forEach((planKey) => {
     const plan = PRICING_PLANS[planKey];
     const data = plan.methods[state.paymentMethod];
+    ['idr', 'usd'].forEach((method) => {
+      setText(`${planKey}-${method}-old`, plan.methods[method].oldPrice);
+      setText(`${planKey}-${method}-price`, plan.methods[method].price);
+    });
+    setText(`${planKey}-period`, t(data.periodKey));
     setText(`${planKey}-scope`, t('pricing.singlePass'));
-    setText(`${planKey}-old-price`, data.oldPrice);
-    setPrice(`${planKey}-price`, data.price, t(data.periodKey));
     setText(`${planKey}-cta`, t(data.ctaKey));
     setBenefits(`${planKey}-benefits`, plan.benefitKeys.map((key) => t(key)));
+    document.querySelectorAll(`[data-price-plan="${planKey}"]`).forEach((element) => {
+      element.classList.toggle('active', element.getAttribute('data-currency') === state.paymentMethod);
+    });
 
     const cta = document.getElementById(`${planKey}-cta`);
     if (!cta) return;

@@ -23,10 +23,7 @@
 
       <nav id="landing-nav" class="landing-nav" data-i18n-aria="nav.aria" aria-label="Navigasi utama">
         <a href="#kategori" data-i18n="nav.categories">Kategori</a>
-        <a href="#sync" data-i18n="nav.sheet">Google Sheet</a>
-        <a href="#keamanan" data-i18n="nav.security">Keamanan</a>
-        <a href="#cara" data-i18n="nav.how">Cara Pakai</a>
-        <a href="#showcase" data-i18n="nav.demo">Demo</a>
+        <a href="#data-trust" data-i18n="nav.security">Data</a>
         <a href="#harga" data-i18n="nav.pricing">Harga</a>
         <a href="#faq" data-i18n="nav.faq">FAQ</a>
       </nav>
@@ -101,17 +98,34 @@
             <p class="hero-description" data-i18n="hero.desc">Ubah pertanyaan yang kaku menjadi pengalaman form yang mewah dan menyenangkan. Setiap jawaban masuk langsung ke Google Sheet akun Anda sendiri.</p>
             <div class="hero-actions">
               <button type="button" onclick="scrollToSection('kategori')" class="btn btn-primary"><span data-i18n="hero.choose">Pilih Kategori</span> <span>&rarr;</span></button>
-              <button type="button" onclick="scrollToSection('sync')" class="btn btn-secondary" data-i18n="hero.connect">Hubungkan Sheet</button>
+              <button type="button" onclick="openPasteModal()" class="btn btn-secondary" data-i18n="header.settings">Pengaturan Sheet</button>
             </div>
             <div class="hero-proof">
               <span data-i18n="hero.proofCategories"><b>7</b> kategori siap pakai</span>
               <span data-i18n="hero.proofInputs"><b>7</b> tipe input interaktif</span>
               <span data-i18n="hero.proofThemes"><b>4</b> tema premium</span>
             </div>
+            <div class="hero-trust" id="data-trust">
+              <span class="trust-mark" aria-hidden="true">&#10003;</span>
+              <p data-i18n="sync.ownership">iziForm tidak menyimpan salinan permanen jawaban Anda. Sheet tetap berada di bawah akun dan kontrol Anda sendiri.</p>
+            </div>
           </div>
 
           <div class="hero-visual" aria-hidden="true">
             <div class="hero-orbit"></div>
+            <div class="dragon-motif" aria-hidden="true">
+              <svg viewBox="0 0 240 190" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M24 132c22-4 31-22 47-35 13-11 28-8 33 4 5 12-6 23-18 21-11-2-12-14-4-19"/>
+                <path d="M79 103c17-31 51-49 85-39 20 6 31 18 43 18 10 0 18-5 23-12"/>
+                <path d="M207 70c5-12 1-24-8-31 16 3 27 14 30 28-7-4-15-3-22 3"/>
+                <path d="M86 102c-4 15-18 24-34 24 12 9 27 10 39 3"/>
+                <path d="M113 122c8 18 25 29 45 31-13 7-29 8-43 2"/>
+                <path d="M151 60c-8-8-9-19-4-28 6 8 15 12 25 12"/>
+                <path d="M127 73c6-7 15-9 23-6"/>
+                <circle cx="182" cy="70" r="2.4"/>
+                <path d="M34 154c16-8 34-8 50 0M54 169c14-7 29-7 43 0"/>
+              </svg>
+            </div>
             <div class="hero-preview">
               <div class="preview-header">
                 <span class="preview-window-dots"><i></i><i></i><i></i></span>
@@ -146,140 +160,6 @@
           <div id="category-grid" class="category-grid"></div>
         </section>
 
-        <section id="sync" class="landing-section">
-          <div class="sync-panel">
-            <div class="sync-copy">
-              <span class="section-eyebrow" data-i18n="sync.eyebrow">Google Account &amp; Sheet Sync</span>
-              <h2 data-i18n="sync.title">Data Anda, Sheet Anda sendiri.</h2>
-              <p data-i18n="sync.desc">Hubungkan email Google dan webhook Google Sheet Anda. Setiap submission dikirim sebagai payload JSON langsung ke sheet milik masing-masing pengguna.</p>
-              <div class="sync-status-list">
-                <div class="status-row">
-                  <span class="status-dot" id="google-status-dot"></span>
-                  <span data-i18n="sync.googleEmail">Email Google</span>
-                  <strong id="google-status-text">Belum diisi</strong>
-                </div>
-                <div class="status-row">
-                  <span class="status-dot" id="sheet-status-dot"></span>
-                  <span data-i18n="sync.sheetWebhook">Sheet Webhook</span>
-                  <strong id="sheet-status-text">Belum diisi</strong>
-                </div>
-              </div>
-              <p class="sheet-ownership-note" data-i18n="sync.ownership">iziForm tidak menyimpan salinan permanen jawaban Anda. Sheet tetap berada di bawah akun dan kontrol Anda sendiri.</p>
-              <p class="sync-note" data-i18n="sync.note">iziForm tidak meminta kata sandi Google. Cukup email untuk identitas akun dan URL webhook Apps Script yang Anda buat sendiri.</p>
-            </div>
-
-            <div class="sync-form">
-              <label class="field-label" for="sync-email-input" data-i18n="sync.googleEmail">Email Google</label>
-              <input type="email" id="sync-email-input" class="field-input" data-i18n-placeholder="sync.emailPlaceholder" placeholder="nama@email.com">
-
-              <label class="field-label" for="sync-webhook-input" data-i18n="sync.webhookUrl">Google Sheet Webhook URL</label>
-              <input type="url" id="sync-webhook-input" class="field-input" data-i18n-placeholder="sync.webhookPlaceholder" placeholder="https://script.google.com/macros/s/.../exec">
-
-              <label class="field-label" for="sync-gform-input" data-i18n="sync.gformOptional">Link Google Form (opsional)</label>
-              <input type="url" id="sync-gform-input" class="field-input" data-i18n-placeholder="sync.gformPlaceholder" placeholder="https://docs.google.com/forms/d/e/.../viewform">
-
-              <button type="button" onclick="saveSyncSettings()" class="btn btn-primary btn-block"><span data-i18n="sync.save">Simpan Koneksi</span> <span>&rarr;</span></button>
-              <p id="sync-form-hint" class="form-hint">Status: webhook belum diisi — submission berjalan dalam mode simulasi lokal.</p>
-            </div>
-          </div>
-        </section>
-
-        <section id="keamanan" class="landing-section">
-          <div class="section-heading">
-            <span class="section-eyebrow" data-i18n="security.eyebrow">Keamanan Data</span>
-            <h2 data-i18n="security.title">Data tetap milik Anda, dari awal sampai akhir.</h2>
-            <p data-i18n="security.desc">Alurnya sederhana dan transparan: jawaban dikirim langsung dari browser ke webhook Google Sheet yang Anda pasang sendiri.</p>
-          </div>
-          <div class="security-grid">
-            <article class="security-card">
-              <span class="security-icon">1</span>
-              <h3 data-i18n="security.directTitle">Langsung ke Sheet Anda</h3>
-              <p data-i18n="security.directDesc">Payload JSON dikirim ke URL webhook milik Anda. Tidak ada penyimpanan pusat yang tersembunyi di iziForm.</p>
-            </article>
-            <article class="security-card">
-              <span class="security-icon">2</span>
-              <h3 data-i18n="security.controlTitle">Akses di tangan Anda</h3>
-              <p data-i18n="security.controlDesc">Anda menentukan siapa yang bisa melihat atau mengubah Sheet, serta kapan akses dicabut.</p>
-            </article>
-            <article class="security-card">
-              <span class="security-icon">3</span>
-              <h3 data-i18n="security.clearTitle">Transparan &amp; dapat diaudit</h3>
-              <p data-i18n="security.clearDesc">Setiap submission menampilkan status pengiriman. Jika webhook kosong, iziForm menyebutnya sebagai simulasi lokal.</p>
-            </article>
-          </div>
-          <div class="security-strip">
-            <span data-i18n="security.strip">Semua kategori memakai prinsip yang sama: email untuk identitas, webhook untuk penyimpanan, kontrol penuh di tangan Anda.</span>
-          </div>
-        </section>
-
-        <section id="cara" class="landing-section">
-          <div class="section-heading">
-            <span class="section-eyebrow" data-i18n="how.eyebrow">Cara Penggunaan</span>
-            <h2 data-i18n="how.title">Tiga langkah dari ide ke Sheet terisi.</h2>
-            <p data-i18n="how.desc">Tidak perlu coding, tidak perlu desain ulang. Cukup pilih, hubungkan, dan bagikan.</p>
-          </div>
-          <div class="steps-grid">
-            <article class="step-card">
-              <span class="step-number">01</span>
-              <h3 data-i18n="how.step1Title">Pilih Kategori</h3>
-              <p data-i18n="how.step1Desc">Pilih rekrutmen, event, pesanan, kelas, survei, brief, atau buat kategori Pilihan Sendiri.</p>
-            </article>
-            <article class="step-card">
-              <span class="step-number">02</span>
-              <h3 data-i18n="how.step2Title">Hubungkan Email &amp; Sheet</h3>
-              <p data-i18n="how.step2Desc">Isi email Google dan webhook Apps Script agar jawaban masuk ke sheet akun Anda.</p>
-            </article>
-            <article class="step-card">
-              <span class="step-number">03</span>
-              <h3 data-i18n="how.step3Title">Bagikan Link &amp; Pantau Sheet</h3>
-              <p data-i18n="how.step3Desc">Salin tautan unik kategori, lalu pantau setiap jawaban langsung di Google Sheet.</p>
-            </article>
-          </div>
-        </section>
-
-        <section id="showcase" class="landing-section">
-          <div class="section-heading">
-            <span class="section-eyebrow" data-i18n="showcase.eyebrow">Showcase Gallery</span>
-            <h2 data-i18n="showcase.title">Lihat hasilnya, bukan cuma bayangkan.</h2>
-            <p data-i18n="showcase.desc">Kartu demo di bawah membuka alur form asli dengan data contoh. Pratinjau Cepat juga tersedia di setiap kartu kategori.</p>
-          </div>
-          <div class="showcase-grid">
-            <button type="button" class="showcase-card" onclick="previewCategory('recruit')">
-              <span class="showcase-preview preview-one">
-                <span class="showcase-label" data-i18n="showcase.demoLabel">Demo Interaktif</span>
-                <span class="play-mark">&#9654;</span>
-                <span class="showcase-lines"><i></i><i></i><i></i></span>
-              </span>
-              <span class="showcase-meta">
-                <strong data-i18n="showcase.recruitTitle">Alur Lamaran Kerja</strong>
-                <span data-i18n="showcase.recruitDesc">Identitas kandidat, PDF CV, dan indikator kecocokan.</span>
-              </span>
-            </button>
-            <button type="button" class="showcase-card" onclick="previewCategory('event')">
-              <span class="showcase-preview preview-two">
-                <span class="showcase-label" data-i18n="showcase.demoLabel">Demo Interaktif</span>
-                <span class="play-mark">&#9654;</span>
-                <span class="showcase-lines"><i></i><i></i><i></i></span>
-              </span>
-              <span class="showcase-meta">
-                <strong data-i18n="showcase.eventTitle">Pendaftaran Event</strong>
-                <span data-i18n="showcase.eventDesc">Pilih jarak lomba dan konfirmasi e-tiket.</span>
-              </span>
-            </button>
-            <button type="button" class="showcase-card" onclick="previewCategory('survey')">
-              <span class="showcase-preview preview-three">
-                <span class="showcase-label" data-i18n="showcase.demoLabel">Demo Interaktif</span>
-                <span class="play-mark">&#9654;</span>
-                <span class="showcase-lines"><i></i><i></i><i></i></span>
-              </span>
-              <span class="showcase-meta">
-                <strong data-i18n="showcase.surveyTitle">Survei Pelanggan</strong>
-                <span data-i18n="showcase.surveyDesc">Rating, masukan, dan ringkasan otomatis.</span>
-              </span>
-            </button>
-          </div>
-        </section>
-
         <section id="harga" class="landing-section">
           <div class="section-heading">
             <span class="section-eyebrow" data-i18n="pricing.eyebrow">Harga</span>
@@ -306,15 +186,16 @@
               <span class="price-note" data-i18n="pricing.freeNote">Untuk mencoba dan kebutuhan personal.</span>
               <ul id="free-benefits"><li>1 Form Aktif</li><li>50 respon/bulan</li><li>Tersambung ke Google Sheet</li><li>Watermark iziForm</li></ul>
               <button type="button" onclick="scrollToSection('kategori')" class="btn btn-secondary btn-block" data-i18n="pricing.freeCta">Mulai Gratis</button>
-              <div class="price-support">
-                <button type="button" onclick="openQrisModal()" class="support-button" data-i18n="qris.supportButton">Traktir Kopi</button>
-                <span data-i18n="qris.supportNote">Dukungan sukarela, tidak memengaruhi fitur.</span>
-              </div>
             </article>
             <article class="price-card price-popular">
               <span class="price-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
               <span class="price-name" data-i18n="pricing.pro">Pro</span>
-              <span class="price-amount-wrap"><s class="price-old" id="pro-old-price">Rp50rb</s><span class="price-new" id="pro-price">Rp29rb<small class="price-period">/form</small></span></span>
+              <span class="price-amount-wrap price-amount-dual">
+                <span class="price-currency active" data-price-plan="pro" data-currency="idr"><s class="price-old" id="pro-idr-old">Rp50rb</s><span class="price-new" id="pro-idr-price">Rp29rb</span></span>
+                <span class="price-divider" aria-hidden="true">/</span>
+                <span class="price-currency" data-price-plan="pro" data-currency="usd"><s class="price-old" id="pro-usd-old">$4</s><span class="price-new" id="pro-usd-price">$2</span></span>
+                <small class="price-period" id="pro-period">/form</small>
+              </span>
               <span class="price-scope" id="pro-scope">Sekali Pakai</span>
               <ul id="pro-benefits"><li>Respon Tanpa Batas</li><li>Hapus Watermark iziForm</li><li>PDF CV Auto-Fill</li><li>Semua Tipe Input</li><li>Branding Kustom</li></ul>
               <a href="#" id="pro-cta" class="btn btn-primary btn-block">Bayar QRIS Rp29rb</a>
@@ -322,7 +203,12 @@
             <article class="price-card price-business">
               <span class="price-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
               <span class="price-name" data-i18n="pricing.business">Business</span>
-              <span class="price-amount-wrap"><s class="price-old" id="business-old-price">Rp150rb</s><span class="price-new" id="business-price">Rp99rb<small class="price-period">/proyek</small></span></span>
+              <span class="price-amount-wrap price-amount-dual">
+                <span class="price-currency active" data-price-plan="business" data-currency="idr"><s class="price-old" id="business-idr-old">Rp150rb</s><span class="price-new" id="business-idr-price">Rp99rb</span></span>
+                <span class="price-divider" aria-hidden="true">/</span>
+                <span class="price-currency" data-price-plan="business" data-currency="usd"><s class="price-old" id="business-usd-old">$10</s><span class="price-new" id="business-usd-price">$7</span></span>
+                <small class="price-period" id="business-period">/proyek</small>
+              </span>
               <span class="price-scope" id="business-scope">Sekali Pakai</span>
               <ul id="business-benefits"><li>Semua Fitur PRO + AI Candidate Match Score &amp; Ranking</li><li>Akses Multi-Admin/Tim</li><li>Multi-Form 1 Proyek</li><li>Prioritas Support</li></ul>
               <a href="#" id="business-cta" class="btn btn-primary btn-block">Bayar QRIS Rp99rb</a>
@@ -376,6 +262,15 @@
         <span class="form-nav-label"><span data-i18n="form.active">Form aktif:</span> <strong id="form-category-label">Rekrutmen &amp; Lamaran Kerja</strong></span>
         <button type="button" onclick="backToDashboard()" class="form-change-btn" data-i18n="form.change">Ganti Kategori</button>
       </div>
+
+      <details class="workspace-guide">
+        <summary data-i18n="how.title">Tiga langkah dari ide ke Sheet terisi.</summary>
+        <div class="workspace-guide-steps">
+          <span><b>01</b> <span data-i18n="how.step1Title">Pilih Kategori</span></span>
+          <span><b>02</b> <span data-i18n="how.step2Title">Hubungkan Email &amp; Sheet</span></span>
+          <span><b>03</b> <span data-i18n="how.step3Title">Bagikan Link &amp; Pantau Sheet</span></span>
+        </div>
+      </details>
 
       <div id="simulation-banner" class="simulation-banner hidden">
         <span class="simulation-badge" data-i18n="sim.badge">Mode Simulasi</span>
@@ -468,11 +363,10 @@
       </div>
       <div class="footer-links">
         <a href="#kategori" data-i18n="nav.categories">Kategori</a>
-        <a href="#sync" data-i18n="nav.sheet">Integrasi</a>
-        <a href="#keamanan" data-i18n="nav.security">Keamanan</a>
+        <a href="#data-trust" data-i18n="nav.security">Data</a>
         <a href="#harga" data-i18n="nav.pricing">Harga</a>
         <a href="#faq" data-i18n="nav.faq">FAQ</a>
-        <button type="button" onclick="openQrisModal()" data-i18n="qris.supportButton">Traktir Kopi</button>
+        <button type="button" onclick="openSupportModal()" data-i18n="qris.supportButton">Dukung iziForm</button>
       </div>
       <span class="footer-copy" data-i18n="footer.copy">&copy; 2026 iziForm. Dibuat untuk form yang lebih manusiawi.</span>
     </div>
@@ -502,6 +396,7 @@
           <input type="url" id="modal-webhook-input" class="modal-input modal-input-plain" data-i18n-placeholder="sync.webhookPlaceholder" placeholder="https://script.google.com/macros/s/.../exec">
           <p id="paste-sync-status" class="modal-hint">Webhook: belum diisi (mode simulasi)</p>
         </div>
+        <p class="modal-security-note" data-i18n="sync.ownership">iziForm tidak menyimpan salinan permanen jawaban Anda. Sheet tetap berada di bawah akun dan kontrol Anda sendiri.</p>
         <button onclick="applyPastedGForm()" class="modal-primary" data-i18n="modal.save">Simpan Pengaturan</button>
       </div>
     </div>
@@ -527,16 +422,29 @@
     <div class="modal-card">
       <button onclick="closeQrisModal()" class="modal-close" data-i18n-aria="common.close" aria-label="Tutup">&#10005;</button>
       <span class="modal-eyebrow" data-i18n="qris.eyebrow">Dukungan Sukarela</span>
-      <h3 class="modal-title" data-i18n="qris.title">Traktir Kopi untuk iziForm</h3>
-      <p class="modal-description" data-i18n="qris.desc">Jika iziForm membantu pekerjaan Anda, Anda bisa mengirim dukungan kecil lewat QRIS. Sepenuhnya opsional dan tidak memengaruhi fitur apa pun.</p>
+      <h3 class="modal-title" data-i18n="qris.title">Dukung iziForm</h3>
+      <p class="modal-description" data-i18n="qris.desc">Jika iziForm membantu pekerjaan Anda, Anda bisa memberi dukungan lewat QRIS atau tautan Web / Global. Sepenuhnya opsional dan tidak memengaruhi fitur apa pun.</p>
 
-      <div class="qris-panel">
-        <div id="qris-preview" class="qris-preview" data-i18n="qris.empty">QRIS belum dipasang. Unggah gambar kode QRIS Anda.</div>
-        <label for="qris-merchant-input" class="modal-label" data-i18n="qris.merchant">Nama merchant / QMID</label>
-        <input type="text" id="qris-merchant-input" class="modal-input modal-input-plain" onchange="saveQrisMerchant(this.value)" data-i18n-placeholder="qris.merchantPlaceholder" placeholder="Contoh: IZIFORM-QRIS">
-        <label for="qris-image-input" class="modal-label" data-i18n="qris.image">Pasang gambar QRIS</label>
-        <input type="file" id="qris-image-input" class="modal-input modal-input-plain" accept="image/*" onchange="previewQrisImage(this.files[0])">
-        <p class="modal-hint" data-i18n="qris.hint">Gambar hanya ditampilkan di browser Anda untuk pratinjau; tidak diunggah ke server.</p>
+      <div class="support-tabs" role="tablist" data-i18n-aria="support.aria" aria-label="Pilih metode dukungan">
+        <button type="button" id="support-tab-qris" class="support-tab active" aria-selected="true" onclick="setSupportMethod('qris')" data-i18n="support.qris">QRIS (IDR)</button>
+        <button type="button" id="support-tab-web" class="support-tab" aria-selected="false" onclick="setSupportMethod('web')" data-i18n="support.web">Web / Global ($)</button>
+      </div>
+
+      <div id="support-panel-qris" class="support-panel">
+        <div class="qris-panel">
+          <div id="qris-preview" class="qris-preview" data-i18n="qris.empty">QRIS belum dipasang. Unggah gambar kode QRIS Anda.</div>
+          <label for="qris-merchant-input" class="modal-label" data-i18n="qris.merchant">Nama merchant / QMID</label>
+          <input type="text" id="qris-merchant-input" class="modal-input modal-input-plain" onchange="saveQrisMerchant(this.value)" data-i18n-placeholder="qris.merchantPlaceholder" placeholder="Contoh: IZIFORM-QRIS">
+          <label for="qris-image-input" class="modal-label" data-i18n="qris.image">Pasang gambar QRIS</label>
+          <input type="file" id="qris-image-input" class="modal-input modal-input-plain" accept="image/*" onchange="previewQrisImage(this.files[0])">
+          <p class="modal-hint" data-i18n="qris.hint">Gambar hanya ditampilkan di browser Anda untuk pratinjau; tidak diunggah ke server.</p>
+        </div>
+      </div>
+
+      <div id="support-panel-web" class="support-panel hidden">
+        <p class="modal-description" data-i18n="support.webDesc">Dukung iziForm lewat halaman Web / Global dengan kartu atau metode pembayaran internasional.</p>
+        <a id="support-web-link" href="https://checkout.example.com/iziform-support-usd" target="_blank" rel="noopener" class="modal-primary support-web-link" data-i18n="support.webCta">Dukung via Web ($)</a>
+        <p class="modal-hint" data-i18n="support.webHint">Tautan ini adalah placeholder checkout sampai tautan pembayaran final tersedia.</p>
       </div>
 
       <button onclick="closeQrisModal()" class="modal-primary" data-i18n="common.close">Tutup</button>
@@ -562,7 +470,7 @@
         <div id="payment-qris-preview" class="qris-preview" data-i18n="qris.empty">QRIS belum dipasang. Unggah gambar kode QRIS Anda.</div>
         <label for="payment-proof-input" class="modal-label" data-i18n="qris.proofLabel">Bukti transfer (opsional)</label>
         <input type="file" id="payment-proof-input" class="modal-input modal-input-plain" accept="image/*,application/pdf">
-        <p class="modal-hint" data-i18n="qris.transferHint">Jika QRIS belum dipasang, atur gambar kode QRIS melalui menu Traktir Kopi terlebih dahulu.</p>
+        <p class="modal-hint" data-i18n="qris.transferHint">Jika QRIS belum dipasang, atur gambar kode QRIS melalui menu Dukung iziForm terlebih dahulu.</p>
       </div>
 
       <button onclick="confirmQrisPayment()" class="modal-primary" data-i18n="qris.confirm">Saya sudah transfer</button>
