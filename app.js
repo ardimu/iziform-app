@@ -20,6 +20,8 @@ const state = {
   isSimulation: false,
   cvParse: null,
   hrRequirement: null,
+  hrCompanyName: 'PT Digital Nusantara Indonesia',
+  hrCompanyLogo: '',
   hrTemplateKey: 'tech',
   hrSelectionStatus: 'new',
   hrLastCandidate: null,
@@ -959,6 +961,13 @@ const I18N = {
     'hr.builderTitle': 'Susun requirement, portal kandidat langsung menyesuaikan.',
     'hr.builderDesc': 'Atur detail lowongan dan batas requirement. Sisi B otomatis merefleksikan field, badge, dan pertanyaan penyaring.',
     'hr.builderOption': 'Buka HR Builder',
+    'hr.companyName': 'Nama perusahaan',
+    'hr.companyLogo': 'Logo / foto perusahaan',
+    'hr.logoHint': 'Kosongkan untuk memakai inisial otomatis.',
+    'hr.logoClear': 'Hapus Logo',
+    'portal.companyLabel': 'Perusahaan',
+    'portal.positionApplied': 'Posisi yang dilamar',
+    'portal.workLocation': 'Lokasi / tipe kerja',
     'hr.templateLabel': 'Template posisi cepat',
     'hr.templateTech': 'Teknologi',
     'hr.templatePeople': 'HR / People',
@@ -1305,6 +1314,13 @@ const I18N = {
     'hr.builderTitle': 'Set the requirements once; the candidate portal follows.',
     'hr.builderDesc': 'Define job details and requirement limits. Side B automatically reflects fields, badges, and screening questions.',
     'hr.builderOption': 'Open HR Builder',
+    'hr.companyName': 'Company name',
+    'hr.companyLogo': 'Company logo / photo',
+    'hr.logoHint': 'Leave empty to use automatic initials.',
+    'hr.logoClear': 'Clear Logo',
+    'portal.companyLabel': 'Company',
+    'portal.positionApplied': 'Applied position',
+    'portal.workLocation': 'Location / work type',
     'hr.templateLabel': 'Quick role templates',
     'hr.templateTech': 'Technology',
     'hr.templatePeople': 'HR / People',
@@ -1651,6 +1667,13 @@ const I18N = {
     'hr.builderTitle': '设置好要求，候选人门户即刻同步。',
     'hr.builderDesc': '定义职位详情与要求边界。候选人端会自动反映字段、标签与筛选问题。',
     'hr.builderOption': '打开 HR 构建器',
+    'hr.companyName': '公司名称',
+    'hr.companyLogo': '公司标志 / 照片',
+    'hr.logoHint': '留空则使用自动首字母。',
+    'hr.logoClear': '清除标志',
+    'portal.companyLabel': '公司',
+    'portal.positionApplied': '申请职位',
+    'portal.workLocation': '地点 / 工作类型',
     'hr.templateLabel': '快速职位模板',
     'hr.templateTech': '技术',
     'hr.templatePeople': 'HR / 人力',
@@ -1972,7 +1995,14 @@ function getPreset(key) {
   if (key === 'recruit') {
     const requirement = state.hrRequirement || HR_TEMPLATES.tech[state.currentLanguage] || HR_TEMPLATES.tech.id;
     const buildQuestions = HR_QUESTION_COPY[state.currentLanguage] || HR_QUESTION_COPY.id;
-    result = { ...result, subText: `Official Career Portal • ${requirement.position} • ${requirement.location}`, questions: buildQuestions(requirement) };
+    result = {
+      ...result,
+      companyName: state.hrCompanyName || result.companyName,
+      companyLogo: state.hrCompanyLogo,
+      logo: getHrCompanyInitials(),
+      subText: `Official Career Portal • ${requirement.position} • ${requirement.location}`,
+      questions: buildQuestions(requirement)
+    };
   }
   return result;
 }
@@ -2292,6 +2322,7 @@ function toggleViews() {
   const dock = document.getElementById('form-dock');
   const ribbon = document.getElementById('hr-career-ribbon');
   const portal = document.getElementById('candidate-portal');
+  const stickyHeader = document.getElementById('candidate-company-sticky');
   const ribbonTitle = document.getElementById('hr-ribbon-title');
   const ribbonStatus = document.getElementById('hr-ribbon-status');
   const banner = document.getElementById('simulation-banner');
@@ -2306,12 +2337,14 @@ function toggleViews() {
   if (banner) banner.classList.toggle('hidden', !(isForm && state.isSimulation));
   if (ribbon) ribbon.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
   if (portal) portal.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
+  if (stickyHeader) stickyHeader.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
   if (landingNav) landingNav.classList.toggle('hidden', isForm);
   if (dashboardButton) dashboardButton.classList.toggle('hidden', !isForm);
   if (linkPill) linkPill.classList.toggle('hidden', !isForm);
   if (ribbonTitle && isForm) ribbonTitle.textContent = t('form.ribbonTitle');
   if (ribbonStatus && isForm) ribbonStatus.textContent = getPreset(state.activePresetKey).subText;
   renderInfoPanels();
+  renderCompanyIdentity();
   renderCandidatePortal();
 }
 
@@ -2444,6 +2477,73 @@ function currentHrRequirement() {
   return state.hrRequirement || HR_TEMPLATES.tech[state.currentLanguage] || HR_TEMPLATES.tech.id;
 }
 
+function getHrCompanyInitials(name = state.hrCompanyName) {
+  const words = String(name || '').trim().split(/\s+/).filter(Boolean);
+  const initials = words.slice(0, 2).map((word) => word[0]).join('').toUpperCase();
+  return initials || 'iF';
+}
+
+function setCompanyLogoMarkup(element, logo, name) {
+  if (!element) return;
+  if (logo) {
+    element.innerHTML = `<img src="${escapeHtml(logo)}" alt="${escapeHtml(name || 'Company logo')}">`;
+    return;
+  }
+  element.textContent = getHrCompanyInitials(name);
+}
+
+function updateHrCompanyName(value) {
+  state.hrCompanyName = String(value || '').trim() || state.hrCompanyName;
+  renderHrLogoPreview();
+  renderCompanyIdentity();
+  if (state.view === 'form' && state.activePresetKey === 'recruit') {
+    renderActivePresetHeader();
+    renderCurrentQuestion();
+  }
+}
+
+function setHrCompanyLogo(value) {
+  state.hrCompanyLogo = String(value || '');
+  renderHrLogoPreview();
+  renderCompanyIdentity();
+  if (state.view === 'form' && state.activePresetKey === 'recruit') renderActivePresetHeader();
+}
+
+function handleHrLogoInput(file) {
+  if (!file || !/^image\//.test(file.type)) return;
+  const reader = new FileReader();
+  reader.onload = () => setHrCompanyLogo(reader.result);
+  reader.readAsDataURL(file);
+}
+
+function clearHrLogo() {
+  setHrCompanyLogo('');
+  const input = document.getElementById('hr-logo-input');
+  if (input) input.value = '';
+}
+
+function renderHrLogoPreview() {
+  setCompanyLogoMarkup(document.getElementById('hr-logo-preview'), state.hrCompanyLogo, state.hrCompanyName);
+  const clearButton = document.getElementById('hr-logo-clear');
+  if (clearButton) clearButton.classList.toggle('hidden', !state.hrCompanyLogo);
+}
+
+function renderCompanyIdentity() {
+  const r = currentHrRequirement();
+  const name = state.hrCompanyName || getPreset('recruit').companyName;
+  const setText = (id, value) => {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+  };
+  setCompanyLogoMarkup(document.getElementById('candidate-company-logo'), state.hrCompanyLogo, name);
+  setCompanyLogoMarkup(document.getElementById('company-logo-box'), state.hrCompanyLogo, name);
+  setText('candidate-company-name', name);
+  setText('candidate-company-position', r.position);
+  setText('candidate-company-location', r.location);
+  setText('company-name-text', name);
+  setText('hr-ribbon-status', `${name} • ${r.position} • ${r.location}`);
+}
+
 function applyHrTemplate(templateKey, silent = false) {
   const template = HR_TEMPLATES[templateKey] || HR_TEMPLATES.tech;
   state.hrTemplateKey = template === HR_TEMPLATES.tech ? 'tech' : template === HR_TEMPLATES.people ? 'people' : template === HR_TEMPLATES.growth ? 'growth' : 'custom';
@@ -2523,6 +2623,9 @@ function renderHrBuilder() {
     const element = document.getElementById(id);
     if (element) element.value = r[key] || '';
   });
+  const companyInput = document.getElementById('hr-company-input');
+  if (companyInput) companyInput.value = state.hrCompanyName;
+  renderHrLogoPreview();
   renderHrTemplateButtons();
   renderHrPreview();
   renderHrPricing();
@@ -2875,6 +2978,7 @@ function renderActivePresetHeader() {
   if (headerPill) headerPill.textContent = `iziform.app/f/${p.slug}`;
   if (ribbonTitle) ribbonTitle.textContent = t('form.ribbonTitle');
   if (ribbonStatus) ribbonStatus.textContent = p.subText;
+  renderCompanyIdentity();
   renderCandidatePortal();
 }
 
@@ -3131,6 +3235,8 @@ function buildSubmissionPayload() {
     googleEmail: state.googleEmail,
     formTitle: p.companyName,
     formSlug: p.slug,
+    companyName: state.hrCompanyName,
+    companyLogoMode: state.hrCompanyLogo ? 'uploaded' : 'initials',
     sourceUrl: state.gformUrl,
     simulation: state.isSimulation,
     hrRequirement: state.activePresetKey === 'recruit' ? { ...currentHrRequirement() } : null,

@@ -417,6 +417,19 @@
                 </div>
               </div>
               <div class="hr-form-grid">
+                <label class="hr-form-field hr-form-wide">
+                  <span data-i18n="hr.companyName">Nama perusahaan</span>
+                  <input type="text" id="hr-company-input" oninput="updateHrCompanyName(this.value)">
+                </label>
+                <label class="hr-form-field hr-form-wide">
+                  <span data-i18n="hr.companyLogo">Logo / foto perusahaan</span>
+                  <span class="hr-logo-row">
+                    <span id="hr-logo-preview" class="hr-logo-preview">iF</span>
+                    <input type="file" id="hr-logo-input" accept="image/png,image/jpeg,image/webp,image/svg+xml" onchange="handleHrLogoInput(this.files[0])" class="hr-logo-native">
+                    <button type="button" onclick="clearHrLogo()" id="hr-logo-clear" class="hr-logo-clear" data-i18n="hr.logoClear">Hapus Logo</button>
+                  </span>
+                  <small class="hr-logo-hint" data-i18n="hr.logoHint">Kosongkan untuk memakai inisial otomatis.</small>
+                </label>
                 <label class="hr-form-field">
                   <span data-i18n="hr.position">Nama posisi</span>
                   <input type="text" id="hr-position-input" oninput="updateHrRequirement('position', this.value)">
@@ -531,6 +544,19 @@
           <span id="hr-ribbon-status" data-i18n="form.ribbonStatus">PT Digital Nusantara Indonesia • Talent Acquisition 2026</span>
         </div>
         <span class="hr-ribbon-status" data-i18n="form.open">Open Registration</span>
+      </div>
+
+      <div id="candidate-company-sticky" class="candidate-company-sticky hidden">
+        <span id="candidate-company-logo" class="candidate-company-logo">iF</span>
+        <span class="candidate-company-copy">
+          <span class="candidate-company-label" data-i18n="portal.companyLabel">Perusahaan</span>
+          <strong id="candidate-company-name">PT Digital Nusantara Indonesia</strong>
+          <span id="candidate-company-position" data-i18n="portal.positionApplied">Posisi yang dilamar</span>
+        </span>
+        <span class="candidate-company-meta">
+          <span id="candidate-company-location" data-i18n="portal.workLocation">Lokasi / tipe kerja</span>
+          <span class="verified-badge candidate-company-verified"><span data-i18n="form.verified">Terverifikasi</span></span>
+        </span>
       </div>
 
       <section id="candidate-portal" class="candidate-portal hidden">

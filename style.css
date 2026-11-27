@@ -1045,6 +1045,13 @@ body[data-lang-theme="en"] .hero-preview { border-radius: 1.1rem; transform: non
 .hr-form-field > span { font-size: 0.5625rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); }
 .hr-form-field input, .hr-form-field textarea { width: 100%; padding: 0.7rem 0.85rem; border-radius: 0.85rem; border: 1px solid var(--border-subtle); background: var(--surface-soft); color: var(--text-headline); font-family: inherit; font-size: 0.75rem; font-weight: 700; resize: vertical; }
 .hr-form-wide { grid-column: 1 / -1; }
+.hr-logo-row { display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem; }
+.hr-logo-preview { width: 2.75rem; height: 2.75rem; border-radius: 0.85rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--accent-soft); border: 1px solid var(--accent-ring); color: var(--accent-color); font-size: 0.8125rem; font-weight: 900; }
+.hr-logo-preview img { width: 100%; height: 100%; object-fit: cover; }
+.hr-logo-native { max-width: 13rem; color: var(--text-faint); font-family: inherit; font-size: 0.625rem; }
+.hr-logo-clear { padding: 0.35rem 0.65rem; border-radius: 999px; border: 1px solid var(--border-subtle); background: var(--surface-raised); color: var(--text-faint); font-family: inherit; font-size: 0.5625rem; font-weight: 900; cursor: pointer; }
+.hr-logo-clear:hover { border-color: var(--accent-color); color: var(--accent-color); }
+.hr-logo-hint { margin-top: 0.25rem; font-size: 0.5625rem; color: var(--text-faint); }
 .hr-preview-column { display: flex; flex-direction: column; gap: 1rem; }
 .hr-price-card { position: relative; display: flex; flex-direction: column; padding: 1.5rem; border-radius: 1.5rem; background: var(--surface-raised); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-soft); }
 .hr-price-label { font-size: 0.75rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-color); }
@@ -1063,6 +1070,23 @@ body[data-lang-theme="en"] .hero-preview { border-radius: 1.1rem; transform: non
 .hr-recap-table { width: 100%; border-collapse: collapse; font-size: 0.6875rem; }
 .hr-recap-table th { text-align: left; padding: 0.5rem; border-bottom: 1px solid var(--border-subtle); color: var(--text-faint); font-size: 0.5625rem; letter-spacing: 0.07em; text-transform: uppercase; }
 .hr-recap-table td { padding: 0.6rem 0.5rem; border-bottom: 1px dashed var(--border-subtle); color: var(--text-body); }
+
+.candidate-company-sticky {
+  position: sticky; top: 7.25rem; z-index: 38; display: flex; align-items: center; gap: 0.75rem;
+  margin: 0 0 1rem; padding: 0.55rem 0.85rem; border-radius: 1rem;
+  background-color: var(--surface-glass); border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-soft); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+}
+.candidate-company-logo { width: 2.35rem; height: 2.35rem; border-radius: 0.75rem; flex-shrink: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; background: var(--accent-soft); border: 1px solid var(--accent-ring); color: var(--accent-color); font-size: 0.6875rem; font-weight: 900; }
+.candidate-company-logo img { width: 100%; height: 100%; object-fit: cover; }
+.candidate-company-copy { display: flex; flex-direction: column; min-width: 0; flex: 1 1 auto; }
+.candidate-company-label { font-size: 0.5rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); }
+.candidate-company-copy strong { font-size: 0.8125rem; font-weight: 900; letter-spacing: -0.02em; color: var(--text-headline); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.candidate-company-copy > span:last-child { font-size: 0.625rem; color: var(--text-faint); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.candidate-company-meta { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
+.candidate-company-meta > span:first-child { max-width: 10rem; font-size: 0.625rem; font-weight: 800; color: var(--text-body); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.candidate-company-verified { font-size: 0.5rem; padding: 0.2rem 0.5rem; }
+body[data-preset="recruit"] .brand-identity-card { display: none; }
 
 .candidate-portal { display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem; border-radius: 1.75rem; background: var(--surface-raised); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-soft); }
 .candidate-portal-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
@@ -1606,6 +1630,8 @@ body[data-preset="recruit"] .hr-career-ribbon { display: flex; }
   .info-panel { padding: 2.5rem 0 3rem; scroll-margin-top: 8rem; }
   .custom-track-grid, .custom-tier-grid, .hr-builder-grid, .hr-form-grid { grid-template-columns: 1fr; }
   .candidate-portal-head, .candidate-cv-card { flex-direction: column; }
+  .candidate-company-sticky { top: 7rem; padding: 0.5rem 0.65rem; }
+  .candidate-company-meta > span:first-child { max-width: 6rem; }
   .candidate-progress-card { width: 100%; }
   .category-card { padding: 1rem; }
   .category-icon { width: 2.35rem; height: 2.35rem; }
