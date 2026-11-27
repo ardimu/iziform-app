@@ -411,61 +411,170 @@
           </div>
           <div class="hr-builder-grid">
             <div class="hr-builder-form">
-              <div class="hr-template-row">
-                <span class="hr-template-label" data-i18n="hr.templateLabel">Template posisi cepat</span>
-                <div class="hr-template-buttons">
-                  <button type="button" onclick="applyHrTemplate('tech')" id="hr-template-tech" class="hr-template-btn">Tech</button>
-                  <button type="button" onclick="applyHrTemplate('people')" id="hr-template-people" class="hr-template-btn">People</button>
-                  <button type="button" onclick="applyHrTemplate('growth')" id="hr-template-growth" class="hr-template-btn">Growth</button>
-                  <button type="button" onclick="applyHrTemplate('custom')" id="hr-template-custom" class="hr-template-btn">Custom</button>
+              <div class="hr-block">
+                <h3 class="hr-block-title" data-i18n="hr.block.identity">1. Identitas & Profil Perusahaan</h3>
+                <div class="hr-template-row">
+                  <span class="hr-template-label" data-i18n="hr.companyPresetLabel">Preset perusahaan sampel</span>
+                  <div class="hr-template-buttons">
+                    <button type="button" onclick="applyCompanyPreset('nusantara')" id="hr-company-preset-nusantara" class="hr-template-btn">Nusantara</button>
+                    <button type="button" onclick="applyCompanyPreset('aurora')" id="hr-company-preset-aurora" class="hr-template-btn">Aurora</button>
+                    <button type="button" onclick="applyCompanyPreset('monarch')" id="hr-company-preset-monarch" class="hr-template-btn">Monarch</button>
+                  </div>
+                </div>
+                <div class="hr-form-grid">
+                  <label class="hr-form-field hr-form-wide">
+                    <span data-i18n="hr.companyName">Nama perusahaan</span>
+                    <input type="text" id="hr-company-input" oninput="updateHrCompanyName(this.value)">
+                  </label>
+                  <label class="hr-form-field hr-form-wide">
+                    <span data-i18n="hr.companyLogo">Logo / foto perusahaan</span>
+                    <span class="hr-logo-row">
+                      <span id="hr-logo-preview" class="hr-logo-preview">iF</span>
+                      <input type="file" id="hr-logo-input" accept="image/png,image/jpeg,image/webp,image/svg+xml" onchange="handleHrLogoInput(this.files[0])" class="hr-logo-native">
+                      <button type="button" onclick="clearHrLogo()" id="hr-logo-clear" class="hr-logo-clear" data-i18n="hr.logoClear">Hapus Logo</button>
+                    </span>
+                    <small class="hr-logo-hint" data-i18n="hr.logoHint">Kosongkan untuk memakai inisial otomatis.</small>
+                  </label>
+                  <label class="hr-form-field">
+                    <span data-i18n="hr.industry">Industri / bidang usaha</span>
+                    <input type="text" id="hr-industry-input" oninput="updateHrCompanyField('industry', this.value)">
+                  </label>
+                  <label class="hr-form-field">
+                    <span data-i18n="hr.website">Website resmi</span>
+                    <input type="url" id="hr-website-input" oninput="updateHrCompanyField('website', this.value)">
+                  </label>
+                  <label class="hr-form-field hr-form-wide">
+                    <span data-i18n="hr.description">Deskripsi singkat perusahaan</span>
+                    <textarea id="hr-description-input" rows="2" oninput="updateHrCompanyField('description', this.value)"></textarea>
+                  </label>
+                  <label class="hr-form-field hr-form-wide">
+                    <span data-i18n="hr.banner">Banner header</span>
+                    <span class="hr-logo-row">
+                      <span id="hr-banner-preview" class="hr-banner-preview"></span>
+                      <input type="file" id="hr-banner-input" accept="image/png,image/jpeg,image/webp,image/svg+xml" onchange="handleHrBannerInput(this.files[0])" class="hr-logo-native">
+                      <button type="button" onclick="clearHrBanner()" id="hr-banner-clear" class="hr-logo-clear" data-i18n="hr.bannerClear">Hapus Banner</button>
+                    </span>
+                    <small class="hr-logo-hint" data-i18n="hr.bannerHint">Kosongkan untuk memakai gradasi otomatis.</small>
+                  </label>
                 </div>
               </div>
-              <div class="hr-form-grid">
-                <label class="hr-form-field hr-form-wide">
-                  <span data-i18n="hr.companyName">Nama perusahaan</span>
-                  <input type="text" id="hr-company-input" oninput="updateHrCompanyName(this.value)">
-                </label>
-                <label class="hr-form-field hr-form-wide">
-                  <span data-i18n="hr.companyLogo">Logo / foto perusahaan</span>
-                  <span class="hr-logo-row">
-                    <span id="hr-logo-preview" class="hr-logo-preview">iF</span>
-                    <input type="file" id="hr-logo-input" accept="image/png,image/jpeg,image/webp,image/svg+xml" onchange="handleHrLogoInput(this.files[0])" class="hr-logo-native">
-                    <button type="button" onclick="clearHrLogo()" id="hr-logo-clear" class="hr-logo-clear" data-i18n="hr.logoClear">Hapus Logo</button>
-                  </span>
-                  <small class="hr-logo-hint" data-i18n="hr.logoHint">Kosongkan untuk memakai inisial otomatis.</small>
-                </label>
-                <label class="hr-form-field">
-                  <span data-i18n="hr.position">Nama posisi</span>
-                  <input type="text" id="hr-position-input" oninput="updateHrRequirement('position', this.value)">
-                </label>
-                <label class="hr-form-field">
-                  <span data-i18n="hr.location">Domisili / lokasi kerja</span>
-                  <input type="text" id="hr-location-input" oninput="updateHrRequirement('location', this.value)">
-                </label>
-                <label class="hr-form-field">
-                  <span data-i18n="hr.minYears">Minimal tahun pengalaman</span>
-                  <input type="text" id="hr-min-years-input" oninput="updateHrRequirement('minYears', this.value)">
-                </label>
-                <label class="hr-form-field">
-                  <span data-i18n="hr.salary">Ekspektasi gaji</span>
-                  <input type="text" id="hr-salary-input" oninput="updateHrRequirement('salary', this.value)">
-                </label>
-                <label class="hr-form-field">
-                  <span data-i18n="hr.notice">Notice period</span>
-                  <input type="text" id="hr-notice-input" oninput="updateHrRequirement('noticePeriod', this.value)">
-                </label>
-                <label class="hr-form-field">
-                  <span data-i18n="hr.skills">Skill / tools utama</span>
-                  <input type="text" id="hr-skills-input" oninput="updateHrRequirement('skills', this.value)">
-                </label>
-                <label class="hr-form-field hr-form-wide">
-                  <span data-i18n="hr.education">Pendidikan / sertifikasi / portofolio</span>
-                  <input type="text" id="hr-education-input" oninput="updateHrRequirement('education', this.value)">
-                </label>
-                <label class="hr-form-field hr-form-wide">
-                  <span data-i18n="hr.screening">Pertanyaan penyaring</span>
-                  <textarea id="hr-screening-input" rows="3" oninput="updateHrRequirement('screening', this.value)"></textarea>
-                </label>
+              <div class="hr-block">
+                <h3 class="hr-block-title" data-i18n="hr.block.overview">2. Job Overview</h3>
+                <div class="hr-template-row">
+                  <span class="hr-template-label" data-i18n="hr.templateLabel">Template posisi cepat</span>
+                  <div class="hr-template-buttons">
+                    <button type="button" onclick="applyHrTemplate('tech')" id="hr-template-tech" class="hr-template-btn">Tech</button>
+                    <button type="button" onclick="applyHrTemplate('people')" id="hr-template-people" class="hr-template-btn">People</button>
+                    <button type="button" onclick="applyHrTemplate('growth')" id="hr-template-growth" class="hr-template-btn">Growth</button>
+                    <button type="button" onclick="applyHrTemplate('custom')" id="hr-template-custom" class="hr-template-btn">Custom</button>
+                  </div>
+                </div>
+                <div class="hr-form-grid">
+                  <label class="hr-form-field">
+                    <span data-i18n="hr.position">Nama posisi</span>
+                    <input type="text" id="hr-position-input" oninput="updateHrRequirement('position', this.value)">
+                  </label>
+                  <label class="hr-form-field">
+                    <span data-i18n="hr.location">Domisili / lokasi kerja</span>
+                    <input type="text" id="hr-location-input" oninput="updateHrRequirement('location', this.value)">
+                  </label>
+                  <label class="hr-form-field hr-form-wide">
+                    <span data-i18n="hr.roleSummary">Ringkasan peran</span>
+                    <input type="text" id="hr-role-summary-input" oninput="updateHrRequirement('roleSummary', this.value)">
+                  </label>
+                  <label class="hr-form-field hr-form-wide">
+                    <span data-i18n="hr.responsibilities">Tanggung jawab utama</span>
+                    <textarea id="hr-responsibilities-input" rows="2" oninput="updateHrRequirement('responsibilities', this.value)"></textarea>
+                  </label>
+                  <label class="hr-form-field">
+                    <span data-i18n="hr.jobType">Tipe kerja</span>
+                    <select id="hr-job-type-input" onchange="updateHrRequirement('jobType', this.value)">
+                      <option value="Full-time" data-i18n="hr.jobTypeFullTime">Full-time</option>
+                      <option value="Contract" data-i18n="hr.jobTypeContract">Contract</option>
+                      <option value="Hybrid" data-i18n="hr.jobTypeHybrid">Hybrid</option>
+                      <option value="On-site" data-i18n="hr.jobTypeOnsite">On-site</option>
+                    </select>
+                  </label>
+                  <label class="hr-form-field">
+                    <span data-i18n="hr.salary">Ekspektasi gaji</span>
+                    <input type="text" id="hr-salary-input" oninput="updateHrRequirement('salary', this.value)">
+                  </label>
+                  <label class="hr-form-field hr-form-wide">
+                    <span data-i18n="hr.notice">Notice period</span>
+                    <input type="text" id="hr-notice-input" oninput="updateHrRequirement('noticePeriod', this.value)">
+                  </label>
+                </div>
+              </div>
+              <div class="hr-block">
+                <h3 class="hr-block-title" data-i18n="hr.block.requirement">3. Requirement</h3>
+                <div class="hr-form-grid">
+                  <label class="hr-form-field">
+                    <span data-i18n="hr.minYears">Minimal tahun pengalaman</span>
+                    <input type="text" id="hr-min-years-input" oninput="updateHrRequirement('minYears', this.value)">
+                  </label>
+                  <label class="hr-form-field">
+                    <span data-i18n="hr.skills">Skill / tools utama</span>
+                    <input type="text" id="hr-skills-input" oninput="updateHrRequirement('skills', this.value)">
+                  </label>
+                  <label class="hr-form-field hr-form-wide">
+                    <span data-i18n="hr.mustHave">Syarat mutlak / wajib</span>
+                    <textarea id="hr-must-have-input" rows="2" oninput="updateHrRequirement('mustHave', this.value)"></textarea>
+                  </label>
+                </div>
+              </div>
+              <div class="hr-block">
+                <h3 class="hr-block-title" data-i18n="hr.block.qualification">4. Qualification</h3>
+                <div class="hr-form-grid">
+                  <label class="hr-form-field hr-form-wide">
+                    <span data-i18n="hr.qualification">Kualifikasi latar belakang</span>
+                    <textarea id="hr-qualification-input" rows="2" oninput="updateHrRequirement('qualification', this.value)"></textarea>
+                  </label>
+                  <label class="hr-form-field">
+                    <span data-i18n="hr.education">Pendidikan / sertifikasi / portofolio</span>
+                    <input type="text" id="hr-education-input" oninput="updateHrRequirement('education', this.value)">
+                  </label>
+                  <label class="hr-form-field">
+                    <span data-i18n="hr.certification">Sertifikasi</span>
+                    <input type="text" id="hr-certification-input" oninput="updateHrRequirement('certification', this.value)">
+                  </label>
+                  <label class="hr-form-field hr-form-wide">
+                    <span data-i18n="hr.plusPoints">Nilai plus</span>
+                    <input type="text" id="hr-plus-points-input" oninput="updateHrRequirement('plusPoints', this.value)">
+                  </label>
+                </div>
+              </div>
+              <div class="hr-block">
+                <h3 class="hr-block-title" data-i18n="hr.block.screening">5. Screening Questions & Form Rules</h3>
+                <div class="hr-form-grid">
+                  <label class="hr-form-field hr-form-wide">
+                    <span data-i18n="hr.screening">Pertanyaan penyaring</span>
+                    <textarea id="hr-screening-input" rows="3" oninput="updateHrRequirement('screening', this.value)"></textarea>
+                  </label>
+                  <label class="hr-form-field hr-check-field">
+                    <span data-i18n="hr.cvRequired">Wajib unggah CV PDF</span>
+                    <input type="checkbox" id="hr-cv-required-input" checked onchange="updateHrRequirement('cvRequired', this.checked)">
+                  </label>
+                  <label class="hr-form-field">
+                    <span data-i18n="hr.matchThreshold">Batas kriteria Match Score</span>
+                    <select id="hr-match-threshold-input" onchange="updateHrRequirement('matchThreshold', this.value)">
+                      <option value="low" data-i18n="cv.levelLow">Rendah</option>
+                      <option value="medium" data-i18n="cv.levelMedium">Sedang</option>
+                      <option value="high" data-i18n="cv.levelHigh">Tinggi</option>
+                    </select>
+                  </label>
+                </div>
+              </div>
+              <div class="hr-block hr-ui-block">
+                <div class="hr-ui-head">
+                  <h3 class="hr-block-title" data-i18n="hr.uiTemplateLabel">Template UI HR</h3>
+                  <span class="hr-template-label" data-i18n="hr.uiPreviewLabel">Pratinjau langsung</span>
+                </div>
+                <div id="hr-ui-template-grid" class="hr-ui-template-grid"></div>
+                <div id="hr-ui-preview" class="hr-ui-preview" data-tier="free" data-template="clean01">
+                  <span class="hr-ui-preview-bar"></span>
+                  <span class="hr-ui-preview-logo">iF</span>
+                  <span class="hr-ui-preview-copy"><b id="hr-ui-preview-name">Minimal Stack</b><i id="hr-ui-preview-tier">Free</i></span>
+                </div>
               </div>
             </div>
             <aside class="hr-preview-column">
@@ -566,46 +675,94 @@
           <span id="candidate-company-location" data-i18n="portal.workLocation">Lokasi / tipe kerja</span>
           <span class="verified-badge candidate-company-verified"><span data-i18n="form.verified">Terverifikasi</span></span>
         </span>
+        <button type="button" onclick="jumpToCandidateStep(0)" id="sticky-apply-btn" class="sticky-apply-btn" data-i18n="portal.applyNow">Lamar Sekarang</button>
       </div>
 
-      <section id="candidate-portal" class="candidate-portal hidden">
-        <div class="candidate-portal-head">
-          <div>
-            <span class="section-eyebrow" data-i18n="portal.eyebrow">Portal Kandidat</span>
-            <h2 data-i18n="portal.title">Lamaran Anda, jelas dan terstruktur.</h2>
+      <div id="career-portal-shell" class="career-portal-shell hidden">
+        <section class="career-hero">
+          <div id="career-company-banner" class="career-company-banner"></div>
+          <div class="career-hero-body">
+            <div id="career-company-logo" class="career-company-logo">iF</div>
+            <div class="career-hero-copy">
+              <span class="section-eyebrow" data-i18n="portal.eyebrow">Portal Kandidat</span>
+              <h1 id="showcase-company-name">PT Digital Nusantara Indonesia</h1>
+              <div class="career-hero-meta">
+                <span class="verified-badge"><span data-i18n="form.verified">Terverifikasi</span></span>
+                <span id="showcase-industry">Teknologi &amp; Digital</span>
+                <span><span data-i18n="portal.templateBadge">Template</span>: <b id="showcase-template-name">Minimal Stack</b> · <b id="showcase-template-tier">Free</b></span>
+              </div>
+              <p id="showcase-description">Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.</p>
+              <div class="career-hero-actions">
+                <button type="button" onclick="jumpToCandidateStep(0)" class="btn btn-primary" data-i18n="portal.applyNow">Lamar Sekarang</button>
+                <span id="showcase-website">https://iziform.app</span>
+              </div>
+            </div>
           </div>
-          <div class="candidate-progress-card">
-            <span data-i18n="portal.progress">Progres lamaran</span>
-            <strong id="candidate-progress-text">1 / 11</strong>
-            <div class="candidate-progress-track"><span id="candidate-progress-bar" style="width: 9%"></span></div>
-            <div id="candidate-step-list" class="candidate-step-list"></div>
+        </section>
+
+        <section class="career-showcase-grid">
+          <article class="career-showcase-card">
+            <span class="section-eyebrow" data-i18n="portal.jobOverview">Ringkasan Posisi</span>
+            <h2 id="candidate-position">Lead Fullstack Developer</h2>
+            <p><b data-i18n="hr.roleSummary">Ringkasan peran</b><span id="showcase-role-summary">Memimpin inisiatif utama.</span></p>
+            <p><b data-i18n="portal.responsibilitiesLabel">Tanggung jawab</b><span id="showcase-responsibilities">Merancang solusi dan berkolaborasi lintas fungsi.</span></p>
+            <div class="career-fact-row">
+              <span><b data-i18n="portal.jobTypeLabel">Tipe kerja</b><i id="showcase-job-type">Full-time</i></span>
+              <span><b data-i18n="hr.location">Domisili / lokasi kerja</b><i id="candidate-location">Jakarta / Hybrid</i></span>
+              <span><b data-i18n="hr.salary">Ekspektasi gaji</b><i id="candidate-salary">Rp25–35 juta</i></span>
+              <span><b data-i18n="hr.notice">Notice period</b><i id="candidate-notice">30 hari</i></span>
+            </div>
+          </article>
+          <article class="career-showcase-card">
+            <span class="section-eyebrow" data-i18n="portal.requirements">Requirement</span>
+            <h2 data-i18n="hr.block.requirement">3. Requirement</h2>
+            <p><b data-i18n="portal.mustHaveLabel">Syarat wajib</b><span id="showcase-must-have">Pengalaman relevan dan tools wajib.</span></p>
+            <div class="career-fact-row">
+              <span><b data-i18n="hr.minYears">Minimal tahun pengalaman</b><i id="candidate-years">5</i></span>
+              <span><b data-i18n="hr.skills">Skill / tools utama</b><i id="candidate-skills">React, Node.js, Go</i></span>
+              <span><b data-i18n="portal.matchThresholdLabel">Minimum Match Score</b><i id="showcase-match-threshold">Sedang</i></span>
+            </div>
+          </article>
+          <article class="career-showcase-card">
+            <span class="section-eyebrow" data-i18n="portal.qualifications">Qualification</span>
+            <h2 data-i18n="hr.block.qualification">4. Qualification</h2>
+            <p><b data-i18n="hr.qualification">Kualifikasi latar belakang</b><span id="showcase-qualification">Portofolio relevan.</span></p>
+            <div class="career-fact-row">
+              <span><b data-i18n="hr.education">Pendidikan / sertifikasi / portofolio</b><i id="candidate-education">S1 Informatika</i></span>
+              <span><b data-i18n="portal.certificationLabel">Sertifikasi</b><i id="showcase-certification">Sertifikasi relevan</i></span>
+              <span><b data-i18n="portal.plusPointsLabel">Nilai plus</b><i id="showcase-plus-points">Komunikasi kuat</i></span>
+              <span><b data-i18n="hr.screening">Pertanyaan penyaring</b><i id="candidate-screening">Ceritakan pengalaman Anda.</i></span>
+            </div>
+          </article>
+        </section>
+
+        <section id="candidate-portal" class="candidate-portal hidden">
+          <div class="candidate-portal-head">
+            <div>
+              <span class="section-eyebrow" data-i18n="portal.applicationPanel">Formulir Lamaran</span>
+              <h2 data-i18n="portal.title">Lamaran Anda, jelas dan terstruktur.</h2>
+            </div>
+            <div class="candidate-progress-card">
+              <span data-i18n="portal.progress">Progres lamaran</span>
+              <strong id="candidate-progress-text">1 / 11</strong>
+              <div class="candidate-progress-track"><span id="candidate-progress-bar" style="width: 9%"></span></div>
+              <div id="candidate-step-list" class="candidate-step-list"></div>
+            </div>
           </div>
-        </div>
-        <div class="candidate-position-card">
-          <span class="custom-track-label" data-i18n="portal.requirementLabel">Requirement posisi</span>
-          <h3 id="candidate-position">Lead Fullstack Developer</h3>
-          <div class="candidate-badges">
-            <span id="candidate-location">Jakarta / Hybrid</span>
-            <span id="candidate-years">Min. 5 tahun</span>
-            <span id="candidate-skills">React, Node.js, Go</span>
-            <span id="candidate-education">S1 Informatika</span>
-            <span id="candidate-salary">Rp25–35 juta</span>
-            <span id="candidate-notice">30 hari</span>
-            <span id="candidate-screening">Screening question</span>
+          <div id="candidate-cv-dropzone" class="candidate-cv-card candidate-cv-dropzone" onclick="jumpToCandidateStep(10)" ondragover="handleCvDragOver(event)" ondragleave="handleCvDragLeave(event)" ondrop="handleCvDrop(event)">
+            <div class="candidate-cv-drop-icon">PDF</div>
+            <div class="candidate-cv-drop-copy">
+              <strong id="candidate-cv-drop-title" data-i18n="portal.cvDropTitle">Tarik &amp; lepas CV PDF di sini</strong>
+              <span data-i18n="portal.cvDropHint">atau klik untuk memilih berkas • auto-fill otomatis</span>
+              <p id="candidate-cv-state" data-i18n="portal.cvEmpty">Belum ada CV diunggah</p>
+            </div>
+            <div class="candidate-cv-actions">
+              <span id="candidate-cv-match" class="candidate-match-badge" data-i18n="portal.matchLabel">Kecocokan</span>
+              <button type="button" onclick="jumpToCandidateStep(10)" class="btn btn-secondary" data-i18n="portal.jumpCv">Isi CV</button>
+            </div>
           </div>
-        </div>
-        <div class="candidate-cv-card">
-          <div>
-            <span class="custom-track-label" data-i18n="portal.cvTitle">CV PDF</span>
-            <strong data-i18n="portal.cvDesc">Auto-fill data & indikator kecocokan ringkas.</strong>
-            <p id="candidate-cv-state" data-i18n="portal.cvEmpty">Belum ada CV diunggah</p>
-          </div>
-          <div class="candidate-cv-actions">
-            <span id="candidate-cv-match" class="candidate-match-badge" data-i18n="portal.matchLabel">Kecocokan</span>
-            <button type="button" onclick="jumpToCandidateStep(10)" class="btn btn-secondary" data-i18n="portal.jumpCv">Isi CV</button>
-          </div>
-        </div>
-      </section>
+        </section>
+      </div>
 
       <div class="brand-cover-wrapper">
         <img id="banner-cover-image"

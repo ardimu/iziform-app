@@ -22,7 +22,11 @@ const state = {
   hrRequirement: null,
   hrActiveSide: 'a',
   hrCompanyName: 'PT Digital Nusantara Indonesia',
+  hrCompanyProfile: { industry: 'Teknologi & Digital', description: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', website: 'https://iziform.app' },
   hrCompanyLogo: '',
+  hrCompanyBanner: '',
+  hrUiTemplate: 'clean01',
+  hrUiTier: 'free',
   hrTemplateKey: 'tech',
   hrSelectionStatus: 'new',
   hrLastCandidate: null,
@@ -519,6 +523,46 @@ const CUSTOM_PRICING = {
   requestComplex: { id: 'custom-request-complex-price', idr: 'Rp299rb', usd: '$24' }
 };
 
+const HR_BASE_COPY = {
+  id: { industry: 'Teknologi & Digital', description: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', website: 'https://iziform.app', roleSummary: 'Memimpin inisiatif utama dan mengirimkan dampak yang terukur bagi tim.', responsibilities: 'Merancang solusi, berkolaborasi lintas fungsi, dan menjaga kualitas hasil akhir.', jobType: 'Full-time', mustHave: 'Pengalaman relevan, tools wajib sesuai posisi, dan domisili sesuai ketentuan.', qualification: 'Latar belakang profesional dengan portofolio atau pengalaman yang relevan.', certification: 'Sertifikasi relevan menjadi nilai tambah.', plusPoints: 'Pengalaman tim, komunikasi kuat, dan kemampuan belajar cepat.', cvRequired: true, matchThreshold: 'medium' },
+  en: { industry: 'Technology & Digital', description: 'A digital company building modern work products for Indonesian teams.', website: 'https://iziform.app', roleSummary: 'Lead key initiatives and deliver measurable impact for the team.', responsibilities: 'Design solutions, collaborate cross-functionally, and protect final quality.', jobType: 'Full-time', mustHave: 'Relevant experience, required tools, and location that matches the rule.', qualification: 'Professional background with a relevant portfolio or track record.', certification: 'Relevant certification is an advantage.', plusPoints: 'Team experience, strong communication, and fast learning.', cvRequired: true, matchThreshold: 'medium' },
+  zh: { industry: '科技与数字化', description: '一家为印尼团队打造现代工作产品的数字公司。', website: 'https://iziform.app', roleSummary: '主导关键项目，为团队带来可衡量的成果。', responsibilities: '设计解决方案、跨职能协作并把控最终质量。', jobType: 'Full-time', mustHave: '具备相关经验、指定工具，并符合所在地要求。', qualification: '具备相关专业背景及作品集或项目经历。', certification: '相关证书者优先。', plusPoints: '团队经验、沟通能力强、学习速度快。', cvRequired: true, matchThreshold: 'medium' }
+};
+
+const HR_COMPANY_PRESETS = {
+  nusantara: {
+    name: 'PT Digital Nusantara Indonesia',
+    industry: { id: 'Teknologi & Digital', en: 'Technology & Digital', zh: '科技与数字化' },
+    description: { id: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', en: 'A digital company building modern work products for Indonesian teams.', zh: '一家为印尼团队打造现代工作产品的数字公司。' },
+    website: 'https://iziform.app'
+  },
+  aurora: {
+    name: 'Aurora Retail Group',
+    industry: { id: 'Retail & E-Commerce', en: 'Retail & E-Commerce', zh: '零售与电子商务' },
+    description: { id: 'Grup retail omnichannel yang menghubungkan pengalaman digital dan toko fisik.', en: 'An omnichannel retail group connecting digital and physical store experiences.', zh: '连接数字与线下门店体验的全渠道零售集团。' },
+    website: 'https://aurora.example.com'
+  },
+  monarch: {
+    name: 'Monarch Education',
+    industry: { id: 'Pendidikan & Pelatihan', en: 'Education & Training', zh: '教育与培训' },
+    description: { id: 'Lembaga pendidikan modern yang mengembangkan talenta siap kerja.', en: 'A modern education institution developing job-ready talent.', zh: '培养职场-ready 人才的现代教育品牌。' },
+    website: 'https://monarch.example.com'
+  }
+};
+
+const HR_UI_TEMPLATES = [
+  { key: 'clean01', tier: 'free', labelKey: 'hr.uiTemplate.clean01' },
+  { key: 'clean02', tier: 'free', labelKey: 'hr.uiTemplate.clean02' },
+  { key: 'clean03', tier: 'free', labelKey: 'hr.uiTemplate.clean03' },
+  { key: 'clean04', tier: 'free', labelKey: 'hr.uiTemplate.clean04' },
+  { key: 'glass05', tier: 'pro', labelKey: 'hr.uiTemplate.glass05' },
+  { key: 'glass06', tier: 'pro', labelKey: 'hr.uiTemplate.glass06' },
+  { key: 'glass07', tier: 'pro', labelKey: 'hr.uiTemplate.glass07' },
+  { key: 'exec08', tier: 'business', labelKey: 'hr.uiTemplate.exec08' },
+  { key: 'exec09', tier: 'business', labelKey: 'hr.uiTemplate.exec09' },
+  { key: 'exec10', tier: 'business', labelKey: 'hr.uiTemplate.exec10' }
+];
+
 const HR_TEMPLATES = {
   tech: {
     id: { position: 'Lead Fullstack Developer', location: 'Jakarta / Hybrid', minYears: '5', skills: 'React, Node.js, Go, Microservices', education: 'S1 Informatika / Bootcamp + Portofolio GitHub', salary: 'Rp25–35 juta', noticePeriod: '30 hari', screening: 'Ceritakan pengalaman Anda membangun sistem produksi dan peran Anda di dalam tim.' },
@@ -541,6 +585,12 @@ const HR_TEMPLATES = {
     zh: { position: '自定义 HR 职位', location: '由 HR 设置', minYears: '1', skills: '由 HR 设置', education: '由 HR 设置', salary: '由 HR 设置', noticePeriod: '由 HR 设置', screening: '请添加您的主要筛选问题。' }
   }
 };
+
+Object.values(HR_TEMPLATES).forEach((entry) => {
+  Object.keys(entry).forEach((lang) => {
+    entry[lang] = { ...(HR_BASE_COPY[lang] || HR_BASE_COPY.id), ...entry[lang] };
+  });
+});
 
 const HR_PRICING = {
   idr: { old: 'Rp79rb', price: 'Rp49rb' },
@@ -969,6 +1019,63 @@ const I18N = {
     'hr.openWorkspace': 'Buka Workspace HR',
     'hr.sideA': 'Sisi A · HR / Builder',
     'hr.sideB': 'Sisi B · Portal Kandidat',
+    'hr.companyPresetLabel': 'Preset perusahaan sampel',
+    'hr.block.identity': '1. Identitas & Profil Perusahaan',
+    'hr.block.overview': '2. Job Overview',
+    'hr.block.requirement': '3. Requirement',
+    'hr.block.qualification': '4. Qualification',
+    'hr.block.screening': '5. Screening Questions & Form Rules',
+    'hr.industry': 'Industri / bidang usaha',
+    'hr.description': 'Deskripsi singkat perusahaan',
+    'hr.website': 'Website resmi',
+    'hr.banner': 'Banner header',
+    'hr.bannerHint': 'Kosongkan untuk memakai gradasi otomatis.',
+    'hr.bannerClear': 'Hapus Banner',
+    'hr.roleSummary': 'Ringkasan peran',
+    'hr.responsibilities': 'Tanggung jawab utama',
+    'hr.jobType': 'Tipe kerja',
+    'hr.jobTypeFullTime': 'Full-time',
+    'hr.jobTypeContract': 'Contract',
+    'hr.jobTypeHybrid': 'Hybrid',
+    'hr.jobTypeOnsite': 'On-site',
+    'hr.mustHave': 'Syarat mutlak / wajib',
+    'hr.qualification': 'Kualifikasi latar belakang',
+    'hr.certification': 'Sertifikasi',
+    'hr.plusPoints': 'Nilai plus',
+    'hr.cvRequired': 'Wajib unggah CV PDF',
+    'hr.matchThreshold': 'Batas kriteria Match Score',
+    'hr.uiTemplateLabel': 'Template UI HR',
+    'hr.uiPreviewLabel': 'Pratinjau langsung',
+    'hr.uiTier': 'Tier',
+    'hr.uiTemplate.clean01': 'Minimal Stack',
+    'hr.uiTemplate.clean02': 'Editorial White',
+    'hr.uiTemplate.clean03': 'Soft Grid',
+    'hr.uiTemplate.clean04': 'Mono Line',
+    'hr.uiTemplate.glass05': 'Corporate Glass',
+    'hr.uiTemplate.glass06': 'Aurora Glass',
+    'hr.uiTemplate.glass07': 'Modular Glass',
+    'hr.uiTemplate.exec08': 'Executive Board',
+    'hr.uiTemplate.exec09': 'Enterprise Split',
+    'hr.uiTemplate.exec10': 'Premium Dark',
+    'portal.applyNow': 'Lamar Sekarang',
+    'portal.aboutCompany': 'Tentang Perusahaan',
+    'portal.jobOverview': 'Ringkasan Posisi',
+    'portal.requirements': 'Requirement',
+    'portal.qualifications': 'Qualification',
+    'portal.industryLabel': 'Industri',
+    'portal.websiteLabel': 'Website',
+    'portal.responsibilitiesLabel': 'Tanggung jawab',
+    'portal.jobTypeLabel': 'Tipe kerja',
+    'portal.mustHaveLabel': 'Syarat wajib',
+    'portal.educationLabel': 'Pendidikan',
+    'portal.certificationLabel': 'Sertifikasi',
+    'portal.plusPointsLabel': 'Nilai plus',
+    'portal.matchThresholdLabel': 'Minimum Match Score',
+    'portal.cvDropTitle': 'Tarik & lepas CV PDF di sini',
+    'portal.cvDropHint': 'atau klik untuk memilih berkas • auto-fill otomatis',
+    'portal.cvDragActive': 'Lepaskan untuk memindai CV',
+    'portal.applicationPanel': 'Formulir Lamaran',
+    'portal.templateBadge': 'Template',
     'portal.companyLabel': 'Perusahaan',
     'portal.positionApplied': 'Posisi yang dilamar',
     'portal.workLocation': 'Lokasi / tipe kerja',
@@ -1225,6 +1332,7 @@ const I18N = {
     'toast.pdfAutofilled': 'CV terbaca. Data pelamar diisi otomatis.',
     'toast.pdfUnreadable': 'Teks PDF tidak terbaca. Silakan isi data manual.',
     'toast.pdfError': 'PDF gagal dibaca. Silakan isi data manual.',
+    'toast.cvRequired': 'CV PDF wajib diunggah sebelum melanjutkan.',
     'toast.theme': 'Tema UI diubah: {name}',
     'toast.font': 'Font aktif: {name}',
     'toast.language': 'Bahasa diubah: {name}',
@@ -1325,6 +1433,63 @@ const I18N = {
     'hr.openWorkspace': 'Open HR Workspace',
     'hr.sideA': 'Side A · HR / Builder',
     'hr.sideB': 'Side B · Candidate Portal',
+    'hr.companyPresetLabel': 'Sample company presets',
+    'hr.block.identity': '1. Identity & Company Profile',
+    'hr.block.overview': '2. Job Overview',
+    'hr.block.requirement': '3. Requirement',
+    'hr.block.qualification': '4. Qualification',
+    'hr.block.screening': '5. Screening Questions & Form Rules',
+    'hr.industry': 'Industry / field',
+    'hr.description': 'Company short description',
+    'hr.website': 'Official website',
+    'hr.banner': 'Header banner',
+    'hr.bannerHint': 'Leave empty to use automatic gradient.',
+    'hr.bannerClear': 'Clear Banner',
+    'hr.roleSummary': 'Role summary',
+    'hr.responsibilities': 'Key responsibilities',
+    'hr.jobType': 'Work type',
+    'hr.jobTypeFullTime': 'Full-time',
+    'hr.jobTypeContract': 'Contract',
+    'hr.jobTypeHybrid': 'Hybrid',
+    'hr.jobTypeOnsite': 'On-site',
+    'hr.mustHave': 'Must-have requirements',
+    'hr.qualification': 'Background qualification',
+    'hr.certification': 'Certification',
+    'hr.plusPoints': 'Plus points',
+    'hr.cvRequired': 'PDF CV upload required',
+    'hr.matchThreshold': 'Match Score threshold',
+    'hr.uiTemplateLabel': 'HR UI template',
+    'hr.uiPreviewLabel': 'Live preview',
+    'hr.uiTier': 'Tier',
+    'hr.uiTemplate.clean01': 'Minimal Stack',
+    'hr.uiTemplate.clean02': 'Editorial White',
+    'hr.uiTemplate.clean03': 'Soft Grid',
+    'hr.uiTemplate.clean04': 'Mono Line',
+    'hr.uiTemplate.glass05': 'Corporate Glass',
+    'hr.uiTemplate.glass06': 'Aurora Glass',
+    'hr.uiTemplate.glass07': 'Modular Glass',
+    'hr.uiTemplate.exec08': 'Executive Board',
+    'hr.uiTemplate.exec09': 'Enterprise Split',
+    'hr.uiTemplate.exec10': 'Premium Dark',
+    'portal.applyNow': 'Apply Now',
+    'portal.aboutCompany': 'About the Company',
+    'portal.jobOverview': 'Job Overview',
+    'portal.requirements': 'Requirements',
+    'portal.qualifications': 'Qualifications',
+    'portal.industryLabel': 'Industry',
+    'portal.websiteLabel': 'Website',
+    'portal.responsibilitiesLabel': 'Responsibilities',
+    'portal.jobTypeLabel': 'Work type',
+    'portal.mustHaveLabel': 'Must-have',
+    'portal.educationLabel': 'Education',
+    'portal.certificationLabel': 'Certification',
+    'portal.plusPointsLabel': 'Plus points',
+    'portal.matchThresholdLabel': 'Minimum Match Score',
+    'portal.cvDropTitle': 'Drag & drop your PDF CV here',
+    'portal.cvDropHint': 'or click to choose a file • automatic auto-fill',
+    'portal.cvDragActive': 'Release to scan the CV',
+    'portal.applicationPanel': 'Application Form',
+    'portal.templateBadge': 'Template',
     'portal.companyLabel': 'Company',
     'portal.positionApplied': 'Applied position',
     'portal.workLocation': 'Location / work type',
@@ -1581,6 +1746,7 @@ const I18N = {
     'toast.pdfAutofilled': 'CV read. Applicant details were autofilled.',
     'toast.pdfUnreadable': 'PDF text could not be read. Please fill in the details manually.',
     'toast.pdfError': 'The PDF could not be processed. Please fill in the details manually.',
+    'toast.cvRequired': 'A PDF CV is required before continuing.',
     'toast.theme': 'UI theme changed: {name}',
     'toast.font': 'Active font: {name}',
     'toast.language': 'Language changed: {name}',
@@ -1681,6 +1847,63 @@ const I18N = {
     'hr.openWorkspace': '打开 HR 工作区',
     'hr.sideA': 'A 侧 · HR / 构建器',
     'hr.sideB': 'B 侧 · 候选人门户',
+    'hr.companyPresetLabel': '公司示例预设',
+    'hr.block.identity': '1. 身份与公司资料',
+    'hr.block.overview': '2. 职位概览',
+    'hr.block.requirement': '3. 任职要求',
+    'hr.block.qualification': '4. 资格条件',
+    'hr.block.screening': '5. 筛选问题与表单规则',
+    'hr.industry': '行业 / 业务领域',
+    'hr.description': '公司简介',
+    'hr.website': '官方网站',
+    'hr.banner': '页眉横幅',
+    'hr.bannerHint': '留空则使用自动渐变。',
+    'hr.bannerClear': '清除横幅',
+    'hr.roleSummary': '职位摘要',
+    'hr.responsibilities': '主要职责',
+    'hr.jobType': '工作类型',
+    'hr.jobTypeFullTime': '全职',
+    'hr.jobTypeContract': '合同制',
+    'hr.jobTypeHybrid': '混合办公',
+    'hr.jobTypeOnsite': '现场办公',
+    'hr.mustHave': '必备条件',
+    'hr.qualification': '背景资质',
+    'hr.certification': '证书',
+    'hr.plusPoints': '加分项',
+    'hr.cvRequired': '必须上传 PDF 简历',
+    'hr.matchThreshold': '匹配分门槛',
+    'hr.uiTemplateLabel': 'HR 界面模板',
+    'hr.uiPreviewLabel': '实时预览',
+    'hr.uiTier': '层级',
+    'hr.uiTemplate.clean01': '极简叠层',
+    'hr.uiTemplate.clean02': '编辑留白',
+    'hr.uiTemplate.clean03': '柔和网格',
+    'hr.uiTemplate.clean04': '单色线条',
+    'hr.uiTemplate.glass05': '企业玻璃',
+    'hr.uiTemplate.glass06': '极光玻璃',
+    'hr.uiTemplate.glass07': '模块玻璃',
+    'hr.uiTemplate.exec08': '高管董事会',
+    'hr.uiTemplate.exec09': '企业分栏',
+    'hr.uiTemplate.exec10': '尊享深色',
+    'portal.applyNow': '立即申请',
+    'portal.aboutCompany': '关于公司',
+    'portal.jobOverview': '职位概览',
+    'portal.requirements': '任职要求',
+    'portal.qualifications': '资格条件',
+    'portal.industryLabel': '行业',
+    'portal.websiteLabel': '网站',
+    'portal.responsibilitiesLabel': '职责',
+    'portal.jobTypeLabel': '工作类型',
+    'portal.mustHaveLabel': '必备条件',
+    'portal.educationLabel': '学历',
+    'portal.certificationLabel': '证书',
+    'portal.plusPointsLabel': '加分项',
+    'portal.matchThresholdLabel': '最低匹配分',
+    'portal.cvDropTitle': '将 PDF 简历拖放到此处',
+    'portal.cvDropHint': '或点击选择文件 • 自动填充',
+    'portal.cvDragActive': '松开以扫描简历',
+    'portal.applicationPanel': '申请表',
+    'portal.templateBadge': '模板',
     'portal.companyLabel': '公司',
     'portal.positionApplied': '申请职位',
     'portal.workLocation': '地点 / 工作类型',
@@ -1937,6 +2160,7 @@ const I18N = {
     'toast.pdfAutofilled': '简历已读取，申请人信息已自动填写。',
     'toast.pdfUnreadable': '无法读取 PDF 文本，请手动填写信息。',
     'toast.pdfError': 'PDF 处理失败，请手动填写信息。',
+    'toast.cvRequired': '继续之前必须上传 PDF 简历。',
     'toast.theme': '界面主题已更改：{name}',
     'toast.font': '当前字体：{name}',
     'toast.language': '语言已更改：{name}',
@@ -2238,7 +2462,8 @@ function computeCandidateMatch(text) {
   const meetsYears = foundYears >= minYears;
   const hasEducation = /s1|bachelor|bootcamp|sertifikasi|certification|本科|训练营|证书/i.test(text);
   const score = Math.min(100, 20 + Math.min(matched.length * 12, 48) + (hasEmail ? 10 : 0) + (hasPhone ? 10 : 0) + (meetsYears ? 12 : 0) + (hasEducation ? 8 : 0));
-  const levelKey = score >= 70 ? 'cv.levelHigh' : score >= 45 ? 'cv.levelMedium' : 'cv.levelLow';
+  const threshold = requirement.matchThreshold === 'high' ? 80 : requirement.matchThreshold === 'low' ? 50 : 70;
+  const levelKey = score >= threshold ? 'cv.levelHigh' : score >= threshold - 25 ? 'cv.levelMedium' : 'cv.levelLow';
   return { matched, score, level: t(levelKey), role: requirement.position };
 }
 
@@ -2333,6 +2558,7 @@ function toggleViews() {
   const ribbon = document.getElementById('hr-career-ribbon');
   const portal = document.getElementById('candidate-portal');
   const stickyHeader = document.getElementById('candidate-company-sticky');
+  const careerShell = document.getElementById('career-portal-shell');
   const formSideSwitcher = document.getElementById('recruit-side-switcher-form');
   const ribbonTitle = document.getElementById('hr-ribbon-title');
   const ribbonStatus = document.getElementById('hr-ribbon-status');
@@ -2349,6 +2575,7 @@ function toggleViews() {
   if (ribbon) ribbon.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
   if (portal) portal.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
   if (stickyHeader) stickyHeader.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
+  if (careerShell) careerShell.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
   if (formSideSwitcher) formSideSwitcher.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
   if (landingNav) landingNav.classList.toggle('hidden', isForm);
   if (dashboardButton) dashboardButton.classList.toggle('hidden', !isForm);
@@ -2547,20 +2774,130 @@ function renderHrLogoPreview() {
   if (clearButton) clearButton.classList.toggle('hidden', !state.hrCompanyLogo);
 }
 
+function updateHrCompanyField(field, value) {
+  if (!['industry', 'description', 'website'].includes(field)) return;
+  state.hrCompanyProfile[field] = String(value || '');
+  renderCompanyIdentity();
+  if (state.view === 'form' && state.activePresetKey === 'recruit') renderActivePresetHeader();
+}
+
+function setHrCompanyBanner(value) {
+  state.hrCompanyBanner = String(value || '');
+  renderHrBannerPreview();
+  renderCompanyIdentity();
+  if (state.view === 'form' && state.activePresetKey === 'recruit') renderActivePresetHeader();
+}
+
+function handleHrBannerInput(file) {
+  if (!file || !/^image\//.test(file.type)) return;
+  const reader = new FileReader();
+  reader.onload = () => setHrCompanyBanner(reader.result);
+  reader.readAsDataURL(file);
+}
+
+function clearHrBanner() {
+  setHrCompanyBanner('');
+  const input = document.getElementById('hr-banner-input');
+  if (input) input.value = '';
+}
+
+function renderHrBannerPreview() {
+  const preview = document.getElementById('hr-banner-preview');
+  if (preview) preview.style.backgroundImage = state.hrCompanyBanner ? `url("${state.hrCompanyBanner}")` : '';
+  const clearButton = document.getElementById('hr-banner-clear');
+  if (clearButton) clearButton.classList.toggle('hidden', !state.hrCompanyBanner);
+}
+
+function applyCompanyPreset(presetKey) {
+  const preset = HR_COMPANY_PRESETS[presetKey] || HR_COMPANY_PRESETS.nusantara;
+  state.hrCompanyName = preset.name;
+  state.hrCompanyProfile = {
+    industry: preset.industry[state.currentLanguage] || preset.industry.id,
+    description: preset.description[state.currentLanguage] || preset.description.id,
+    website: preset.website
+  };
+  state.hrCompanyLogo = '';
+  state.hrCompanyBanner = '';
+  renderHrBuilder();
+  renderCompanyIdentity();
+  if (state.view === 'form' && state.activePresetKey === 'recruit') renderActivePresetHeader();
+}
+
+function getHrUiTemplate() {
+  return HR_UI_TEMPLATES.find((item) => item.key === state.hrUiTemplate) || HR_UI_TEMPLATES[0];
+}
+
+function selectHrUiTemplate(templateKey) {
+  const template = HR_UI_TEMPLATES.find((item) => item.key === templateKey);
+  if (!template) return;
+  state.hrUiTemplate = template.key;
+  state.hrUiTier = template.tier;
+  renderHrUiTemplateGallery();
+  renderHrUiPreview();
+  renderCompanyIdentity();
+  if (state.view === 'form' && state.activePresetKey === 'recruit') renderActivePresetHeader();
+}
+
+function renderHrUiTemplateGallery() {
+  const grid = document.getElementById('hr-ui-template-grid');
+  if (!grid) return;
+  grid.innerHTML = HR_UI_TEMPLATES.map((template) => `
+    <button type="button" onclick="selectHrUiTemplate('${template.key}')" id="hr-ui-template-${template.key}" class="hr-ui-template-btn ${template.key === state.hrUiTemplate ? 'active' : ''}" data-tier="${template.tier}">
+      <span class="hr-ui-template-tier">${escapeHtml(t(`pricing.${template.tier}`))}</span>
+      <strong>${escapeHtml(t(template.labelKey))}</strong>
+      <span class="hr-ui-template-lines"><i></i><i></i><i></i></span>
+    </button>
+  `).join('');
+}
+
+function renderHrUiPreview() {
+  const template = getHrUiTemplate();
+  const preview = document.getElementById('hr-ui-preview');
+  if (preview) {
+    preview.dataset.tier = template.tier;
+    preview.dataset.template = template.key;
+  }
+  setTextById('hr-ui-preview-name', t(template.labelKey));
+  setTextById('hr-ui-preview-tier', t(`pricing.${template.tier}`));
+}
+
+function setTextById(id, value) {
+  const element = document.getElementById(id);
+  if (element) element.textContent = value;
+}
+
 function renderCompanyIdentity() {
   const r = currentHrRequirement();
+  const profile = state.hrCompanyProfile;
+  const template = getHrUiTemplate();
   const name = state.hrCompanyName || getPreset('recruit').companyName;
-  const setText = (id, value) => {
-    const element = document.getElementById(id);
-    if (element) element.textContent = value;
-  };
+  const setText = (id, value) => setTextById(id, value);
+  document.body.dataset.hrTemplate = template.key;
+  document.body.dataset.hrTier = template.tier;
   setCompanyLogoMarkup(document.getElementById('candidate-company-logo'), state.hrCompanyLogo, name);
   setCompanyLogoMarkup(document.getElementById('company-logo-box'), state.hrCompanyLogo, name);
+  setCompanyLogoMarkup(document.getElementById('career-company-logo'), state.hrCompanyLogo, name);
   setText('candidate-company-name', name);
   setText('candidate-company-position', r.position);
   setText('candidate-company-location', r.location);
   setText('company-name-text', name);
   setText('hr-ribbon-status', `${name} • ${r.position} • ${r.location}`);
+  setText('showcase-company-name', name);
+  setText('showcase-industry', profile.industry);
+  setText('showcase-description', profile.description);
+  setText('showcase-website', profile.website);
+  setText('showcase-role-summary', r.roleSummary);
+  setText('showcase-responsibilities', r.responsibilities);
+  setText('showcase-job-type', r.jobType);
+  setText('showcase-must-have', r.mustHave);
+  setText('showcase-qualification', r.qualification);
+  setText('showcase-certification', r.certification);
+  setText('showcase-plus-points', r.plusPoints);
+  setText('showcase-match-threshold', t(`cv.level${r.matchThreshold === 'high' ? 'High' : r.matchThreshold === 'low' ? 'Low' : 'Medium'}`));
+  setText('showcase-template-name', t(template.labelKey));
+  setText('showcase-template-tier', t(`pricing.${template.tier}`));
+  const banner = document.getElementById('career-company-banner');
+  if (banner) banner.style.backgroundImage = state.hrCompanyBanner ? `url("${state.hrCompanyBanner}")` : '';
 }
 
 function renderHrSideSwitcher() {
@@ -2632,6 +2969,7 @@ function updateHrRequirement(field, value) {
   renderHrPreview();
   renderHrPricing();
   renderHrRecap();
+  renderCompanyIdentity();
   if (state.view === 'form' && state.activePresetKey === 'recruit') {
     renderActivePresetHeader();
     renderCurrentQuestion();
@@ -2682,7 +3020,13 @@ function renderHrBuilder() {
     ['hr-notice-input', 'noticePeriod'],
     ['hr-skills-input', 'skills'],
     ['hr-education-input', 'education'],
-    ['hr-screening-input', 'screening']
+    ['hr-screening-input', 'screening'],
+    ['hr-role-summary-input', 'roleSummary'],
+    ['hr-responsibilities-input', 'responsibilities'],
+    ['hr-must-have-input', 'mustHave'],
+    ['hr-qualification-input', 'qualification'],
+    ['hr-certification-input', 'certification'],
+    ['hr-plus-points-input', 'plusPoints']
   ];
   fields.forEach(([id, key]) => {
     const element = document.getElementById(id);
@@ -2690,8 +3034,25 @@ function renderHrBuilder() {
   });
   const companyInput = document.getElementById('hr-company-input');
   if (companyInput) companyInput.value = state.hrCompanyName;
+  [
+    ['hr-industry-input', 'industry'],
+    ['hr-description-input', 'description'],
+    ['hr-website-input', 'website']
+  ].forEach(([id, key]) => {
+    const element = document.getElementById(id);
+    if (element) element.value = state.hrCompanyProfile[key] || '';
+  });
+  const jobType = document.getElementById('hr-job-type-input');
+  if (jobType) jobType.value = r.jobType || 'Full-time';
+  const matchThreshold = document.getElementById('hr-match-threshold-input');
+  if (matchThreshold) matchThreshold.value = r.matchThreshold || 'medium';
+  const cvRequired = document.getElementById('hr-cv-required-input');
+  if (cvRequired) cvRequired.checked = r.cvRequired !== false;
   renderHrLogoPreview();
+  renderHrBannerPreview();
   renderHrTemplateButtons();
+  renderHrUiTemplateGallery();
+  renderHrUiPreview();
   renderHrPreview();
   renderHrPricing();
   renderHrStatusList();
@@ -3212,6 +3573,34 @@ function selectRating(qId, value) {
   }, 320);
 }
 
+function handleCvDragOver(event) {
+  if (!event) return;
+  if (event.preventDefault) event.preventDefault();
+  const zone = document.getElementById('candidate-cv-dropzone');
+  if (zone) {
+    zone.classList.add('is-dragging');
+    setTextById('candidate-cv-drop-title', t('portal.cvDragActive'));
+  }
+}
+
+function handleCvDragLeave(event) {
+  if (!event) return;
+  if (event.preventDefault) event.preventDefault();
+  const zone = document.getElementById('candidate-cv-dropzone');
+  if (zone) {
+    zone.classList.remove('is-dragging');
+    setTextById('candidate-cv-drop-title', t('portal.cvDropTitle'));
+  }
+}
+
+function handleCvDrop(event) {
+  if (!event) return;
+  if (event.preventDefault) event.preventDefault();
+  handleCvDragLeave(event);
+  const file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
+  if (file) handleFileInput('recruit_cv', file);
+}
+
 async function handleFileInput(qId, file) {
   if (!file) return;
   clearAdvanceTimer();
@@ -3253,6 +3642,14 @@ function nextStepQuestion() {
   if (state.view !== 'form') return;
   clearAdvanceTimer();
   const p = getPreset(state.activePresetKey);
+  const question = p.questions[state.currentStepIndex];
+  if (state.activePresetKey === 'recruit' && !state.isSimulation && question && question.id === 'recruit_cv' && currentHrRequirement().cvRequired !== false) {
+    const cvAnswer = state.userResponses.recruit_cv;
+    if (!cvAnswer || (!cvAnswer.name && !cvAnswer.url)) {
+      showToast(t('toast.cvRequired'));
+      return;
+    }
+  }
   if (state.currentStepIndex < p.questions.length - 1) {
     state.currentStepIndex++;
     renderCurrentQuestion();
@@ -3308,6 +3705,9 @@ function buildSubmissionPayload() {
     formSlug: p.slug,
     companyName: state.hrCompanyName,
     companyLogoMode: state.hrCompanyLogo ? 'uploaded' : 'initials',
+    companyProfile: state.activePresetKey === 'recruit' ? { ...state.hrCompanyProfile } : null,
+    hrUiTemplate: state.activePresetKey === 'recruit' ? state.hrUiTemplate : null,
+    hrUiTier: state.activePresetKey === 'recruit' ? state.hrUiTier : null,
     sourceUrl: state.gformUrl,
     simulation: state.isSimulation,
     hrRequirement: state.activePresetKey === 'recruit' ? { ...currentHrRequirement() } : null,
