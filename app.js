@@ -551,17 +551,24 @@ const HR_COMPANY_PRESETS = {
 };
 
 const HR_UI_TEMPLATES = [
-  { key: 'clean01', tier: 'free', labelKey: 'hr.uiTemplate.clean01' },
-  { key: 'clean02', tier: 'free', labelKey: 'hr.uiTemplate.clean02' },
-  { key: 'clean03', tier: 'free', labelKey: 'hr.uiTemplate.clean03' },
-  { key: 'clean04', tier: 'free', labelKey: 'hr.uiTemplate.clean04' },
-  { key: 'glass05', tier: 'pro', labelKey: 'hr.uiTemplate.glass05' },
-  { key: 'glass06', tier: 'pro', labelKey: 'hr.uiTemplate.glass06' },
-  { key: 'glass07', tier: 'pro', labelKey: 'hr.uiTemplate.glass07' },
-  { key: 'exec08', tier: 'business', labelKey: 'hr.uiTemplate.exec08' },
-  { key: 'exec09', tier: 'business', labelKey: 'hr.uiTemplate.exec09' },
-  { key: 'exec10', tier: 'business', labelKey: 'hr.uiTemplate.exec10' }
+  { key: 'clean01', tier: 'free', layout: 'saasSlate', labelKey: 'hr.uiTemplate.clean01' },
+  { key: 'clean02', tier: 'free', layout: 'modernBlue', labelKey: 'hr.uiTemplate.clean02' },
+  { key: 'clean03', tier: 'free', layout: 'modernBlue', labelKey: 'hr.uiTemplate.clean03' },
+  { key: 'clean04', tier: 'free', layout: 'darkHeader', labelKey: 'hr.uiTemplate.clean04' },
+  { key: 'glass05', tier: 'pro', layout: 'warmEditorial', labelKey: 'hr.uiTemplate.glass05' },
+  { key: 'glass06', tier: 'pro', layout: 'warmEditorial', labelKey: 'hr.uiTemplate.glass06' },
+  { key: 'glass07', tier: 'pro', layout: 'modernBlue', labelKey: 'hr.uiTemplate.glass07' },
+  { key: 'exec08', tier: 'business', layout: 'warmEditorial', labelKey: 'hr.uiTemplate.exec08' },
+  { key: 'exec09', tier: 'business', layout: 'saasSlate', labelKey: 'hr.uiTemplate.exec09' },
+  { key: 'exec10', tier: 'business', layout: 'darkHeader', labelKey: 'hr.uiTemplate.exec10' }
 ];
+
+const HR_TEMPLATE_THUMBS = {
+  saasSlate: 'assets/templates/free-01-saas-slate.jpg',
+  warmEditorial: 'assets/templates/pro-01-warm-editorial.jpg',
+  modernBlue: 'assets/templates/free-02-modern-blue.jpg',
+  darkHeader: 'assets/templates/free-03-dark-header.jpg'
+};
 
 const HR_TEMPLATES = {
   tech: {
@@ -2884,11 +2891,18 @@ function activateHrFreeMode() {
   showToast(t('toast.hrFreeMode'));
 }
 
+function handleTemplateThumbError(image) {
+  const wrapper = image && image.parentElement;
+  if (wrapper) wrapper.classList.add('thumb-missing');
+  if (image) image.style.display = 'none';
+}
+
 function renderHrUiTemplateGallery() {
   const grid = document.getElementById('hr-ui-template-grid');
   if (!grid) return;
   grid.innerHTML = HR_UI_TEMPLATES.map((template) => `
-    <button type="button" onclick="selectHrUiTemplate('${template.key}')" id="hr-ui-template-${template.key}" class="hr-ui-template-btn ${template.key === state.hrUiTemplate ? 'active' : ''}" data-tier="${template.tier}">
+    <button type="button" onclick="selectHrUiTemplate('${template.key}')" id="hr-ui-template-${template.key}" class="hr-ui-template-btn ${template.key === state.hrUiTemplate ? 'active' : ''}" data-tier="${template.tier}" data-layout="${template.layout}">
+      <span class="hr-ui-template-thumb"><img src="${HR_TEMPLATE_THUMBS[template.layout]}" alt="" onerror="handleTemplateThumbError(this)"></span>
       <span class="hr-ui-template-tier">${escapeHtml(t(`pricing.${template.tier}`))}</span>
       <strong>${escapeHtml(t(template.labelKey))}</strong>
       <span class="hr-ui-template-lines"><i></i><i></i><i></i></span>
@@ -2902,6 +2916,7 @@ function renderHrUiPreview() {
   if (preview) {
     preview.dataset.tier = template.tier;
     preview.dataset.template = template.key;
+    preview.dataset.layout = template.layout;
   }
   setTextById('hr-ui-preview-name', t(template.labelKey));
   setTextById('hr-ui-preview-tier', t(`pricing.${template.tier}`));
@@ -2920,6 +2935,9 @@ function renderCompanyIdentity() {
   const setText = (id, value) => setTextById(id, value);
   document.body.dataset.hrTemplate = template.key;
   document.body.dataset.hrTier = template.tier;
+  document.body.dataset.hrLayout = template.layout;
+  const careerShell = document.getElementById('career-portal-shell');
+  if (careerShell) careerShell.dataset.layout = template.layout;
   setCompanyLogoMarkup(document.getElementById('candidate-company-logo'), state.hrCompanyLogo, name);
   setCompanyLogoMarkup(document.getElementById('company-logo-box'), state.hrCompanyLogo, name);
   setCompanyLogoMarkup(document.getElementById('career-company-logo'), state.hrCompanyLogo, name);
