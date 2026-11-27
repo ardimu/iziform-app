@@ -557,21 +557,53 @@ const HR_COMPANY_PRESETS = {
 const HR_UI_TEMPLATES = [
   { key: 'clean01', tier: 'free', layout: 'saasSlate', labelKey: 'hr.uiTemplate.clean01' },
   { key: 'clean02', tier: 'free', layout: 'modernBlue', labelKey: 'hr.uiTemplate.clean02' },
-  { key: 'clean03', tier: 'free', layout: 'modernBlue', labelKey: 'hr.uiTemplate.clean03' },
-  { key: 'clean04', tier: 'free', layout: 'darkHeader', labelKey: 'hr.uiTemplate.clean04' },
+  { key: 'clean03', tier: 'free', layout: 'darkHeader', labelKey: 'hr.uiTemplate.clean03' },
   { key: 'glass05', tier: 'pro', layout: 'warmEditorial', labelKey: 'hr.uiTemplate.glass05' },
-  { key: 'glass06', tier: 'pro', layout: 'warmEditorial', labelKey: 'hr.uiTemplate.glass06' },
-  { key: 'glass07', tier: 'pro', layout: 'modernBlue', labelKey: 'hr.uiTemplate.glass07' },
-  { key: 'exec08', tier: 'business', layout: 'warmEditorial', labelKey: 'hr.uiTemplate.exec08' },
-  { key: 'exec09', tier: 'business', layout: 'saasSlate', labelKey: 'hr.uiTemplate.exec09' },
-  { key: 'exec10', tier: 'business', layout: 'darkHeader', labelKey: 'hr.uiTemplate.exec10' }
+  { key: 'glass06', tier: 'pro', layout: 'warmEditorial', labelKey: 'hr.uiTemplate.glass06', asset: false },
+  { key: 'glass07', tier: 'pro', layout: 'modernBlue', labelKey: 'hr.uiTemplate.glass07', asset: false },
+  { key: 'exec08', tier: 'business', layout: 'warmEditorial', labelKey: 'hr.uiTemplate.exec08', asset: false },
+  { key: 'exec09', tier: 'business', layout: 'saasSlate', labelKey: 'hr.uiTemplate.exec09', asset: false },
+  { key: 'exec10', tier: 'business', layout: 'darkHeader', labelKey: 'hr.uiTemplate.exec10', asset: false },
+  { key: 'exec11', tier: 'business', layout: 'modernBlue', labelKey: 'hr.uiTemplate.exec11', asset: false }
 ];
 
-const HR_TEMPLATE_THUMBS = {
-  saasSlate: 'assets/templates/free-01-saas-slate.jpg',
-  warmEditorial: 'assets/templates/pro-01-warm-editorial.jpg',
-  modernBlue: 'assets/templates/free-02-modern-blue.jpg',
-  darkHeader: 'assets/templates/free-03-dark-header.jpg'
+const HR_TEMPLATE_ASSETS = {
+  saasSlate: {
+    web: [
+      'assets/templates/HR-WEB-free-01-saas-slate.jpg',
+      'assets/templates/HR-Web-free-01-saas-slate.jpg'
+    ],
+    phone: [
+      'assets/templates/HR-Phone-free-01-saas-slate.jpg'
+    ]
+  },
+  modernBlue: {
+    web: [
+      'assets/templates/HR-Web-free-02-modern-blue.jpg'
+    ],
+    phone: [
+      'assets/templates/HR-Phone-free-02-modern-blue.jpg'
+    ]
+  },
+  darkHeader: {
+    web: [
+      'assets/templates/HR-Web-fee-03-dark-header.jpg',
+      'assets/templates/HR-Web-free-03-dark-header.jpg'
+    ],
+    phone: [
+      'assets/templates/HR-Phone-03-dark-header.jpg',
+      'assets/templates/HR-Phone-fee-03-dark-header.jpg',
+      'assets/templates/HR-Phone-free-03-dark-header.jpg'
+    ]
+  },
+  warmEditorial: {
+    web: [
+      'assets/templates/HR-Web-pro-01-warm-editorial.jpg'
+    ],
+    phone: [
+      'assets/templates/HR-Phone-pro-01-warm-editorial.jpg'
+    ]
+  }
 };
 
 const HR_UPLOAD_LAYOUTS = ['saasSlate', 'warmEditorial', 'modernBlue', 'darkHeader'];
@@ -1076,7 +1108,7 @@ const I18N = {
     'hr.uiTier': 'Tier',
     'hr.uiTemplate.clean01': 'Minimal Stack',
     'hr.uiTemplate.clean02': 'Editorial White',
-    'hr.uiTemplate.clean03': 'Soft Grid',
+    'hr.uiTemplate.clean03': 'Mono Header',
     'hr.uiTemplate.clean04': 'Mono Line',
     'hr.uiTemplate.glass05': 'Corporate Glass',
     'hr.uiTemplate.glass06': 'Aurora Glass',
@@ -1084,6 +1116,7 @@ const I18N = {
     'hr.uiTemplate.exec08': 'Executive Board',
     'hr.uiTemplate.exec09': 'Enterprise Split',
     'hr.uiTemplate.exec10': 'Premium Dark',
+    'hr.uiTemplate.exec11': 'Eksekutif Biru',
     'portal.applyNow': 'Lamar Sekarang',
     'portal.aboutCompany': 'Tentang Perusahaan',
     'portal.jobOverview': 'Ringkasan Posisi',
@@ -1104,6 +1137,7 @@ const I18N = {
     'portal.applicationPanel': 'Formulir Lamaran',
     'portal.templateBadge': 'Template',
     'portal.companyLabel': 'Perusahaan',
+    'portal.companyProfile': 'Profil Perusahaan',
     'portal.positionApplied': 'Posisi yang dilamar',
     'portal.workLocation': 'Lokasi / tipe kerja',
     'hr.templateLabel': 'Template posisi cepat',
@@ -1517,7 +1551,7 @@ const I18N = {
     'hr.uiTier': 'Tier',
     'hr.uiTemplate.clean01': 'Minimal Stack',
     'hr.uiTemplate.clean02': 'Editorial White',
-    'hr.uiTemplate.clean03': 'Soft Grid',
+    'hr.uiTemplate.clean03': 'Mono Header',
     'hr.uiTemplate.clean04': 'Mono Line',
     'hr.uiTemplate.glass05': 'Corporate Glass',
     'hr.uiTemplate.glass06': 'Aurora Glass',
@@ -1525,6 +1559,7 @@ const I18N = {
     'hr.uiTemplate.exec08': 'Executive Board',
     'hr.uiTemplate.exec09': 'Enterprise Split',
     'hr.uiTemplate.exec10': 'Premium Dark',
+    'hr.uiTemplate.exec11': 'Executive Blue',
     'portal.applyNow': 'Apply Now',
     'portal.aboutCompany': 'About the Company',
     'portal.jobOverview': 'Job Overview',
@@ -1545,6 +1580,7 @@ const I18N = {
     'portal.applicationPanel': 'Application Form',
     'portal.templateBadge': 'Template',
     'portal.companyLabel': 'Company',
+    'portal.companyProfile': 'Company Profile',
     'portal.positionApplied': 'Applied position',
     'portal.workLocation': 'Location / work type',
     'hr.templateLabel': 'Quick role templates',
@@ -1958,7 +1994,7 @@ const I18N = {
     'hr.uiTier': '层级',
     'hr.uiTemplate.clean01': '极简叠层',
     'hr.uiTemplate.clean02': '编辑留白',
-    'hr.uiTemplate.clean03': '柔和网格',
+    'hr.uiTemplate.clean03': '单色页眉',
     'hr.uiTemplate.clean04': '单色线条',
     'hr.uiTemplate.glass05': '企业玻璃',
     'hr.uiTemplate.glass06': '极光玻璃',
@@ -1966,6 +2002,7 @@ const I18N = {
     'hr.uiTemplate.exec08': '高管董事会',
     'hr.uiTemplate.exec09': '企业分栏',
     'hr.uiTemplate.exec10': '尊享深色',
+    'hr.uiTemplate.exec11': '行政蓝',
     'portal.applyNow': '立即申请',
     'portal.aboutCompany': '关于公司',
     'portal.jobOverview': '职位概览',
@@ -1986,6 +2023,7 @@ const I18N = {
     'portal.applicationPanel': '申请表',
     'portal.templateBadge': '模板',
     'portal.companyLabel': '公司',
+    'portal.companyProfile': '公司简介',
     'portal.positionApplied': '申请职位',
     'portal.workLocation': '地点 / 工作类型',
     'hr.templateLabel': '快速职位模板',
@@ -2930,8 +2968,20 @@ function getHrUiTemplate() {
   return getAllHrTemplates().find((item) => item.key === state.hrUiTemplate) || HR_UI_TEMPLATES[0];
 }
 
-function getHrTemplateThumb(template) {
-  return template.thumb || HR_TEMPLATE_THUMBS[template.layout] || '';
+function getHrTemplateAssetList(template, device) {
+  const group = HR_TEMPLATE_ASSETS[template.layout] || {};
+  return device === 'mobile' ? (group.phone || []) : (group.web || []);
+}
+
+function getHrTemplateThumb(template, device) {
+  if (template.asset === false) return '';
+  if (template.thumb) return template.thumb;
+  return getHrTemplateAssetList(template, device)[0] || '';
+}
+
+function getHrTemplateThumbFallbacks(template, device) {
+  if (template.asset === false || template.thumb) return '';
+  return getHrTemplateAssetList(template, device).slice(1).join('|');
 }
 
 function getHrTemplateLabel(template) {
@@ -2980,9 +3030,18 @@ function activateHrFreeMode() {
 }
 
 function handleTemplateThumbError(image) {
-  const wrapper = image && image.parentElement;
+  if (!image) return;
+  const wrapper = image.parentElement;
+  const fallbacks = String(image.getAttribute('data-fallback') || '').split('|').filter(Boolean);
+  if (fallbacks.length) {
+    image.setAttribute('data-fallback', fallbacks.slice(1).join('|'));
+    image.src = fallbacks[0];
+    image.style.display = '';
+    if (wrapper) wrapper.classList.remove('thumb-missing');
+    return;
+  }
   if (wrapper) wrapper.classList.add('thumb-missing');
-  if (image) image.style.display = 'none';
+  image.style.display = 'none';
 }
 
 function selectHrUiTemplateDirect(event, templateKey) {
@@ -2996,6 +3055,25 @@ function handleTemplateCardKey(event, templateKey) {
   openTemplatePreview(templateKey);
 }
 
+function refreshTemplatePreviewImage() {
+  const template = getAllHrTemplates().find((item) => item.key === state.templatePreviewKey);
+  const frame = document.getElementById('hr-template-preview-frame');
+  const image = document.getElementById('hr-template-preview-image');
+  if (!template || !image) return;
+  const thumb = getHrTemplateThumb(template, state.templatePreviewDevice);
+  const fallbacks = getHrTemplateThumbFallbacks(template, state.templatePreviewDevice);
+  if (frame) {
+    frame.classList.toggle('thumb-missing', !thumb);
+    frame.dataset.device = state.templatePreviewDevice;
+  }
+  image.style.display = thumb ? '' : 'none';
+  image.src = thumb;
+  image.alt = `${getHrTemplateLabel(template)} ${state.templatePreviewDevice === 'mobile' ? 'HP' : 'Web'}`;
+  if (thumb) image.setAttribute('data-fallback', fallbacks);
+  else image.removeAttribute('data-fallback');
+  updateTemplatePreviewDeviceButtons();
+}
+
 function openTemplatePreview(templateKey) {
   const template = getAllHrTemplates().find((item) => item.key === templateKey);
   if (!template) return;
@@ -3003,23 +3081,12 @@ function openTemplatePreview(templateKey) {
   if (!modal) return;
   state.templatePreviewKey = template.key;
   state.templatePreviewDevice = 'web';
-  const frame = document.getElementById('hr-template-preview-frame');
-  const image = document.getElementById('hr-template-preview-image');
-  if (frame) {
-    frame.classList.remove('thumb-missing');
-    frame.dataset.device = state.templatePreviewDevice;
-  }
-  if (image) {
-    image.style.display = '';
-    image.src = getHrTemplateThumb(template);
-    image.alt = getHrTemplateLabel(template);
-  }
   setTextById('hr-template-preview-name', getHrTemplateLabel(template));
   setTextById('hr-template-preview-index', t('hr.templateIndex', { index: getHrTemplateNumber(template.key) }));
   setTextById('hr-template-preview-tier', t(`pricing.${template.tier}`));
   setTextById('hr-template-preview-note', t('hr.templatePreviewHint'));
   modal.classList.remove('hidden');
-  updateTemplatePreviewDeviceButtons();
+  refreshTemplatePreviewImage();
 }
 
 function closeTemplatePreview() {
@@ -3037,7 +3104,7 @@ function confirmTemplatePreview() {
 
 function setTemplatePreviewDevice(device) {
   state.templatePreviewDevice = device === 'mobile' ? 'mobile' : 'web';
-  updateTemplatePreviewDeviceButtons();
+  refreshTemplatePreviewImage();
 }
 
 function updateTemplatePreviewDeviceButtons() {
@@ -3129,10 +3196,14 @@ function renderHrUiTemplateGallery() {
   grid.innerHTML = getAllHrTemplates().map((template) => {
     const number = getHrTemplateNumber(template.key);
     const label = escapeHtml(getHrTemplateLabel(template));
-    const thumb = escapeHtml(getHrTemplateThumb(template));
+    const thumb = getHrTemplateThumb(template);
+    const fallbacks = getHrTemplateThumbFallbacks(template);
+    const thumbMarkup = thumb
+      ? `<span class="hr-ui-template-thumb"><img src="${escapeHtml(thumb)}" data-fallback="${escapeHtml(fallbacks)}" alt="" onerror="handleTemplateThumbError(this)"></span>`
+      : '<span class="hr-ui-template-thumb thumb-missing"></span>';
     return `
     <div role="button" tabindex="0" onclick="openTemplatePreview('${template.key}')" onkeydown="handleTemplateCardKey(event, '${template.key}')" id="hr-ui-template-${template.key}" class="hr-ui-template-btn hr-ui-template-card ${template.key === state.hrUiTemplate ? 'active' : ''}" data-tier="${template.tier}" data-layout="${template.layout}" data-key="${template.key}">
-      <span class="hr-ui-template-thumb"><img src="${thumb}" alt="" onerror="handleTemplateThumbError(this)"></span>
+      ${thumbMarkup}
       <span class="hr-ui-template-index">${escapeHtml(t('hr.templateIndex', { index: number }))}</span>
       <span class="hr-ui-template-tier">${escapeHtml(t(`pricing.${template.tier}`))}</span>
       <strong>${label}</strong>

@@ -722,7 +722,8 @@
         <button type="button" onclick="jumpToCandidateStep(0)" id="sticky-apply-btn" class="sticky-apply-btn" data-i18n="portal.applyNow">Lamar Sekarang</button>
       </div>
 
-      <div id="career-portal-shell" class="career-portal-shell hidden">
+      <div id="recruit-portal-layout" class="recruit-portal-layout">
+        <div id="career-portal-shell" class="career-portal-shell hidden">
         <section class="career-hero">
           <div id="career-company-banner" class="career-company-banner"></div>
           <div class="career-hero-body">
@@ -735,7 +736,10 @@
                 <span id="showcase-industry"></span>
                 <span><span data-i18n="portal.templateBadge">Template</span>: <b id="showcase-template-name"></b> · <b id="showcase-template-tier"></b></span>
               </div>
-              <p id="showcase-description"></p>
+              <div class="career-profile-note">
+                <span data-i18n="portal.companyProfile">Profil Perusahaan</span>
+                <p id="showcase-description"></p>
+              </div>
               <div class="career-hero-actions">
                 <button type="button" onclick="jumpToCandidateStep(0)" class="btn btn-primary" data-i18n="portal.applyNow">Lamar Sekarang</button>
                 <span id="showcase-website"></span>
@@ -779,8 +783,10 @@
             </div>
           </article>
         </section>
+        </div>
 
-        <section id="candidate-portal" class="candidate-portal hidden">
+        <div class="recruit-apply-column">
+          <section id="candidate-portal" class="candidate-portal hidden">
           <div class="candidate-portal-head">
             <div>
               <span class="section-eyebrow" data-i18n="portal.applicationPanel">Formulir Lamaran</span>
@@ -806,9 +812,8 @@
             </div>
           </div>
         </section>
-      </div>
 
-      <div class="brand-cover-wrapper">
+        <div class="brand-cover-wrapper">
         <img id="banner-cover-image"
              src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80"
              data-i18n-aria="form.bannerAlt"
@@ -846,8 +851,10 @@
         <h3 class="question-headline" id="q-headline-text">Siapa nama lengkap Anda?</h3>
         <p class="question-subtitle" id="q-subtitle-text">Masukkan nama resmi Anda sesuai yang tertera pada resume atau KTP.</p>
         <div id="q-interactive-body"></div>
-        <div id="cv-match-panel" class="cv-match-panel hidden"></div>
-      </section>
+          <div id="cv-match-panel" class="cv-match-panel hidden"></div>
+        </section>
+        </div>
+      </div>
 
       <div class="floating-bottom-dock" id="form-dock">
         <button onclick="prevStepQuestion()" id="dock-btn-prev" class="dock-btn dock-btn-secondary opacity-50 cursor-not-allowed">
