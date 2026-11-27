@@ -14,10 +14,13 @@ const state = {
   googleEmail: '',
   gformUrl: '',
   webhookUrl: '',
-  pricingMode: 'monthly',
+  paymentMethod: 'idr',
+  paymentMethodManuallySet: false,
   isSimulation: false,
   cvParse: null,
   qrisImageUrl: '',
+  qrisPaymentPlan: '',
+  qrisMerchant: '',
   presets: {
     recruit: {
       companyName: 'PT Digital Nusantara Indonesia',
@@ -457,42 +460,45 @@ const state = {
 };
 
 const PRICING_PLANS = {
-  monthly: {
-    noteKey: 'pricing.monthlyNote',
-    pro: {
-      price: 'Rp49rb',
-      periodKey: 'pricing.perMonth',
-      scopeKey: 'pricing.proScopeMonthly',
-      noteKey: 'pricing.proNoteMonthly',
-      ctaKey: 'pricing.proCtaMonthly',
-      benefitKeys: ['pricing.proBenefitMonthly1', 'pricing.proBenefit1', 'pricing.proBenefit3', 'pricing.proBenefitMonthly4']
-    },
-    business: {
-      price: 'Rp149rb',
-      periodKey: 'pricing.perMonth',
-      scopeKey: 'pricing.businessScopeMonthly',
-      noteKey: 'pricing.businessNoteMonthly',
-      ctaKey: 'pricing.businessCtaMonthly',
-      benefitKeys: ['pricing.businessBenefit1', 'pricing.businessBenefit2', 'pricing.businessBenefit3', 'pricing.businessBenefit4']
+  free: {
+    benefitKeys: ['pricing.freeBenefit1', 'pricing.freeBenefit2', 'pricing.freeBenefit3', 'pricing.freeBenefit4']
+  },
+  pro: {
+    benefitKeys: ['pricing.proBenefit1', 'pricing.proBenefit2', 'pricing.proBenefit3', 'pricing.proBenefit4', 'pricing.proBenefit5'],
+    methods: {
+      idr: {
+        oldPrice: 'Rp50rb',
+        price: 'Rp29rb',
+        periodKey: 'pricing.perForm',
+        ctaKey: 'pricing.proCtaIdr',
+        checkoutUrl: ''
+      },
+      usd: {
+        oldPrice: '$4',
+        price: '$2',
+        periodKey: 'pricing.perForm',
+        ctaKey: 'pricing.proCtaUsd',
+        checkoutUrl: 'https://checkout.example.com/iziform-pro-usd'
+      }
     }
   },
-  onetime: {
-    noteKey: 'pricing.onetimeNote',
-    pro: {
-      price: 'Rp99rb',
-      periodKey: 'pricing.perForm',
-      scopeKey: 'pricing.proScopeOnetime',
-      noteKey: 'pricing.proNoteOnetime',
-      ctaKey: 'pricing.proCtaOnetime',
-      benefitKeys: ['pricing.proBenefitOnetime1', 'pricing.proBenefit1', 'pricing.proBenefit3', 'pricing.proBenefitOnetime4']
-    },
-    business: {
-      price: 'Rp349rb',
-      periodKey: 'pricing.perProject',
-      scopeKey: 'pricing.businessScopeOnetime',
-      noteKey: 'pricing.businessNoteOnetime',
-      ctaKey: 'pricing.businessCtaOnetime',
-      benefitKeys: ['pricing.businessBenefitOnetime1', 'pricing.businessBenefitOnetime2', 'pricing.businessBenefit2', 'pricing.businessBenefitOnetime4']
+  business: {
+    benefitKeys: ['pricing.businessBenefit1', 'pricing.businessBenefit2', 'pricing.businessBenefit3', 'pricing.businessBenefit4'],
+    methods: {
+      idr: {
+        oldPrice: 'Rp150rb',
+        price: 'Rp99rb',
+        periodKey: 'pricing.perProject',
+        ctaKey: 'pricing.businessCtaIdr',
+        checkoutUrl: ''
+      },
+      usd: {
+        oldPrice: '$10',
+        price: '$7',
+        periodKey: 'pricing.perProject',
+        ctaKey: 'pricing.businessCtaUsd',
+        checkoutUrl: 'https://checkout.example.com/iziform-business-usd'
+      }
     }
   }
 };
@@ -884,54 +890,57 @@ const I18N = {
     'showcase.surveyTitle': 'Survei Pelanggan',
     'showcase.surveyDesc': 'Rating, masukan, dan ringkasan otomatis.',
     'pricing.eyebrow': 'Harga',
-    'pricing.title': 'Mulai gratis, scale saat dibutuhkan.',
-    'pricing.desc': 'Semua paket tetap mengutamakan data di Google Sheet akun Anda sendiri.',
-    'pricing.modeAria': 'Pilih mode harga Pro dan Business',
-    'pricing.modeLabel': 'Mode harga',
-    'pricing.monthly': 'Bulanan',
-    'pricing.onetime': 'Sekali Pakai',
-    'pricing.monthlyNote': 'Tagihan bulanan, bisa dibatalkan kapan saja. Free tetap tersedia sebagai paket awal tanpa biaya.',
-    'pricing.onetimeNote': 'Bayar sekali untuk satu form, batch, atau proyek tanpa langganan. Free tetap tersedia sebagai paket awal tanpa biaya.',
-    'pricing.perMonth': '/bulan',
+    'pricing.title': 'Bayar sekali, langsung pakai.',
+    'pricing.desc': 'Fokus paket Sekali Pakai (Single Pass). Data tetap masuk ke Google Sheet akun Anda sendiri.',
+    'pricing.singlePassNote': 'Tanpa langganan. Pilih QRIS (IDR) atau Global / USD; Free tetap tersedia sebagai paket awal.',
+    'pricing.singlePass': 'Sekali Pakai',
+    'pricing.promoBadge': 'PROMO NEW LAUNCHING',
     'pricing.perForm': '/form',
     'pricing.perProject': '/proyek',
-    'pricing.freeRibbon': 'Paket awal',
+    'pricing.freeRibbon': 'PAKET AWAL',
     'pricing.free': 'Free',
-    'pricing.freeScope': 'Tanpa biaya, selamanya',
-    'pricing.freeNote': 'Paket awal untuk mencoba dan kebutuhan personal.',
-    'pricing.freeBenefit1': '7 kategori form',
-    'pricing.freeBenefit2': 'Simulasi lokal',
-    'pricing.freeBenefit3': '4 tema dasar',
+    'pricing.freeScope': 'PAKET AWAL',
+    'pricing.freeNote': 'Untuk mencoba dan kebutuhan personal.',
+    'pricing.freeBenefit1': '1 Form Aktif',
+    'pricing.freeBenefit2': '50 respon/bulan',
+    'pricing.freeBenefit3': 'Tersambung ke Google Sheet',
+    'pricing.freeBenefit4': 'Watermark iziForm',
     'pricing.freeCta': 'Mulai Gratis',
-    'pricing.proRibbon': 'Populer UMKM',
+    'pricing.proRibbon': 'Pro',
     'pricing.pro': 'Pro',
-    'pricing.proScopeMonthly': 'Fokus: 1 form aktif',
-    'pricing.proNoteMonthly': 'Untuk individu, UMKM, atau satu event/batch tunggal.',
-    'pricing.proCtaMonthly': 'Pilih Pro Bulanan',
-    'pricing.proBenefitMonthly1': '1 form aktif dengan kategori pilihan',
-    'pricing.proBenefitMonthly4': 'Cocok untuk UMKM dan event tunggal',
-    'pricing.proScopeOnetime': 'Fokus: 1 form sekali pakai',
-    'pricing.proNoteOnetime': 'Untuk satu kebutuhan individu, UMKM, atau event/batch tunggal.',
-    'pricing.proCtaOnetime': 'Pilih Pro Sekali Pakai',
-    'pricing.proBenefitOnetime1': '1 form sekali pakai tanpa langganan',
-    'pricing.proBenefitOnetime4': 'Cocok untuk pendaftaran dan event tunggal',
-    'pricing.proBenefit1': 'Tampilan premium & semua tipe input lengkap',
-    'pricing.proBenefit3': 'Sheet webhook aktif + link form unik',
-    'pricing.businessRibbon': 'Pilihan Tim',
+    'pricing.proBenefit1': 'Respon Tanpa Batas',
+    'pricing.proBenefit2': 'Hapus Watermark iziForm',
+    'pricing.proBenefit3': 'PDF CV Auto-Fill',
+    'pricing.proBenefit4': 'Semua Tipe Input',
+    'pricing.proBenefit5': 'Branding Kustom',
+    'pricing.proCtaIdr': 'Bayar QRIS Rp29rb',
+    'pricing.proCtaUsd': 'Checkout $2',
+    'pricing.businessRibbon': 'Business',
     'pricing.business': 'Business',
-    'pricing.businessScopeMonthly': 'Fokus: tim & kampanye besar',
-    'pricing.businessNoteMonthly': 'Untuk tim, perusahaan, dan kampanye/event berulang.',
-    'pricing.businessCtaMonthly': 'Konsultasi Tim',
-    'pricing.businessScopeOnetime': 'Fokus: proyek/event besar',
-    'pricing.businessNoteOnetime': 'Untuk tim yang menjalankan satu kampanye atau event besar.',
-    'pricing.businessCtaOnetime': 'Konsultasi Proyek',
-    'pricing.businessBenefit1': 'Semua fitur Pro + multi-form & multi-kategori',
-    'pricing.businessBenefit2': 'Akses dan kolaborasi tim (admin/editor)',
-    'pricing.businessBenefit3': 'Ringkasan submission & kerapian data Sheet',
-    'pricing.businessBenefit4': 'Prioritas kustomisasi & pendampingan integrasi',
-    'pricing.businessBenefitOnetime1': '1 proyek besar tanpa langganan',
-    'pricing.businessBenefitOnetime2': 'Multi-form & multi-kategori dalam satu proyek',
-    'pricing.businessBenefitOnetime4': 'Kerapian operasional & struktur Sheet rapi',
+    'pricing.businessBenefit1': 'Semua Fitur PRO + AI Candidate Match Score & Ranking',
+    'pricing.businessBenefit2': 'Akses Multi-Admin/Tim',
+    'pricing.businessBenefit3': 'Multi-Form 1 Proyek',
+    'pricing.businessBenefit4': 'Prioritas Support',
+    'pricing.businessCtaIdr': 'Bayar QRIS Rp99rb',
+    'pricing.businessCtaUsd': 'Checkout $7',
+    'payment.label': 'Metode Pembayaran',
+    'payment.aria': 'Pilih metode pembayaran dan mata uang',
+    'payment.idr': 'QRIS (IDR)',
+    'payment.usd': 'Global / USD ($)',
+    'payment.note': 'Bahasa tidak mengubah metode pembayaran. Pilih bebas QRIS IDR atau Global USD.',
+    'toast.paymentMethod': 'Metode pembayaran: {name}',
+    'qris.paymentEyebrow': 'Pembayaran QRIS',
+    'qris.paymentTitle': 'Bayar paket iziForm',
+    'qris.paymentDesc': 'Scan kode QRIS, transfer sesuai nominal, lalu konfirmasi. Bukti transfer opsional dan hanya disimpan di browser Anda.',
+    'qris.paymentSummary': 'Ringkasan Pembayaran',
+    'qris.paymentMerchant': 'Merchant / QMID',
+    'qris.merchantFallback': 'IZIFORM-QRIS',
+    'qris.proofLabel': 'Bukti transfer (opsional)',
+    'qris.transferHint': 'Jika QRIS belum dipasang, atur gambar kode QRIS melalui menu Traktir Kopi terlebih dahulu.',
+    'qris.confirm': 'Saya sudah transfer',
+    'toast.qrisPaymentConfirmed': 'Konfirmasi diterima untuk {plan}. Cek Google Sheet Anda setelah pembayaran diverifikasi.',
+    'toast.qrisProofSaved': 'Bukti transfer dipilih: {name}',
+    'toast.qrisMerchantSaved': 'Merchant QRIS tersimpan.',
     'faq.eyebrow': 'FAQ',
     'faq.title': 'Pertanyaan yang paling sering ditanyakan.',
     'faq.q1': 'Apakah data tersimpan di Google Sheet saya sendiri?',
@@ -1138,54 +1147,57 @@ const I18N = {
     'showcase.surveyTitle': 'Customer survey',
     'showcase.surveyDesc': 'Rating, feedback, and automatic summary.',
     'pricing.eyebrow': 'Pricing',
-    'pricing.title': 'Start free, scale when needed.',
-    'pricing.desc': 'Every plan keeps your data in your own Google Sheet account.',
-    'pricing.modeAria': 'Choose Pro and Business billing mode',
-    'pricing.modeLabel': 'Billing mode',
-    'pricing.monthly': 'Monthly',
-    'pricing.onetime': 'One-time',
-    'pricing.monthlyNote': 'Billed monthly, cancel anytime. Free stays available as the starting plan at no cost.',
-    'pricing.onetimeNote': 'Pay once for one form, batch, or project with no subscription. Free stays available as the starting plan at no cost.',
-    'pricing.perMonth': '/month',
+    'pricing.title': 'Pay once, use it right away.',
+    'pricing.desc': 'Focused on Single Pass packages. Your data still flows into your own Google Sheet account.',
+    'pricing.singlePassNote': 'No subscription. Choose QRIS (IDR) or Global / USD; Free stays available as the starter plan.',
+    'pricing.singlePass': 'Single Pass',
+    'pricing.promoBadge': 'PROMO NEW LAUNCHING',
     'pricing.perForm': '/form',
     'pricing.perProject': '/project',
-    'pricing.freeRibbon': 'Starter plan',
+    'pricing.freeRibbon': 'STARTER PLAN',
     'pricing.free': 'Free',
-    'pricing.freeScope': 'Free forever',
-    'pricing.freeNote': 'The starting plan for trying iziForm and personal use.',
-    'pricing.freeBenefit1': '7 form categories',
-    'pricing.freeBenefit2': 'Local simulation',
-    'pricing.freeBenefit3': '4 core themes',
+    'pricing.freeScope': 'STARTER PLAN',
+    'pricing.freeNote': 'For trying iziForm and personal use.',
+    'pricing.freeBenefit1': '1 Active Form',
+    'pricing.freeBenefit2': '50 responses/month',
+    'pricing.freeBenefit3': 'Connected to Google Sheet',
+    'pricing.freeBenefit4': 'iziForm watermark',
     'pricing.freeCta': 'Start free',
-    'pricing.proRibbon': 'Popular for UMKM',
+    'pricing.proRibbon': 'Pro',
     'pricing.pro': 'Pro',
-    'pricing.proScopeMonthly': 'Focus: 1 active form',
-    'pricing.proNoteMonthly': 'For individuals, small businesses, or one event/batch.',
-    'pricing.proCtaMonthly': 'Choose Pro Monthly',
-    'pricing.proBenefitMonthly1': '1 active form with your chosen category',
-    'pricing.proBenefitMonthly4': 'Built for small businesses and single events',
-    'pricing.proScopeOnetime': 'Focus: 1 one-time form',
-    'pricing.proNoteOnetime': 'For one individual, small business, or single event/batch need.',
-    'pricing.proCtaOnetime': 'Choose Pro One-time',
-    'pricing.proBenefitOnetime1': '1 one-time form, no subscription',
-    'pricing.proBenefitOnetime4': 'Built for registration and single events',
-    'pricing.proBenefit1': 'Premium look and all input types',
-    'pricing.proBenefit3': 'Active Sheet webhook + unique form link',
-    'pricing.businessRibbon': 'Team choice',
+    'pricing.proBenefit1': 'Unlimited Responses',
+    'pricing.proBenefit2': 'Remove iziForm Watermark',
+    'pricing.proBenefit3': 'PDF CV Auto-Fill',
+    'pricing.proBenefit4': 'All Input Types',
+    'pricing.proBenefit5': 'Custom Branding',
+    'pricing.proCtaIdr': 'Pay QRIS Rp29rb',
+    'pricing.proCtaUsd': 'Checkout $2',
+    'pricing.businessRibbon': 'Business',
     'pricing.business': 'Business',
-    'pricing.businessScopeMonthly': 'Focus: teams & large campaigns',
-    'pricing.businessNoteMonthly': 'For teams, companies, and recurring campaigns/events.',
-    'pricing.businessCtaMonthly': 'Consult as a team',
-    'pricing.businessScopeOnetime': 'Focus: large project/event',
-    'pricing.businessNoteOnetime': 'For teams running one large campaign or event.',
-    'pricing.businessCtaOnetime': 'Consult a project',
-    'pricing.businessBenefit1': 'Everything in Pro + multi-form & multi-category',
-    'pricing.businessBenefit2': 'Team access and collaboration (admin/editor)',
-    'pricing.businessBenefit3': 'Submission summary & tidy Sheet data',
-    'pricing.businessBenefit4': 'Priority customization & integration help',
-    'pricing.businessBenefitOnetime1': '1 large project with no subscription',
-    'pricing.businessBenefitOnetime2': 'Multi-form & multi-category in one project',
-    'pricing.businessBenefitOnetime4': 'Clean operations and structured Sheet data',
+    'pricing.businessBenefit1': 'All PRO features + AI Candidate Match Score & Ranking',
+    'pricing.businessBenefit2': 'Multi-Admin/Team Access',
+    'pricing.businessBenefit3': 'Multi-Form in 1 Project',
+    'pricing.businessBenefit4': 'Priority Support',
+    'pricing.businessCtaIdr': 'Pay QRIS Rp99rb',
+    'pricing.businessCtaUsd': 'Checkout $7',
+    'payment.label': 'Payment Method',
+    'payment.aria': 'Choose payment method and currency',
+    'payment.idr': 'QRIS (IDR)',
+    'payment.usd': 'Global / USD ($)',
+    'payment.note': 'Language never changes payment method. Pick QRIS IDR or Global USD freely.',
+    'toast.paymentMethod': 'Payment method: {name}',
+    'qris.paymentEyebrow': 'QRIS Payment',
+    'qris.paymentTitle': 'Pay for your iziForm package',
+    'qris.paymentDesc': 'Scan the QRIS code, transfer the exact amount, then confirm. Payment proof is optional and stays in your browser.',
+    'qris.paymentSummary': 'Payment Summary',
+    'qris.paymentMerchant': 'Merchant / QMID',
+    'qris.merchantFallback': 'IZIFORM-QRIS',
+    'qris.proofLabel': 'Payment proof (optional)',
+    'qris.transferHint': 'If QRIS is not set yet, install your QR code first from the Traktir Kopi menu.',
+    'qris.confirm': 'I have transferred',
+    'toast.qrisPaymentConfirmed': 'Confirmation received for {plan}. Check your Google Sheet after payment verification.',
+    'toast.qrisProofSaved': 'Payment proof selected: {name}',
+    'toast.qrisMerchantSaved': 'QRIS merchant saved.',
     'faq.eyebrow': 'FAQ',
     'faq.title': 'Questions people ask most.',
     'faq.q1': 'Is my data stored in my own Google Sheet?',
@@ -1392,54 +1404,57 @@ const I18N = {
     'showcase.surveyTitle': '客户问卷',
     'showcase.surveyDesc': '评分、反馈与自动汇总。',
     'pricing.eyebrow': '价格',
-    'pricing.title': '免费开始，按需升级。',
-    'pricing.desc': '所有套餐都坚持把数据保存在您自己的 Google Sheet 账号中。',
-    'pricing.modeAria': '选择 Pro 与 Business 的计费方式',
-    'pricing.modeLabel': '计费方式',
-    'pricing.monthly': '按月',
-    'pricing.onetime': '一次性',
-    'pricing.monthlyNote': '按月计费，可随时取消。Free 仍作为免费起步套餐提供。',
-    'pricing.onetimeNote': '按单个表单、批次或项目付费一次，无需订阅。Free 仍作为免费起步套餐提供。',
-    'pricing.perMonth': '/月',
+    'pricing.title': '一次付费，立即使用。',
+    'pricing.desc': '专注于一次性（Single Pass）套餐。数据仍会写入您自己的 Google Sheet 账号。',
+    'pricing.singlePassNote': '无需订阅。可选择 QRIS（IDR）或 Global / USD；Free 仍作为免费起步套餐。',
+    'pricing.singlePass': '一次性',
+    'pricing.promoBadge': 'PROMO NEW LAUNCHING',
     'pricing.perForm': '/表单',
     'pricing.perProject': '/项目',
     'pricing.freeRibbon': '起步套餐',
     'pricing.free': 'Free',
-    'pricing.freeScope': '永久免费',
-    'pricing.freeNote': '用于体验和个人需求的起步套餐。',
-    'pricing.freeBenefit1': '7 个表单分类',
-    'pricing.freeBenefit2': '本地模拟',
-    'pricing.freeBenefit3': '4 套基础主题',
+    'pricing.freeScope': '起步套餐',
+    'pricing.freeNote': '用于体验和满足个人需求。',
+    'pricing.freeBenefit1': '1 个使用中表单',
+    'pricing.freeBenefit2': '每月 50 份回复',
+    'pricing.freeBenefit3': '连接 Google Sheet',
+    'pricing.freeBenefit4': 'iziForm 水印',
     'pricing.freeCta': '免费开始',
-    'pricing.proRibbon': '小微商户热门',
+    'pricing.proRibbon': 'Pro',
     'pricing.pro': 'Pro',
-    'pricing.proScopeMonthly': '重点：1 个使用中的表单',
-    'pricing.proNoteMonthly': '适合个人、小微商户，或单场活动/单次批次。',
-    'pricing.proCtaMonthly': '选择 Pro 按月',
-    'pricing.proBenefitMonthly1': '1 个使用中的表单及所选分类',
-    'pricing.proBenefitMonthly4': '适合小微商户和单场活动',
-    'pricing.proScopeOnetime': '重点：1 个一次性表单',
-    'pricing.proNoteOnetime': '适合个人、小微商户的一次性表单或单场活动。',
-    'pricing.proCtaOnetime': '选择 Pro 一次性',
-    'pricing.proBenefitOnetime1': '1 个一次性表单，无订阅',
-    'pricing.proBenefitOnetime4': '适合报名和单场活动',
-    'pricing.proBenefit1': '高级外观与全部输入类型',
-    'pricing.proBenefit3': '启用 Sheet Webhook + 专属表单链接',
-    'pricing.businessRibbon': '团队选择',
+    'pricing.proBenefit1': '无限回复',
+    'pricing.proBenefit2': '移除 iziForm 水印',
+    'pricing.proBenefit3': 'PDF 简历自动填充',
+    'pricing.proBenefit4': '所有输入类型',
+    'pricing.proBenefit5': '自定义品牌',
+    'pricing.proCtaIdr': 'QRIS 支付 Rp29rb',
+    'pricing.proCtaUsd': '结账 $2',
+    'pricing.businessRibbon': 'Business',
     'pricing.business': 'Business',
-    'pricing.businessScopeMonthly': '重点：团队与大型活动',
-    'pricing.businessNoteMonthly': '适合团队、公司，以及持续开展的活动或营销项目。',
-    'pricing.businessCtaMonthly': '以团队身份咨询',
-    'pricing.businessScopeOnetime': '重点：大型项目/活动',
-    'pricing.businessNoteOnetime': '适合团队执行单个大型活动或项目。',
-    'pricing.businessCtaOnetime': '咨询项目',
-    'pricing.businessBenefit1': '包含 Pro 全部功能 + 多表单与多分类',
-    'pricing.businessBenefit2': '团队访问与协作（管理员/编辑）',
-    'pricing.businessBenefit3': '提交汇总与表格数据整理',
-    'pricing.businessBenefit4': '优先定制与集成协助',
-    'pricing.businessBenefitOnetime1': '1 个大型项目，无订阅',
-    'pricing.businessBenefitOnetime2': '一个项目内支持多表单与多分类',
-    'pricing.businessBenefitOnetime4': '运营整齐、表格结构清晰',
+    'pricing.businessBenefit1': '包含全部 PRO 功能 + AI 候选人匹配评分与排名',
+    'pricing.businessBenefit2': '多管理员/团队访问',
+    'pricing.businessBenefit3': '1 个项目内多表单',
+    'pricing.businessBenefit4': '优先支持',
+    'pricing.businessCtaIdr': 'QRIS 支付 Rp99rb',
+    'pricing.businessCtaUsd': '结账 $7',
+    'payment.label': '支付方式',
+    'payment.aria': '选择支付方式和货币',
+    'payment.idr': 'QRIS (IDR)',
+    'payment.usd': 'Global / USD ($)',
+    'payment.note': '语言不会改变支付方式。QRIS IDR 或 Global USD 可自由选择。',
+    'toast.paymentMethod': '支付方式：{name}',
+    'qris.paymentEyebrow': 'QRIS 支付',
+    'qris.paymentTitle': '支付 iziForm 套餐',
+    'qris.paymentDesc': '扫描 QRIS 码，按金额转账，然后确认。支付凭证为可选项，仅保存在您的浏览器中。',
+    'qris.paymentSummary': '支付摘要',
+    'qris.paymentMerchant': '商户 / QMID',
+    'qris.merchantFallback': 'IZIFORM-QRIS',
+    'qris.proofLabel': '支付凭证（可选）',
+    'qris.transferHint': '如果尚未设置 QRIS，请先从“Traktir Kopi”菜单安装二维码图片。',
+    'qris.confirm': '我已转账',
+    'toast.qrisPaymentConfirmed': '已收到 {plan} 的确认。付款验证后请查看您的 Google Sheet。',
+    'toast.qrisProofSaved': '已选择支付凭证：{name}',
+    'toast.qrisMerchantSaved': 'QRIS 商户已保存。',
     'faq.eyebrow': '常见问题',
     'faq.title': '大家最常问的问题。',
     'faq.q1': '数据会保存在我自己的 Google Sheet 吗？',
@@ -1626,11 +1641,17 @@ function applyTranslations() {
   applyFontStack();
 }
 
+function defaultPaymentMethodForLanguage(lang) {
+  return lang === 'en' ? 'usd' : 'idr';
+}
+
 function setLanguage(lang) {
   if (!I18N[lang]) return;
   state.currentLanguage = lang;
+  if (!state.paymentMethodManuallySet) state.paymentMethod = defaultPaymentMethodForLanguage(lang);
   applyTranslations();
-  setPricingMode(state.pricingMode);
+  renderPaymentMethod();
+  renderPricing();
   if (state.view === 'form') {
     renderActivePresetHeader();
     renderCurrentQuestion();
@@ -1680,8 +1701,8 @@ function closeQrisModal() {
   if (modal) modal.classList.add('hidden');
 }
 
-function updateQrisPreview() {
-  const preview = document.getElementById('qris-preview');
+function updateQrisPreview(previewId = 'qris-preview') {
+  const preview = document.getElementById(previewId);
   if (!preview) return;
   preview.textContent = '';
   if (state.qrisImageUrl) {
@@ -1699,6 +1720,7 @@ function previewQrisImage(file) {
   if (state.qrisImageUrl) URL.revokeObjectURL(state.qrisImageUrl);
   state.qrisImageUrl = URL.createObjectURL(file);
   updateQrisPreview();
+  updateQrisPreview('payment-qris-preview');
 }
 
 async function extractPdfText(file) {
@@ -1818,10 +1840,12 @@ function renderCvMatchPanel() {
 }
 
 document.addEventListener('DOMContentLoaded', () => {
+  state.paymentMethod = defaultPaymentMethodForLanguage(state.currentLanguage);
   applyTranslations();
   renderDashboard();
   renderSyncStatus();
-  setPricingMode(state.pricingMode);
+  renderPaymentMethod();
+  renderPricing();
   updateQrisPreview();
   setupKeyboardNavigation();
 });
@@ -1897,20 +1921,32 @@ function scrollToSection(sectionId) {
   if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
-function setPricingMode(mode) {
-  state.pricingMode = mode === 'onetime' ? 'onetime' : 'monthly';
-  const plans = PRICING_PLANS[state.pricingMode];
-  const monthlyActive = state.pricingMode === 'monthly';
-
+function renderPaymentMethod() {
   [
-    [document.getElementById('pricing-monthly-btn'), monthlyActive],
-    [document.getElementById('pricing-onetime-btn'), !monthlyActive]
-  ].forEach(([button, active]) => {
+    ['payment-idr-btn', 'idr'],
+    ['payment-usd-btn', 'usd']
+  ].forEach(([id, method]) => {
+    const button = document.getElementById(id);
     if (!button) return;
+    const active = method === state.paymentMethod;
     button.classList.toggle('active', active);
     button.setAttribute('aria-pressed', String(active));
   });
 
+  const note = document.getElementById('payment-note');
+  if (note) note.textContent = t('payment.note');
+}
+
+function setPaymentMethod(method, manual = true) {
+  const nextMethod = method === 'usd' ? 'usd' : 'idr';
+  state.paymentMethod = nextMethod;
+  if (manual) state.paymentMethodManuallySet = true;
+  renderPaymentMethod();
+  renderPricing();
+  showToast(t('toast.paymentMethod', { name: t(nextMethod === 'usd' ? 'payment.usd' : 'payment.idr') }));
+}
+
+function renderPricing() {
   const setText = (id, value) => {
     const element = document.getElementById(id);
     if (element) element.textContent = value;
@@ -1938,17 +1974,74 @@ function setPricingMode(mode) {
     });
   };
 
-  setText('pricing-mode-note', t(plans.noteKey));
-  setPrice('pro-price', plans.pro.price, t(plans.pro.periodKey));
-  setText('pro-scope', t(plans.pro.scopeKey));
-  setText('pro-note', t(plans.pro.noteKey));
-  setText('pro-cta', t(plans.pro.ctaKey));
-  setBenefits('pro-benefits', plans.pro.benefitKeys.map((key) => t(key)));
-  setPrice('business-price', plans.business.price, t(plans.business.periodKey));
-  setText('business-scope', t(plans.business.scopeKey));
-  setText('business-note', t(plans.business.noteKey));
-  setText('business-cta', t(plans.business.ctaKey));
-  setBenefits('business-benefits', plans.business.benefitKeys.map((key) => t(key)));
+  setText('pricing-payment-note', t('pricing.singlePassNote'));
+  setText('free-scope', t('pricing.freeScope'));
+  setBenefits('free-benefits', PRICING_PLANS.free.benefitKeys.map((key) => t(key)));
+
+  ['pro', 'business'].forEach((planKey) => {
+    const plan = PRICING_PLANS[planKey];
+    const data = plan.methods[state.paymentMethod];
+    setText(`${planKey}-scope`, t('pricing.singlePass'));
+    setText(`${planKey}-old-price`, data.oldPrice);
+    setPrice(`${planKey}-price`, data.price, t(data.periodKey));
+    setText(`${planKey}-cta`, t(data.ctaKey));
+    setBenefits(`${planKey}-benefits`, plan.benefitKeys.map((key) => t(key)));
+
+    const cta = document.getElementById(`${planKey}-cta`);
+    if (!cta) return;
+    if (state.paymentMethod === 'idr') {
+      cta.setAttribute('href', '#');
+      cta.removeAttribute('target');
+      cta.removeAttribute('rel');
+      cta.onclick = () => {
+        openQrisPayment(planKey);
+        return false;
+      };
+    } else {
+      cta.setAttribute('href', data.checkoutUrl);
+      cta.setAttribute('target', '_blank');
+      cta.setAttribute('rel', 'noopener');
+      cta.onclick = null;
+    }
+  });
+}
+
+function openQrisPayment(planKey) {
+  const plan = PRICING_PLANS[planKey];
+  if (!plan || state.paymentMethod !== 'idr') return;
+  clearAdvanceTimer();
+  state.qrisPaymentPlan = planKey;
+  const data = plan.methods.idr;
+  const planLabel = document.getElementById('qris-payment-plan');
+  const priceLabel = document.getElementById('qris-payment-price');
+  const merchantLabel = document.getElementById('qris-payment-merchant');
+  if (planLabel) planLabel.textContent = t(`pricing.${planKey}`);
+  if (priceLabel) priceLabel.textContent = `${data.price} ${t(data.periodKey)}`;
+  if (merchantLabel) merchantLabel.textContent = state.qrisMerchant || t('qris.merchantFallback');
+  updateQrisPreview('payment-qris-preview');
+  const modal = document.getElementById('payment-qris-modal');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeQrisPaymentModal() {
+  const modal = document.getElementById('payment-qris-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function confirmQrisPayment() {
+  const planKey = state.qrisPaymentPlan || 'pro';
+  const input = document.getElementById('payment-proof-input');
+  const file = input && input.files ? input.files[0] : null;
+  if (file) showToast(t('toast.qrisProofSaved', { name: file.name }));
+  showToast(t('toast.qrisPaymentConfirmed', { plan: t(`pricing.${planKey}`) }));
+  closeQrisPaymentModal();
+}
+
+function saveQrisMerchant(value) {
+  state.qrisMerchant = String(value === undefined || value === null ? '' : value).trim();
+  updateQrisPreview();
+  updateQrisPreview('payment-qris-preview');
+  showToast(t('toast.qrisMerchantSaved'));
 }
 
 function isValidEmail(value) {

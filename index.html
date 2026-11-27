@@ -59,6 +59,14 @@
         </div>
       </div>
 
+      <div class="control-group payment-control">
+        <span class="control-label" data-i18n="payment.label">Metode Pembayaran</span>
+        <div class="payment-switch" role="group" data-i18n-aria="payment.aria" aria-label="Pilih metode pembayaran dan mata uang">
+          <button type="button" id="payment-idr-btn" class="payment-option active" aria-pressed="true" onclick="setPaymentMethod('idr')" data-i18n="payment.idr">QRIS (IDR)</button>
+          <button type="button" id="payment-usd-btn" class="payment-option" aria-pressed="false" onclick="setPaymentMethod('usd')" data-i18n="payment.usd">Global / USD ($)</button>
+        </div>
+      </div>
+
       <div class="control-group">
         <span class="control-label" data-i18n="controls.theme">Aksen UI</span>
         <div class="theme-chips">
@@ -277,22 +285,15 @@
             <h2 data-i18n="pricing.title">Mulai gratis, scale saat dibutuhkan.</h2>
             <p data-i18n="pricing.desc">Semua paket tetap mengutamakan data di Google Sheet akun Anda sendiri.</p>
           </div>
-          <div class="pricing-toggle" role="group" data-i18n-aria="pricing.modeAria" aria-label="Pilih mode harga Pro dan Business">
-            <span class="pricing-toggle-label" data-i18n="pricing.modeLabel">Mode harga</span>
-            <div class="pricing-switch">
-              <button type="button" id="pricing-monthly-btn" class="pricing-option active" aria-pressed="true" onclick="setPricingMode('monthly')" data-i18n="pricing.monthly">Bulanan</button>
-              <button type="button" id="pricing-onetime-btn" class="pricing-option" aria-pressed="false" onclick="setPricingMode('onetime')" data-i18n="pricing.onetime">Sekali Pakai</button>
-            </div>
-            <p class="pricing-mode-note" id="pricing-mode-note">Tagihan bulanan, bisa dibatalkan kapan saja. Free tetap tersedia sebagai paket awal tanpa biaya.</p>
-          </div>
+          <p class="pricing-single-note" id="pricing-payment-note" data-i18n="pricing.singlePassNote">Tanpa langganan. Pilih QRIS (IDR) atau Global / USD; Free tetap tersedia sebagai paket awal.</p>
           <div class="pricing-grid">
             <article class="price-card">
-              <span class="price-ribbon price-ribbon-free" data-i18n="pricing.freeRibbon">Paket awal</span>
+              <span class="price-ribbon price-ribbon-free" data-i18n="pricing.freeRibbon">PAKET AWAL</span>
               <span class="price-name" data-i18n="pricing.free">Free</span>
               <span class="price-amount">Rp0</span>
-              <span class="price-scope price-scope-free" data-i18n="pricing.freeScope">Tanpa biaya, selamanya</span>
-              <span class="price-note" data-i18n="pricing.freeNote">Paket awal untuk mencoba dan kebutuhan personal.</span>
-              <ul><li data-i18n="pricing.freeBenefit1">7 kategori form</li><li data-i18n="pricing.freeBenefit2">Simulasi lokal</li><li data-i18n="pricing.freeBenefit3">4 tema dasar</li></ul>
+              <span class="price-scope price-scope-free" id="free-scope" data-i18n="pricing.freeScope">PAKET AWAL</span>
+              <span class="price-note" data-i18n="pricing.freeNote">Untuk mencoba dan kebutuhan personal.</span>
+              <ul id="free-benefits"><li>1 Form Aktif</li><li>50 respon/bulan</li><li>Tersambung ke Google Sheet</li><li>Watermark iziForm</li></ul>
               <button type="button" onclick="scrollToSection('kategori')" class="btn btn-secondary btn-block" data-i18n="pricing.freeCta">Mulai Gratis</button>
               <div class="price-support">
                 <button type="button" onclick="openQrisModal()" class="support-button" data-i18n="qris.supportButton">Traktir Kopi</button>
@@ -300,22 +301,20 @@
               </div>
             </article>
             <article class="price-card price-popular">
-              <span class="price-ribbon" data-i18n="pricing.proRibbon">Populer UMKM</span>
+              <span class="price-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
               <span class="price-name" data-i18n="pricing.pro">Pro</span>
-              <span class="price-amount" id="pro-price">Rp49rb<small class="price-period">/bulan</small></span>
-              <span class="price-scope" id="pro-scope">Fokus: 1 form aktif</span>
-              <span class="price-note" id="pro-note">Untuk individu, UMKM, atau satu event/batch tunggal.</span>
-              <ul id="pro-benefits"><li>1 form aktif dengan kategori pilihan</li><li>Tampilan premium &amp; semua tipe input lengkap</li><li>Sheet webhook aktif + link form unik</li><li>Cocok untuk UMKM dan event tunggal</li></ul>
-              <button type="button" onclick="scrollToSection('sync')" id="pro-cta" class="btn btn-primary btn-block">Pilih Pro Bulanan</button>
+              <span class="price-amount-wrap"><s class="price-old" id="pro-old-price">Rp50rb</s><span class="price-new" id="pro-price">Rp29rb<small class="price-period">/form</small></span></span>
+              <span class="price-scope" id="pro-scope">Sekali Pakai</span>
+              <ul id="pro-benefits"><li>Respon Tanpa Batas</li><li>Hapus Watermark iziForm</li><li>PDF CV Auto-Fill</li><li>Semua Tipe Input</li><li>Branding Kustom</li></ul>
+              <a href="#" id="pro-cta" class="btn btn-primary btn-block">Bayar QRIS Rp29rb</a>
             </article>
             <article class="price-card price-business">
-              <span class="price-ribbon" data-i18n="pricing.businessRibbon">Pilihan Tim</span>
+              <span class="price-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
               <span class="price-name" data-i18n="pricing.business">Business</span>
-              <span class="price-amount" id="business-price">Rp149rb<small class="price-period">/bulan</small></span>
-              <span class="price-scope" id="business-scope">Fokus: tim &amp; kampanye besar</span>
-              <span class="price-note" id="business-note">Untuk tim, perusahaan, dan kampanye/event berulang.</span>
-              <ul id="business-benefits"><li>Semua fitur Pro + multi-form &amp; multi-kategori</li><li>Akses dan kolaborasi tim (admin/editor)</li><li>Ringkasan submission &amp; kerapian data Sheet</li><li>Prioritas kustomisasi &amp; pendampingan integrasi</li></ul>
-              <button type="button" onclick="openPasteModal()" id="business-cta" class="btn btn-primary btn-block">Konsultasi Tim</button>
+              <span class="price-amount-wrap"><s class="price-old" id="business-old-price">Rp150rb</s><span class="price-new" id="business-price">Rp99rb<small class="price-period">/proyek</small></span></span>
+              <span class="price-scope" id="business-scope">Sekali Pakai</span>
+              <ul id="business-benefits"><li>Semua Fitur PRO + AI Candidate Match Score &amp; Ranking</li><li>Akses Multi-Admin/Tim</li><li>Multi-Form 1 Proyek</li><li>Prioritas Support</li></ul>
+              <a href="#" id="business-cta" class="btn btn-primary btn-block">Bayar QRIS Rp99rb</a>
             </article>
           </div>
         </section>
@@ -523,13 +522,39 @@
       <div class="qris-panel">
         <div id="qris-preview" class="qris-preview" data-i18n="qris.empty">QRIS belum dipasang. Unggah gambar kode QRIS Anda.</div>
         <label for="qris-merchant-input" class="modal-label" data-i18n="qris.merchant">Nama merchant / QMID</label>
-        <input type="text" id="qris-merchant-input" class="modal-input modal-input-plain" data-i18n-placeholder="qris.merchantPlaceholder" placeholder="Contoh: IZIFORM-QRIS">
+        <input type="text" id="qris-merchant-input" class="modal-input modal-input-plain" onchange="saveQrisMerchant(this.value)" data-i18n-placeholder="qris.merchantPlaceholder" placeholder="Contoh: IZIFORM-QRIS">
         <label for="qris-image-input" class="modal-label" data-i18n="qris.image">Pasang gambar QRIS</label>
         <input type="file" id="qris-image-input" class="modal-input modal-input-plain" accept="image/*" onchange="previewQrisImage(this.files[0])">
         <p class="modal-hint" data-i18n="qris.hint">Gambar hanya ditampilkan di browser Anda untuk pratinjau; tidak diunggah ke server.</p>
       </div>
 
       <button onclick="closeQrisModal()" class="modal-primary" data-i18n="common.close">Tutup</button>
+    </div>
+  </div>
+
+  <div id="payment-qris-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button onclick="closeQrisPaymentModal()" class="modal-close" data-i18n-aria="common.close" aria-label="Tutup">&#10005;</button>
+      <span class="modal-eyebrow" data-i18n="qris.paymentEyebrow">Pembayaran QRIS</span>
+      <h3 class="modal-title" data-i18n="qris.paymentTitle">Bayar paket iziForm</h3>
+      <p class="modal-description" data-i18n="qris.paymentDesc">Scan kode QRIS, transfer sesuai nominal, lalu konfirmasi. Bukti transfer opsional dan hanya disimpan di browser Anda.</p>
+
+      <div class="payment-summary">
+        <span class="payment-summary-label" data-i18n="qris.paymentSummary">Ringkasan Pembayaran</span>
+        <strong id="qris-payment-plan">Pro</strong>
+        <span class="payment-summary-price" id="qris-payment-price">Rp29rb /form</span>
+        <span class="payment-summary-merchant" data-i18n="qris.paymentMerchant">Merchant / QMID</span>
+        <span id="qris-payment-merchant">IZIFORM-QRIS</span>
+      </div>
+
+      <div class="qris-panel">
+        <div id="payment-qris-preview" class="qris-preview" data-i18n="qris.empty">QRIS belum dipasang. Unggah gambar kode QRIS Anda.</div>
+        <label for="payment-proof-input" class="modal-label" data-i18n="qris.proofLabel">Bukti transfer (opsional)</label>
+        <input type="file" id="payment-proof-input" class="modal-input modal-input-plain" accept="image/*,application/pdf">
+        <p class="modal-hint" data-i18n="qris.transferHint">Jika QRIS belum dipasang, atur gambar kode QRIS melalui menu Traktir Kopi terlebih dahulu.</p>
+      </div>
+
+      <button onclick="confirmQrisPayment()" class="modal-primary" data-i18n="qris.confirm">Saya sudah transfer</button>
     </div>
   </div>
 
