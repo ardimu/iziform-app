@@ -14,9 +14,9 @@ const state = {
   presets: {
     hr: {
       companyName: 'PT Digital Nusantara Indonesia',
-      subText: 'Portal Rekrutmen Resmi Talenta Teknologi 2026 • Tersambung ke Google Sheet',
+      subText: 'Official Career Portal • Talenta Teknologi 2026 • Data tersambung aman ke Google Sheet',
       logo: '🏢',
-      categoryTag: 'OFFICIAL RECRUITMENT',
+      categoryTag: 'OFFICIAL CAREER PORTAL',
       coverImg: 'https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80',
       slug: 'rekrutmen-digital-2026',
       questions: [
@@ -197,7 +197,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupKeyboardNavigation();
 });
 
-// Switch Active Preset (HR, Marathon, Cafe)
+// Switch Active Preset (HR, Event, Pre-Order)
 function switchActivePreset(presetKey) {
   if (!state.presets[presetKey]) return;
   clearAdvanceTimer();
@@ -208,13 +208,7 @@ function switchActivePreset(presetKey) {
   // Update demo buttons
   ['hr', 'event', 'preorder'].forEach(k => {
     const btn = document.getElementById(`demo-btn-${k}`);
-    if (btn) {
-      if (k === presetKey) {
-        btn.className = 'px-2.5 py-1 rounded-lg bg-brand-600 text-white font-bold text-xs shadow-sm';
-      } else {
-        btn.className = 'px-2.5 py-1 rounded-lg bg-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-300';
-      }
-    }
+    if (btn) btn.classList.toggle('active', k === presetKey);
   });
 
   renderActivePresetHeader();
@@ -234,6 +228,7 @@ function renderActivePresetHeader() {
   const companySub = document.getElementById('company-sub-text');
   const headerPill = document.getElementById('header-link-pill');
 
+  document.body.dataset.preset = state.activePresetKey;
   if (coverImg) coverImg.src = p.coverImg;
   if (catBadge) catBadge.innerText = p.categoryTag;
   if (logoBox) logoBox.innerText = p.logo;
@@ -634,21 +629,19 @@ function showToast(message) {
   if (!box) return;
 
   const toast = document.createElement('div');
-  toast.className = 'p-3.5 px-4 rounded-2xl bg-slate-900 text-white text-xs font-bold shadow-2xl flex items-center gap-2.5 transform transition-all duration-300 translate-y-2 opacity-0 border border-slate-700';
-  toast.innerHTML = `
-    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 inline-block"></span>
-    <span>${message}</span>
-  `;
+  toast.className = 'toast-card';
+  const dot = document.createElement('span');
+  dot.className = 'toast-dot';
+  const text = document.createElement('span');
+  text.textContent = message;
+  toast.append(dot, text);
 
   box.appendChild(toast);
 
+  setTimeout(() => toast.classList.add('is-visible'), 10);
   setTimeout(() => {
-    toast.classList.remove('translate-y-2', 'opacity-0');
-  }, 10);
-
-  setTimeout(() => {
-    toast.classList.add('translate-y-2', 'opacity-0');
-    setTimeout(() => toast.remove(), 300);
+    toast.classList.remove('is-visible');
+    setTimeout(() => toast.remove(), 320);
   }, 3500);
 }
 

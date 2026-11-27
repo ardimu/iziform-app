@@ -11,250 +11,181 @@
 </head>
 <body class="theme-silicon font-jakarta">
 
-  <!-- TOP BRAND ENGINE CONTROLLER -->
-  <header class="sticky top-0 z-50 backdrop-blur-xl bg-white/80 dark:bg-slate-900/80 border-b border-slate-200/80 transition-all">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
-      
-      <!-- LOGO -->
-      <div class="flex items-center gap-2.5">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-brand-600 to-amber-400 flex items-center justify-center text-white font-black text-sm shadow-md">
-          iF
-        </div>
-        <div>
-          <div class="flex items-center gap-1.5">
-            <span class="text-lg font-black tracking-tight">iziForm</span>
-            <span class="text-[9px] font-black px-1.5 py-0.5 rounded-full bg-brand-500/10 text-brand-600 border border-brand-500/20">PREMIUM</span>
-          </div>
+  <header class="app-header sticky top-0 z-50">
+    <div class="header-inner max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="brand-mark">
+        <div class="brand-mark-icon">iF</div>
+        <div class="brand-mark-copy">
+          <span class="brand-name">iziForm</span>
+          <span class="brand-tier">PREMIUM</span>
         </div>
       </div>
 
-      <!-- PASTE GFORM LINK BUTTON (MODAL TRIGGER) -->
-      <div class="flex items-center gap-2">
-        <button onclick="openPasteModal()" class="px-3.5 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-xs font-bold text-slate-700 transition flex items-center gap-1.5">
+      <div class="header-actions">
+        <button onclick="openPasteModal()" class="header-button">
           <span>🔗</span>
-          <span class="hidden sm:inline">Ganti Link Google Form</span>
-          <span class="sm:hidden">Ganti Link</span>
+          <span class="header-long-label">Ganti Link Google Form</span>
+          <span class="header-short-label">Ganti Link</span>
         </button>
 
-        <!-- SHARE LINK PILL -->
-        <div class="hidden md:flex items-center gap-1.5 bg-slate-100 px-3 py-1.5 rounded-xl border text-xs font-mono font-bold text-brand-600">
-          <span id="header-link-pill">iziform.app/f/rekrutmen-2026</span>
-          <button onclick="copyFormLink()" title="Salin Link" class="text-slate-400 hover:text-slate-800 ml-1">📋</button>
+        <div class="link-pill">
+          <span id="header-link-pill">iziform.app/f/rekrutmen-digital-2026</span>
+          <button onclick="copyFormLink()" title="Salin Link" class="link-copy">📋</button>
         </div>
       </div>
-
     </div>
   </header>
 
-  <!-- SUB-HEADER: INTERACTIVE UI ACCENT & FONT BAR -->
-  <div class="bg-white/60 backdrop-blur-md border-b border-slate-200/60 py-2.5 px-4 sticky top-16 z-30">
-    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
-      
-      <!-- UI THEME PICKER (BISA DIPILIH SENDIRI) -->
-      <div class="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
-        <span class="font-bold text-slate-400 text-[11px] uppercase mr-1">Aksen UI:</span>
-        <button onclick="setUITheme('silicon')" id="theme-btn-silicon" class="style-chip active">
-          <span>🏛️</span> <span>Silicon Clean</span>
-        </button>
-        <button onclick="setUITheme('midnight')" id="theme-btn-midnight" class="style-chip">
-          <span>👑</span> <span>Midnight Gold</span>
-        </button>
-        <button onclick="setUITheme('cyber')" id="theme-btn-cyber" class="style-chip">
-          <span>⚡</span> <span>Cyber Neo</span>
-        </button>
-        <button onclick="setUITheme('terracotta')" id="theme-btn-terracotta" class="style-chip">
-          <span>☕</span> <span>Terracotta Editorial</span>
-        </button>
+  <div class="app-subheader sticky top-16 z-30">
+    <div class="subheader-inner max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="control-group">
+        <span class="control-label">Aksen UI</span>
+        <div class="theme-chips">
+          <button onclick="setUITheme('silicon')" id="theme-btn-silicon" class="style-chip active"><span>🏛️</span> <span>Silicon Clean</span></button>
+          <button onclick="setUITheme('midnight')" id="theme-btn-midnight" class="style-chip"><span>👑</span> <span>Midnight Gold</span></button>
+          <button onclick="setUITheme('cyber')" id="theme-btn-cyber" class="style-chip"><span>⚡</span> <span>Cyber Neo</span></button>
+          <button onclick="setUITheme('terracotta')" id="theme-btn-terracotta" class="style-chip"><span>☕</span> <span>Terracotta</span></button>
+        </div>
       </div>
 
-      <!-- FONT PICKER -->
-      <div class="flex items-center gap-1.5">
-        <span class="font-bold text-slate-400 text-[11px] uppercase">Font:</span>
-        <select onchange="changeFontFamily(this.value)" class="bg-white border rounded-lg px-2.5 py-1 text-xs font-bold outline-none cursor-pointer">
+      <div class="control-group font-control">
+        <span class="control-label">Font</span>
+        <select onchange="changeFontFamily(this.value)" class="font-select">
           <option value="Plus Jakarta Sans">Jakarta Sans (Modern)</option>
           <option value="Outfit">Outfit (Tech Ceria)</option>
           <option value="Space Grotesk">Space Grotesk (Trendy)</option>
           <option value="Playfair Display">Playfair (Mewah & Serif)</option>
         </select>
       </div>
-
     </div>
   </div>
 
-  <!-- MAIN OPEN-CANVAS CONTAINER -->
-  <main class="relative max-w-4xl mx-auto px-4 sm:px-6 pt-6 pb-24 z-10 flex-1">
-    
-    <!-- AMBIENT GLOW MESH -->
+  <main class="app-main relative max-w-4xl mx-auto px-4 sm:px-6 pt-8 pb-28 z-10">
     <div class="open-canvas-mesh"></div>
 
-    <!-- 1. BRAND COVER BANNER & COMPANY LOGO (HEADER PERUSAHAAN / EVENT) -->
-    <div class="mb-8">
-      
-      <!-- PANORAMIC COVER BANNER -->
+    <div class="premium-shell">
+      <div class="hr-career-ribbon" id="hr-career-ribbon">
+        <span class="hr-ribbon-icon">💼</span>
+        <div class="hr-ribbon-copy">
+          <strong>Official Career Portal</strong>
+          <span>PT Digital Nusantara Indonesia • Talent Acquisition 2026</span>
+        </div>
+        <span class="hr-ribbon-status">Open Registration</span>
+      </div>
+
       <div class="brand-cover-wrapper">
-        <img id="banner-cover-image" 
-             src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80" 
-             alt="Brand Banner" 
+        <img id="banner-cover-image"
+             src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80"
+             alt="Brand Banner"
              class="brand-cover-img">
         <div class="brand-cover-overlay"></div>
-
-        <!-- Banner Overlaid Badge -->
-        <div class="absolute top-4 right-4 z-10">
-          <span id="banner-category-badge" class="px-3.5 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-white font-extrabold text-[10px] uppercase tracking-wider">
-            OFFICIAL PORTAL
-          </span>
+        <div class="cover-shine"></div>
+        <div class="cover-badge-wrap">
+          <span id="banner-category-badge" class="cover-badge">OFFICIAL PORTAL</span>
         </div>
       </div>
 
-      <!-- BRAND PROFILE & LOGO AVATAR -->
-      <div class="brand-profile-bar">
-        
-        <div class="flex items-end gap-4">
-          <!-- LOGO AVATAR -->
-          <div class="company-logo-avatar" id="company-logo-box">
-            🏢
-          </div>
-
-          <!-- COMPANY / EVENT TITLE -->
-          <div class="pb-1">
-            <div class="flex items-center gap-2">
-              <h1 class="text-xl sm:text-2xl font-black tracking-tight" id="company-name-text">
-                PT Digital Nusantara Indonesia
-              </h1>
+      <section class="brand-identity-card">
+        <div class="brand-identity-main">
+          <div class="company-logo-avatar" id="company-logo-box">🏢</div>
+          <div class="brand-identity-copy">
+            <h1 class="company-name" id="company-name-text">PT Digital Nusantara Indonesia</h1>
+            <div class="brand-meta-row">
               <span class="verified-badge">
                 <svg class="w-3 h-3 fill-current" viewBox="0 0 20 20"><path d="M6.267 3.455a3.066 3.066 0 001.745-.723 3.066 3.066 0 013.976 0 3.066 3.066 0 001.745.723 3.066 3.066 0 012.812 2.812c.051.643.304 1.254.723 1.745a3.066 3.066 0 010 3.976 3.066 3.066 0 00-.723 1.745 3.066 3.066 0 01-2.812 2.812 3.066 3.066 0 00-1.745.723 3.066 3.066 0 01-3.976 0 3.066 3.066 0 00-1.745-.723 3.066 3.066 0 01-2.812-2.812 3.066 3.066 0 00-.723-1.745 3.066 3.066 0 010-3.976 3.066 3.066 0 00.723-1.745 3.066 3.066 0 012.812-2.812zm7.44 5.252a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
                 <span>Terverifikasi</span>
               </span>
+              <span class="meta-divider"></span>
+              <p class="company-subtitle" id="company-sub-text">Portal Rekrutmen Resmi Talenta Teknologi 2026 • Data langsung tersambung ke Google Sheet</p>
             </div>
-            <p class="text-xs text-slate-500 font-medium mt-0.5" id="company-sub-text">
-              Portal Rekrutmen Resmi Talenta Teknologi 2026 • Data langsung tersambung ke Google Sheet
-            </p>
           </div>
         </div>
 
-        <!-- FORM SWITCHER QUICK PILLS -->
-        <div class="flex items-center gap-1.5 pb-1">
-          <span class="text-[10px] font-bold text-slate-400 uppercase hidden sm:inline">Pilih Demo:</span>
-          <button onclick="switchActivePreset('hr')" id="demo-btn-hr" class="px-2.5 py-1 rounded-lg bg-brand-600 text-white font-bold text-xs shadow-sm">💼 HR</button>
-          <button onclick="switchActivePreset('event')" id="demo-btn-event" class="px-2.5 py-1 rounded-lg bg-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-300">🏃 Event 10K</button>
-          <button onclick="switchActivePreset('preorder')" id="demo-btn-preorder" class="px-2.5 py-1 rounded-lg bg-slate-200 text-slate-700 font-bold text-xs hover:bg-slate-300">🛍️ Pre-Order</button>
+        <div class="brand-switcher">
+          <span class="switcher-label">Template</span>
+          <div class="switcher-pills">
+            <button onclick="switchActivePreset('hr')" id="demo-btn-hr" class="switcher-pill active">💼 HR</button>
+            <button onclick="switchActivePreset('event')" id="demo-btn-event" class="switcher-pill">🏃 Event 10K</button>
+            <button onclick="switchActivePreset('preorder')" id="demo-btn-preorder" class="switcher-pill">🛍️ Pre-Order</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="open-question-card animate-question-in" id="active-question-card">
+        <div class="question-topline">
+          <span class="question-category" id="q-category-tag">01 • IDENTITAS</span>
+          <span class="question-counter" id="q-counter-tag">Pertanyaan 1 dari 5</span>
+        </div>
+        <h2 class="question-headline" id="q-headline-text">Siapa nama lengkap Anda?</h2>
+        <p class="question-subtitle" id="q-subtitle-text">Masukkan nama resmi Anda sesuai yang tertera pada resume atau KTP.</p>
+        <div id="q-interactive-body"></div>
+      </section>
+
+      <div class="floating-bottom-dock">
+        <button onclick="prevStepQuestion()" id="dock-btn-prev" class="dock-btn dock-btn-secondary opacity-50 cursor-not-allowed">
+          <span>&uarr;</span> <span>Sebelumnya</span>
+        </button>
+
+        <div class="dock-progress-wrap">
+          <div class="dock-keyboard-hint">
+            <span>Pilih kartu atau tekan</span>
+            <kbd class="dock-kbd">Enter ↵</kbd>
+          </div>
+          <div class="dock-progress-track">
+            <div id="dock-progress-bar" class="dock-progress-bar" style="width: 20%"></div>
+          </div>
+          <span class="dock-percent" id="dock-percent-text">20%</span>
         </div>
 
-      </div>
-
-    </div>
-
-    <!-- 2. OPEN-CANVAS INTERACTIVE QUESTION CARD -->
-    <div class="open-question-card animate-question-in" id="active-question-card">
-      
-      <!-- Top Step Tag & Number -->
-      <div class="flex items-center justify-between mb-2">
-        <span class="text-[11px] font-black uppercase tracking-wider text-brand-600" id="q-category-tag">
-          01 • IDENTITAS
-        </span>
-        <span class="text-xs font-bold text-slate-400" id="q-counter-tag">
-          Pertanyaan 1 dari 4
-        </span>
-      </div>
-
-      <!-- Question Title -->
-      <h2 class="question-headline" id="q-headline-text">
-        Siapa nama lengkap Anda?
-      </h2>
-      <p class="question-subtitle" id="q-subtitle-text">
-        Nama resmi ini akan dicatat langsung pada database kandidat perusahaan.
-      </p>
-
-      <!-- DYNAMIC INPUT AREA -->
-      <div id="q-interactive-body">
-        <!-- Injected via app.js -->
-      </div>
-
-    </div>
-
-    <!-- 3. FLOATING LUXURY BOTTOM DOCK (NAVIGATION & KEYBOARD HELPER) -->
-    <div class="floating-bottom-dock">
-      
-      <!-- PREV BUTTON -->
-      <button onclick="prevStepQuestion()" id="dock-btn-prev" class="dock-btn dock-btn-secondary opacity-50 cursor-not-allowed">
-        <span>&uarr;</span> <span>Sebelumnya</span>
-      </button>
-
-      <!-- PROGRESS PERCENTAGE & KEYBOARD HELPER -->
-      <div class="flex items-center gap-3 text-xs">
-        <div class="hidden sm:flex items-center gap-1.5 text-slate-400">
-          <span>Pilih kartu atau tekan</span>
-          <kbd class="px-2 py-0.5 rounded bg-slate-100 border text-[11px] font-mono font-bold text-slate-700">Enter ↵</kbd>
-        </div>
-        <div class="w-24 bg-slate-200 h-2 rounded-full overflow-hidden">
-          <div id="dock-progress-bar" class="h-full bg-brand-600 rounded-full transition-all duration-300" style="width: 25%"></div>
-        </div>
-        <span class="font-extrabold text-brand-600" id="dock-percent-text">25%</span>
-      </div>
-
-      <!-- NEXT / SUBMIT BUTTON -->
-      <button onclick="nextStepQuestion()" id="dock-btn-next" class="dock-btn dock-btn-primary">
-        <span id="dock-next-label">Lanjutkan</span>
-        <span>&rarr;</span>
-      </button>
-
-    </div>
-
-  </main>
-
-  <!-- ==================== MODALS ==================== -->
-
-  <!-- PASTE GFORM LINK MODAL -->
-  <div id="paste-link-modal" class="hidden fixed inset-0 z-50 bg-black/75 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl p-6 sm:p-8 max-w-lg w-full shadow-2xl relative border">
-      <button onclick="closePasteModal()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-800 text-lg">✕</button>
-
-      <span class="text-xs font-black text-brand-600 uppercase tracking-wider">Transformer Mesin GForm</span>
-      <h3 class="text-2xl font-black text-slate-900 mt-1">Tempelkan Link Google Form Anda</h3>
-      <p class="text-xs text-slate-500 mt-1 mb-5">iziForm akan membaca pertanyaannya dan mengubahnya seketika menjadi tampilan mewah di atas.</p>
-
-      <div class="space-y-3">
-        <div class="relative flex items-center">
-          <span class="absolute left-3.5 text-base">🔗</span>
-          <input type="url" id="modal-gform-input" placeholder="https://docs.google.com/forms/d/e/.../viewform" class="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-slate-200 text-xs font-semibold outline-none focus:border-brand-600">
-        </div>
-        <div>
-          <label for="modal-webhook-input" class="block text-[10px] font-black text-slate-500 uppercase mb-1">Google Sheet Sync URL / Webhook</label>
-          <input type="url" id="modal-webhook-input" placeholder="https://script.google.com/macros/s/.../exec" class="w-full pl-3 pr-4 py-3 rounded-xl border-2 border-slate-200 text-xs font-semibold outline-none focus:border-brand-600">
-          <p id="paste-sync-status" class="text-[10px] text-slate-400 mt-1">Webhook: belum diisi (mode simulasi)</p>
-        </div>
-        <button onclick="applyPastedGForm()" class="w-full py-3.5 rounded-xl bg-brand-600 hover:bg-brand-500 text-white font-extrabold text-xs uppercase tracking-wider shadow-lg transition">
-          ⚡ Terapkan & Transformasi Sekarang
+        <button onclick="nextStepQuestion()" id="dock-btn-next" class="dock-btn dock-btn-primary">
+          <span id="dock-next-label">Lanjutkan</span>
+          <span>&rarr;</span>
         </button>
       </div>
     </div>
-  </div>
+  </main>
 
-  <!-- SUCCESS SUBMISSION MODAL (SIMULATED DATA FORWARD TO GSHEET) -->
-  <div id="success-submit-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl text-center space-y-4 border">
-      <div class="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-3xl mx-auto shadow-inner">
-        🎉
+  <div id="paste-link-modal" class="modal-overlay hidden">
+    <div class="modal-card">
+      <button onclick="closePasteModal()" class="modal-close">✕</button>
+      <span class="modal-eyebrow">Transformer Mesin GForm</span>
+      <h3 class="modal-title">Tempelkan Link Google Form Anda</h3>
+      <p class="modal-description">iziForm akan membaca pertanyaannya dan mengubahnya seketika menjadi tampilan mewah di atas.</p>
+
+      <div class="modal-form">
+        <div class="modal-input-wrap">
+          <span class="modal-input-icon">🔗</span>
+          <input type="url" id="modal-gform-input" class="modal-input" placeholder="https://docs.google.com/forms/d/e/.../viewform">
+        </div>
+        <div>
+          <label for="modal-webhook-input" class="modal-label">Google Sheet Sync URL / Webhook</label>
+          <input type="url" id="modal-webhook-input" class="modal-input modal-input-plain" placeholder="https://script.google.com/macros/s/.../exec">
+          <p id="paste-sync-status" class="modal-hint">Webhook: belum diisi (mode simulasi)</p>
+        </div>
+        <button onclick="applyPastedGForm()" class="modal-primary">⚡ Terapkan & Transformasi Sekarang</button>
       </div>
-      <h3 class="text-2xl font-black text-slate-900">Pendaftaran Berhasil!</h3>
-      <p class="text-xs text-slate-600 leading-relaxed">
-        Payload JSON jawaban responden dikirim ke <b>webhook Google Sheet</b> yang Anda isi di pengaturan link. Jika webhook kosong, statusnya adalah simulasi lokal.
-      </p>
-
-      <div class="p-3.5 rounded-2xl bg-slate-50 border text-left text-xs space-y-1">
-        <p class="font-bold text-slate-700">Data Ringkasan:</p>
-        <p class="text-slate-500" id="summary-payload-text">Nama: Budi Pratama • Status: Menyiapkan</p>
-        <p class="text-[11px] font-bold text-slate-500" id="sync-status-text">Status sync: menunggu pengiriman...</p>
-      </div>
-
-      <button onclick="closeSuccessModal()" class="w-full py-3 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs shadow-md">
-        Isi Formulir Baru
-      </button>
     </div>
   </div>
 
-  <!-- TOAST BOX -->
-  <div id="toast-box" class="fixed bottom-6 right-6 z-50 pointer-events-none flex flex-col gap-2"></div>
+  <div id="success-submit-modal" class="modal-overlay hidden">
+    <div class="modal-card modal-card-center">
+      <div class="success-icon">🎉</div>
+      <h3 class="modal-title">Pendaftaran Berhasil!</h3>
+      <p class="modal-description">
+        Payload JSON jawaban responden dikirim ke <b>webhook Google Sheet</b> yang Anda isi di pengaturan link. Jika webhook kosong, statusnya adalah simulasi lokal.
+      </p>
+
+      <div class="summary-card">
+        <p class="summary-title">Data Ringkasan:</p>
+        <p class="summary-text" id="summary-payload-text">Nama: Budi Pratama • Status: Menyiapkan</p>
+        <p class="sync-status-text" id="sync-status-text">Status sync: menunggu pengiriman...</p>
+      </div>
+
+      <button onclick="closeSuccessModal()" class="modal-success">Isi Formulir Baru</button>
+    </div>
+  </div>
+
+  <div id="toast-box" class="toast-box"></div>
 
   <script src="app.js"></script>
 </body>
