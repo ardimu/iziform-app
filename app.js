@@ -15,6 +15,7 @@ const state = {
   googleEmail: '',
   gformUrl: '',
   webhookUrl: '',
+  hrDriveFolderUrl: '',
   paymentMethod: 'idr',
   paymentMethodManuallySet: false,
   isSimulation: false,
@@ -526,9 +527,9 @@ const CUSTOM_PRICING = {
 };
 
 const HR_BASE_COPY = {
-  id: { industry: 'Teknologi & Digital', description: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', website: 'https://iziform.app', roleSummary: 'Memimpin inisiatif utama dan mengirimkan dampak yang terukur bagi tim.', responsibilities: 'Merancang solusi, berkolaborasi lintas fungsi, dan menjaga kualitas hasil akhir.', jobType: 'Full-time', mustHave: 'Pengalaman relevan, tools wajib sesuai posisi, dan domisili sesuai ketentuan.', qualification: 'Latar belakang profesional dengan portofolio atau pengalaman yang relevan.', certification: 'Sertifikasi relevan menjadi nilai tambah.', plusPoints: 'Pengalaman tim, komunikasi kuat, dan kemampuan belajar cepat.', benefit: '', customFields: [], cvRequired: true, matchThreshold: 'medium' },
-  en: { industry: 'Technology & Digital', description: 'A digital company building modern work products for Indonesian teams.', website: 'https://iziform.app', roleSummary: 'Lead key initiatives and deliver measurable impact for the team.', responsibilities: 'Design solutions, collaborate cross-functionally, and protect final quality.', jobType: 'Full-time', mustHave: 'Relevant experience, required tools, and location that matches the rule.', qualification: 'Professional background with a relevant portfolio or track record.', certification: 'Relevant certification is an advantage.', plusPoints: 'Team experience, strong communication, and fast learning.', benefit: '', customFields: [], cvRequired: true, matchThreshold: 'medium' },
-  zh: { industry: '科技与数字化', description: '一家为印尼团队打造现代工作产品的数字公司。', website: 'https://iziform.app', roleSummary: '主导关键项目，为团队带来可衡量的成果。', responsibilities: '设计解决方案、跨职能协作并把控最终质量。', jobType: 'Full-time', mustHave: '具备相关经验、指定工具，并符合所在地要求。', qualification: '具备相关专业背景及作品集或项目经历。', certification: '相关证书者优先。', plusPoints: '团队经验、沟通能力强、学习速度快。', benefit: '', customFields: [], cvRequired: true, matchThreshold: 'medium' }
+  id: { industry: 'Teknologi & Digital', description: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', website: 'https://iziform.app', roleSummary: 'Memimpin inisiatif utama dan mengirimkan dampak yang terukur bagi tim.', responsibilities: 'Merancang solusi, berkolaborasi lintas fungsi, dan menjaga kualitas hasil akhir.', jobType: 'Full-time', mustHave: 'Pengalaman relevan, tools wajib sesuai posisi, dan domisili sesuai ketentuan.', qualification: 'Latar belakang profesional dengan portofolio atau pengalaman yang relevan.', certification: 'Sertifikasi relevan menjadi nilai tambah.', plusPoints: 'Pengalaman tim, komunikasi kuat, dan kemampuan belajar cepat.', benefit: '', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' },
+  en: { industry: 'Technology & Digital', description: 'A digital company building modern work products for Indonesian teams.', website: 'https://iziform.app', roleSummary: 'Lead key initiatives and deliver measurable impact for the team.', responsibilities: 'Design solutions, collaborate cross-functionally, and protect final quality.', jobType: 'Full-time', mustHave: 'Relevant experience, required tools, and location that matches the rule.', qualification: 'Professional background with a relevant portfolio or track record.', certification: 'Relevant certification is an advantage.', plusPoints: 'Team experience, strong communication, and fast learning.', benefit: '', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' },
+  zh: { industry: '科技与数字化', description: '一家为印尼团队打造现代工作产品的数字公司。', website: 'https://iziform.app', roleSummary: '主导关键项目，为团队带来可衡量的成果。', responsibilities: '设计解决方案、跨职能协作并把控最终质量。', jobType: 'Full-time', mustHave: '具备相关经验、指定工具，并符合所在地要求。', qualification: '具备相关专业背景及作品集或项目经历。', certification: '相关证书者优先。', plusPoints: '团队经验、沟通能力强、学习速度快。', benefit: '', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' }
 };
 
 const HR_COMPANY_PRESETS = {
@@ -562,7 +563,7 @@ const HR_UI_TEMPLATES = [
   { key: 'business01', tier: 'business', theme: 'obsidian', ornament: 'executive', fontPair: 'executive', labelKey: 'hr.uiTemplate.business01' },
   { key: 'business02', tier: 'business', theme: 'ivory-champagne', ornament: 'filigree', fontPair: 'editorial', labelKey: 'hr.uiTemplate.business02' },
   { key: 'business03', tier: 'business', theme: 'nordic-cobalt', ornament: 'nordic', fontPair: 'studio', labelKey: 'hr.uiTemplate.business03' },
-  { key: 'business04', tier: 'business', theme: 'deep-forest', ornament: 'forest', fontPair: 'heritage', labelKey: 'hr.uiTemplate.business04' }
+  { key: 'business04', tier: 'business', theme: 'veilo', ornament: 'forest', fontPair: 'heritage', labelKey: 'hr.uiTemplate.business04' }
 ];
 
 const HR_FONT_PAIRS = {
@@ -611,8 +612,15 @@ const HR_PRICING = {
 
 const HR_STATUS_KEYS = ['new', 'shortlist', 'interview', 'accepted', 'rejected'];
 
+function hrStatusLabel(status) {
+  const key = HR_STATUS_KEYS.includes(status) ? status : 'new';
+  const suffix = key.charAt(0).toUpperCase() + key.slice(1);
+  return t(`hr.status${suffix}`);
+}
+
 const HR_QUESTION_COPY = {
-  id: (r) => [
+  id: (r) => {
+    const questions = [
     { id: 'recruit_name', category: '01 • IDENTITAS KANDIDAT', title: 'Nama lengkap sesuai CV Anda', subtitle: 'Isi nama resmi Anda sesuai dokumen dan CV.', type: 'text', placeholder: 'Nama lengkap', defaultValue: 'Nadia Utami' },
     { id: 'recruit_email', category: '02 • KONTAK', title: 'Email aktif Anda', subtitle: 'Digunakan untuk undangan interview dan status seleksi.', type: 'text', placeholder: 'nama@email.com', defaultValue: 'nadia@email.com' },
     { id: 'recruit_wa', category: '02 • KONTAK', title: 'Nomor WhatsApp aktif Anda', subtitle: 'Tim HR akan mengabari jadwal interview via WhatsApp.', type: 'tel', placeholder: '0812-xxxx-xxxx', defaultValue: '0812-3456-7890' },
@@ -624,8 +632,14 @@ const HR_QUESTION_COPY = {
     { id: 'recruit_notice', category: '08 • KESIAPAN', title: 'Notice period / kesiapan bergabung', subtitle: `Sesuai requirement HR: ${r.noticePeriod}.`, type: 'text', placeholder: 'Contoh: 30 hari', defaultValue: r.noticePeriod },
     { id: 'recruit_screening', category: '09 • PERTANYAAN PENYARING', title: 'Pertanyaan penyaring HR', subtitle: r.screening, type: 'textarea', placeholder: 'Tulis jawaban ringkas', defaultValue: '' },
     { id: 'recruit_cv', category: '10 • DOKUMEN', title: 'Unggah CV PDF Anda', subtitle: 'PDF akan dibaca untuk auto-fill dan indikator kecocokan.', type: 'file', placeholder: 'https://drive.google.com/...' }
-  ],
-  en: (r) => [
+    ];
+    if (r.coverLetterEnabled) {
+      questions.push({ id: 'recruit_cover_letter', category: '11 • SURAT LAMARAN', title: 'Unggah surat lamaran (cover letter)', subtitle: 'Unggah berkas atau tempel tautan Google Drive surat lamaran Anda.', type: 'file', placeholder: 'https://drive.google.com/...' });
+    }
+    return questions;
+  },
+  en: (r) => {
+    const questions = [
     { id: 'recruit_name', category: '01 • CANDIDATE IDENTITY', title: 'Your full name as shown on your CV', subtitle: 'Enter your official name exactly as written in your documents.', type: 'text', placeholder: 'Full name', defaultValue: 'Nadia Utami' },
     { id: 'recruit_email', category: '02 • CONTACT', title: 'Your active email address', subtitle: 'Used for interview invitations and selection status updates.', type: 'text', placeholder: 'name@email.com', defaultValue: 'nadia@email.com' },
     { id: 'recruit_wa', category: '02 • CONTACT', title: 'Your active WhatsApp number', subtitle: 'The HR team will contact you about interviews via WhatsApp.', type: 'tel', placeholder: '0812-xxxx-xxxx', defaultValue: '0812-3456-7890' },
@@ -637,8 +651,14 @@ const HR_QUESTION_COPY = {
     { id: 'recruit_notice', category: '08 • AVAILABILITY', title: 'Notice period / joining availability', subtitle: `HR requirement: ${r.noticePeriod}.`, type: 'text', placeholder: 'Example: 30 days', defaultValue: r.noticePeriod },
     { id: 'recruit_screening', category: '09 • SCREENING QUESTION', title: 'HR screening question', subtitle: r.screening, type: 'textarea', placeholder: 'Write a concise answer', defaultValue: '' },
     { id: 'recruit_cv', category: '10 • DOCUMENT', title: 'Upload your PDF CV', subtitle: 'The PDF is read for autofill and a concise match indicator.', type: 'file', placeholder: 'https://drive.google.com/...' }
-  ],
-  zh: (r) => [
+    ];
+    if (r.coverLetterEnabled) {
+      questions.push({ id: 'recruit_cover_letter', category: '11 • COVER LETTER', title: 'Upload your cover letter', subtitle: 'Upload the file or paste the Google Drive link to your cover letter.', type: 'file', placeholder: 'https://drive.google.com/...' });
+    }
+    return questions;
+  },
+  zh: (r) => {
+    const questions = [
     { id: 'recruit_name', category: '01 • 候选人信息', title: '请填写简历上的全名', subtitle: '请按证件上的正式姓名填写。', type: 'text', placeholder: '全名', defaultValue: 'Nadia Utami' },
     { id: 'recruit_email', category: '02 • 联系方式', title: '您的常用邮箱', subtitle: '用于发送面试邀请和筛选状态通知。', type: 'text', placeholder: 'name@email.com', defaultValue: 'nadia@email.com' },
     { id: 'recruit_wa', category: '02 • 联系方式', title: '您的常用 WhatsApp 号码', subtitle: 'HR 团队会通过 WhatsApp 通知面试安排。', type: 'tel', placeholder: '0812-xxxx-xxxx', defaultValue: '0812-3456-7890' },
@@ -650,7 +670,12 @@ const HR_QUESTION_COPY = {
     { id: 'recruit_notice', category: '08 • 到岗时间', title: '通知期 / 到岗准备情况', subtitle: `HR 要求：${r.noticePeriod}。`, type: 'text', placeholder: '示例：30 天', defaultValue: r.noticePeriod },
     { id: 'recruit_screening', category: '09 • 筛选问题', title: 'HR 筛选问题', subtitle: r.screening, type: 'textarea', placeholder: '请简要作答', defaultValue: '' },
     { id: 'recruit_cv', category: '10 • 文档', title: '上传 PDF 简历', subtitle: '系统会读取 PDF 以自动填写信息并给出匹配指标。', type: 'file', placeholder: 'https://drive.google.com/...' }
-  ]
+    ];
+    if (r.coverLetterEnabled) {
+      questions.push({ id: 'recruit_cover_letter', category: '11 • 求职信', title: '上传求职信（cover letter）', subtitle: '请上传文件，或粘贴求职信的 Google Drive 链接。', type: 'file', placeholder: 'https://drive.google.com/...' });
+    }
+    return questions;
+  }
 };
 
 const PRESET_LOCALE = {
@@ -1079,7 +1104,7 @@ const I18N = {
     'hr.uiTemplate.business01': 'Business 1 — Obsidian Executive',
     'hr.uiTemplate.business02': 'Business 2 — Ivory & Champagne Atelier',
     'hr.uiTemplate.business03': 'Business 3 — Nordic Slate & Cobalt',
-    'hr.uiTemplate.business04': 'Business 4 — Deep Forest & Brass Heritage',
+    'hr.uiTemplate.business04': 'Business — Veilo',
     'hr.fontPairLabel': 'Font pairing Sisi B',
     'hr.fontPairTemplate': 'Ikuti template',
     'hr.fontPairEditorial': 'Editorial Serif + Clean Sans',
@@ -1168,11 +1193,25 @@ const I18N = {
     'hr.cardboxShow': 'Tampil',
     'hr.cardboxAtLeastOne': 'Minimal satu cardbox harus tetap tampil di Sisi B.',
     'hr.cardboxResetDone': 'Status cardbox dikembalikan ke pengaturan awal',
+    'hr.cardboxItemsTitle': 'Item tambahan buatan HR',
+    'hr.cardboxAddItem': 'Tambah item',
+    'hr.cardboxEdit': 'Atur',
+    'hr.cardboxDelete': 'Hapus',
+    'hr.cardboxCoverRule': 'diatur di dalam cardbox ini',
+    'hr.coverLetterTitle': 'Upload Surat Lamaran',
+    'hr.coverLetterDesc': 'Aktifkan cardbox unggah surat lamaran di Sisi B. Berkas atau tautan Google Drive ikut masuk ke 1 Google Sheet dan Drive HR.',
+    'hr.coverLetterEnabled': 'Aktifkan upload surat lamaran',
+    'hr.coverLetterRequired': 'Wajib unggah surat lamaran',
+    'hr.coverLetterHint': 'Saat nonaktif, cardbox surat lamaran tidak tampil di Sisi B dan tidak masuk rekap.',
+    'hr.coverLetterUploadHint': 'Pilih berkas dari perangkat Anda atau tempel tautan Google Drive surat lamaran di atas.',
     'hr.additionalQuestions': 'INFORMASI TAMBAHAN',
     'hr.customFieldInputPlaceholder': 'Tulis jawaban Anda',
     'hr.customFieldNotePlaceholder': 'Tulis jawaban Anda dengan detail',
     'hr.colBenefit': 'Benefit',
     'hr.colCustom': 'Kolom tambahan',
+    'hr.colDocuments': 'Dokumen',
+    'hr.docCv': 'CV',
+    'hr.docCover': 'Surat lamaran',
     'hr.benefitPortal': 'Portal lamaran Sisi B aktif',
     'hr.benefitCv': 'Auto-fill PDF CV + kecocokan Tinggi/Sedang/Rendah',
     'hr.benefitSheet': 'Rekap 1 Google Sheet HR',
@@ -1212,6 +1251,9 @@ const I18N = {
     'sync.gformPlaceholder': 'https://docs.google.com/forms/d/e/.../viewform',
     'sync.save': 'Simpan Koneksi',
     'sync.ownership': 'iziForm tidak menyimpan salinan permanen jawaban Anda. Sheet tetap berada di bawah akun dan kontrol Anda sendiri.',
+    'sync.driveFolder': 'Folder Google Drive HR (opsional)',
+    'sync.drivePlaceholder': 'https://drive.google.com/drive/folders/...',
+    'sync.driveHint': 'Tautan folder ikut dalam payload dokumen agar Apps Script HR menyimpan CV & surat lamaran ke Drive Anda.',
     'sync.note': 'iziForm tidak meminta kata sandi Google. Cukup email untuk identitas akun dan URL webhook Apps Script yang Anda buat sendiri.',
     'sync.notConnected': 'Belum terhubung',
     'sync.googleFilled': 'Email terisi',
@@ -1560,7 +1602,7 @@ const I18N = {
     'hr.uiTemplate.business01': 'Business 1 — Obsidian Executive',
     'hr.uiTemplate.business02': 'Business 2 — Ivory & Champagne Atelier',
     'hr.uiTemplate.business03': 'Business 3 — Nordic Slate & Cobalt',
-    'hr.uiTemplate.business04': 'Business 4 — Deep Forest & Brass Heritage',
+    'hr.uiTemplate.business04': 'Business — Veilo',
     'hr.fontPairLabel': 'Candidate portal font pairing',
     'hr.fontPairTemplate': 'Follow template',
     'hr.fontPairEditorial': 'Editorial Serif + Clean Sans',
@@ -1649,11 +1691,25 @@ const I18N = {
     'hr.cardboxShow': 'Show',
     'hr.cardboxAtLeastOne': 'At least one cardbox must stay visible on Side B.',
     'hr.cardboxResetDone': 'Cardbox statuses restored to defaults',
+    'hr.cardboxItemsTitle': 'HR-added items',
+    'hr.cardboxAddItem': 'Add item',
+    'hr.cardboxEdit': 'Edit',
+    'hr.cardboxDelete': 'Remove',
+    'hr.cardboxCoverRule': 'set in this cardbox',
+    'hr.coverLetterTitle': 'Cover Letter Upload',
+    'hr.coverLetterDesc': 'Enable the cover letter upload cardbox on Side B. Files or Google Drive links are sent to the HR Sheet and Drive.',
+    'hr.coverLetterEnabled': 'Enable cover letter upload',
+    'hr.coverLetterRequired': 'Require cover letter upload',
+    'hr.coverLetterHint': 'When disabled, the cover letter cardbox is hidden on Side B and excluded from the recap.',
+    'hr.coverLetterUploadHint': 'Choose a file from your device or paste the Google Drive link above.',
     'hr.additionalQuestions': 'ADDITIONAL INFORMATION',
     'hr.customFieldInputPlaceholder': 'Write your answer',
     'hr.customFieldNotePlaceholder': 'Write your answer with details',
     'hr.colBenefit': 'Benefits',
     'hr.colCustom': 'Additional fields',
+    'hr.colDocuments': 'Documents',
+    'hr.docCv': 'CV',
+    'hr.docCover': 'Cover letter',
     'hr.benefitPortal': 'Sisi B application portal enabled',
     'hr.benefitCv': 'PDF CV auto-fill + High/Medium/Low match',
     'hr.benefitSheet': 'Recap in 1 HR Google Sheet',
@@ -1693,6 +1749,9 @@ const I18N = {
     'sync.gformPlaceholder': 'https://docs.google.com/forms/d/e/.../viewform',
     'sync.save': 'Save connection',
     'sync.ownership': 'iziForm keeps no permanent copy of your answers. Your Sheet stays under your own account and control.',
+    'sync.driveFolder': 'HR Google Drive folder (optional)',
+    'sync.drivePlaceholder': 'https://drive.google.com/drive/folders/...',
+    'sync.driveHint': 'The folder link is included in the document payload so your Apps Script saves the CV and cover letter to your Drive.',
     'sync.note': 'iziForm never asks for your Google password. Only your email for identity and your own Apps Script webhook URL.',
     'sync.notConnected': 'Not connected',
     'sync.googleFilled': 'Email set',
@@ -2041,7 +2100,7 @@ const I18N = {
     'hr.uiTemplate.business01': 'Business 1 — 黑曜行政风',
     'hr.uiTemplate.business02': 'Business 2 — 象牙香槟工坊',
     'hr.uiTemplate.business03': 'Business 3 — 北欧石板钴蓝',
-    'hr.uiTemplate.business04': 'Business 4 — 深林黄铜传承',
+    'hr.uiTemplate.business04': 'Business — Veilo',
     'hr.fontPairLabel': '候选人门户字体搭配',
     'hr.fontPairTemplate': '跟随模板',
     'hr.fontPairEditorial': '编辑衬线 + 清晰无衬线',
@@ -2130,11 +2189,25 @@ const I18N = {
     'hr.cardboxShow': '显示',
     'hr.cardboxAtLeastOne': 'B 侧至少需要保留一张可见卡片。',
     'hr.cardboxResetDone': '卡片状态已恢复默认',
+    'hr.cardboxItemsTitle': 'HR 添加的自定义项目',
+    'hr.cardboxAddItem': '添加项目',
+    'hr.cardboxEdit': '编辑',
+    'hr.cardboxDelete': '删除',
+    'hr.cardboxCoverRule': '在此卡片中设置',
+    'hr.coverLetterTitle': '上传求职信',
+    'hr.coverLetterDesc': '在 B 侧启用求职信上传卡片。文件或 Google Drive 链接会一并进入 HR 的 Sheet 和 Drive。',
+    'hr.coverLetterEnabled': '启用求职信上传',
+    'hr.coverLetterRequired': '求职信必传',
+    'hr.coverLetterHint': '关闭时，求职信卡片不会出现在 B 侧，也不会进入汇总。',
+    'hr.coverLetterUploadHint': '请从设备选择文件，或在上方粘贴求职信的 Google Drive 链接。',
     'hr.additionalQuestions': '附加信息',
     'hr.customFieldInputPlaceholder': '请输入您的答案',
     'hr.customFieldNotePlaceholder': '请详细描述您的答案',
     'hr.colBenefit': '福利',
     'hr.colCustom': '附加字段',
+    'hr.colDocuments': '文档',
+    'hr.docCv': '简历',
+    'hr.docCover': '求职信',
     'hr.benefitPortal': '启用 B 侧申请门户',
     'hr.benefitCv': 'PDF 简历自动填充 + 高/中/低匹配',
     'hr.benefitSheet': '汇总至 1 个 HR Google Sheet',
@@ -2174,6 +2247,9 @@ const I18N = {
     'sync.gformPlaceholder': 'https://docs.google.com/forms/d/e/.../viewform',
     'sync.save': '保存连接',
     'sync.ownership': 'iziForm 不保存您的永久答案副本。表格始终位于您的账号和管控之下。',
+    'sync.driveFolder': 'HR 的 Google Drive 文件夹（可选）',
+    'sync.drivePlaceholder': 'https://drive.google.com/drive/folders/...',
+    'sync.driveHint': '该文件夹链接会随文档数据发送，便于 Apps Script 将 CV 和求职信存入您的 Drive。',
     'sync.note': 'iziForm 不会索要 Google 密码。只需邮箱用于身份识别，以及您自己创建的 Apps Script Webhook 地址。',
     'sync.notConnected': '尚未连接',
     'sync.googleFilled': '邮箱已填写',
@@ -2988,6 +3064,7 @@ function getHrCardboxSetting(id) {
 }
 
 function isHrCardboxVisible(id) {
+  if (id === 'recruit_cover_letter') return currentHrRequirement().coverLetterEnabled === true;
   return getHrCardboxSetting(id).visible !== false;
 }
 
@@ -3002,6 +3079,16 @@ function getHrCardboxManifest() {
     required: question.id === 'recruit_cv' ? requirement.cvRequired !== false : Boolean(getHrCardboxSetting(question.id).required),
     customIndex: -1
   }));
+  if (!fixed.some((question) => question.id === 'recruit_cover_letter')) {
+    fixed.push({
+      id: 'recruit_cover_letter',
+      category: `11 • ${t('hr.coverLetterTitle')}`,
+      title: t('hr.coverLetterTitle'),
+      source: 'standard',
+      required: Boolean(requirement.coverLetterRequired),
+      customIndex: -1
+    });
+  }
   const custom = getHrCustomFieldsRaw().map((field, index) => ({
     id: field.id,
     category: `${String(fixed.length + index + 1).padStart(2, '0')} • ${t('hr.additionalQuestions')}`,
@@ -3010,7 +3097,15 @@ function getHrCardboxManifest() {
     required: field.required,
     customIndex: index
   }));
-  return [...fixed, ...custom].map((item) => ({ ...item, visible: isHrCardboxVisible(item.id) }));
+  return [...fixed, ...custom].map((item) => {
+    let visible = isHrCardboxVisible(item.id);
+    let required = item.required;
+    if (item.id === 'recruit_cover_letter') {
+      visible = requirement.coverLetterEnabled === true;
+      required = visible && requirement.coverLetterRequired === true;
+    }
+    return { ...item, visible, required, special: item.id === 'recruit_cover_letter' ? 'coverLetter' : '' };
+  });
 }
 
 function getHrCustomFields() {
@@ -3032,8 +3127,14 @@ function renderHrCardboxOverview() {
     const sourceLabel = item.source === 'custom' ? t('hr.cardboxSourceCustom') : t('hr.cardboxSourceStandard');
     const sheetLabel = item.visible ? t('hr.cardboxSheetIncluded') : t('hr.cardboxSheetExcluded');
     const cvLocked = item.id === 'recruit_cv';
+    const coverSpecial = item.special === 'coverLetter';
+    const requiredDisabled = cvLocked || (coverSpecial && !item.visible);
+    const ruleLabel = cvLocked ? t('hr.cardboxCvRule') : coverSpecial ? t('hr.cardboxCoverRule') : '';
     const visibleChecked = item.visible ? ' checked' : '';
     const requiredChecked = item.required ? ' checked' : '';
+    const itemActions = item.customIndex >= 0 ? `
+          <button type="button" class="hr-cardbox-mini" onclick="focusHrCustomItem(${item.customIndex})">${escapeHtml(t('hr.cardboxEdit'))}</button>
+          <button type="button" class="hr-cardbox-mini danger" onclick="removeHrCustomField(${item.customIndex})">${escapeHtml(t('hr.cardboxDelete'))}</button>` : '';
     return `
       <div class="hr-cardbox-row ${item.visible ? '' : 'is-hidden'}">
         <div class="hr-cardbox-main">
@@ -3042,18 +3143,33 @@ function renderHrCardboxOverview() {
         </div>
         <div class="hr-cardbox-tags">
           <span class="hr-cardbox-tag ${item.visible ? 'active' : 'muted'}">${escapeHtml(statusLabel)}</span>
-          <span class="hr-cardbox-tag">${escapeHtml(requiredLabel)}${cvLocked ? ` · ${escapeHtml(t('hr.cardboxCvRule'))}` : ''}</span>
+          <span class="hr-cardbox-tag">${escapeHtml(requiredLabel)}${ruleLabel ? ` · ${escapeHtml(ruleLabel)}` : ''}</span>
           <span class="hr-cardbox-tag ${item.visible ? '' : 'muted'}">${escapeHtml(sheetLabel)}</span>
         </div>
         <div class="hr-cardbox-controls">
           <label class="hr-cardbox-control"><input type="checkbox"${visibleChecked} onchange="setHrCardboxVisible('${escapeHtml(item.id)}', this.checked)"> <span>${escapeHtml(t('hr.cardboxShow'))}</span></label>
-          <label class="hr-cardbox-control"><input type="checkbox"${requiredChecked}${cvLocked ? ' disabled' : ''} onchange="setHrCardboxRequired('${escapeHtml(item.id)}', this.checked)"> <span>${escapeHtml(t('form.required'))}</span></label>
+          <label class="hr-cardbox-control"><input type="checkbox"${requiredChecked}${requiredDisabled ? ' disabled' : ''} onchange="setHrCardboxRequired('${escapeHtml(item.id)}', this.checked)"> <span>${escapeHtml(t('form.required'))}</span></label>
+          ${itemActions}
         </div>
       </div>`;
   }).join('');
 }
 
+function setHrCoverLetterState(patch) {
+  if (!state.hrRequirement) return;
+  Object.assign(state.hrRequirement, patch);
+  if (!state.hrRequirement.coverLetterEnabled) state.hrRequirement.coverLetterRequired = false;
+  state.hrTemplateKey = 'custom';
+  renderHrCoverLetterControl();
+  refreshHrRequirementViews();
+  updateFloatingDock();
+}
+
 function setHrCardboxVisible(id, visible) {
+  if (id === 'recruit_cover_letter') {
+    setHrCoverLetterState({ coverLetterEnabled: Boolean(visible) });
+    return;
+  }
   if (!visible) {
     const manifest = getHrCardboxManifest();
     if (manifest.filter((item) => item.visible).length <= 1) {
@@ -3069,6 +3185,10 @@ function setHrCardboxVisible(id, visible) {
 }
 
 function setHrCardboxRequired(id, required) {
+  if (id === 'recruit_cover_letter') {
+    setHrCoverLetterState({ coverLetterRequired: Boolean(required) });
+    return;
+  }
   const item = getHrCardboxManifest().find((entry) => entry.id === id);
   if (!item || item.customIndex < 0) {
     if (!state.hrCardboxSettings[id]) state.hrCardboxSettings[id] = {};
@@ -3083,7 +3203,12 @@ function setHrCardboxRequired(id, required) {
 
 function resetHrCardboxSettings() {
   state.hrCardboxSettings = {};
+  if (state.hrRequirement) {
+    state.hrRequirement.coverLetterEnabled = false;
+    state.hrRequirement.coverLetterRequired = false;
+  }
   renderHrCustomFieldEditor();
+  renderHrCoverLetterControl();
   refreshHrRequirementViews();
   updateFloatingDock();
   showToast(t('hr.cardboxResetDone'));
@@ -3473,6 +3598,7 @@ function updateHrRequirement(field, value) {
   renderHrTemplateButtons();
   renderHrPreview();
   renderBenefitDisplays();
+  renderHrCoverLetterControl();
   renderHrCardboxOverview();
   renderHrPricing();
   renderHrRecap();
@@ -3487,6 +3613,7 @@ function refreshHrRequirementViews() {
   renderHrTemplateButtons();
   renderHrPreview();
   renderBenefitDisplays();
+  renderHrCoverLetterControl();
   renderHrCardboxOverview();
   renderHrRecap();
   renderCompanyIdentity();
@@ -3529,6 +3656,29 @@ function renderHrCustomFieldEditor() {
       </div>`;
   }).join('');
   applyTranslations();
+}
+
+function renderHrCoverLetterControl() {
+  const requirement = currentHrRequirement();
+  const enabledInput = document.getElementById('hr-cover-letter-enabled-input');
+  if (enabledInput) enabledInput.checked = requirement.coverLetterEnabled === true;
+  const requiredInput = document.getElementById('hr-cover-letter-required-input');
+  if (requiredInput) {
+    requiredInput.checked = requirement.coverLetterRequired === true;
+    requiredInput.disabled = requirement.coverLetterEnabled !== true;
+  }
+}
+
+function focusHrCustomItem(index) {
+  renderHrCustomFieldEditor();
+  const rows = document.querySelectorAll('#hr-custom-fields-list .hr-custom-field-row');
+  const row = rows[index];
+  if (!row) return;
+  row.classList.add('is-focused');
+  row.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  const labelInput = row.querySelector('input[type="text"]');
+  if (labelInput) labelInput.focus({ preventScroll: true });
+  setTimeout(() => row.classList.remove('is-focused'), 1600);
 }
 
 function addHrCustomField() {
@@ -3647,6 +3797,7 @@ function renderHrBuilder() {
   if (matchThreshold) matchThreshold.value = r.matchThreshold || 'medium';
   const cvRequired = document.getElementById('hr-cv-required-input');
   if (cvRequired) cvRequired.checked = r.cvRequired !== false;
+  renderHrCoverLetterControl();
   renderHrLogoPreview();
   renderHrBannerPreview();
   renderHrTemplateButtons();
@@ -3665,7 +3816,7 @@ function renderHrStatusList() {
   const list = document.getElementById('hr-status-list');
   if (!list) return;
   list.innerHTML = HR_STATUS_KEYS.map((key) => `
-    <button type="button" onclick="setHrSelectionStatus('${key}')" class="hr-status-pill ${key === state.hrSelectionStatus ? 'active' : ''}">${escapeHtml(t(`hr.status.${key}`))}</button>
+    <button type="button" onclick="setHrSelectionStatus('${key}')" class="hr-status-pill ${key === state.hrSelectionStatus ? 'active' : ''}">${escapeHtml(hrStatusLabel(key))}</button>
   `).join('');
 }
 
@@ -3675,7 +3826,7 @@ function setHrSelectionStatus(status) {
   if (state.hrLastCandidate) state.hrLastCandidate.status = status;
   renderHrStatusList();
   renderHrRecap();
-  showToast(`${t('toast.hrStatus')}: ${t(`hr.status.${status}`)}`);
+  showToast(`${t('toast.hrStatus')}: ${hrStatusLabel(status)}`);
 }
 
 function getHrAnswerValue(id) {
@@ -3686,12 +3837,47 @@ function getHrAnswerValue(id) {
   return raw !== undefined ? raw : (question && question.defaultValue) || '';
 }
 
+function normalizeHrDocument(value) {
+  if (typeof value === 'string') {
+    const text = value.trim();
+    const url = /^https?:\/\//i.test(text) ? text : '';
+    return { kind: url ? 'link' : 'upload', name: url ? '' : text, size: 0, type: '', url, display: text };
+  }
+  const raw = value && typeof value === 'object' ? value : {};
+  const name = String(raw.name || '').trim();
+  const url = String(raw.url || '').trim();
+  return {
+    kind: raw.kind || (url ? 'link' : 'upload'),
+    name,
+    size: Number(raw.size) || 0,
+    type: String(raw.type || ''),
+    url,
+    display: url || name || ''
+  };
+}
+
+function getHrDocument(id) {
+  if (!isHrCardboxVisible(id)) return null;
+  const raw = state.userResponses[id] !== undefined ? state.userResponses[id] : getHrAnswerValue(id);
+  if (!raw) return null;
+  return normalizeHrDocument(raw);
+}
+
+function renderHrDocumentCell(label, documentValue) {
+  if (!documentValue || !documentValue.display) return `<b>${escapeHtml(label)}:</b> -`;
+  const text = escapeHtml(documentValue.display);
+  const value = documentValue.url
+    ? `<a href="${escapeHtml(documentValue.url)}" target="_blank" rel="noopener">${text}</a>`
+    : text;
+  return `<b>${escapeHtml(label)}:</b> ${value}`;
+}
+
 function renderHrRecap() {
   const body = document.getElementById('hr-recap-body');
   if (!body) return;
   const candidate = state.hrLastCandidate;
   if (!candidate) {
-    body.innerHTML = `<tr><td colspan="5">${escapeHtml(t('hr.noCandidate'))}</td></tr>`;
+    body.innerHTML = `<tr><td colspan="6">${escapeHtml(t('hr.noCandidate'))}</td></tr>`;
     return;
   }
   const score = candidate.score ? ` (${candidate.score})` : '';
@@ -3703,13 +3889,18 @@ function renderHrRecap() {
       return `<b>${escapeHtml(answer.label || '-')}:</b> ${escapeHtml(display)}`;
     }).join('<br>')
     : '-';
+  const documents = [
+    renderHrDocumentCell(t('hr.docCv'), candidate.cv),
+    renderHrDocumentCell(t('hr.docCover'), candidate.coverLetter)
+  ].join('<br>');
   body.innerHTML = `
     <tr>
       <td><b>${escapeHtml(candidate.name || '-')}</b><br><span>${escapeHtml(candidate.email || '-')} · ${escapeHtml(candidate.wa || '-')}</span></td>
       <td>${escapeHtml(candidate.match || t('cv.levelLow'))}${escapeHtml(score)}</td>
-      <td>${escapeHtml(t(`hr.status.${candidate.status || 'new'}`))}</td>
+      <td>${escapeHtml(hrStatusLabel(candidate.status || 'new'))}</td>
       <td>${escapeHtml(benefit)}</td>
       <td>${customAnswers}</td>
+      <td>${documents}</td>
     </tr>
   `;
 }
@@ -3946,25 +4137,29 @@ function renderSyncStatus() {
   const emailInput = document.getElementById('sync-email-input');
   const webhookInput = document.getElementById('sync-webhook-input');
   const gformInput = document.getElementById('sync-gform-input');
+  const driveInput = document.getElementById('modal-drive-input') || document.getElementById('sync-drive-input');
   if (emailInput && document.activeElement !== emailInput) emailInput.value = state.googleEmail;
   if (webhookInput && document.activeElement !== webhookInput) webhookInput.value = state.webhookUrl;
   if (gformInput && document.activeElement !== gformInput) gformInput.value = state.gformUrl;
+  if (driveInput && document.activeElement !== driveInput) driveInput.value = state.hrDriveFolderUrl;
 }
 
 function saveSyncSettings() {
   const emailInput = document.getElementById('sync-email-input');
   const webhookInput = document.getElementById('sync-webhook-input');
   const gformInput = document.getElementById('sync-gform-input');
+  const driveInput = document.getElementById('modal-drive-input') || document.getElementById('sync-drive-input');
 
   const email = emailInput ? emailInput.value.trim() : '';
   const webhook = webhookInput ? webhookInput.value.trim() : '';
   const gform = gformInput ? gformInput.value.trim() : '';
+  const drive = driveInput ? driveInput.value.trim() : '';
 
   if (email && !isValidEmail(email)) {
     showToast(t('toast.invalidEmail'));
     return;
   }
-  if (!isValidWebhook(webhook) || !isValidWebhook(gform)) {
+  if (!isValidWebhook(webhook) || !isValidWebhook(gform) || !isValidWebhook(drive)) {
     showToast(t('toast.invalidUrl'));
     return;
   }
@@ -3972,6 +4167,7 @@ function saveSyncSettings() {
   state.googleEmail = email;
   state.webhookUrl = webhook;
   state.gformUrl = gform;
+  state.hrDriveFolderUrl = drive;
   renderSyncStatus();
   triggerConfetti();
   showToast(webhook ? t('toast.settingsSavedWebhook') : t('toast.settingsSavedSim'));
@@ -4115,11 +4311,12 @@ function renderCurrentQuestion() {
     const currentLabel = val ? (val.url || val.name) : t('form.noDocument');
     const linkValue = val && val.kind === 'link' ? val.url : '';
     bodyHtml = `
-      <div class="file-input-row">
+      <div class="file-input-row ${q.id === 'recruit_cover_letter' ? 'cover-letter-upload' : ''}">
         <input type="file" id="large-file-input" onchange="handleFileInput('${q.id}', this.files[0])" class="file-input-native">
         <input type="url" placeholder="${escapeHtml(q.placeholder)}" value="${escapeHtml(linkValue)}"
                oninput="handleDocLinkInput('${q.id}', this.value)" class="large-open-input doc-link-input">
         <p id="file-link-label" class="file-name-label">${escapeHtml(currentLabel)}</p>
+        ${q.id === 'recruit_cover_letter' ? `<p class="file-drop-hint" data-i18n="hr.coverLetterUploadHint">${escapeHtml(t('hr.coverLetterUploadHint'))}</p>` : ''}
       </div>
     `;
   } else if (q.type === 'choice') {
@@ -4395,6 +4592,12 @@ function buildSubmissionPayload() {
       required: item.required,
       includedInSheet: item.visible
     })) : [],
+    documents: isRecruit ? {
+      driveFolderUrl: state.hrDriveFolderUrl || '',
+      cv: getHrDocument('recruit_cv'),
+      coverLetter: getHrDocument('recruit_cover_letter'),
+      coverLetterEnabled: currentHrRequirement().coverLetterEnabled === true
+    } : null,
     sourceUrl: state.gformUrl,
     simulation: state.isSimulation,
     hrRequirement: isRecruit ? cloneHrRequirement(currentHrRequirement()) : null,
@@ -4465,6 +4668,8 @@ async function triggerFormSubmissionSuccess() {
       notice: getHrAnswerValue('recruit_notice'),
       screening: getHrAnswerValue('recruit_screening'),
       benefit: String(currentHrRequirement().benefit || '').trim(),
+      cv: getHrDocument('recruit_cv'),
+      coverLetter: getHrDocument('recruit_cover_letter'),
       customAnswers: getHrCustomFields().map((field) => {
         const raw = state.userResponses[field.id] !== undefined ? state.userResponses[field.id] : '';
         let display = raw;
@@ -4489,7 +4694,7 @@ async function triggerFormSubmissionSuccess() {
     summaryText.textContent = t('success.respondent', { name: nameVal, form: p.companyName });
     if (state.activePresetKey === 'recruit') {
       summaryText.textContent += ` • ${t('portal.matchLabel')}: ${state.cvParse ? state.cvParse.level : t('cv.levelLow')}`;
-      summaryText.textContent += ` • ${t('hr.statusLabel')}: ${t(`hr.status.${state.hrSelectionStatus}`)}`;
+      summaryText.textContent += ` • ${t('hr.statusLabel')}: ${hrStatusLabel(state.hrSelectionStatus)}`;
     }
   }
   if (statusText) statusText.textContent = t('success.sending');
@@ -4571,9 +4776,11 @@ function openPasteModal() {
   const emailInput = document.getElementById('modal-email-input');
   const gformInput = document.getElementById('modal-gform-input');
   const webhookInput = document.getElementById('modal-webhook-input');
+  const driveInput = document.getElementById('modal-drive-input');
   if (emailInput) emailInput.value = state.googleEmail;
   if (gformInput) gformInput.value = state.gformUrl;
   if (webhookInput) webhookInput.value = state.webhookUrl;
+  if (driveInput) driveInput.value = state.hrDriveFolderUrl;
   renderSyncStatus();
 }
 
@@ -4586,16 +4793,18 @@ function applyPastedGForm() {
   const emailInput = document.getElementById('modal-email-input');
   const gformInput = document.getElementById('modal-gform-input');
   const webhookInput = document.getElementById('modal-webhook-input');
+  const driveInput = document.getElementById('modal-drive-input');
 
   const email = emailInput ? emailInput.value.trim() : '';
   const gform = gformInput ? gformInput.value.trim() : '';
   const webhook = webhookInput ? webhookInput.value.trim() : '';
+  const drive = driveInput ? driveInput.value.trim() : '';
 
   if (email && !isValidEmail(email)) {
     showToast(t('toast.invalidEmail'));
     return;
   }
-  if (!isValidWebhook(webhook) || !isValidWebhook(gform)) {
+  if (!isValidWebhook(webhook) || !isValidWebhook(gform) || !isValidWebhook(drive)) {
     showToast(t('toast.invalidUrl'));
     return;
   }
@@ -4603,6 +4812,7 @@ function applyPastedGForm() {
   state.googleEmail = email;
   state.gformUrl = gform;
   state.webhookUrl = webhook;
+  state.hrDriveFolderUrl = drive;
   closePasteModal();
   renderSyncStatus();
   triggerConfetti();

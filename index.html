@@ -579,14 +579,6 @@
                   </label>
                 </div>
               </div>
-              <div class="hr-block hr-custom-fields-block">
-                <div class="hr-ui-head">
-                  <h3 class="hr-block-title" data-i18n="hr.customFieldsTitle">Kolom tambahan pelamar</h3>
-                  <button type="button" onclick="addHrCustomField()" id="hr-add-custom-field" class="btn btn-secondary" data-i18n="hr.customFieldAdd">Tambah kolom</button>
-                </div>
-                <p class="hr-block-desc" data-i18n="hr.customFieldsDesc">Tambah field di luar standar; tampil otomatis di Sisi B dan rekap Sheet HR.</p>
-                <div id="hr-custom-fields-list" class="hr-custom-fields-list"></div>
-              </div>
               <div class="hr-block hr-cardbox-block">
                 <div class="hr-ui-head">
                   <h3 class="hr-block-title" data-i18n="hr.block.cardbox">7. Daftar Cardbox Isian Pelamar</h3>
@@ -596,6 +588,31 @@
                 <div id="hr-cardbox-summary" class="hr-cardbox-summary"></div>
                 <div id="hr-cardbox-list" class="hr-cardbox-list"></div>
                 <p class="hr-cardbox-footnote" data-i18n="hr.cardboxFootnote">Perubahan di sini langsung diterapkan ke cardbox Sisi B dan payload Sheet HR. Status wajib CV tetap mengikuti Bagian 5.</p>
+                <div class="hr-cardbox-section hr-cardbox-custom-section">
+                  <div class="hr-ui-head">
+                    <div>
+                      <h4 class="hr-cardbox-section-title" data-i18n="hr.cardboxItemsTitle">Item tambahan buatan HR</h4>
+                      <p class="hr-block-desc" data-i18n="hr.customFieldsDesc">Tambah field di luar standar; tampil otomatis di Sisi B dan rekap Sheet HR.</p>
+                    </div>
+                    <button type="button" onclick="addHrCustomField()" id="hr-add-custom-field" class="btn btn-secondary" data-i18n="hr.cardboxAddItem">Tambah item</button>
+                  </div>
+                  <div id="hr-custom-fields-list" class="hr-custom-fields-list"></div>
+                </div>
+                <div class="hr-cardbox-section hr-cardbox-cover-section">
+                  <h4 class="hr-cardbox-section-title" data-i18n="hr.coverLetterTitle">Upload Surat Lamaran</h4>
+                  <p class="hr-block-desc" data-i18n="hr.coverLetterDesc">Aktifkan cardbox unggah surat lamaran di Sisi B. Berkas atau tautan Google Drive ikut masuk ke 1 Google Sheet dan Drive HR.</p>
+                  <div class="hr-cardbox-cover-controls">
+                    <label class="hr-form-field hr-check-field">
+                      <span data-i18n="hr.coverLetterEnabled">Aktifkan upload surat lamaran</span>
+                      <input type="checkbox" id="hr-cover-letter-enabled-input" onchange="updateHrRequirement('coverLetterEnabled', this.checked)">
+                    </label>
+                    <label class="hr-form-field hr-check-field">
+                      <span data-i18n="hr.coverLetterRequired">Wajib unggah surat lamaran</span>
+                      <input type="checkbox" id="hr-cover-letter-required-input" onchange="updateHrRequirement('coverLetterRequired', this.checked)">
+                    </label>
+                  </div>
+                  <small class="hr-field-hint" data-i18n="hr.coverLetterHint">Saat nonaktif, cardbox surat lamaran tidak tampil di Sisi B dan tidak masuk rekap.</small>
+                </div>
               </div>
               <div class="hr-block hr-ui-block">
                 <div class="hr-ui-head">
@@ -695,6 +712,7 @@
                       <th data-i18n="hr.colSelection">Seleksi</th>
                       <th data-i18n="hr.colBenefit">Benefit</th>
                       <th data-i18n="hr.colCustom">Kolom tambahan</th>
+                      <th data-i18n="hr.colDocuments">Dokumen</th>
                     </tr></thead>
                     <tbody id="hr-recap-body"></tbody>
                   </table>
@@ -963,6 +981,11 @@
           <label for="modal-webhook-input" class="modal-label" data-i18n="sync.webhookUrl">Google Sheet Webhook URL</label>
           <input type="url" id="modal-webhook-input" class="modal-input modal-input-plain" data-i18n-placeholder="sync.webhookPlaceholder" placeholder="https://script.google.com/macros/s/.../exec">
           <p id="paste-sync-status" class="modal-hint">Webhook: belum diisi (mode simulasi)</p>
+        </div>
+        <div>
+          <label for="modal-drive-input" class="modal-label" data-i18n="sync.driveFolder">Folder Google Drive HR (opsional)</label>
+          <input type="url" id="modal-drive-input" class="modal-input modal-input-plain" data-i18n-placeholder="sync.drivePlaceholder" placeholder="https://drive.google.com/drive/folders/...">
+          <p class="modal-hint" data-i18n="sync.driveHint">Tautan folder ikut dalam payload dokumen agar Apps Script HR menyimpan CV & surat lamaran ke Drive Anda.</p>
         </div>
         <p class="modal-security-note" data-i18n="sync.ownership">iziForm tidak menyimpan salinan permanen jawaban Anda. Sheet tetap berada di bawah akun dan kontrol Anda sendiri.</p>
         <button onclick="applyPastedGForm()" class="modal-primary" data-i18n="modal.save">Simpan Pengaturan</button>
