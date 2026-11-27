@@ -527,9 +527,9 @@ const CUSTOM_PRICING = {
 };
 
 const HR_BASE_COPY = {
-  id: { industry: 'Teknologi & Digital', description: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', website: 'https://iziform.app', roleSummary: 'Memimpin inisiatif utama dan mengirimkan dampak yang terukur bagi tim.', responsibilities: 'Merancang solusi, berkolaborasi lintas fungsi, dan menjaga kualitas hasil akhir.', jobType: 'Full-time', mustHave: 'Pengalaman relevan, tools wajib sesuai posisi, dan domisili sesuai ketentuan.', qualification: 'Latar belakang profesional dengan portofolio atau pengalaman yang relevan.', certification: 'Sertifikasi relevan menjadi nilai tambah.', plusPoints: 'Pengalaman tim, komunikasi kuat, dan kemampuan belajar cepat.', benefit: '', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' },
-  en: { industry: 'Technology & Digital', description: 'A digital company building modern work products for Indonesian teams.', website: 'https://iziform.app', roleSummary: 'Lead key initiatives and deliver measurable impact for the team.', responsibilities: 'Design solutions, collaborate cross-functionally, and protect final quality.', jobType: 'Full-time', mustHave: 'Relevant experience, required tools, and location that matches the rule.', qualification: 'Professional background with a relevant portfolio or track record.', certification: 'Relevant certification is an advantage.', plusPoints: 'Team experience, strong communication, and fast learning.', benefit: '', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' },
-  zh: { industry: '科技与数字化', description: '一家为印尼团队打造现代工作产品的数字公司。', website: 'https://iziform.app', roleSummary: '主导关键项目，为团队带来可衡量的成果。', responsibilities: '设计解决方案、跨职能协作并把控最终质量。', jobType: 'Full-time', mustHave: '具备相关经验、指定工具，并符合所在地要求。', qualification: '具备相关专业背景及作品集或项目经历。', certification: '相关证书者优先。', plusPoints: '团队经验、沟通能力强、学习速度快。', benefit: '', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' }
+  id: { industry: 'Teknologi & Digital', description: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', website: 'https://iziform.app', roleSummary: 'Memimpin inisiatif utama dan mengirimkan dampak yang terukur bagi tim.', responsibilities: 'Merancang solusi, berkolaborasi lintas fungsi, dan menjaga kualitas hasil akhir.', jobType: 'Full-time', mustHave: 'Pengalaman relevan, tools wajib sesuai posisi, dan domisili sesuai ketentuan.', qualification: 'Latar belakang profesional dengan portofolio atau pengalaman yang relevan.', certification: 'Sertifikasi relevan menjadi nilai tambah.', plusPoints: 'Pengalaman tim, komunikasi kuat, dan kemampuan belajar cepat.', benefit: 'BPJS Kesehatan & Ketenagakerjaan, fleksibel hybrid, tunjangan belajar Rp2 juta/tahun, dan cuti wellbeing.', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' },
+  en: { industry: 'Technology & Digital', description: 'A digital company building modern work products for Indonesian teams.', website: 'https://iziform.app', roleSummary: 'Lead key initiatives and deliver measurable impact for the team.', responsibilities: 'Design solutions, collaborate cross-functionally, and protect final quality.', jobType: 'Full-time', mustHave: 'Relevant experience, required tools, and location that matches the rule.', qualification: 'Professional background with a relevant portfolio or track record.', certification: 'Relevant certification is an advantage.', plusPoints: 'Team experience, strong communication, and fast learning.', benefit: 'Health and employment insurance, flexible hybrid work, IDR 2M yearly learning budget, and wellbeing leave.', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' },
+  zh: { industry: '科技与数字化', description: '一家为印尼团队打造现代工作产品的数字公司。', website: 'https://iziform.app', roleSummary: '主导关键项目，为团队带来可衡量的成果。', responsibilities: '设计解决方案、跨职能协作并把控最终质量。', jobType: 'Full-time', mustHave: '具备相关经验、指定工具，并符合所在地要求。', qualification: '具备相关专业背景及作品集或项目经历。', certification: '相关证书者优先。', plusPoints: '团队经验、沟通能力强、学习速度快。', benefit: '社保与公积金、灵活混合办公、每年 200 万印尼盾学习津贴及健康休假。', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' }
 };
 
 const HR_COMPANY_PRESETS = {
@@ -563,7 +563,7 @@ const HR_UI_TEMPLATES = [
   { key: 'business01', tier: 'business', theme: 'obsidian', ornament: 'executive', fontPair: 'executive', labelKey: 'hr.uiTemplate.business01' },
   { key: 'business02', tier: 'business', theme: 'ivory-champagne', ornament: 'filigree', fontPair: 'editorial', labelKey: 'hr.uiTemplate.business02' },
   { key: 'business03', tier: 'business', theme: 'nordic-cobalt', ornament: 'nordic', fontPair: 'studio', labelKey: 'hr.uiTemplate.business03' },
-  { key: 'business04', tier: 'business', theme: 'veilo', ornament: 'forest', fontPair: 'heritage', labelKey: 'hr.uiTemplate.business04' }
+  { key: 'business04', tier: 'business', theme: 'veilo', ornament: 'veilo', fontPair: 'clean', labelKey: 'hr.uiTemplate.business04' }
 ];
 
 const HR_FONT_PAIRS = {
@@ -1105,6 +1105,8 @@ const I18N = {
     'hr.uiTemplate.business02': 'Business 2 — Ivory & Champagne Atelier',
     'hr.uiTemplate.business03': 'Business 3 — Nordic Slate & Cobalt',
     'hr.uiTemplate.business04': 'Business — Veilo',
+    'hr.veiloLineTwo': 'Karier yang jelas, langkah yang percaya diri.',
+    'hr.veiloLineThree': 'Tumbuh bersama tim yang tepat.',
     'hr.fontPairLabel': 'Font pairing Sisi B',
     'hr.fontPairTemplate': 'Ikuti template',
     'hr.fontPairEditorial': 'Editorial Serif + Clean Sans',
@@ -1603,6 +1605,8 @@ const I18N = {
     'hr.uiTemplate.business02': 'Business 2 — Ivory & Champagne Atelier',
     'hr.uiTemplate.business03': 'Business 3 — Nordic Slate & Cobalt',
     'hr.uiTemplate.business04': 'Business — Veilo',
+    'hr.veiloLineTwo': 'A clearer career move, made simple.',
+    'hr.veiloLineThree': 'Grow with the right team.',
     'hr.fontPairLabel': 'Candidate portal font pairing',
     'hr.fontPairTemplate': 'Follow template',
     'hr.fontPairEditorial': 'Editorial Serif + Clean Sans',
@@ -2101,6 +2105,8 @@ const I18N = {
     'hr.uiTemplate.business02': 'Business 2 — 象牙香槟工坊',
     'hr.uiTemplate.business03': 'Business 3 — 北欧石板钴蓝',
     'hr.uiTemplate.business04': 'Business — Veilo',
+    'hr.veiloLineTwo': '更清晰的职业下一步。',
+    'hr.veiloLineThree': '与合适的团队一起成长。',
     'hr.fontPairLabel': '候选人门户字体搭配',
     'hr.fontPairTemplate': '跟随模板',
     'hr.fontPairEditorial': '编辑衬线 + 清晰无衬线',
@@ -3220,7 +3226,10 @@ function renderBenefitDisplays() {
     node.textContent = benefit || t('hr.noBenefit');
   });
   document.querySelectorAll('[data-hr-benefit-wrap]').forEach((node) => {
-    node.classList.toggle('hidden', !benefit);
+    const visible = Boolean(benefit);
+    node.classList.toggle('hidden', !visible);
+    if (visible) node.removeAttribute('hidden');
+    else node.setAttribute('hidden', '');
   });
 }
 
@@ -3514,7 +3523,14 @@ function renderCompanyIdentity() {
   setText('candidate-company-location', r.location);
   setText('company-name-text', name);
   setText('hr-ribbon-status', `${name} • ${r.position} • ${r.location}`);
-  setText('showcase-company-name', name);
+  const showcaseName = document.getElementById('showcase-company-name');
+  if (showcaseName) {
+    if (getHrUiTemplate().theme === 'veilo') {
+      showcaseName.innerHTML = `<span class="veilo-headline-strong">${escapeHtml(name)}</span><span class="veilo-headline-soft">${escapeHtml(t('hr.veiloLineTwo'))}</span><span class="veilo-headline-accent">${escapeHtml(t('hr.veiloLineThree'))}</span>`;
+    } else {
+      showcaseName.textContent = name;
+    }
+  }
   setText('showcase-industry', profile.industry);
   setText('showcase-description', profile.description);
   setText('showcase-website', profile.website);
