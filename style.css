@@ -1040,6 +1040,11 @@ body[data-lang-theme="en"] .hero-preview { border-radius: 1.1rem; transform: non
 .hr-template-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 .hr-template-btn { padding: 0.45rem 0.8rem; border-radius: 999px; border: 1px solid var(--border-subtle); background: var(--surface-soft); color: var(--text-body); font-family: inherit; font-size: 0.6875rem; font-weight: 900; cursor: pointer; }
 .hr-template-btn.active { border-color: var(--accent-color); background: var(--accent-color); color: var(--accent-contrast, #ffffff); }
+.recruit-side-switcher { display: flex; gap: 0.35rem; padding: 0.3rem; margin-bottom: 1rem; border-radius: 999px; background: var(--surface-soft); border: 1px solid var(--border-subtle); }
+.recruit-side-btn { flex: 1 1 0; padding: 0.55rem 0.75rem; border-radius: 999px; border: 1px solid transparent; background: transparent; color: var(--text-faint); font-family: inherit; font-size: 0.625rem; font-weight: 900; letter-spacing: 0.02em; cursor: pointer; transition: all 0.2s ease; }
+.recruit-side-btn:hover { color: var(--text-headline); }
+.recruit-side-btn.active { border-color: var(--accent-ring); background: var(--accent-soft); color: var(--accent-color); }
+.recruit-side-switcher-form { position: relative; z-index: 37; margin: 0 0 1rem; background-color: var(--surface-glass); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
 .hr-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.85rem; margin-top: 1.25rem; }
 .hr-form-field { display: flex; flex-direction: column; gap: 0.35rem; }
 .hr-form-field > span { font-size: 0.5625rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); }
@@ -1633,6 +1638,7 @@ body[data-preset="recruit"] .hr-career-ribbon { display: flex; }
   .candidate-company-sticky { top: 7rem; padding: 0.5rem 0.65rem; }
   .candidate-company-meta > span:first-child { max-width: 6rem; }
   .candidate-progress-card { width: 100%; }
+  .recruit-side-btn { padding: 0.5rem 0.55rem; font-size: 0.5625rem; }
   .category-card { padding: 1rem; }
   .category-icon { width: 2.35rem; height: 2.35rem; }
   .category-card-copy { padding-right: 0.5rem; }

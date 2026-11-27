@@ -20,6 +20,7 @@ const state = {
   isSimulation: false,
   cvParse: null,
   hrRequirement: null,
+  hrActiveSide: 'a',
   hrCompanyName: 'PT Digital Nusantara Indonesia',
   hrCompanyLogo: '',
   hrTemplateKey: 'tech',
@@ -965,6 +966,9 @@ const I18N = {
     'hr.companyLogo': 'Logo / foto perusahaan',
     'hr.logoHint': 'Kosongkan untuk memakai inisial otomatis.',
     'hr.logoClear': 'Hapus Logo',
+    'hr.openWorkspace': 'Buka Workspace HR',
+    'hr.sideA': 'Sisi A · HR / Builder',
+    'hr.sideB': 'Sisi B · Portal Kandidat',
     'portal.companyLabel': 'Perusahaan',
     'portal.positionApplied': 'Posisi yang dilamar',
     'portal.workLocation': 'Lokasi / tipe kerja',
@@ -1318,6 +1322,9 @@ const I18N = {
     'hr.companyLogo': 'Company logo / photo',
     'hr.logoHint': 'Leave empty to use automatic initials.',
     'hr.logoClear': 'Clear Logo',
+    'hr.openWorkspace': 'Open HR Workspace',
+    'hr.sideA': 'Side A · HR / Builder',
+    'hr.sideB': 'Side B · Candidate Portal',
     'portal.companyLabel': 'Company',
     'portal.positionApplied': 'Applied position',
     'portal.workLocation': 'Location / work type',
@@ -1671,6 +1678,9 @@ const I18N = {
     'hr.companyLogo': '公司标志 / 照片',
     'hr.logoHint': '留空则使用自动首字母。',
     'hr.logoClear': '清除标志',
+    'hr.openWorkspace': '打开 HR 工作区',
+    'hr.sideA': 'A 侧 · HR / 构建器',
+    'hr.sideB': 'B 侧 · 候选人门户',
     'portal.companyLabel': '公司',
     'portal.positionApplied': '申请职位',
     'portal.workLocation': '地点 / 工作类型',
@@ -2323,6 +2333,7 @@ function toggleViews() {
   const ribbon = document.getElementById('hr-career-ribbon');
   const portal = document.getElementById('candidate-portal');
   const stickyHeader = document.getElementById('candidate-company-sticky');
+  const formSideSwitcher = document.getElementById('recruit-side-switcher-form');
   const ribbonTitle = document.getElementById('hr-ribbon-title');
   const ribbonStatus = document.getElementById('hr-ribbon-status');
   const banner = document.getElementById('simulation-banner');
@@ -2338,12 +2349,14 @@ function toggleViews() {
   if (ribbon) ribbon.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
   if (portal) portal.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
   if (stickyHeader) stickyHeader.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
+  if (formSideSwitcher) formSideSwitcher.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
   if (landingNav) landingNav.classList.toggle('hidden', isForm);
   if (dashboardButton) dashboardButton.classList.toggle('hidden', !isForm);
   if (linkPill) linkPill.classList.toggle('hidden', !isForm);
   if (ribbonTitle && isForm) ribbonTitle.textContent = t('form.ribbonTitle');
   if (ribbonStatus && isForm) ribbonStatus.textContent = getPreset(state.activePresetKey).subText;
   renderInfoPanels();
+  renderHrSideSwitcher();
   renderCompanyIdentity();
   renderCandidatePortal();
 }
@@ -2363,9 +2376,14 @@ function renderInfoPanels() {
 function openInfoPanel(panelKey) {
   if (!Object.prototype.hasOwnProperty.call(INFO_PANEL_IDS, panelKey)) return;
   clearAdvanceTimer();
+  if (panelKey === 'hrBuilder') {
+    state.activePresetKey = 'recruit';
+    state.hrActiveSide = 'a';
+  }
   state.view = 'dashboard';
   state.activePanel = panelKey;
   toggleViews();
+  if (panelKey === 'hrBuilder') renderHrBuilder();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -2381,6 +2399,7 @@ function openMainSection(sectionId) {
 
 function renderDashboard() {
   clearAdvanceTimer();
+  state.hrActiveSide = 'a';
   state.view = 'dashboard';
   state.currentStepIndex = 0;
   state.userResponses = {};
@@ -2408,7 +2427,7 @@ function renderDashboard() {
             ${escapeHtml(t('categories.preview'))}
           </button>
           ${key === 'custom' ? `<button type="button" onclick="openInfoPanel('custom')" class="custom-options-btn">${escapeHtml(t('custom.options'))}</button>` : ''}
-          ${key === 'recruit' ? `<button type="button" onclick="openInfoPanel('hrBuilder')" class="custom-options-btn">${escapeHtml(t('hr.builderOption'))}</button>` : ''}
+          ${key === 'recruit' ? `<button type="button" onclick="openRecruitWorkspace()" class="custom-options-btn">${escapeHtml(t('hr.openWorkspace'))}</button>` : ''}
         </article>
       `;
     }).join('');
@@ -2542,6 +2561,52 @@ function renderCompanyIdentity() {
   setText('candidate-company-location', r.location);
   setText('company-name-text', name);
   setText('hr-ribbon-status', `${name} • ${r.position} • ${r.location}`);
+}
+
+function renderHrSideSwitcher() {
+  const isSideA = state.hrActiveSide !== 'b';
+  [
+    ['hr-side-a-btn', 'form-side-a-btn', true],
+    ['hr-side-b-btn', 'form-side-b-btn', false]
+  ].forEach(([panelId, formId, isA]) => {
+    const active = isA ? isSideA : !isSideA;
+    [panelId, formId].forEach((id) => {
+      const button = document.getElementById(id);
+      if (!button) return;
+      button.classList.toggle('active', active);
+      button.setAttribute('aria-selected', String(active));
+    });
+  });
+}
+
+function openRecruitWorkspace() {
+  clearAdvanceTimer();
+  state.activePresetKey = 'recruit';
+  state.currentStepIndex = 0;
+  state.userResponses = {};
+  state.isSimulation = false;
+  state.cvParse = null;
+  setHrActiveSide('a');
+}
+
+function setHrActiveSide(side, silent = false) {
+  state.hrActiveSide = side === 'b' ? 'b' : 'a';
+  state.activePresetKey = 'recruit';
+  clearAdvanceTimer();
+  if (state.hrActiveSide === 'a') {
+    state.view = 'dashboard';
+    state.activePanel = 'hrBuilder';
+    toggleViews();
+    renderHrBuilder();
+  } else {
+    state.view = 'form';
+    state.activePanel = '';
+    toggleViews();
+    renderActivePresetHeader();
+    renderCurrentQuestion();
+  }
+  renderHrSideSwitcher();
+  if (!silent) window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 function applyHrTemplate(templateKey, silent = false) {
@@ -2927,8 +2992,13 @@ function saveSyncSettings() {
 
 function chooseCategory(presetKey, simulation = false) {
   if (!state.presets[presetKey]) return;
+  if (presetKey === 'recruit' && !simulation) {
+    openRecruitWorkspace();
+    return;
+  }
   clearAdvanceTimer();
   state.activePresetKey = presetKey;
+  if (presetKey === 'recruit') state.hrActiveSide = 'b';
   state.currentStepIndex = 0;
   state.userResponses = {};
   state.isSimulation = Boolean(simulation);
@@ -2945,6 +3015,7 @@ function chooseCategory(presetKey, simulation = false) {
 
 function backToDashboard() {
   clearAdvanceTimer();
+  state.hrActiveSide = 'a';
   state.activePanel = '';
   renderDashboard();
   showToast(t('toast.backDashboard'));

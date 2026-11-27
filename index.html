@@ -405,6 +405,10 @@
             <h2 data-i18n="hr.builderTitle">Susun requirement, portal kandidat langsung menyesuaikan.</h2>
             <p data-i18n="hr.builderDesc">Atur detail lowongan dan batas requirement. Sisi B otomatis merefleksikan field, badge, dan pertanyaan penyaring.</p>
           </div>
+          <div class="recruit-side-switcher" role="tablist" aria-label="Recruitment sides">
+            <button type="button" onclick="setHrActiveSide('a')" id="hr-side-a-btn" class="recruit-side-btn active" role="tab" aria-selected="true"><span data-i18n="hr.sideA">Sisi A · HR / Builder</span></button>
+            <button type="button" onclick="setHrActiveSide('b')" id="hr-side-b-btn" class="recruit-side-btn" role="tab" aria-selected="false"><span data-i18n="hr.sideB">Sisi B · Portal Kandidat</span></button>
+          </div>
           <div class="hr-builder-grid">
             <div class="hr-builder-form">
               <div class="hr-template-row">
@@ -506,7 +510,7 @@
             </aside>
           </div>
           <div class="custom-actions">
-            <button type="button" onclick="chooseCategory('recruit', false)" class="btn btn-primary" data-i18n="hr.openPortal">Buka Portal Kandidat</button>
+            <button type="button" onclick="setHrActiveSide('b')" class="btn btn-primary" data-i18n="hr.openPortal">Buka Portal Kandidat</button>
             <button type="button" onclick="previewCategory('recruit')" class="btn btn-secondary" data-i18n="hr.demoPortal">Demo Portal Kandidat</button>
           </div>
           <button type="button" onclick="closeInfoPanel()" class="btn btn-secondary panel-inline-cta" data-i18n="panel.back">Kembali ke Kategori</button>
@@ -520,6 +524,11 @@
         <button type="button" onclick="backToDashboard()" class="form-back-btn"><span aria-hidden="true">&larr;</span> <span data-i18n="form.back">Kembali ke Dashboard</span></button>
         <span class="form-nav-label"><span data-i18n="form.active">Form aktif:</span> <strong id="form-category-label">Rekrutmen &amp; Lamaran Kerja</strong></span>
         <button type="button" onclick="backToDashboard()" class="form-change-btn" data-i18n="form.change">Ganti Kategori</button>
+      </div>
+
+      <div id="recruit-side-switcher-form" class="recruit-side-switcher recruit-side-switcher-form hidden" role="tablist" aria-label="Recruitment sides">
+        <button type="button" onclick="setHrActiveSide('a')" id="form-side-a-btn" class="recruit-side-btn" role="tab" aria-selected="false"><span data-i18n="hr.sideA">Sisi A · HR / Builder</span></button>
+        <button type="button" onclick="setHrActiveSide('b')" id="form-side-b-btn" class="recruit-side-btn active" role="tab" aria-selected="true"><span data-i18n="hr.sideB">Sisi B · Portal Kandidat</span></button>
       </div>
 
       <details class="workspace-guide">
