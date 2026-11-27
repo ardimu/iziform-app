@@ -8,6 +8,7 @@ const state = {
   currentFont: 'Plus Jakarta Sans',
   currentLanguage: 'id',
   view: 'dashboard',
+  activePanel: '',
   activePresetKey: 'recruit',
   currentStepIndex: 0,
   userResponses: {},
@@ -773,6 +774,13 @@ const PRESET_LOCALE = {
   }
 };
 
+const MAIN_SECTION_IDS = ['top', 'kategori', 'harga', 'faq'];
+const INFO_PANEL_IDS = {
+  security: 'panel-keamanan',
+  how: 'panel-cara',
+  demo: 'panel-demo'
+};
+
 const ROLE_KEYWORDS = {
   A: ['react', 'node', 'go', 'fullstack', 'frontend', 'backend', 'microservice'],
   B: ['recruitment', 'hr', 'talent', 'people', 'employer', 'kpi', 'culture'],
@@ -785,12 +793,13 @@ const I18N = {
     'brand.tier': 'SaaS Studio',
     'nav.aria': 'Navigasi utama',
     'nav.categories': 'Kategori',
-    'nav.sheet': 'Google Sheet',
     'nav.security': 'Keamanan',
     'nav.how': 'Cara Pakai',
     'nav.demo': 'Demo',
     'nav.pricing': 'Harga',
     'nav.faq': 'FAQ',
+    'panel.back': 'Kembali ke Kategori',
+    'panel.demoDesc': 'Pilih alur interaktif di bawah untuk mencoba form dengan data contoh tanpa mengubah pengaturan Sheet Anda.',
     'header.settings': 'Pengaturan Sheet',
     'common.copy': 'Salin',
     'common.copyLink': 'Salin Link',
@@ -939,7 +948,7 @@ const I18N = {
     'qris.paymentMerchant': 'Merchant / QMID',
     'qris.merchantFallback': 'IZIFORM-QRIS',
     'qris.proofLabel': 'Bukti transfer (opsional)',
-    'qris.transferHint': 'Jika QRIS belum dipasang, atur gambar kode QRIS melalui menu Dukung iziForm terlebih dahulu.',
+    'qris.transferHint': 'Jika QRIS belum dipasang, atur gambar kode QRIS melalui menu Dukung Kami terlebih dahulu.',
     'qris.confirm': 'Saya sudah transfer',
     'toast.qrisPaymentConfirmed': 'Konfirmasi diterima untuk {plan}. Cek Google Sheet Anda setelah pembayaran diverifikasi.',
     'toast.qrisProofSaved': 'Bukti transfer dipilih: {name}',
@@ -947,7 +956,7 @@ const I18N = {
     'support.aria': 'Pilih metode dukungan',
     'support.qris': 'QRIS (IDR)',
     'support.web': 'Web / Global ($)',
-    'support.webDesc': 'Dukung iziForm lewat halaman Web / Global dengan kartu atau metode pembayaran internasional.',
+    'support.webDesc': 'Dukung kami lewat halaman Web / Global dengan kartu atau metode pembayaran internasional.',
     'support.webCta': 'Dukung via Web ($)',
     'support.webHint': 'Tautan ini adalah placeholder checkout sampai tautan pembayaran final tersedia.',
     'toast.supportMethod': 'Metode dukungan: {name}',
@@ -959,8 +968,8 @@ const I18N = {
     'faq.a2': 'Tidak. Pilih kategori, isi email dan webhook, lalu bagikan tautan. Tampilan form dan alur pertanyaannya sudah disiapkan.',
     'faq.q3': 'Bagaimana jika webhook belum diisi?',
     'faq.a3': 'Form tetap bisa dicoba. Submission akan berstatus simulasi lokal sampai Anda menyimpan webhook Google Sheet yang aktif.',
-    'faq.q4': 'Bisakah mengganti tema, font, dan bahasa?',
-    'faq.a4': 'Bisa. Gunakan kontrol di bagian atas halaman untuk mengganti tema, font, serta bahasa Indonesia, Inggris, atau Mandarin Sederhana.',
+    'faq.q4': 'Bisakah mengganti tema dan bahasa?',
+    'faq.a4': 'Bisa. Gunakan kontrol di bagian atas halaman untuk mengganti aksen tema serta bahasa Indonesia, Inggris, atau Mandarin Sederhana.',
     'faq.q5': 'Apa bedanya Pro dan Business?',
     'faq.a5': 'Pro fokus pada satu form atau satu batch. Business untuk tim serta kampanye/event besar, dengan multi-form, kolaborasi tim, dan kerapian operasional.',
     'faq.q6': 'Apakah Free benar-benar tetap tersedia?',
@@ -1002,10 +1011,10 @@ const I18N = {
     'success.sent': 'Terkirim',
     'success.simulated': 'Simulasi',
     'success.failed': 'Gagal',
-    'qris.supportButton': 'Dukung iziForm',
+    'qris.supportButton': 'Dukung Kami',
     'qris.supportNote': 'Dukungan sukarela, tidak memengaruhi fitur.',
     'qris.eyebrow': 'Dukungan Sukarela',
-    'qris.title': 'Dukung iziForm',
+    'qris.title': 'Dukung Kami',
     'qris.desc': 'Jika iziForm membantu pekerjaan Anda, Anda bisa memberi dukungan lewat QRIS atau tautan Web / Global. Sepenuhnya opsional dan tidak memengaruhi fitur apa pun.',
     'qris.empty': 'QRIS belum dipasang. Unggah gambar kode QRIS Anda.',
     'qris.merchant': 'Nama merchant / QMID',
@@ -1051,12 +1060,13 @@ const I18N = {
     'brand.tier': 'SaaS Studio',
     'nav.aria': 'Main navigation',
     'nav.categories': 'Categories',
-    'nav.sheet': 'Google Sheet',
     'nav.security': 'Security',
     'nav.how': 'How it works',
     'nav.demo': 'Demo',
     'nav.pricing': 'Pricing',
     'nav.faq': 'FAQ',
+    'panel.back': 'Back to Categories',
+    'panel.demoDesc': 'Choose an interactive flow below to try a form with sample data without changing your Sheet settings.',
     'header.settings': 'Sheet settings',
     'common.copy': 'Copy',
     'common.copyLink': 'Copy link',
@@ -1205,7 +1215,7 @@ const I18N = {
     'qris.paymentMerchant': 'Merchant / QMID',
     'qris.merchantFallback': 'IZIFORM-QRIS',
     'qris.proofLabel': 'Payment proof (optional)',
-    'qris.transferHint': 'If QRIS is not set yet, install your QR code first from the Support iziForm menu.',
+    'qris.transferHint': 'If QRIS is not set yet, install your QR code first from the Support Us menu.',
     'qris.confirm': 'I have transferred',
     'toast.qrisPaymentConfirmed': 'Confirmation received for {plan}. Check your Google Sheet after payment verification.',
     'toast.qrisProofSaved': 'Payment proof selected: {name}',
@@ -1213,7 +1223,7 @@ const I18N = {
     'support.aria': 'Choose support method',
     'support.qris': 'QRIS (IDR)',
     'support.web': 'Web / Global ($)',
-    'support.webDesc': 'Support iziForm through the Web / Global page with a card or international payment method.',
+    'support.webDesc': 'Support us through the Web / Global page with a card or international payment method.',
     'support.webCta': 'Support via Web ($)',
     'support.webHint': 'This link is a checkout placeholder until the final payment link is available.',
     'toast.supportMethod': 'Support method: {name}',
@@ -1225,8 +1235,8 @@ const I18N = {
     'faq.a2': 'No. Pick a category, fill in your email and webhook, then share the link. The form display and question flow are ready.',
     'faq.q3': 'What if the webhook is empty?',
     'faq.a3': 'The form still works. Submissions are labeled as a local simulation until you save an active Google Sheet webhook.',
-    'faq.q4': 'Can I switch themes, fonts, and language?',
-    'faq.a4': 'Yes. Use the controls at the top to switch themes, fonts, and between Indonesian, English, or Simplified Chinese.',
+    'faq.q4': 'Can I switch themes and language?',
+    'faq.a4': 'Yes. Use the controls at the top to switch theme accents and between Indonesian, English, or Simplified Chinese.',
     'faq.q5': 'What is the difference between Pro and Business?',
     'faq.a5': 'Pro focuses on one form or one batch. Business is for teams and larger campaigns/events, with multi-form flows, team collaboration, and tidy operations.',
     'faq.q6': 'Is Free really still available?',
@@ -1268,10 +1278,10 @@ const I18N = {
     'success.sent': 'Sent',
     'success.simulated': 'Simulation',
     'success.failed': 'Failed',
-    'qris.supportButton': 'Support iziForm',
+    'qris.supportButton': 'Support Us',
     'qris.supportNote': 'Voluntary support, does not affect any feature.',
     'qris.eyebrow': 'Voluntary support',
-    'qris.title': 'Support iziForm',
+    'qris.title': 'Support Us',
     'qris.desc': 'If iziForm helped your work, you can support it via QRIS or the Web / Global link. Completely optional and it never affects any feature.',
     'qris.empty': 'No QRIS installed yet. Upload your QR code image.',
     'qris.merchant': 'Merchant name / QMID',
@@ -1317,12 +1327,13 @@ const I18N = {
     'brand.tier': 'SaaS 工作室',
     'nav.aria': '主导航',
     'nav.categories': '分类',
-    'nav.sheet': 'Google Sheet',
     'nav.security': '数据安全',
     'nav.how': '使用方法',
     'nav.demo': '演示',
     'nav.pricing': '价格',
     'nav.faq': '常见问题',
+    'panel.back': '返回分类',
+    'panel.demoDesc': '在下方选择互动流程，即可使用示例数据体验表单，不会更改您的表格设置。',
     'header.settings': '表格设置',
     'common.copy': '复制',
     'common.copyLink': '复制链接',
@@ -1471,7 +1482,7 @@ const I18N = {
     'qris.paymentMerchant': '商户 / QMID',
     'qris.merchantFallback': 'IZIFORM-QRIS',
     'qris.proofLabel': '支付凭证（可选）',
-    'qris.transferHint': '如果尚未设置 QRIS，请先从“支持 iziForm”菜单安装二维码图片。',
+    'qris.transferHint': '如果尚未设置 QRIS，请先从“支持我们”菜单安装二维码图片。',
     'qris.confirm': '我已转账',
     'toast.qrisPaymentConfirmed': '已收到 {plan} 的确认。付款验证后请查看您的 Google Sheet。',
     'toast.qrisProofSaved': '已选择支付凭证：{name}',
@@ -1479,7 +1490,7 @@ const I18N = {
     'support.aria': '选择支持方式',
     'support.qris': 'QRIS (IDR)',
     'support.web': 'Web / Global ($)',
-    'support.webDesc': '通过 Web / Global 页面使用银行卡或国际支付方式支持 iziForm。',
+    'support.webDesc': '通过 Web / Global 页面使用银行卡或国际支付方式支持我们。',
     'support.webCta': '通过 Web 支持 ($)',
     'support.webHint': '该链接为结账占位链接，最终支付链接可用后即可替换。',
     'toast.supportMethod': '支持方式：{name}',
@@ -1491,8 +1502,8 @@ const I18N = {
     'faq.a2': '不需要。选择分类，填写邮箱和 Webhook，然后分享链接。表单外观和问题流程已经准备好。',
     'faq.q3': '如果 Webhook 没填写怎么办？',
     'faq.a3': '表单仍可体验。在保存有效的 Google Sheet Webhook 之前，提交会标注为本地模拟。',
-    'faq.q4': '可以更换主题、字体和语言吗？',
-    'faq.a4': '可以。使用页面顶部的控件切换主题、字体，以及印尼语、英语或简体中文。',
+    'faq.q4': '可以更换主题和语言吗？',
+    'faq.a4': '可以。使用页面顶部的控件切换主题配色，以及印尼语、英语或简体中文。',
     'faq.q5': 'Pro 和 Business 有什么区别？',
     'faq.a5': 'Pro 聚焦一个表单或一次批次。Business 面向团队与更大型活动，支持多表单、团队协作和整齐的运营管理。',
     'faq.q6': 'Free 真的仍然可用吗？',
@@ -1534,10 +1545,10 @@ const I18N = {
     'success.sent': '已发送',
     'success.simulated': '模拟',
     'success.failed': '失败',
-    'qris.supportButton': '支持 iziForm',
+    'qris.supportButton': '支持我们',
     'qris.supportNote': '自愿支持，不影响任何功能。',
     'qris.eyebrow': '自愿支持',
-    'qris.title': '支持 iziForm',
+    'qris.title': '支持我们',
     'qris.desc': '如果 iziForm 帮到了您，可以通过 QRIS 或 Web / Global 链接给予支持。完全自愿，不会影响任何功能。',
     'qris.empty': '尚未安装 QRIS。请上传您的二维码图片。',
     'qris.merchant': '商户名称 / QMID',
@@ -1956,6 +1967,38 @@ function toggleViews() {
   if (linkPill) linkPill.classList.toggle('hidden', !isForm);
   if (ribbonTitle && isForm) ribbonTitle.textContent = t('form.ribbonTitle');
   if (ribbonStatus && isForm) ribbonStatus.textContent = getPreset(state.activePresetKey).subText;
+  renderInfoPanels();
+}
+
+function renderInfoPanels() {
+  const hasPanel = Boolean(state.activePanel) && Object.prototype.hasOwnProperty.call(INFO_PANEL_IDS, state.activePanel);
+  MAIN_SECTION_IDS.forEach((id) => {
+    const section = document.getElementById(id);
+    if (section) section.classList.toggle('hidden', hasPanel);
+  });
+  Object.entries(INFO_PANEL_IDS).forEach(([key, id]) => {
+    const panel = document.getElementById(id);
+    if (panel) panel.classList.toggle('hidden', key !== state.activePanel);
+  });
+}
+
+function openInfoPanel(panelKey) {
+  if (!Object.prototype.hasOwnProperty.call(INFO_PANEL_IDS, panelKey)) return;
+  clearAdvanceTimer();
+  state.view = 'dashboard';
+  state.activePanel = panelKey;
+  toggleViews();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function closeInfoPanel() {
+  openMainSection('kategori');
+}
+
+function openMainSection(sectionId) {
+  state.activePanel = '';
+  renderInfoPanels();
+  scrollToSection(sectionId);
 }
 
 function renderDashboard() {
@@ -2000,6 +2043,10 @@ function renderDashboard() {
 }
 
 function scrollToSection(sectionId) {
+  if (state.activePanel) {
+    state.activePanel = '';
+    renderInfoPanels();
+  }
   const target = document.getElementById(sectionId);
   if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
@@ -2047,23 +2094,19 @@ function renderPricing() {
   };
 
   setText('pricing-payment-note', t('pricing.singlePassNote'));
+  setText('free-amount', state.paymentMethod === 'usd' ? '$0' : 'Rp0');
   setText('free-scope', t('pricing.freeScope'));
   setBenefits('free-benefits', PRICING_PLANS.free.benefitKeys.map((key) => t(key)));
 
   ['pro', 'business'].forEach((planKey) => {
     const plan = PRICING_PLANS[planKey];
     const data = plan.methods[state.paymentMethod];
-    ['idr', 'usd'].forEach((method) => {
-      setText(`${planKey}-${method}-old`, plan.methods[method].oldPrice);
-      setText(`${planKey}-${method}-price`, plan.methods[method].price);
-    });
+    setText(`${planKey}-old-price`, data.oldPrice);
+    setText(`${planKey}-price`, data.price);
     setText(`${planKey}-period`, t(data.periodKey));
     setText(`${planKey}-scope`, t('pricing.singlePass'));
     setText(`${planKey}-cta`, t(data.ctaKey));
     setBenefits(`${planKey}-benefits`, plan.benefitKeys.map((key) => t(key)));
-    document.querySelectorAll(`[data-price-plan="${planKey}"]`).forEach((element) => {
-      element.classList.toggle('active', element.getAttribute('data-currency') === state.paymentMethod);
-    });
 
     const cta = document.getElementById(`${planKey}-cta`);
     if (!cta) return;
@@ -2224,6 +2267,7 @@ function chooseCategory(presetKey, simulation = false) {
 
 function backToDashboard() {
   clearAdvanceTimer();
+  state.activePanel = '';
   renderDashboard();
   showToast(t('toast.backDashboard'));
   window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -2613,7 +2657,7 @@ function changeFontFamily(fontName) {
 // Setup Keyboard Hotkeys (A, B, C, D, 1-5 & Enter ↵)
 function setupKeyboardNavigation() {
   window.addEventListener('keydown', (e) => {
-    const activeModal = document.querySelector('#paste-link-modal:not(.hidden), #success-submit-modal:not(.hidden), #qris-modal:not(.hidden)');
+    const activeModal = document.querySelector('#paste-link-modal:not(.hidden), #success-submit-modal:not(.hidden), #qris-modal:not(.hidden), #payment-qris-modal:not(.hidden)');
     if (activeModal) return;
     if (state.view !== 'form') return;
 

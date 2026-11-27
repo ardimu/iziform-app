@@ -22,10 +22,12 @@
       </a>
 
       <nav id="landing-nav" class="landing-nav" data-i18n-aria="nav.aria" aria-label="Navigasi utama">
-        <a href="#kategori" data-i18n="nav.categories">Kategori</a>
-        <a href="#data-trust" data-i18n="nav.security">Data</a>
-        <a href="#harga" data-i18n="nav.pricing">Harga</a>
-        <a href="#faq" data-i18n="nav.faq">FAQ</a>
+        <a href="#kategori" onclick="openMainSection('kategori'); return false;" data-i18n="nav.categories">Kategori</a>
+        <a href="#panel-keamanan" onclick="openInfoPanel('security'); return false;" data-i18n="nav.security">Keamanan</a>
+        <a href="#panel-cara" onclick="openInfoPanel('how'); return false;" data-i18n="nav.how">Cara Pakai</a>
+        <a href="#panel-demo" onclick="openInfoPanel('demo'); return false;" data-i18n="nav.demo">Demo</a>
+        <a href="#harga" onclick="openMainSection('harga'); return false;" data-i18n="nav.pricing">Harga</a>
+        <a href="#faq" onclick="openMainSection('faq'); return false;" data-i18n="nav.faq">FAQ</a>
       </nav>
 
       <div class="header-actions">
@@ -75,13 +77,6 @@
             <button onclick="setUITheme('cyber')" id="theme-btn-cyber" class="style-chip" data-i18n="theme.cyber">Cyber Neo</button>
             <button onclick="setUITheme('terracotta')" id="theme-btn-terracotta" class="style-chip" data-i18n="theme.terracotta">Terracotta</button>
           </div>
-          <span class="control-label" data-i18n="controls.font">Font</span>
-          <select onchange="changeFontFamily(this.value)" class="font-select" data-i18n-aria="controls.fontAria" aria-label="Pilih font tampilan">
-            <option value="Plus Jakarta Sans" data-i18n="font.jakarta">Jakarta Sans (Modern)</option>
-            <option value="Outfit" data-i18n="font.outfit">Outfit (Tech Ceria)</option>
-            <option value="Space Grotesk" data-i18n="font.space">Space Grotesk (Trendy)</option>
-            <option value="Playfair Display" data-i18n="font.playfair">Playfair (Mewah &amp; Serif)</option>
-          </select>
         </div>
       </div>
     </div>
@@ -181,7 +176,7 @@
             <article class="price-card">
               <span class="price-ribbon price-ribbon-free" data-i18n="pricing.freeRibbon">PAKET AWAL</span>
               <span class="price-name" data-i18n="pricing.free">Free</span>
-              <span class="price-amount">Rp0</span>
+              <span class="price-amount"><span id="free-amount">Rp0</span></span>
               <span class="price-scope price-scope-free" id="free-scope" data-i18n="pricing.freeScope">PAKET AWAL</span>
               <span class="price-note" data-i18n="pricing.freeNote">Untuk mencoba dan kebutuhan personal.</span>
               <ul id="free-benefits"><li>1 Form Aktif</li><li>50 respon/bulan</li><li>Tersambung ke Google Sheet</li><li>Watermark iziForm</li></ul>
@@ -190,10 +185,9 @@
             <article class="price-card price-popular">
               <span class="price-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
               <span class="price-name" data-i18n="pricing.pro">Pro</span>
-              <span class="price-amount-wrap price-amount-dual">
-                <span class="price-currency active" data-price-plan="pro" data-currency="idr"><s class="price-old" id="pro-idr-old">Rp50rb</s><span class="price-new" id="pro-idr-price">Rp29rb</span></span>
-                <span class="price-divider" aria-hidden="true">/</span>
-                <span class="price-currency" data-price-plan="pro" data-currency="usd"><s class="price-old" id="pro-usd-old">$4</s><span class="price-new" id="pro-usd-price">$2</span></span>
+              <span class="price-amount-wrap">
+                <s class="price-old" id="pro-old-price">Rp50rb</s>
+                <span class="price-new" id="pro-price">Rp29rb</span>
                 <small class="price-period" id="pro-period">/form</small>
               </span>
               <span class="price-scope" id="pro-scope">Sekali Pakai</span>
@@ -203,10 +197,9 @@
             <article class="price-card price-business">
               <span class="price-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
               <span class="price-name" data-i18n="pricing.business">Business</span>
-              <span class="price-amount-wrap price-amount-dual">
-                <span class="price-currency active" data-price-plan="business" data-currency="idr"><s class="price-old" id="business-idr-old">Rp150rb</s><span class="price-new" id="business-idr-price">Rp99rb</span></span>
-                <span class="price-divider" aria-hidden="true">/</span>
-                <span class="price-currency" data-price-plan="business" data-currency="usd"><s class="price-old" id="business-usd-old">$10</s><span class="price-new" id="business-usd-price">$7</span></span>
+              <span class="price-amount-wrap">
+                <s class="price-old" id="business-old-price">Rp150rb</s>
+                <span class="price-new" id="business-price">Rp99rb</span>
                 <small class="price-period" id="business-period">/proyek</small>
               </span>
               <span class="price-scope" id="business-scope">Sekali Pakai</span>
@@ -235,8 +228,8 @@
               <p data-i18n="faq.a3">Form tetap bisa dicoba. Submission akan berstatus simulasi lokal sampai Anda menyimpan webhook Google Sheet yang aktif.</p>
             </details>
             <details class="faq-item">
-              <summary data-i18n="faq.q4">Bisakah mengganti tema, font, dan bahasa?</summary>
-              <p data-i18n="faq.a4">Bisa. Gunakan kontrol di bagian atas halaman untuk mengganti tema, font, serta bahasa Indonesia, Inggris, atau Mandarin Sederhana.</p>
+              <summary data-i18n="faq.q4">Bisakah mengganti tema dan bahasa?</summary>
+              <p data-i18n="faq.a4">Bisa. Gunakan kontrol di bagian atas halaman untuk mengganti aksen tema serta bahasa Indonesia, Inggris, atau Mandarin Sederhana.</p>
             </details>
             <details class="faq-item">
               <summary data-i18n="faq.q5">Apa bedanya Pro dan Business?</summary>
@@ -251,6 +244,87 @@
               <p data-i18n="faq.a7">Ya. Upaya pembacaan PDF dilakukan di browser. Jika teks tidak dapat diekstrak, iziForm menampilkan fallback agar data pelamar tetap bisa diisi manual.</p>
             </details>
           </div>
+        </section>
+
+        <section id="panel-keamanan" class="info-panel hidden">
+          <div class="panel-heading">
+            <button type="button" onclick="closeInfoPanel()" class="panel-back-btn"><span aria-hidden="true">&larr;</span> <span data-i18n="panel.back">Kembali ke Kategori</span></button>
+            <span class="section-eyebrow" data-i18n="security.eyebrow">Keamanan Data</span>
+            <h2 data-i18n="security.title">Data tetap milik Anda, dari awal sampai akhir.</h2>
+            <p data-i18n="security.desc">Alurnya sederhana dan transparan: jawaban dikirim langsung dari browser ke webhook Google Sheet yang Anda pasang sendiri.</p>
+          </div>
+          <div class="security-grid">
+            <article class="security-card">
+              <span class="security-icon" aria-hidden="true">&#8594;</span>
+              <h3 data-i18n="security.directTitle">Langsung ke Sheet Anda</h3>
+              <p data-i18n="security.directDesc">Payload JSON dikirim ke URL webhook milik Anda. Tidak ada penyimpanan pusat yang tersembunyi di iziForm.</p>
+            </article>
+            <article class="security-card">
+              <span class="security-icon" aria-hidden="true">&#128274;</span>
+              <h3 data-i18n="security.controlTitle">Akses di tangan Anda</h3>
+              <p data-i18n="security.controlDesc">Anda menentukan siapa yang bisa melihat atau mengubah Sheet, serta kapan akses dicabut.</p>
+            </article>
+            <article class="security-card">
+              <span class="security-icon" aria-hidden="true">&#9679;</span>
+              <h3 data-i18n="security.clearTitle">Transparan &amp; dapat diaudit</h3>
+              <p data-i18n="security.clearDesc">Setiap submission menampilkan status pengiriman. Jika webhook kosong, iziForm menyebutnya sebagai simulasi lokal.</p>
+            </article>
+          </div>
+          <p class="security-strip" data-i18n="security.strip">Semua kategori memakai prinsip yang sama: email untuk identitas, webhook untuk penyimpanan, kontrol penuh di tangan Anda.</p>
+        </section>
+
+        <section id="panel-cara" class="info-panel hidden">
+          <div class="panel-heading">
+            <button type="button" onclick="closeInfoPanel()" class="panel-back-btn"><span aria-hidden="true">&larr;</span> <span data-i18n="panel.back">Kembali ke Kategori</span></button>
+            <span class="section-eyebrow" data-i18n="how.eyebrow">Cara Penggunaan</span>
+            <h2 data-i18n="how.title">Tiga langkah dari ide ke Sheet terisi.</h2>
+            <p data-i18n="how.desc">Tidak perlu coding, tidak perlu desain ulang. Cukup pilih, hubungkan, dan bagikan.</p>
+          </div>
+          <div class="steps-grid">
+            <article class="step-card">
+              <span class="step-number">01</span>
+              <h3 data-i18n="how.step1Title">Pilih Kategori</h3>
+              <p data-i18n="how.step1Desc">Pilih rekrutmen, event, pesanan, kelas, survei, brief, atau buat kategori Pilihan Sendiri.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-number">02</span>
+              <h3 data-i18n="how.step2Title">Hubungkan Email &amp; Sheet</h3>
+              <p data-i18n="how.step2Desc">Isi email Google dan webhook Apps Script agar jawaban masuk ke sheet akun Anda.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-number">03</span>
+              <h3 data-i18n="how.step3Title">Bagikan Link &amp; Pantau Sheet</h3>
+              <p data-i18n="how.step3Desc">Salin tautan unik kategori, lalu pantau setiap jawaban langsung di Google Sheet.</p>
+            </article>
+          </div>
+          <button type="button" onclick="closeInfoPanel()" class="btn btn-secondary panel-inline-cta" data-i18n="panel.back">Kembali ke Kategori</button>
+        </section>
+
+        <section id="panel-demo" class="info-panel hidden">
+          <div class="panel-heading">
+            <button type="button" onclick="closeInfoPanel()" class="panel-back-btn"><span aria-hidden="true">&larr;</span> <span data-i18n="panel.back">Kembali ke Kategori</span></button>
+            <span class="section-eyebrow" data-i18n="showcase.eyebrow">Showcase Gallery</span>
+            <h2 data-i18n="showcase.title">Lihat hasilnya, bukan cuma bayangkan.</h2>
+            <p data-i18n="panel.demoDesc">Pilih alur interaktif di bawah untuk mencoba form dengan data contoh tanpa mengubah pengaturan Sheet Anda.</p>
+          </div>
+          <div class="demo-grid">
+            <button type="button" onclick="previewCategory('recruit')" class="demo-card">
+              <span class="demo-card-label" data-i18n="showcase.demoLabel">Demo Interaktif</span>
+              <strong data-i18n="showcase.recruitTitle">Alur Lamaran Kerja</strong>
+              <span data-i18n="showcase.recruitDesc">Identitas kandidat, PDF CV, dan indikator kecocokan.</span>
+            </button>
+            <button type="button" onclick="previewCategory('event')" class="demo-card">
+              <span class="demo-card-label" data-i18n="showcase.demoLabel">Demo Interaktif</span>
+              <strong data-i18n="showcase.eventTitle">Pendaftaran Event</strong>
+              <span data-i18n="showcase.eventDesc">Pilih jarak lomba dan konfirmasi e-tiket.</span>
+            </button>
+            <button type="button" onclick="previewCategory('survey')" class="demo-card">
+              <span class="demo-card-label" data-i18n="showcase.demoLabel">Demo Interaktif</span>
+              <strong data-i18n="showcase.surveyTitle">Survei Pelanggan</strong>
+              <span data-i18n="showcase.surveyDesc">Rating, masukan, dan ringkasan otomatis.</span>
+            </button>
+          </div>
+          <button type="button" onclick="closeInfoPanel()" class="btn btn-secondary panel-inline-cta" data-i18n="panel.back">Kembali ke Kategori</button>
         </section>
 
       </div>
@@ -362,11 +436,13 @@
         </div>
       </div>
       <div class="footer-links">
-        <a href="#kategori" data-i18n="nav.categories">Kategori</a>
-        <a href="#data-trust" data-i18n="nav.security">Data</a>
-        <a href="#harga" data-i18n="nav.pricing">Harga</a>
-        <a href="#faq" data-i18n="nav.faq">FAQ</a>
-        <button type="button" onclick="openSupportModal()" data-i18n="qris.supportButton">Dukung iziForm</button>
+        <a href="#kategori" onclick="openMainSection('kategori'); return false;" data-i18n="nav.categories">Kategori</a>
+        <a href="#panel-keamanan" onclick="openInfoPanel('security'); return false;" data-i18n="nav.security">Keamanan</a>
+        <a href="#panel-cara" onclick="openInfoPanel('how'); return false;" data-i18n="nav.how">Cara Pakai</a>
+        <a href="#panel-demo" onclick="openInfoPanel('demo'); return false;" data-i18n="nav.demo">Demo</a>
+        <a href="#harga" onclick="openMainSection('harga'); return false;" data-i18n="nav.pricing">Harga</a>
+        <a href="#faq" onclick="openMainSection('faq'); return false;" data-i18n="nav.faq">FAQ</a>
+        <button type="button" class="footer-support-btn" onclick="openSupportModal()" data-i18n="qris.supportButton">Dukung Kami</button>
       </div>
       <span class="footer-copy" data-i18n="footer.copy">&copy; 2026 iziForm. Dibuat untuk form yang lebih manusiawi.</span>
     </div>
@@ -422,7 +498,7 @@
     <div class="modal-card">
       <button onclick="closeQrisModal()" class="modal-close" data-i18n-aria="common.close" aria-label="Tutup">&#10005;</button>
       <span class="modal-eyebrow" data-i18n="qris.eyebrow">Dukungan Sukarela</span>
-      <h3 class="modal-title" data-i18n="qris.title">Dukung iziForm</h3>
+      <h3 class="modal-title" data-i18n="qris.title">Dukung Kami</h3>
       <p class="modal-description" data-i18n="qris.desc">Jika iziForm membantu pekerjaan Anda, Anda bisa memberi dukungan lewat QRIS atau tautan Web / Global. Sepenuhnya opsional dan tidak memengaruhi fitur apa pun.</p>
 
       <div class="support-tabs" role="tablist" data-i18n-aria="support.aria" aria-label="Pilih metode dukungan">
@@ -442,7 +518,7 @@
       </div>
 
       <div id="support-panel-web" class="support-panel hidden">
-        <p class="modal-description" data-i18n="support.webDesc">Dukung iziForm lewat halaman Web / Global dengan kartu atau metode pembayaran internasional.</p>
+        <p class="modal-description" data-i18n="support.webDesc">Dukung kami lewat halaman Web / Global dengan kartu atau metode pembayaran internasional.</p>
         <a id="support-web-link" href="https://checkout.example.com/iziform-support-usd" target="_blank" rel="noopener" class="modal-primary support-web-link" data-i18n="support.webCta">Dukung via Web ($)</a>
         <p class="modal-hint" data-i18n="support.webHint">Tautan ini adalah placeholder checkout sampai tautan pembayaran final tersedia.</p>
       </div>
@@ -470,7 +546,7 @@
         <div id="payment-qris-preview" class="qris-preview" data-i18n="qris.empty">QRIS belum dipasang. Unggah gambar kode QRIS Anda.</div>
         <label for="payment-proof-input" class="modal-label" data-i18n="qris.proofLabel">Bukti transfer (opsional)</label>
         <input type="file" id="payment-proof-input" class="modal-input modal-input-plain" accept="image/*,application/pdf">
-        <p class="modal-hint" data-i18n="qris.transferHint">Jika QRIS belum dipasang, atur gambar kode QRIS melalui menu Dukung iziForm terlebih dahulu.</p>
+        <p class="modal-hint" data-i18n="qris.transferHint">Jika QRIS belum dipasang, atur gambar kode QRIS melalui menu Dukung Kami terlebih dahulu.</p>
       </div>
 
       <button onclick="confirmQrisPayment()" class="modal-primary" data-i18n="qris.confirm">Saya sudah transfer</button>
