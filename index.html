@@ -323,6 +323,11 @@
               <strong data-i18n="showcase.surveyTitle">Survei Pelanggan</strong>
               <span data-i18n="showcase.surveyDesc">Rating, masukan, dan ringkasan otomatis.</span>
             </button>
+            <button type="button" onclick="openInfoPanel('hrBuilder')" class="demo-card">
+              <span class="demo-card-label" data-i18n="showcase.demoLabel">Demo Interaktif</span>
+              <strong data-i18n="showcase.hrBuilderTitle">Alur HR Builder</strong>
+              <span data-i18n="showcase.hrBuilderDesc">Requirement HR otomatis tercermin di portal kandidat.</span>
+            </button>
           </div>
           <button type="button" onclick="closeInfoPanel()" class="btn btn-secondary panel-inline-cta" data-i18n="panel.back">Kembali ke Kategori</button>
         </section>
@@ -393,6 +398,107 @@
           <button type="button" onclick="closeInfoPanel()" class="btn btn-secondary panel-inline-cta" data-i18n="panel.back">Kembali ke Kategori</button>
         </section>
 
+        <section id="panel-hr-builder" class="info-panel hidden">
+          <div class="panel-heading">
+            <button type="button" onclick="closeInfoPanel()" class="panel-back-btn"><span aria-hidden="true">&larr;</span> <span data-i18n="panel.back">Kembali ke Kategori</span></button>
+            <span class="section-eyebrow" data-i18n="hr.builderEyebrow">HR Builder</span>
+            <h2 data-i18n="hr.builderTitle">Susun requirement, portal kandidat langsung menyesuaikan.</h2>
+            <p data-i18n="hr.builderDesc">Atur detail lowongan dan batas requirement. Sisi B otomatis merefleksikan field, badge, dan pertanyaan penyaring.</p>
+          </div>
+          <div class="hr-builder-grid">
+            <div class="hr-builder-form">
+              <div class="hr-template-row">
+                <span class="hr-template-label" data-i18n="hr.templateLabel">Template posisi cepat</span>
+                <div class="hr-template-buttons">
+                  <button type="button" onclick="applyHrTemplate('tech')" id="hr-template-tech" class="hr-template-btn">Tech</button>
+                  <button type="button" onclick="applyHrTemplate('people')" id="hr-template-people" class="hr-template-btn">People</button>
+                  <button type="button" onclick="applyHrTemplate('growth')" id="hr-template-growth" class="hr-template-btn">Growth</button>
+                  <button type="button" onclick="applyHrTemplate('custom')" id="hr-template-custom" class="hr-template-btn">Custom</button>
+                </div>
+              </div>
+              <div class="hr-form-grid">
+                <label class="hr-form-field">
+                  <span data-i18n="hr.position">Nama posisi</span>
+                  <input type="text" id="hr-position-input" oninput="updateHrRequirement('position', this.value)">
+                </label>
+                <label class="hr-form-field">
+                  <span data-i18n="hr.location">Domisili / lokasi kerja</span>
+                  <input type="text" id="hr-location-input" oninput="updateHrRequirement('location', this.value)">
+                </label>
+                <label class="hr-form-field">
+                  <span data-i18n="hr.minYears">Minimal tahun pengalaman</span>
+                  <input type="text" id="hr-min-years-input" oninput="updateHrRequirement('minYears', this.value)">
+                </label>
+                <label class="hr-form-field">
+                  <span data-i18n="hr.salary">Ekspektasi gaji</span>
+                  <input type="text" id="hr-salary-input" oninput="updateHrRequirement('salary', this.value)">
+                </label>
+                <label class="hr-form-field">
+                  <span data-i18n="hr.notice">Notice period</span>
+                  <input type="text" id="hr-notice-input" oninput="updateHrRequirement('noticePeriod', this.value)">
+                </label>
+                <label class="hr-form-field">
+                  <span data-i18n="hr.skills">Skill / tools utama</span>
+                  <input type="text" id="hr-skills-input" oninput="updateHrRequirement('skills', this.value)">
+                </label>
+                <label class="hr-form-field hr-form-wide">
+                  <span data-i18n="hr.education">Pendidikan / sertifikasi / portofolio</span>
+                  <input type="text" id="hr-education-input" oninput="updateHrRequirement('education', this.value)">
+                </label>
+                <label class="hr-form-field hr-form-wide">
+                  <span data-i18n="hr.screening">Pertanyaan penyaring</span>
+                  <textarea id="hr-screening-input" rows="3" oninput="updateHrRequirement('screening', this.value)"></textarea>
+                </label>
+              </div>
+            </div>
+            <aside class="hr-preview-column">
+              <article class="hr-price-card">
+                <span class="price-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
+                <span class="hr-price-label" data-i18n="hr.builderEyebrow">HR Builder</span>
+                <span class="start-from"><i aria-hidden="true"></i><span data-i18n="pricing.startFrom">Mulai dari</span></span>
+                <div class="price-amount-wrap">
+                  <del class="price-old" id="hr-price-old">Rp79rb</del>
+                  <strong class="price-new" id="hr-price-new">Rp49rb</strong>
+                </div>
+                <p class="hr-price-desc" data-i18n="hr.priceDesc">Akses builder + portal kandidat sekali pakai.</p>
+              </article>
+              <article class="hr-recap-card">
+                <span class="custom-track-label" data-i18n="hr.previewTitle">Pratinjau rekap Google Sheet HR</span>
+                <p class="hr-recap-desc" data-i18n="hr.previewDesc">Kolom ini yang masuk ke Sheet HR, termasuk kecocokan dan status seleksi kandidat.</p>
+                <div class="hr-summary-grid">
+                  <span><b data-i18n="hr.position">Nama posisi</b><i id="hr-preview-position">Lead Fullstack Developer</i></span>
+                  <span><b data-i18n="hr.location">Domisili / lokasi kerja</b><i id="hr-preview-location">Jakarta / Hybrid</i></span>
+                  <span><b data-i18n="hr.minYears">Minimal tahun pengalaman</b><i id="hr-preview-years">5</i></span>
+                  <span><b data-i18n="hr.skills">Skill / tools utama</b><i id="hr-preview-skills">React, Node.js, Go</i></span>
+                  <span><b data-i18n="hr.education">Pendidikan / sertifikasi / portofolio</b><i id="hr-preview-education">S1 Informatika</i></span>
+                  <span><b data-i18n="hr.salary">Ekspektasi gaji</b><i id="hr-preview-salary">Rp25–35 juta</i></span>
+                  <span><b data-i18n="hr.notice">Notice period</b><i id="hr-preview-notice">30 hari</i></span>
+                  <span><b data-i18n="hr.screening">Pertanyaan penyaring</b><i id="hr-preview-screening">Ceritakan pengalaman Anda.</i></span>
+                </div>
+                <div class="hr-status-block">
+                  <span class="hr-status-label" data-i18n="hr.statusLabel">Status seleksi</span>
+                  <div id="hr-status-list" class="hr-status-list"></div>
+                </div>
+                <div class="hr-table-wrap">
+                  <table class="hr-recap-table">
+                    <thead><tr>
+                      <th data-i18n="hr.colCandidate">Kandidat</th>
+                      <th data-i18n="hr.matchStatus">Status kecocokan</th>
+                      <th data-i18n="hr.colSelection">Seleksi</th>
+                    </tr></thead>
+                    <tbody id="hr-recap-body"></tbody>
+                  </table>
+                </div>
+              </article>
+            </aside>
+          </div>
+          <div class="custom-actions">
+            <button type="button" onclick="chooseCategory('recruit', false)" class="btn btn-primary" data-i18n="hr.openPortal">Buka Portal Kandidat</button>
+            <button type="button" onclick="previewCategory('recruit')" class="btn btn-secondary" data-i18n="hr.demoPortal">Demo Portal Kandidat</button>
+          </div>
+          <button type="button" onclick="closeInfoPanel()" class="btn btn-secondary panel-inline-cta" data-i18n="panel.back">Kembali ke Kategori</button>
+        </section>
+
       </div>
     </div>
 
@@ -426,6 +532,45 @@
         </div>
         <span class="hr-ribbon-status" data-i18n="form.open">Open Registration</span>
       </div>
+
+      <section id="candidate-portal" class="candidate-portal hidden">
+        <div class="candidate-portal-head">
+          <div>
+            <span class="section-eyebrow" data-i18n="portal.eyebrow">Portal Kandidat</span>
+            <h2 data-i18n="portal.title">Lamaran Anda, jelas dan terstruktur.</h2>
+          </div>
+          <div class="candidate-progress-card">
+            <span data-i18n="portal.progress">Progres lamaran</span>
+            <strong id="candidate-progress-text">1 / 11</strong>
+            <div class="candidate-progress-track"><span id="candidate-progress-bar" style="width: 9%"></span></div>
+            <div id="candidate-step-list" class="candidate-step-list"></div>
+          </div>
+        </div>
+        <div class="candidate-position-card">
+          <span class="custom-track-label" data-i18n="portal.requirementLabel">Requirement posisi</span>
+          <h3 id="candidate-position">Lead Fullstack Developer</h3>
+          <div class="candidate-badges">
+            <span id="candidate-location">Jakarta / Hybrid</span>
+            <span id="candidate-years">Min. 5 tahun</span>
+            <span id="candidate-skills">React, Node.js, Go</span>
+            <span id="candidate-education">S1 Informatika</span>
+            <span id="candidate-salary">Rp25–35 juta</span>
+            <span id="candidate-notice">30 hari</span>
+            <span id="candidate-screening">Screening question</span>
+          </div>
+        </div>
+        <div class="candidate-cv-card">
+          <div>
+            <span class="custom-track-label" data-i18n="portal.cvTitle">CV PDF</span>
+            <strong data-i18n="portal.cvDesc">Auto-fill data & indikator kecocokan ringkas.</strong>
+            <p id="candidate-cv-state" data-i18n="portal.cvEmpty">Belum ada CV diunggah</p>
+          </div>
+          <div class="candidate-cv-actions">
+            <span id="candidate-cv-match" class="candidate-match-badge" data-i18n="portal.matchLabel">Kecocokan</span>
+            <button type="button" onclick="jumpToCandidateStep(10)" class="btn btn-secondary" data-i18n="portal.jumpCv">Isi CV</button>
+          </div>
+        </div>
+      </section>
 
       <div class="brand-cover-wrapper">
         <img id="banner-cover-image"

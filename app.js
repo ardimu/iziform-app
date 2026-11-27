@@ -19,6 +19,10 @@ const state = {
   paymentMethodManuallySet: false,
   isSimulation: false,
   cvParse: null,
+  hrRequirement: null,
+  hrTemplateKey: 'tech',
+  hrSelectionStatus: 'new',
+  hrLastCandidate: null,
   qrisImageUrl: '',
   qrisPaymentPlan: '',
   qrisMerchant: '',
@@ -512,6 +516,78 @@ const CUSTOM_PRICING = {
   requestComplex: { id: 'custom-request-complex-price', idr: 'Rp299rb', usd: '$24' }
 };
 
+const HR_TEMPLATES = {
+  tech: {
+    id: { position: 'Lead Fullstack Developer', location: 'Jakarta / Hybrid', minYears: '5', skills: 'React, Node.js, Go, Microservices', education: 'S1 Informatika / Bootcamp + Portofolio GitHub', salary: 'Rp25–35 juta', noticePeriod: '30 hari', screening: 'Ceritakan pengalaman Anda membangun sistem produksi dan peran Anda di dalam tim.' },
+    en: { position: 'Lead Fullstack Developer', location: 'Jakarta / Hybrid', minYears: '5', skills: 'React, Node.js, Go, Microservices', education: 'Bachelor in Informatics / Bootcamp + GitHub portfolio', salary: 'IDR 25–35 million', noticePeriod: '30 days', screening: 'Describe a production system you built and your role in the team.' },
+    zh: { position: '全栈开发负责人', location: '雅加达 / 混合办公', minYears: '5', skills: 'React、Node.js、Go、微服务', education: '计算机本科 / 训练营 + GitHub 作品集', salary: '2500万–3500万印尼盾', noticePeriod: '30 天', screening: '请说明您参与构建的生产系统以及您在团队中的角色。' }
+  },
+  people: {
+    id: { position: 'HR Talent Acquisition Lead', location: 'Jakarta / On-site', minYears: '4', skills: 'Sourcing, Interviewing, Employer Branding, HRIS', education: 'S1 Psikologi / Manajemen SDM + Sertifikasi HR', salary: 'Rp18–26 juta', noticePeriod: '30 hari', screening: 'Jelaskan strategi sourcing dan ukuran keberhasilan hiring yang pernah Anda jalankan.' },
+    en: { position: 'HR Talent Acquisition Lead', location: 'Jakarta / On-site', minYears: '4', skills: 'Sourcing, Interviewing, Employer Branding, HRIS', education: 'Bachelor in Psychology / HR Management + HR certification', salary: 'IDR 18–26 million', noticePeriod: '30 days', screening: 'Explain your sourcing strategy and the hiring success metrics you owned.' },
+    zh: { position: '人才招聘负责人', location: '雅加达 / 现场办公', minYears: '4', skills: '人才搜寻、面试、雇主品牌、HRIS', education: '心理学或人力资源管理本科 + HR 认证', salary: '1800万–2600万印尼盾', noticePeriod: '30 天', screening: '请说明您使用过的招聘策略以及您负责的招聘成功指标。' }
+  },
+  growth: {
+    id: { position: 'Growth Marketing Lead', location: 'Remote / Indonesia', minYears: '3', skills: 'Meta Ads, Google Ads, Analytics, Experimentation', education: 'S1 Marketing / Bisnis + Portofolio Campaign', salary: 'Rp20–30 juta', noticePeriod: '45 hari', screening: 'Ceritakan eksperimen growth yang paling berdampak dan bagaimana Anda mengukurnya.' },
+    en: { position: 'Growth Marketing Lead', location: 'Remote / Indonesia', minYears: '3', skills: 'Meta Ads, Google Ads, Analytics, Experimentation', education: 'Bachelor in Marketing / Business + campaign portfolio', salary: 'IDR 20–30 million', noticePeriod: '45 days', screening: 'Share your most impactful growth experiment and how you measured it.' },
+    zh: { position: '增长营销负责人', location: '远程 / 印尼', minYears: '3', skills: 'Meta 广告、Google 广告、数据分析、实验', education: '市场营销或商科本科 +  campaign 作品集', salary: '2000万–3000万印尼盾', noticePeriod: '45 天', screening: '请分享影响最大的增长实验以及您的衡量方式。' }
+  },
+  custom: {
+    id: { position: 'Posisi Custom HR', location: 'Sesuai kebutuhan HR', minYears: '1', skills: 'Diisi HR', education: 'Diisi HR', salary: 'Diisi HR', noticePeriod: 'Diisi HR', screening: 'Tambahkan pertanyaan penyaring utama Anda.' },
+    en: { position: 'Custom HR Position', location: 'Set by HR', minYears: '1', skills: 'Set by HR', education: 'Set by HR', salary: 'Set by HR', noticePeriod: 'Set by HR', screening: 'Add your main screening question.' },
+    zh: { position: '自定义 HR 职位', location: '由 HR 设置', minYears: '1', skills: '由 HR 设置', education: '由 HR 设置', salary: '由 HR 设置', noticePeriod: '由 HR 设置', screening: '请添加您的主要筛选问题。' }
+  }
+};
+
+const HR_PRICING = {
+  idr: { old: 'Rp79rb', price: 'Rp49rb' },
+  usd: { old: '$6', price: '$4' }
+};
+
+const HR_STATUS_KEYS = ['new', 'shortlist', 'interview', 'accepted', 'rejected'];
+
+const HR_QUESTION_COPY = {
+  id: (r) => [
+    { id: 'recruit_name', category: '01 • IDENTITAS KANDIDAT', title: 'Nama lengkap sesuai CV Anda', subtitle: 'Isi nama resmi Anda sesuai dokumen dan CV.', type: 'text', placeholder: 'Nama lengkap', defaultValue: 'Nadia Utami' },
+    { id: 'recruit_email', category: '02 • KONTAK', title: 'Email aktif Anda', subtitle: 'Digunakan untuk undangan interview dan status seleksi.', type: 'text', placeholder: 'nama@email.com', defaultValue: 'nadia@email.com' },
+    { id: 'recruit_wa', category: '02 • KONTAK', title: 'Nomor WhatsApp aktif Anda', subtitle: 'Tim HR akan mengabari jadwal interview via WhatsApp.', type: 'tel', placeholder: '0812-xxxx-xxxx', defaultValue: '0812-3456-7890' },
+    { id: 'recruit_domisili', category: '03 • LOKASI', title: 'Domisili / lokasi kerja Anda', subtitle: `Sesuai requirement HR: ${r.location}.`, type: 'text', placeholder: 'Kota, provinsi', defaultValue: r.location },
+    { id: 'recruit_experience', category: '04 • PENGALAMAN', title: `Pengalaman kerja Anda (minimal ${r.minYears} tahun)`, subtitle: 'Ringkas pengalaman relevan Anda.', type: 'textarea', placeholder: 'Contoh: 6 tahun sebagai Fullstack Engineer', defaultValue: `${r.minYears}+ tahun pengalaman relevan` },
+    { id: 'recruit_education', category: '05 • PENDIDIKAN', title: 'Pendidikan / sertifikasi / portofolio Anda', subtitle: `Sesuai requirement HR: ${r.education}.`, type: 'text', placeholder: 'S1, sertifikasi, atau link portofolio', defaultValue: r.education },
+    { id: 'recruit_skills', category: '06 • SKILL & TOOLS', title: 'Skill / tools utama Anda', subtitle: `Sesuai requirement HR: ${r.skills}.`, type: 'textarea', placeholder: 'Pisahkan dengan koma', defaultValue: r.skills },
+    { id: 'recruit_salary', category: '07 • KOMPENSASI', title: 'Ekspektasi gaji Anda', subtitle: `Rentang HR: ${r.salary}.`, type: 'text', placeholder: 'Contoh: Rp25 juta', defaultValue: r.salary },
+    { id: 'recruit_notice', category: '08 • KESIAPAN', title: 'Notice period / kesiapan bergabung', subtitle: `Sesuai requirement HR: ${r.noticePeriod}.`, type: 'text', placeholder: 'Contoh: 30 hari', defaultValue: r.noticePeriod },
+    { id: 'recruit_screening', category: '09 • PERTANYAAN PENYARING', title: 'Pertanyaan penyaring HR', subtitle: r.screening, type: 'textarea', placeholder: 'Tulis jawaban ringkas', defaultValue: '' },
+    { id: 'recruit_cv', category: '10 • DOKUMEN', title: 'Unggah CV PDF Anda', subtitle: 'PDF akan dibaca untuk auto-fill dan indikator kecocokan.', type: 'file', placeholder: 'https://drive.google.com/...' }
+  ],
+  en: (r) => [
+    { id: 'recruit_name', category: '01 • CANDIDATE IDENTITY', title: 'Your full name as shown on your CV', subtitle: 'Enter your official name exactly as written in your documents.', type: 'text', placeholder: 'Full name', defaultValue: 'Nadia Utami' },
+    { id: 'recruit_email', category: '02 • CONTACT', title: 'Your active email address', subtitle: 'Used for interview invitations and selection status updates.', type: 'text', placeholder: 'name@email.com', defaultValue: 'nadia@email.com' },
+    { id: 'recruit_wa', category: '02 • CONTACT', title: 'Your active WhatsApp number', subtitle: 'The HR team will contact you about interviews via WhatsApp.', type: 'tel', placeholder: '0812-xxxx-xxxx', defaultValue: '0812-3456-7890' },
+    { id: 'recruit_domisili', category: '03 • LOCATION', title: 'Your current location / work location', subtitle: `HR requirement: ${r.location}.`, type: 'text', placeholder: 'City, province', defaultValue: r.location },
+    { id: 'recruit_experience', category: '04 • EXPERIENCE', title: `Your work experience (minimum ${r.minYears} years)`, subtitle: 'Summarize your most relevant experience.', type: 'textarea', placeholder: 'Example: 6 years as a Fullstack Engineer', defaultValue: `${r.minYears}+ years of relevant experience` },
+    { id: 'recruit_education', category: '05 • EDUCATION', title: 'Education / certification / portfolio', subtitle: `HR requirement: ${r.education}.`, type: 'text', placeholder: 'Degree, certification, or portfolio link', defaultValue: r.education },
+    { id: 'recruit_skills', category: '06 • SKILLS & TOOLS', title: 'Your main skills / tools', subtitle: `HR requirement: ${r.skills}.`, type: 'textarea', placeholder: 'Separate with commas', defaultValue: r.skills },
+    { id: 'recruit_salary', category: '07 • COMPENSATION', title: 'Your salary expectation', subtitle: `HR range: ${r.salary}.`, type: 'text', placeholder: 'Example: IDR 25 million', defaultValue: r.salary },
+    { id: 'recruit_notice', category: '08 • AVAILABILITY', title: 'Notice period / joining availability', subtitle: `HR requirement: ${r.noticePeriod}.`, type: 'text', placeholder: 'Example: 30 days', defaultValue: r.noticePeriod },
+    { id: 'recruit_screening', category: '09 • SCREENING QUESTION', title: 'HR screening question', subtitle: r.screening, type: 'textarea', placeholder: 'Write a concise answer', defaultValue: '' },
+    { id: 'recruit_cv', category: '10 • DOCUMENT', title: 'Upload your PDF CV', subtitle: 'The PDF is read for autofill and a concise match indicator.', type: 'file', placeholder: 'https://drive.google.com/...' }
+  ],
+  zh: (r) => [
+    { id: 'recruit_name', category: '01 • 候选人信息', title: '请填写简历上的全名', subtitle: '请按证件上的正式姓名填写。', type: 'text', placeholder: '全名', defaultValue: 'Nadia Utami' },
+    { id: 'recruit_email', category: '02 • 联系方式', title: '您的常用邮箱', subtitle: '用于发送面试邀请和筛选状态通知。', type: 'text', placeholder: 'name@email.com', defaultValue: 'nadia@email.com' },
+    { id: 'recruit_wa', category: '02 • 联系方式', title: '您的常用 WhatsApp 号码', subtitle: 'HR 团队会通过 WhatsApp 通知面试安排。', type: 'tel', placeholder: '0812-xxxx-xxxx', defaultValue: '0812-3456-7890' },
+    { id: 'recruit_domisili', category: '03 • 所在地', title: '您的现居地 / 工作地', subtitle: `HR 要求：${r.location}。`, type: 'text', placeholder: '城市、省份', defaultValue: r.location },
+    { id: 'recruit_experience', category: '04 • 工作经验', title: `您的工作经验（至少 ${r.minYears} 年）`, subtitle: '请简要说明最相关的工作经历。', type: 'textarea', placeholder: '示例：6 年全栈工程师经验', defaultValue: `${r.minYears}+ 年相关经验` },
+    { id: 'recruit_education', category: '05 • 教育背景', title: '您的学历 / 证书 / 作品集', subtitle: `HR 要求：${r.education}。`, type: 'text', placeholder: '学历、证书或作品集链接', defaultValue: r.education },
+    { id: 'recruit_skills', category: '06 • 技能与工具', title: '您的主要技能 / 工具', subtitle: `HR 要求：${r.skills}。`, type: 'textarea', placeholder: '请用逗号分隔', defaultValue: r.skills },
+    { id: 'recruit_salary', category: '07 • 薪资期望', title: '您的薪资期望', subtitle: `HR 范围：${r.salary}。`, type: 'text', placeholder: '示例：2500万印尼盾', defaultValue: r.salary },
+    { id: 'recruit_notice', category: '08 • 到岗时间', title: '通知期 / 到岗准备情况', subtitle: `HR 要求：${r.noticePeriod}。`, type: 'text', placeholder: '示例：30 天', defaultValue: r.noticePeriod },
+    { id: 'recruit_screening', category: '09 • 筛选问题', title: 'HR 筛选问题', subtitle: r.screening, type: 'textarea', placeholder: '请简要作答', defaultValue: '' },
+    { id: 'recruit_cv', category: '10 • 文档', title: '上传 PDF 简历', subtitle: '系统会读取 PDF 以自动填写信息并给出匹配指标。', type: 'file', placeholder: 'https://drive.google.com/...' }
+  ]
+};
+
 const PRESET_LOCALE = {
   en: {
     recruit: {
@@ -786,7 +862,8 @@ const INFO_PANEL_IDS = {
   security: 'panel-keamanan',
   how: 'panel-cara',
   demo: 'panel-demo',
-  custom: 'panel-custom'
+  custom: 'panel-custom',
+  hrBuilder: 'panel-hr-builder'
 };
 
 const ROLE_KEYWORDS = {
@@ -878,6 +955,56 @@ const I18N = {
     'custom.borderNote': 'Perubahan di luar scope yang disepakati akan masuk penyesuaian terpisah.',
     'custom.startSelf': 'Buka Custom Sendiri',
     'custom.preview': 'Pratinjau Form',
+    'hr.builderEyebrow': 'HR Builder',
+    'hr.builderTitle': 'Susun requirement, portal kandidat langsung menyesuaikan.',
+    'hr.builderDesc': 'Atur detail lowongan dan batas requirement. Sisi B otomatis merefleksikan field, badge, dan pertanyaan penyaring.',
+    'hr.builderOption': 'Buka HR Builder',
+    'hr.templateLabel': 'Template posisi cepat',
+    'hr.templateTech': 'Teknologi',
+    'hr.templatePeople': 'HR / People',
+    'hr.templateGrowth': 'Growth',
+    'hr.templateCustom': 'Custom',
+    'hr.position': 'Nama posisi',
+    'hr.location': 'Domisili / lokasi kerja',
+    'hr.minYears': 'Minimal tahun pengalaman',
+    'hr.skills': 'Skill / tools utama',
+    'hr.education': 'Pendidikan / sertifikasi / portofolio',
+    'hr.salary': 'Ekspektasi gaji',
+    'hr.notice': 'Notice period',
+    'hr.screening': 'Pertanyaan penyaring',
+    'hr.previewTitle': 'Pratinjau rekap Google Sheet HR',
+    'hr.previewDesc': 'Kolom ini yang masuk ke Sheet HR, termasuk kecocokan dan status seleksi kandidat.',
+    'hr.sheetColumns': 'Kolom Sheet',
+    'hr.statusLabel': 'Status seleksi',
+    'hr.statusNew': 'Baru Masuk',
+    'hr.statusShortlist': 'Shortlist',
+    'hr.statusInterview': 'Interview',
+    'hr.statusAccepted': 'Diterima',
+    'hr.statusRejected': 'Ditolak',
+    'hr.matchStatus': 'Status kecocokan',
+    'hr.openPortal': 'Buka Portal Kandidat',
+    'hr.demoPortal': 'Demo Portal Kandidat',
+    'hr.priceDesc': 'Akses builder + portal kandidat sekali pakai.',
+    'hr.noCandidate': 'Belum ada kandidat masuk. Kirim link portal untuk mulai menerima lamaran.',
+    'hr.colCandidate': 'Kandidat',
+    'hr.colMatch': 'Kecocokan',
+    'hr.colSelection': 'Seleksi',
+    'portal.eyebrow': 'Portal Kandidat',
+    'portal.title': 'Lamaran Anda, jelas dan terstruktur.',
+    'portal.progress': 'Progres lamaran',
+    'portal.cvTitle': 'CV PDF',
+    'portal.cvDesc': 'Auto-fill data & indikator kecocokan ringkas.',
+    'portal.cvReady': 'CV terbaca',
+    'portal.cvEmpty': 'Belum ada CV diunggah',
+    'portal.jumpCv': 'Isi CV',
+    'portal.requirementLabel': 'Requirement posisi',
+    'portal.matchLabel': 'Kecocokan',
+    'cv.levelHigh': 'Tinggi',
+    'cv.levelMedium': 'Sedang',
+    'toast.hrTemplate': 'Template diterapkan',
+    'toast.hrStatus': 'Status seleksi diperbarui',
+    'showcase.hrBuilderTitle': 'Alur HR Builder',
+    'showcase.hrBuilderDesc': 'Requirement HR otomatis tercermin di portal kandidat.',
     'sync.eyebrow': 'Google Account & Sheet Sync',
     'sync.title': 'Data Anda, Sheet Anda sendiri.',
     'sync.desc': 'Hubungkan email Google dan webhook Google Sheet Anda. Setiap submission dikirim sebagai payload JSON langsung ke sheet milik masing-masing pengguna.',
@@ -1067,7 +1194,7 @@ const I18N = {
     'cv.levelExcellent': 'Sangat cocok',
     'cv.levelGood': 'Cocok',
     'cv.levelFair': 'Cukup relevan',
-    'cv.levelLow': 'Perlu ditinjau',
+    'cv.levelLow': 'Rendah',
     'cv.matchedLabel': 'Kata kunci yang cocok',
     'cv.noMatch': 'Belum ada kata kunci yang terdeteksi',
     'cv.fieldsFilled': 'Field terisi otomatis',
@@ -1174,6 +1301,56 @@ const I18N = {
     'custom.borderNote': 'Changes outside the agreed scope are handled as a separate adjustment.',
     'custom.startSelf': 'Open DIY Custom',
     'custom.preview': 'Preview Form',
+    'hr.builderEyebrow': 'HR Builder',
+    'hr.builderTitle': 'Set the requirements once; the candidate portal follows.',
+    'hr.builderDesc': 'Define job details and requirement limits. Side B automatically reflects fields, badges, and screening questions.',
+    'hr.builderOption': 'Open HR Builder',
+    'hr.templateLabel': 'Quick role templates',
+    'hr.templateTech': 'Technology',
+    'hr.templatePeople': 'HR / People',
+    'hr.templateGrowth': 'Growth',
+    'hr.templateCustom': 'Custom',
+    'hr.position': 'Position name',
+    'hr.location': 'Domisili / work location',
+    'hr.minYears': 'Minimum years of experience',
+    'hr.skills': 'Main skills / tools',
+    'hr.education': 'Education / certification / portfolio',
+    'hr.salary': 'Salary expectation',
+    'hr.notice': 'Notice period',
+    'hr.screening': 'Screening question',
+    'hr.previewTitle': 'HR Google Sheet recap preview',
+    'hr.previewDesc': 'These are the columns saved to the HR Sheet, including candidate match and selection status.',
+    'hr.sheetColumns': 'Sheet columns',
+    'hr.statusLabel': 'Selection status',
+    'hr.statusNew': 'New',
+    'hr.statusShortlist': 'Shortlist',
+    'hr.statusInterview': 'Interview',
+    'hr.statusAccepted': 'Accepted',
+    'hr.statusRejected': 'Rejected',
+    'hr.matchStatus': 'Match status',
+    'hr.openPortal': 'Open Candidate Portal',
+    'hr.demoPortal': 'Candidate Portal Demo',
+    'hr.priceDesc': 'One-time builder + candidate portal access.',
+    'hr.noCandidate': 'No candidate yet. Share the portal link to start receiving applications.',
+    'hr.colCandidate': 'Candidate',
+    'hr.colMatch': 'Match',
+    'hr.colSelection': 'Selection',
+    'portal.eyebrow': 'Candidate Portal',
+    'portal.title': 'Your application, clear and structured.',
+    'portal.progress': 'Application progress',
+    'portal.cvTitle': 'PDF CV',
+    'portal.cvDesc': 'Autofill details with a concise match indicator.',
+    'portal.cvReady': 'CV read',
+    'portal.cvEmpty': 'No CV uploaded yet',
+    'portal.jumpCv': 'Fill CV',
+    'portal.requirementLabel': 'Role requirement',
+    'portal.matchLabel': 'Match',
+    'cv.levelHigh': 'High',
+    'cv.levelMedium': 'Medium',
+    'toast.hrTemplate': 'Template applied',
+    'toast.hrStatus': 'Selection status updated',
+    'showcase.hrBuilderTitle': 'HR Builder flow',
+    'showcase.hrBuilderDesc': 'HR requirements are reflected automatically in the candidate portal.',
     'sync.eyebrow': 'Google Account & Sheet Sync',
     'sync.title': 'Your data, your own Sheet.',
     'sync.desc': 'Connect your Google email and Google Sheet webhook. Each submission is sent as JSON directly to each user’s own sheet.',
@@ -1363,7 +1540,7 @@ const I18N = {
     'cv.levelExcellent': 'Excellent match',
     'cv.levelGood': 'Good match',
     'cv.levelFair': 'Somewhat relevant',
-    'cv.levelLow': 'Needs review',
+    'cv.levelLow': 'Low',
     'cv.matchedLabel': 'Matched keywords',
     'cv.noMatch': 'No keywords detected yet',
     'cv.fieldsFilled': 'Autofilled fields',
@@ -1470,6 +1647,56 @@ const I18N = {
     'custom.borderNote': '超出约定范围的修改将按单独调整处理。',
     'custom.startSelf': '打开自选定制',
     'custom.preview': '预览表单',
+    'hr.builderEyebrow': 'HR 构建器',
+    'hr.builderTitle': '设置好要求，候选人门户即刻同步。',
+    'hr.builderDesc': '定义职位详情与要求边界。候选人端会自动反映字段、标签与筛选问题。',
+    'hr.builderOption': '打开 HR 构建器',
+    'hr.templateLabel': '快速职位模板',
+    'hr.templateTech': '技术',
+    'hr.templatePeople': 'HR / 人力',
+    'hr.templateGrowth': '增长',
+    'hr.templateCustom': '自定义',
+    'hr.position': '职位名称',
+    'hr.location': '现居地 / 工作地点',
+    'hr.minYears': '最低工作年限',
+    'hr.skills': '主要技能 / 工具',
+    'hr.education': '学历 / 证书 / 作品集',
+    'hr.salary': '薪资期望',
+    'hr.notice': '通知期',
+    'hr.screening': '筛选问题',
+    'hr.previewTitle': 'HR Google Sheet 汇总预览',
+    'hr.previewDesc': '这些列会保存至 HR 表格，包括候选人匹配度与筛选状态。',
+    'hr.sheetColumns': '表格列',
+    'hr.statusLabel': '筛选状态',
+    'hr.statusNew': '新入库',
+    'hr.statusShortlist': '候选名单',
+    'hr.statusInterview': '面试中',
+    'hr.statusAccepted': '已录用',
+    'hr.statusRejected': '未通过',
+    'hr.matchStatus': '匹配状态',
+    'hr.openPortal': '打开候选人门户',
+    'hr.demoPortal': '候选人门户演示',
+    'hr.priceDesc': '一次性开通构建器 + 候选人门户。',
+    'hr.noCandidate': '暂无候选人。分享门户链接即可开始接收申请。',
+    'hr.colCandidate': '候选人',
+    'hr.colMatch': '匹配度',
+    'hr.colSelection': '筛选',
+    'portal.eyebrow': '候选人门户',
+    'portal.title': '您的申请，清晰且有条理。',
+    'portal.progress': '申请进度',
+    'portal.cvTitle': 'PDF 简历',
+    'portal.cvDesc': '自动填写信息并给出简要匹配指标。',
+    'portal.cvReady': '简历已读取',
+    'portal.cvEmpty': '尚未上传简历',
+    'portal.jumpCv': '填写简历',
+    'portal.requirementLabel': '职位要求',
+    'portal.matchLabel': '匹配度',
+    'cv.levelHigh': '高',
+    'cv.levelMedium': '中',
+    'toast.hrTemplate': '模板已应用',
+    'toast.hrStatus': '筛选状态已更新',
+    'showcase.hrBuilderTitle': 'HR 构建器流程',
+    'showcase.hrBuilderDesc': 'HR 要求会自动反映在候选人门户中。',
     'sync.eyebrow': 'Google 账号与表格同步',
     'sync.title': '您的数据，您自己的表格。',
     'sync.desc': '连接您的 Google 邮箱和 Google Sheet Webhook。每次提交都会以 JSON 直接发送到每位用户自己的表格。',
@@ -1659,7 +1886,7 @@ const I18N = {
     'cv.levelExcellent': '非常匹配',
     'cv.levelGood': '比较匹配',
     'cv.levelFair': '部分相关',
-    'cv.levelLow': '需要复核',
+    'cv.levelLow': '低',
     'cv.matchedLabel': '匹配关键词',
     'cv.noMatch': '尚未检测到关键词',
     'cv.fieldsFilled': '已自动填写',
@@ -1731,15 +1958,23 @@ function escapeHtml(value) {
 function getPreset(key) {
   const base = state.presets[key] || state.presets.recruit;
   const locale = (PRESET_LOCALE[state.currentLanguage] || {})[key];
-  if (!locale) return base;
-  return {
-    ...base,
-    ...locale,
-    questions: base.questions.map((question, index) => ({
-      ...question,
-      ...(locale.questions && locale.questions[index] ? locale.questions[index] : {})
-    }))
-  };
+  let result = base;
+  if (locale) {
+    result = {
+      ...base,
+      ...locale,
+      questions: base.questions.map((question, index) => ({
+        ...question,
+        ...(locale.questions && locale.questions[index] ? locale.questions[index] : {})
+      }))
+    };
+  }
+  if (key === 'recruit') {
+    const requirement = state.hrRequirement || HR_TEMPLATES.tech[state.currentLanguage] || HR_TEMPLATES.tech.id;
+    const buildQuestions = HR_QUESTION_COPY[state.currentLanguage] || HR_QUESTION_COPY.id;
+    result = { ...result, subText: `Official Career Portal • ${requirement.position} • ${requirement.location}`, questions: buildQuestions(requirement) };
+  }
+  return result;
 }
 
 function applyFontStack() {
@@ -1806,6 +2041,7 @@ function setLanguage(lang) {
   if (!I18N[lang]) return;
   state.currentLanguage = lang;
   if (!state.paymentMethodManuallySet) state.paymentMethod = defaultPaymentMethodForLanguage(lang);
+  if (state.hrTemplateKey !== 'custom') applyHrTemplate(state.hrTemplateKey, true);
   applyTranslations();
   updateDisplayTrigger();
   renderPaymentMethod();
@@ -1949,36 +2185,45 @@ async function extractPdfText(file) {
   return values.join(' ').replace(/\s+/g, ' ').trim();
 }
 
-function computeCandidateMatch(text, roleKey) {
+function computeCandidateMatch(text) {
+  const requirement = currentHrRequirement();
   const lower = text.toLowerCase();
-  const keywords = ROLE_KEYWORDS[roleKey] || Object.values(ROLE_KEYWORDS).flat();
-  const matched = keywords.filter((keyword) => lower.includes(keyword));
+  const skills = requirement.skills.split(/[,，、|]/).map((item) => item.trim().toLowerCase()).filter(Boolean);
+  const matched = skills.filter((keyword) => lower.includes(keyword));
   const hasEmail = /[\w.+-]+@[\w.-]+\.[a-z]{2,}/i.test(text);
   const hasPhone = /(?:\+?62|0)[\d\s-]{8,16}/.test(text);
-  const score = Math.min(100, 18 + matched.length * 13 + (hasEmail ? 14 : 0) + (hasPhone ? 12 : 0));
-  const levelKey = score >= 75 ? 'cv.levelExcellent' : score >= 55 ? 'cv.levelGood' : score >= 35 ? 'cv.levelFair' : 'cv.levelLow';
-  return { matched, score, level: t(levelKey) };
+  const yearMatch = text.match(/(\d{1,2})\+?\s*(?:tahun|years|年)/i);
+  const foundYears = yearMatch ? Number(yearMatch[1]) : 0;
+  const minYears = Number(requirement.minYears) || 0;
+  const meetsYears = foundYears >= minYears;
+  const hasEducation = /s1|bachelor|bootcamp|sertifikasi|certification|本科|训练营|证书/i.test(text);
+  const score = Math.min(100, 20 + Math.min(matched.length * 12, 48) + (hasEmail ? 10 : 0) + (hasPhone ? 10 : 0) + (meetsYears ? 12 : 0) + (hasEducation ? 8 : 0));
+  const levelKey = score >= 70 ? 'cv.levelHigh' : score >= 45 ? 'cv.levelMedium' : 'cv.levelLow';
+  return { matched, score, level: t(levelKey), role: requirement.position };
 }
 
 function applyCvAutofill(text) {
   const nameMatch = text.match(/(?:nama|name)[\s:]*([A-Za-zÀ-ÿ' .]{3,60})/i);
+  const emailMatch = text.match(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i);
   const phoneMatch = text.match(/(?:\+?62|0)[\d\s-]{8,16}/);
-  const roleQuestion = getPreset('recruit').questions[2];
-  const roleIndex = state.userResponses['recruit_role'] !== undefined
-    ? state.userResponses['recruit_role']
-    : (roleQuestion.defaultIndex !== undefined ? roleQuestion.defaultIndex : 0);
-  const roleOption = roleQuestion.options && roleQuestion.options[roleIndex];
-  const match = computeCandidateMatch(text, roleOption ? roleOption.hotkey : 'A');
+  const cityMatch = text.match(/(?:domisili|location|kota|city)[\s:]*([A-Za-zÀ-ÿ' .]{3,40})/i);
+  const educationMatch = text.match(/(?:pendidikan|education|degree|学历)[\s:]*([A-Za-zÀ-ÿ' .0-9]{3,60})/i);
+  const yearMatch = text.match(/(\d{1,2})\+?\s*(?:tahun|years|年)/i);
+  const match = computeCandidateMatch(text);
   const filled = [];
+  const setValue = (id, value) => {
+    if (!value) return;
+    state.userResponses[id] = String(value).trim().replace(/\s+/g, ' ');
+    filled.push(id);
+  };
 
-  if (nameMatch && nameMatch[1].trim()) {
-    state.userResponses['recruit_name'] = nameMatch[1].trim().replace(/\s+/g, ' ');
-    filled.push('recruit_name');
-  }
-  if (phoneMatch && phoneMatch[0].trim()) {
-    state.userResponses['recruit_wa'] = phoneMatch[0].trim();
-    filled.push('recruit_wa');
-  }
+  setValue('recruit_name', nameMatch && nameMatch[1]);
+  setValue('recruit_email', emailMatch && emailMatch[0]);
+  setValue('recruit_wa', phoneMatch && phoneMatch[0]);
+  setValue('recruit_domisili', cityMatch && cityMatch[1]);
+  setValue('recruit_education', educationMatch && educationMatch[1]);
+  setValue('recruit_experience', yearMatch ? `${yearMatch[1]}+ tahun` : '');
+  setValue('recruit_skills', match.matched.join(', '));
 
   state.cvParse = {
     text,
@@ -1986,7 +2231,8 @@ function applyCvAutofill(text) {
     matched: match.matched,
     score: match.score,
     level: match.level,
-    role: roleOption ? roleOption.title : ''
+    role: match.role,
+    requirement: currentHrRequirement()
   };
   renderCurrentQuestion();
 }
@@ -2024,6 +2270,7 @@ function renderCvMatchPanel() {
 
 document.addEventListener('DOMContentLoaded', () => {
   state.paymentMethod = defaultPaymentMethodForLanguage(state.currentLanguage);
+  applyHrTemplate(state.hrTemplateKey, true);
   applyTranslations();
   updateDisplayTrigger();
   renderDashboard();
@@ -2044,6 +2291,7 @@ function toggleViews() {
   const form = document.getElementById('form-view');
   const dock = document.getElementById('form-dock');
   const ribbon = document.getElementById('hr-career-ribbon');
+  const portal = document.getElementById('candidate-portal');
   const ribbonTitle = document.getElementById('hr-ribbon-title');
   const ribbonStatus = document.getElementById('hr-ribbon-status');
   const banner = document.getElementById('simulation-banner');
@@ -2057,12 +2305,14 @@ function toggleViews() {
   if (dock) dock.classList.toggle('hidden', !isForm);
   if (banner) banner.classList.toggle('hidden', !(isForm && state.isSimulation));
   if (ribbon) ribbon.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
+  if (portal) portal.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
   if (landingNav) landingNav.classList.toggle('hidden', isForm);
   if (dashboardButton) dashboardButton.classList.toggle('hidden', !isForm);
   if (linkPill) linkPill.classList.toggle('hidden', !isForm);
   if (ribbonTitle && isForm) ribbonTitle.textContent = t('form.ribbonTitle');
   if (ribbonStatus && isForm) ribbonStatus.textContent = getPreset(state.activePresetKey).subText;
   renderInfoPanels();
+  renderCandidatePortal();
 }
 
 function renderInfoPanels() {
@@ -2125,6 +2375,7 @@ function renderDashboard() {
             ${escapeHtml(t('categories.preview'))}
           </button>
           ${key === 'custom' ? `<button type="button" onclick="openInfoPanel('custom')" class="custom-options-btn">${escapeHtml(t('custom.options'))}</button>` : ''}
+          ${key === 'recruit' ? `<button type="button" onclick="openInfoPanel('hrBuilder')" class="custom-options-btn">${escapeHtml(t('hr.builderOption'))}</button>` : ''}
         </article>
       `;
     }).join('');
@@ -2161,6 +2412,7 @@ function renderPaymentMethod() {
     });
   });
   renderCustomTiers();
+  renderHrPricing();
 }
 
 function setPaymentMethod(method, manual = true) {
@@ -2186,6 +2438,198 @@ function renderCustomTiers() {
   if (lightLoad) lightLoad.textContent = t('custom.loadLight');
   const complexLoad = document.getElementById('custom-complex-load');
   if (complexLoad) complexLoad.textContent = t('custom.loadComplex');
+}
+
+function currentHrRequirement() {
+  return state.hrRequirement || HR_TEMPLATES.tech[state.currentLanguage] || HR_TEMPLATES.tech.id;
+}
+
+function applyHrTemplate(templateKey, silent = false) {
+  const template = HR_TEMPLATES[templateKey] || HR_TEMPLATES.tech;
+  state.hrTemplateKey = template === HR_TEMPLATES.tech ? 'tech' : template === HR_TEMPLATES.people ? 'people' : template === HR_TEMPLATES.growth ? 'growth' : 'custom';
+  state.hrRequirement = { ...(template[state.currentLanguage] || template.id) };
+  renderHrBuilder();
+  if (state.view === 'form' && state.activePresetKey === 'recruit') {
+    renderActivePresetHeader();
+    renderCurrentQuestion();
+  }
+  if (!silent) {
+    const labels = { tech: 'hr.templateTech', people: 'hr.templatePeople', growth: 'hr.templateGrowth', custom: 'hr.templateCustom' };
+    showToast(`${t('toast.hrTemplate')}: ${t(labels[state.hrTemplateKey])}`);
+  }
+}
+
+function updateHrRequirement(field, value) {
+  if (!state.hrRequirement) return;
+  state.hrRequirement[field] = value;
+  state.hrTemplateKey = 'custom';
+  renderHrTemplateButtons();
+  renderHrPreview();
+  renderHrPricing();
+  renderHrRecap();
+  if (state.view === 'form' && state.activePresetKey === 'recruit') {
+    renderActivePresetHeader();
+    renderCurrentQuestion();
+  }
+}
+
+function renderHrTemplateButtons() {
+  const labels = { tech: 'hr.templateTech', people: 'hr.templatePeople', growth: 'hr.templateGrowth', custom: 'hr.templateCustom' };
+  Object.keys(labels).forEach((key) => {
+    const button = document.getElementById(`hr-template-${key}`);
+    if (!button) return;
+    button.textContent = t(labels[key]);
+    button.classList.toggle('active', key === state.hrTemplateKey);
+  });
+}
+
+function renderHrPreview() {
+  const r = currentHrRequirement();
+  const setText = (id, value) => {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+  };
+  setText('hr-preview-position', r.position);
+  setText('hr-preview-location', r.location);
+  setText('hr-preview-years', r.minYears);
+  setText('hr-preview-skills', r.skills);
+  setText('hr-preview-education', r.education);
+  setText('hr-preview-salary', r.salary);
+  setText('hr-preview-notice', r.noticePeriod);
+  setText('hr-preview-screening', r.screening);
+}
+
+function renderHrPricing() {
+  const data = HR_PRICING[state.paymentMethod] || HR_PRICING.idr;
+  const oldPrice = document.getElementById('hr-price-old');
+  const price = document.getElementById('hr-price-new');
+  if (oldPrice) oldPrice.textContent = data.old;
+  if (price) price.textContent = data.price;
+}
+
+function renderHrBuilder() {
+  const r = currentHrRequirement();
+  const fields = [
+    ['hr-position-input', 'position'],
+    ['hr-location-input', 'location'],
+    ['hr-min-years-input', 'minYears'],
+    ['hr-salary-input', 'salary'],
+    ['hr-notice-input', 'noticePeriod'],
+    ['hr-skills-input', 'skills'],
+    ['hr-education-input', 'education'],
+    ['hr-screening-input', 'screening']
+  ];
+  fields.forEach(([id, key]) => {
+    const element = document.getElementById(id);
+    if (element) element.value = r[key] || '';
+  });
+  renderHrTemplateButtons();
+  renderHrPreview();
+  renderHrPricing();
+  renderHrStatusList();
+  renderHrRecap();
+}
+
+function renderHrStatusList() {
+  const list = document.getElementById('hr-status-list');
+  if (!list) return;
+  list.innerHTML = HR_STATUS_KEYS.map((key) => `
+    <button type="button" onclick="setHrSelectionStatus('${key}')" class="hr-status-pill ${key === state.hrSelectionStatus ? 'active' : ''}">${escapeHtml(t(`hr.status.${key}`))}</button>
+  `).join('');
+}
+
+function setHrSelectionStatus(status) {
+  if (!HR_STATUS_KEYS.includes(status)) return;
+  state.hrSelectionStatus = status;
+  if (state.hrLastCandidate) state.hrLastCandidate.status = status;
+  renderHrStatusList();
+  renderHrRecap();
+  showToast(`${t('toast.hrStatus')}: ${t(`hr.status.${status}`)}`);
+}
+
+function getHrAnswerValue(id) {
+  const question = getPreset('recruit').questions.find((item) => item.id === id);
+  const raw = state.userResponses[id];
+  if (raw && typeof raw === 'object') return raw.url || raw.name || '';
+  return raw !== undefined ? raw : (question && question.defaultValue) || '';
+}
+
+function renderHrRecap() {
+  const body = document.getElementById('hr-recap-body');
+  if (!body) return;
+  const candidate = state.hrLastCandidate;
+  if (!candidate) {
+    body.innerHTML = `<tr><td colspan="3">${escapeHtml(t('hr.noCandidate'))}</td></tr>`;
+    return;
+  }
+  const score = candidate.score ? ` (${candidate.score})` : '';
+  body.innerHTML = `
+    <tr>
+      <td><b>${escapeHtml(candidate.name || '-')}</b><br><span>${escapeHtml(candidate.email || '-')} · ${escapeHtml(candidate.wa || '-')}</span></td>
+      <td>${escapeHtml(candidate.match || t('cv.levelLow'))}${escapeHtml(score)}</td>
+      <td>${escapeHtml(t(`hr.status.${candidate.status || 'new'}`))}</td>
+    </tr>
+  `;
+}
+
+function renderCandidatePortal() {
+  const portal = document.getElementById('candidate-portal');
+  if (!portal) return;
+  const isRecruitForm = state.view === 'form' && state.activePresetKey === 'recruit';
+  portal.classList.toggle('hidden', !isRecruitForm);
+  if (!isRecruitForm) return;
+
+  const r = currentHrRequirement();
+  const setText = (id, value) => {
+    const element = document.getElementById(id);
+    if (element) element.textContent = value;
+  };
+  const questions = getPreset('recruit').questions;
+  const index = Math.min(state.currentStepIndex, questions.length - 1);
+
+  setText('candidate-position', r.position);
+  setText('candidate-location', r.location);
+  setText('candidate-years', `${t('hr.minYears')}: ${r.minYears}`);
+  setText('candidate-skills', r.skills);
+  setText('candidate-education', r.education);
+  setText('candidate-salary', r.salary);
+  setText('candidate-notice', r.noticePeriod);
+  setText('candidate-screening', r.screening);
+  setText('candidate-progress-text', `${index + 1} / ${questions.length}`);
+
+  const progressBar = document.getElementById('candidate-progress-bar');
+  if (progressBar) progressBar.style.width = `${Math.round(((index + 1) / questions.length) * 100)}%`;
+
+  const steps = document.getElementById('candidate-step-list');
+  if (steps) {
+    steps.innerHTML = questions.map((_, stepIndex) => `
+      <span class="candidate-step-dot ${stepIndex < index ? 'done' : stepIndex === index ? 'active' : ''}"></span>
+    `).join('');
+  }
+
+  const cvState = document.getElementById('candidate-cv-state');
+  const cvMatch = document.getElementById('candidate-cv-match');
+  if (state.cvParse) {
+    if (cvState) cvState.textContent = `${t('portal.cvReady')} · ${state.cvParse.level} · ${state.cvParse.score}`;
+    if (cvMatch) {
+      cvMatch.textContent = `${t('portal.matchLabel')}: ${state.cvParse.level}`;
+      cvMatch.classList.add('matched');
+    }
+  } else {
+    if (cvState) cvState.textContent = t('portal.cvEmpty');
+    if (cvMatch) {
+      cvMatch.textContent = t('portal.matchLabel');
+      cvMatch.classList.remove('matched');
+    }
+  }
+}
+
+function jumpToCandidateStep(index) {
+  if (state.view !== 'form' || state.activePresetKey !== 'recruit') return;
+  const total = getPreset('recruit').questions.length;
+  clearAdvanceTimer();
+  state.currentStepIndex = Math.max(0, Math.min(index, total - 1));
+  renderCurrentQuestion();
 }
 
 function renderPricing() {
@@ -2431,6 +2875,7 @@ function renderActivePresetHeader() {
   if (headerPill) headerPill.textContent = `iziform.app/f/${p.slug}`;
   if (ribbonTitle) ribbonTitle.textContent = t('form.ribbonTitle');
   if (ribbonStatus) ribbonStatus.textContent = p.subText;
+  renderCandidatePortal();
 }
 
 // Render Current Question Card (Breathable & Luxurious)
@@ -2545,6 +2990,7 @@ function renderCurrentQuestion() {
 
   bodyElem.innerHTML = bodyHtml;
   renderCvMatchPanel();
+  renderCandidatePortal();
 
   const card = document.getElementById('active-question-card');
   if (card) {
@@ -2687,6 +3133,8 @@ function buildSubmissionPayload() {
     formSlug: p.slug,
     sourceUrl: state.gformUrl,
     simulation: state.isSimulation,
+    hrRequirement: state.activePresetKey === 'recruit' ? { ...currentHrRequirement() } : null,
+    selectionStatus: state.activePresetKey === 'recruit' ? state.hrSelectionStatus : null,
     cvMatch: state.cvParse ? {
       score: state.cvParse.score,
       level: state.cvParse.level,
@@ -2731,6 +3179,24 @@ async function triggerFormSubmissionSuccess() {
   triggerConfetti();
   const modal = document.getElementById('success-submit-modal');
   const p = getPreset(state.activePresetKey);
+  if (state.activePresetKey === 'recruit') {
+    state.hrLastCandidate = {
+      name: getHrAnswerValue('recruit_name'),
+      email: getHrAnswerValue('recruit_email'),
+      wa: getHrAnswerValue('recruit_wa'),
+      location: getHrAnswerValue('recruit_domisili'),
+      experience: getHrAnswerValue('recruit_experience'),
+      education: getHrAnswerValue('recruit_education'),
+      skills: getHrAnswerValue('recruit_skills'),
+      salary: getHrAnswerValue('recruit_salary'),
+      notice: getHrAnswerValue('recruit_notice'),
+      screening: getHrAnswerValue('recruit_screening'),
+      match: state.cvParse ? state.cvParse.level : t('cv.levelLow'),
+      score: state.cvParse ? state.cvParse.score : 0,
+      status: state.hrSelectionStatus
+    };
+    renderHrRecap();
+  }
   const summaryText = document.getElementById('summary-payload-text');
   const statusText = document.getElementById('sync-status-text');
   const firstQuestion = p.questions[0];
@@ -2739,7 +3205,13 @@ async function triggerFormSubmissionSuccess() {
     ? (rawName.url || rawName.name || '')
     : (rawName !== undefined ? rawName : (firstQuestion.defaultValue || ''));
 
-  if (summaryText) summaryText.textContent = t('success.respondent', { name: nameVal, form: p.companyName });
+  if (summaryText) {
+    summaryText.textContent = t('success.respondent', { name: nameVal, form: p.companyName });
+    if (state.activePresetKey === 'recruit') {
+      summaryText.textContent += ` • ${t('portal.matchLabel')}: ${state.cvParse ? state.cvParse.level : t('cv.levelLow')}`;
+      summaryText.textContent += ` • ${t('hr.statusLabel')}: ${t(`hr.status.${state.hrSelectionStatus}`)}`;
+    }
+  }
   if (statusText) statusText.textContent = t('success.sending');
   if (modal) modal.classList.remove('hidden');
   showToast(t('success.title'));
