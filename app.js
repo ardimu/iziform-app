@@ -525,9 +525,9 @@ const CUSTOM_PRICING = {
 };
 
 const HR_BASE_COPY = {
-  id: { industry: 'Teknologi & Digital', description: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', website: 'https://iziform.app', roleSummary: 'Memimpin inisiatif utama dan mengirimkan dampak yang terukur bagi tim.', responsibilities: 'Merancang solusi, berkolaborasi lintas fungsi, dan menjaga kualitas hasil akhir.', jobType: 'Full-time', mustHave: 'Pengalaman relevan, tools wajib sesuai posisi, dan domisili sesuai ketentuan.', qualification: 'Latar belakang profesional dengan portofolio atau pengalaman yang relevan.', certification: 'Sertifikasi relevan menjadi nilai tambah.', plusPoints: 'Pengalaman tim, komunikasi kuat, dan kemampuan belajar cepat.', cvRequired: true, matchThreshold: 'medium' },
-  en: { industry: 'Technology & Digital', description: 'A digital company building modern work products for Indonesian teams.', website: 'https://iziform.app', roleSummary: 'Lead key initiatives and deliver measurable impact for the team.', responsibilities: 'Design solutions, collaborate cross-functionally, and protect final quality.', jobType: 'Full-time', mustHave: 'Relevant experience, required tools, and location that matches the rule.', qualification: 'Professional background with a relevant portfolio or track record.', certification: 'Relevant certification is an advantage.', plusPoints: 'Team experience, strong communication, and fast learning.', cvRequired: true, matchThreshold: 'medium' },
-  zh: { industry: '科技与数字化', description: '一家为印尼团队打造现代工作产品的数字公司。', website: 'https://iziform.app', roleSummary: '主导关键项目，为团队带来可衡量的成果。', responsibilities: '设计解决方案、跨职能协作并把控最终质量。', jobType: 'Full-time', mustHave: '具备相关经验、指定工具，并符合所在地要求。', qualification: '具备相关专业背景及作品集或项目经历。', certification: '相关证书者优先。', plusPoints: '团队经验、沟通能力强、学习速度快。', cvRequired: true, matchThreshold: 'medium' }
+  id: { industry: 'Teknologi & Digital', description: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', website: 'https://iziform.app', roleSummary: 'Memimpin inisiatif utama dan mengirimkan dampak yang terukur bagi tim.', responsibilities: 'Merancang solusi, berkolaborasi lintas fungsi, dan menjaga kualitas hasil akhir.', jobType: 'Full-time', mustHave: 'Pengalaman relevan, tools wajib sesuai posisi, dan domisili sesuai ketentuan.', qualification: 'Latar belakang profesional dengan portofolio atau pengalaman yang relevan.', certification: 'Sertifikasi relevan menjadi nilai tambah.', plusPoints: 'Pengalaman tim, komunikasi kuat, dan kemampuan belajar cepat.', benefit: '', customFields: [], cvRequired: true, matchThreshold: 'medium' },
+  en: { industry: 'Technology & Digital', description: 'A digital company building modern work products for Indonesian teams.', website: 'https://iziform.app', roleSummary: 'Lead key initiatives and deliver measurable impact for the team.', responsibilities: 'Design solutions, collaborate cross-functionally, and protect final quality.', jobType: 'Full-time', mustHave: 'Relevant experience, required tools, and location that matches the rule.', qualification: 'Professional background with a relevant portfolio or track record.', certification: 'Relevant certification is an advantage.', plusPoints: 'Team experience, strong communication, and fast learning.', benefit: '', customFields: [], cvRequired: true, matchThreshold: 'medium' },
+  zh: { industry: '科技与数字化', description: '一家为印尼团队打造现代工作产品的数字公司。', website: 'https://iziform.app', roleSummary: '主导关键项目，为团队带来可衡量的成果。', responsibilities: '设计解决方案、跨职能协作并把控最终质量。', jobType: 'Full-time', mustHave: '具备相关经验、指定工具，并符合所在地要求。', qualification: '具备相关专业背景及作品集或项目经历。', certification: '相关证书者优先。', plusPoints: '团队经验、沟通能力强、学习速度快。', benefit: '', customFields: [], cvRequired: true, matchThreshold: 'medium' }
 };
 
 const HR_COMPANY_PRESETS = {
@@ -1136,6 +1136,26 @@ const I18N = {
     'hr.freeTry': 'Free tersedia · coba',
     'hr.freeNote': 'Mode dasar gratis tetap tersedia untuk mencoba alur Sisi A ↔ Sisi B.',
     'hr.starterName': 'Paket Mulai',
+    'hr.benefit': 'Benefit / tunjangan',
+    'hr.benefitPlaceholder': 'Contoh: BPJS, asuransi, flexible working, learning budget',
+    'hr.benefitHint': 'Kosongkan untuk menyembunyikan bagian Benefit di portal kandidat.',
+    'hr.noBenefit': 'Belum diisi',
+    'hr.customFieldsTitle': 'Kolom tambahan pelamar',
+    'hr.customFieldsDesc': 'Tambah field di luar standar; tampil otomatis di Sisi B dan rekap Sheet HR.',
+    'hr.customFieldNew': 'Kolom baru',
+    'hr.customFieldLabel': 'Nama label kolom',
+    'hr.customFieldType': 'Jenis input',
+    'hr.customFieldTypeText': 'Input teks',
+    'hr.customFieldTypeNote': 'Catatan panjang',
+    'hr.customFieldRequired': 'Wajib diisi',
+    'hr.customFieldAdd': 'Tambah kolom',
+    'hr.customFieldRemove': 'Hapus',
+    'hr.customFieldsEmpty': 'Belum ada kolom tambahan.',
+    'hr.additionalQuestions': 'INFORMASI TAMBAHAN',
+    'hr.customFieldInputPlaceholder': 'Tulis jawaban Anda',
+    'hr.customFieldNotePlaceholder': 'Tulis jawaban Anda dengan detail',
+    'hr.colBenefit': 'Benefit',
+    'hr.colCustom': 'Kolom tambahan',
     'hr.benefitPortal': 'Portal lamaran Sisi B aktif',
     'hr.benefitCv': 'Auto-fill PDF CV + kecocokan Tinggi/Sedang/Rendah',
     'hr.benefitSheet': 'Rekap 1 Google Sheet HR',
@@ -1310,6 +1330,8 @@ const I18N = {
     'form.open': 'Open Registration',
     'form.verified': 'Terverifikasi',
     'form.previous': 'Sebelumnya',
+    'form.required': 'Wajib',
+    'form.optional': 'Opsional',
     'form.continue': 'Lanjutkan',
     'form.submit': 'Kirim ke Google Sheet',
     'form.hint': 'Pilih kartu atau tekan',
@@ -1370,6 +1392,8 @@ const I18N = {
     'toast.pdfUnreadable': 'Teks PDF tidak terbaca. Silakan isi data manual.',
     'toast.pdfError': 'PDF gagal dibaca. Silakan isi data manual.',
     'toast.cvRequired': 'CV PDF wajib diunggah sebelum melanjutkan.',
+    'toast.required': 'Field ini wajib diisi',
+    'toast.requiredFieldsMissing': 'Lengkapi kolom wajib sebelum mengirim',
     'toast.hrFreeMode': 'Mode dasar Free aktif — template Netral dipilih.',
     'toast.theme': 'Tema UI diubah: {name}',
     'toast.font': 'Font aktif: {name}',
@@ -1577,6 +1601,26 @@ const I18N = {
     'hr.freeTry': 'Free available · try it',
     'hr.freeNote': 'The free basic mode still works for trying the Sisi A ↔ Sisi B flow.',
     'hr.starterName': 'Starter',
+    'hr.benefit': 'Benefits / perks',
+    'hr.benefitPlaceholder': 'Example: health insurance, flexible work, learning budget',
+    'hr.benefitHint': 'Leave blank to hide the Benefits section on the candidate portal.',
+    'hr.noBenefit': 'Not specified',
+    'hr.customFieldsTitle': 'Additional applicant fields',
+    'hr.customFieldsDesc': 'Add fields beyond the defaults; they appear on Sisi B and in the HR Sheet recap.',
+    'hr.customFieldNew': 'New field',
+    'hr.customFieldLabel': 'Field label',
+    'hr.customFieldType': 'Input type',
+    'hr.customFieldTypeText': 'Text input',
+    'hr.customFieldTypeNote': 'Long note',
+    'hr.customFieldRequired': 'Required',
+    'hr.customFieldAdd': 'Add field',
+    'hr.customFieldRemove': 'Remove',
+    'hr.customFieldsEmpty': 'No additional fields yet.',
+    'hr.additionalQuestions': 'ADDITIONAL INFORMATION',
+    'hr.customFieldInputPlaceholder': 'Write your answer',
+    'hr.customFieldNotePlaceholder': 'Write your answer with details',
+    'hr.colBenefit': 'Benefits',
+    'hr.colCustom': 'Additional fields',
     'hr.benefitPortal': 'Sisi B application portal enabled',
     'hr.benefitCv': 'PDF CV auto-fill + High/Medium/Low match',
     'hr.benefitSheet': 'Recap in 1 HR Google Sheet',
@@ -1751,6 +1795,8 @@ const I18N = {
     'form.open': 'Open Registration',
     'form.verified': 'Verified',
     'form.previous': 'Previous',
+    'form.required': 'Required',
+    'form.optional': 'Optional',
     'form.continue': 'Continue',
     'form.submit': 'Send to Google Sheet',
     'form.hint': 'Pick a card or press',
@@ -1811,6 +1857,8 @@ const I18N = {
     'toast.pdfUnreadable': 'PDF text could not be read. Please fill in the details manually.',
     'toast.pdfError': 'The PDF could not be processed. Please fill in the details manually.',
     'toast.cvRequired': 'A PDF CV is required before continuing.',
+    'toast.required': 'This field is required',
+    'toast.requiredFieldsMissing': 'Complete the required fields before submitting',
     'toast.hrFreeMode': 'Free basic mode enabled — Neutral template selected.',
     'toast.theme': 'UI theme changed: {name}',
     'toast.font': 'Active font: {name}',
@@ -2018,6 +2066,26 @@ const I18N = {
     'hr.freeTry': '免费可用 · 立即试用',
     'hr.freeNote': '免费基础模式仍可体验 A 侧 ↔ B 侧完整流程。',
     'hr.starterName': '入门套餐',
+    'hr.benefit': '福利 / 待遇',
+    'hr.benefitPlaceholder': '例如：社保、商业保险、弹性办公、学习津贴',
+    'hr.benefitHint': '留空即可在候选人门户隐藏福利区块。',
+    'hr.noBenefit': '未填写',
+    'hr.customFieldsTitle': '候选人附加字段',
+    'hr.customFieldsDesc': '添加标准字段以外的项目；会自动显示在 B 侧和 HR Sheet 汇总中。',
+    'hr.customFieldNew': '新字段',
+    'hr.customFieldLabel': '字段名称',
+    'hr.customFieldType': '输入类型',
+    'hr.customFieldTypeText': '文本输入',
+    'hr.customFieldTypeNote': '长文本',
+    'hr.customFieldRequired': '必填',
+    'hr.customFieldAdd': '添加字段',
+    'hr.customFieldRemove': '删除',
+    'hr.customFieldsEmpty': '暂无附加字段。',
+    'hr.additionalQuestions': '附加信息',
+    'hr.customFieldInputPlaceholder': '请输入您的答案',
+    'hr.customFieldNotePlaceholder': '请详细描述您的答案',
+    'hr.colBenefit': '福利',
+    'hr.colCustom': '附加字段',
     'hr.benefitPortal': '启用 B 侧申请门户',
     'hr.benefitCv': 'PDF 简历自动填充 + 高/中/低匹配',
     'hr.benefitSheet': '汇总至 1 个 HR Google Sheet',
@@ -2192,6 +2260,8 @@ const I18N = {
     'form.open': '开放报名',
     'form.verified': '已验证',
     'form.previous': '上一步',
+    'form.required': '必填',
+    'form.optional': '选填',
     'form.continue': '继续',
     'form.submit': '发送到 Google Sheet',
     'form.hint': '选择卡片或按',
@@ -2252,6 +2322,8 @@ const I18N = {
     'toast.pdfUnreadable': '无法读取 PDF 文本，请手动填写信息。',
     'toast.pdfError': 'PDF 处理失败，请手动填写信息。',
     'toast.cvRequired': '继续之前必须上传 PDF 简历。',
+    'toast.required': '此项为必填项',
+    'toast.requiredFieldsMissing': '提交前请填写所有必填项',
     'toast.hrFreeMode': '免费基础模式已启用 — 已选择中性模板。',
     'toast.theme': '界面主题已更改：{name}',
     'toast.font': '当前字体：{name}',
@@ -2321,13 +2393,24 @@ function getPreset(key) {
   if (key === 'recruit') {
     const requirement = state.hrRequirement || HR_TEMPLATES.tech[state.currentLanguage] || HR_TEMPLATES.tech.id;
     const buildQuestions = HR_QUESTION_COPY[state.currentLanguage] || HR_QUESTION_COPY.id;
+    const fixedQuestions = buildQuestions(requirement);
+    const customQuestions = getHrCustomFields().map((field, index) => ({
+      id: field.id,
+      category: `${String(fixedQuestions.length + index + 1).padStart(2, '0')} • ${t('hr.additionalQuestions')}`,
+      title: field.label,
+      subtitle: field.required ? t('form.required') : t('form.optional'),
+      type: field.type,
+      placeholder: field.type === 'textarea' ? t('hr.customFieldNotePlaceholder') : t('hr.customFieldInputPlaceholder'),
+      defaultValue: '',
+      required: field.required
+    }));
     result = {
       ...result,
       companyName: state.hrCompanyName || result.companyName,
       companyLogo: state.hrCompanyLogo,
       logo: getHrCompanyInitials(),
       subText: `Official Career Portal • ${requirement.position} • ${requirement.location}`,
-      questions: buildQuestions(requirement)
+      questions: [...fixedQuestions, ...customQuestions]
     };
   }
   return result;
@@ -2654,7 +2737,6 @@ document.addEventListener('DOMContentLoaded', () => {
 function toggleViews() {
   const dashboard = document.getElementById('dashboard-view');
   const form = document.getElementById('form-view');
-  const dock = document.getElementById('form-dock');
   const ribbon = document.getElementById('hr-career-ribbon');
   const portal = document.getElementById('candidate-portal');
   const stickyHeader = document.getElementById('candidate-company-sticky');
@@ -2670,7 +2752,6 @@ function toggleViews() {
 
   if (dashboard) dashboard.classList.toggle('hidden', state.view !== 'dashboard');
   if (form) form.classList.toggle('hidden', !isForm);
-  if (dock) dock.classList.toggle('hidden', !isForm);
   if (banner) banner.classList.toggle('hidden', !(isForm && state.isSimulation));
   if (ribbon) ribbon.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
   if (portal) portal.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
@@ -2823,6 +2904,37 @@ function currentHrRequirement() {
   return state.hrRequirement || HR_TEMPLATES.tech[state.currentLanguage] || HR_TEMPLATES.tech.id;
 }
 
+function cloneHrRequirement(source = currentHrRequirement()) {
+  const base = source || {};
+  return {
+    ...base,
+    customFields: (Array.isArray(base.customFields) ? base.customFields : []).map((field) => ({ ...field }))
+  };
+}
+
+function getHrCustomFields() {
+  const fields = currentHrRequirement().customFields;
+  if (!Array.isArray(fields)) return [];
+  return fields
+    .filter((field) => field && typeof field.label === 'string' && field.label.trim() && field.id)
+    .map((field) => ({
+      id: String(field.id),
+      label: field.label.trim(),
+      type: field.type === 'textarea' ? 'textarea' : 'text',
+      required: Boolean(field.required)
+    }));
+}
+
+function renderBenefitDisplays() {
+  const benefit = String(currentHrRequirement().benefit || '').trim();
+  document.querySelectorAll('[data-hr-benefit-value]').forEach((node) => {
+    node.textContent = benefit || t('hr.noBenefit');
+  });
+  document.querySelectorAll('[data-hr-benefit-wrap]').forEach((node) => {
+    node.classList.toggle('hidden', !benefit);
+  });
+}
+
 function getHrCompanyInitials(name = state.hrCompanyName) {
   const words = String(name || '').trim().split(/\s+/).filter(Boolean);
   const initials = words.slice(0, 2).map((word) => word[0]).join('').toUpperCase();
@@ -2946,10 +3058,12 @@ function applyHrUiTemplate(isRecruitForm = false) {
   nodes.forEach((node) => {
     if (isRecruitForm) {
       node.dataset.hrUiTemplate = theme;
+      node.dataset.hrUiTier = template.tier;
       node.dataset.ornament = ornament;
       node.dataset.fontPair = fontPair;
     } else {
       node.removeAttribute('data-hr-ui-template');
+      node.removeAttribute('data-hr-ui-tier');
       node.removeAttribute('data-ornament');
       node.removeAttribute('data-font-pair');
     }
@@ -3176,7 +3290,7 @@ function setHrActiveSide(side, silent = false) {
 function applyHrTemplate(templateKey, silent = false) {
   const template = HR_TEMPLATES[templateKey] || HR_TEMPLATES.tech;
   state.hrTemplateKey = template === HR_TEMPLATES.tech ? 'tech' : template === HR_TEMPLATES.people ? 'people' : template === HR_TEMPLATES.growth ? 'growth' : 'custom';
-  state.hrRequirement = { ...(template[state.currentLanguage] || template.id) };
+  state.hrRequirement = cloneHrRequirement(template[state.currentLanguage] || template.id);
   renderHrBuilder();
   if (state.view === 'form' && state.activePresetKey === 'recruit') {
     renderActivePresetHeader();
@@ -3194,6 +3308,7 @@ function updateHrRequirement(field, value) {
   state.hrTemplateKey = 'custom';
   renderHrTemplateButtons();
   renderHrPreview();
+  renderBenefitDisplays();
   renderHrPricing();
   renderHrRecap();
   renderCompanyIdentity();
@@ -3201,6 +3316,88 @@ function updateHrRequirement(field, value) {
     renderActivePresetHeader();
     renderCurrentQuestion();
   }
+}
+
+function refreshHrRequirementViews() {
+  renderHrTemplateButtons();
+  renderHrPreview();
+  renderBenefitDisplays();
+  renderHrRecap();
+  renderCompanyIdentity();
+  if (state.view === 'form' && state.activePresetKey === 'recruit') {
+    renderActivePresetHeader();
+    renderCurrentQuestion();
+  }
+}
+
+function renderHrCustomFieldEditor() {
+  const list = document.getElementById('hr-custom-fields-list');
+  if (!list) return;
+  const fields = getHrCustomFields();
+  if (!fields.length) {
+    list.innerHTML = `<p class="hr-custom-fields-empty">${escapeHtml(t('hr.customFieldsEmpty'))}</p>`;
+    return;
+  }
+  list.innerHTML = fields.map((field, index) => {
+    const selectedText = field.type === 'text' ? ' selected' : '';
+    const selectedNote = field.type === 'textarea' ? ' selected' : '';
+    const checked = field.required ? ' checked' : '';
+    return `
+      <div class="hr-custom-field-row">
+        <label class="hr-form-field">
+          <span data-i18n="hr.customFieldLabel">Nama label kolom</span>
+          <input type="text" value="${escapeHtml(field.label)}" oninput="updateHrCustomField(${index}, 'label', this.value)">
+        </label>
+        <label class="hr-form-field">
+          <span data-i18n="hr.customFieldType">Jenis input</span>
+          <select onchange="updateHrCustomField(${index}, 'type', this.value)">
+            <option value="text"${selectedText} data-i18n="hr.customFieldTypeText">Input teks</option>
+            <option value="textarea"${selectedNote} data-i18n="hr.customFieldTypeNote">Catatan panjang</option>
+          </select>
+        </label>
+        <label class="hr-form-field hr-check-field">
+          <span data-i18n="hr.customFieldRequired">Wajib diisi</span>
+          <input type="checkbox"${checked} onchange="updateHrCustomField(${index}, 'required', this.checked)">
+        </label>
+        <button type="button" class="hr-custom-field-remove" onclick="removeHrCustomField(${index})" aria-label="Remove field"><span aria-hidden="true">&times;</span> <span data-i18n="hr.customFieldRemove">Hapus</span></button>
+      </div>`;
+  }).join('');
+  applyTranslations();
+}
+
+function addHrCustomField() {
+  if (!state.hrRequirement) return;
+  if (!Array.isArray(state.hrRequirement.customFields)) state.hrRequirement.customFields = [];
+  const index = state.hrRequirement.customFields.length + 1;
+  const id = `hr_custom_${Date.now().toString(36)}_${index}`;
+  state.hrRequirement.customFields.push({
+    id,
+    label: `${t('hr.customFieldNew')} ${index}`,
+    type: 'text',
+    required: false
+  });
+  state.hrTemplateKey = 'custom';
+  state.userResponses[id] = '';
+  renderHrCustomFieldEditor();
+  refreshHrRequirementViews();
+}
+
+function updateHrCustomField(index, field, value) {
+  if (!state.hrRequirement || !Array.isArray(state.hrRequirement.customFields)) return;
+  const target = state.hrRequirement.customFields[index];
+  if (!target || !(field in target)) return;
+  target[field] = value;
+  state.hrTemplateKey = 'custom';
+  refreshHrRequirementViews();
+}
+
+function removeHrCustomField(index) {
+  if (!state.hrRequirement || !Array.isArray(state.hrRequirement.customFields)) return;
+  const [removed] = state.hrRequirement.customFields.splice(index, 1);
+  if (removed && removed.id) delete state.userResponses[removed.id];
+  state.hrTemplateKey = 'custom';
+  renderHrCustomFieldEditor();
+  refreshHrRequirementViews();
 }
 
 function renderHrTemplateButtons() {
@@ -3227,6 +3424,8 @@ function renderHrPreview() {
   setText('hr-preview-salary', r.salary);
   setText('hr-preview-notice', r.noticePeriod);
   setText('hr-preview-screening', r.screening);
+  setText('hr-preview-benefit', r.benefit || t('hr.noBenefit'));
+  renderBenefitDisplays();
 }
 
 function renderHrPricing() {
@@ -3259,7 +3458,8 @@ function renderHrBuilder() {
     ['hr-must-have-input', 'mustHave'],
     ['hr-qualification-input', 'qualification'],
     ['hr-certification-input', 'certification'],
-    ['hr-plus-points-input', 'plusPoints']
+    ['hr-plus-points-input', 'plusPoints'],
+    ['hr-benefit-input', 'benefit']
   ];
   fields.forEach(([id, key]) => {
     const element = document.getElementById(id);
@@ -3288,6 +3488,7 @@ function renderHrBuilder() {
   renderHrFontPairControl();
   renderHrUiPreview();
   renderHrPreview();
+  renderHrCustomFieldEditor();
   renderHrPricing();
   renderHrStatusList();
   renderHrRecap();
@@ -3322,15 +3523,25 @@ function renderHrRecap() {
   if (!body) return;
   const candidate = state.hrLastCandidate;
   if (!candidate) {
-    body.innerHTML = `<tr><td colspan="3">${escapeHtml(t('hr.noCandidate'))}</td></tr>`;
+    body.innerHTML = `<tr><td colspan="5">${escapeHtml(t('hr.noCandidate'))}</td></tr>`;
     return;
   }
   const score = candidate.score ? ` (${candidate.score})` : '';
+  const benefit = String(candidate.benefit || '').trim() || t('hr.noBenefit');
+  const answers = Array.isArray(candidate.customAnswers) ? candidate.customAnswers : [];
+  const customAnswers = answers.length
+    ? answers.map((answer) => {
+      const display = answer.display === undefined || answer.display === null || answer.display === '' ? '-' : answer.display;
+      return `<b>${escapeHtml(answer.label || '-')}:</b> ${escapeHtml(display)}`;
+    }).join('<br>')
+    : '-';
   body.innerHTML = `
     <tr>
       <td><b>${escapeHtml(candidate.name || '-')}</b><br><span>${escapeHtml(candidate.email || '-')} · ${escapeHtml(candidate.wa || '-')}</span></td>
       <td>${escapeHtml(candidate.match || t('cv.levelLow'))}${escapeHtml(score)}</td>
       <td>${escapeHtml(t(`hr.status.${candidate.status || 'new'}`))}</td>
+      <td>${escapeHtml(benefit)}</td>
+      <td>${customAnswers}</td>
     </tr>
   `;
 }
@@ -3394,6 +3605,17 @@ function jumpToCandidateStep(index) {
   clearAdvanceTimer();
   state.currentStepIndex = Math.max(0, Math.min(index, total - 1));
   renderCurrentQuestion();
+}
+
+function getRecruitQuestionIndex(id) {
+  const questions = getPreset('recruit').questions;
+  const index = questions.findIndex((question) => question.id === id);
+  return index >= 0 ? index : questions.length - 1;
+}
+
+function jumpToQuestionById(id) {
+  if (state.view !== 'form' || state.activePresetKey !== 'recruit') return;
+  jumpToCandidateStep(getRecruitQuestionIndex(id));
 }
 
 function renderPricing() {
@@ -3669,13 +3891,14 @@ function renderCurrentQuestion() {
 
   if (catTag) catTag.textContent = q.category;
   if (counterTag) counterTag.textContent = t('form.questionCounter', { current: idx + 1, total: qList.length });
-  if (headline) headline.textContent = q.title;
+  if (headline) headline.textContent = q.required ? `${q.title} *` : q.title;
   if (subtitle) subtitle.textContent = q.subtitle;
 
   const bodyElem = document.getElementById('q-interactive-body');
   if (!bodyElem) return;
 
   let bodyHtml = '';
+  const requiredAttr = q.required ? ' required aria-required="true"' : '';
 
   if (q.type === 'text' || q.type === 'tel') {
     const val = state.userResponses[q.id] !== undefined ? state.userResponses[q.id] : q.defaultValue;
@@ -3686,7 +3909,7 @@ function renderCurrentQuestion() {
                value="${escapeHtml(val)}"
                placeholder="${escapeHtml(q.placeholder)}"
                oninput="state.userResponses['${q.id}'] = this.value"
-               class="large-open-input">
+               class="large-open-input"${requiredAttr}>
       </div>
     `;
   } else if (q.type === 'textarea') {
@@ -3696,7 +3919,7 @@ function renderCurrentQuestion() {
         <textarea id="large-textarea-field" rows="4"
                   placeholder="${escapeHtml(q.placeholder)}"
                   oninput="state.userResponses['${q.id}'] = this.value"
-                  class="large-open-input large-textarea">${escapeHtml(val)}</textarea>
+                  class="large-open-input large-textarea"${requiredAttr}>${escapeHtml(val)}</textarea>
       </div>
     `;
   } else if (q.type === 'date') {
@@ -3705,7 +3928,7 @@ function renderCurrentQuestion() {
       <div>
         <input type="date" id="large-date-field" value="${escapeHtml(val)}"
                onchange="state.userResponses['${q.id}'] = this.value"
-               class="large-open-input date-input">
+               class="large-open-input date-input"${requiredAttr}>
       </div>
     `;
   } else if (q.type === 'rating') {
@@ -3773,6 +3996,7 @@ function renderCurrentQuestion() {
   updateFloatingDock();
 
   setTimeout(() => {
+    if (document.activeElement && document.activeElement.closest && document.activeElement.closest('.hr-builder-grid')) return;
     const inp = document.getElementById('large-input-field') || document.getElementById('large-textarea-field') || document.getElementById('large-date-field');
     if (inp) inp.focus();
   }, 80);
@@ -3820,7 +4044,7 @@ function handleCvPickerChange(event) {
   const input = event && event.target;
   const file = input && input.files ? input.files[0] : null;
   if (!file) return;
-  jumpToCandidateStep(getPreset('recruit').questions.length - 1);
+  jumpToQuestionById('recruit_cv');
   handleFileInput('recruit_cv', file);
 }
 
@@ -3850,7 +4074,7 @@ function handleCvDrop(event) {
   handleCvDragLeave(event);
   const file = event.dataTransfer && event.dataTransfer.files && event.dataTransfer.files[0];
   if (!file) return;
-  jumpToCandidateStep(getPreset('recruit').questions.length - 1);
+  jumpToQuestionById('recruit_cv');
   handleFileInput('recruit_cv', file);
 }
 
@@ -3890,25 +4114,48 @@ function handleDocLinkInput(qId, value) {
   renderCvMatchPanel();
 }
 
-// Dock Navigation
+function isHrAnswerEmpty(question) {
+  const raw = state.userResponses[question.id];
+  if (raw === undefined || raw === null) return true;
+  if (typeof raw === 'number') return Number.isNaN(raw);
+  if (typeof raw === 'boolean') return !raw;
+  if (typeof raw === 'object') return !raw.url && !raw.name && !raw.value;
+  return String(raw).trim() === '';
+}
+
+function isQuestionAnswerValid(question) {
+  if (!question) return true;
+  if (question.id === 'recruit_cv' && state.activePresetKey === 'recruit' && currentHrRequirement().cvRequired !== false) {
+    return !isHrAnswerEmpty(question);
+  }
+  if (question.required && isHrAnswerEmpty(question)) return false;
+  return true;
+}
+
 function nextStepQuestion() {
   if (state.view !== 'form') return;
   clearAdvanceTimer();
   const p = getPreset(state.activePresetKey);
   const question = p.questions[state.currentStepIndex];
-  if (state.activePresetKey === 'recruit' && !state.isSimulation && question && question.id === 'recruit_cv' && currentHrRequirement().cvRequired !== false) {
-    const cvAnswer = state.userResponses.recruit_cv;
-    if (!cvAnswer || (!cvAnswer.name && !cvAnswer.url)) {
-      showToast(t('toast.cvRequired'));
-      return;
-    }
+  if (state.activePresetKey === 'recruit' && !state.isSimulation && !isQuestionAnswerValid(question)) {
+    showToast(question && question.id === 'recruit_cv' ? t('toast.cvRequired') : t('toast.required'));
+    return;
   }
   if (state.currentStepIndex < p.questions.length - 1) {
     state.currentStepIndex++;
     renderCurrentQuestion();
-  } else {
-    triggerFormSubmissionSuccess();
+    return;
   }
+  if (state.activePresetKey === 'recruit' && !state.isSimulation) {
+    const invalidIndex = p.questions.findIndex((item) => !isQuestionAnswerValid(item));
+    if (invalidIndex >= 0) {
+      state.currentStepIndex = invalidIndex;
+      renderCurrentQuestion();
+      showToast(t('toast.requiredFieldsMissing'));
+      return;
+    }
+  }
+  triggerFormSubmissionSuccess();
 }
 
 function prevStepQuestion() {
@@ -3926,17 +4173,16 @@ function updateFloatingDock() {
   const idx = state.currentStepIndex;
   const percent = Math.round(((idx + 1) / total) * 100);
 
-  const prevBtn = document.getElementById('dock-btn-prev');
-  const nextLabel = document.getElementById('dock-next-label');
-  const progressBar = document.getElementById('dock-progress-bar');
-  const percentText = document.getElementById('dock-percent-text');
+  const prevBtn = document.getElementById('question-btn-prev');
+  const nextLabel = document.getElementById('question-next-label');
+  const progressBar = document.getElementById('question-progress-bar');
+  const percentText = document.getElementById('question-percent-text');
 
   if (prevBtn) {
-    if (idx === 0) {
-      prevBtn.className = 'dock-btn dock-btn-secondary opacity-50 cursor-not-allowed';
-    } else {
-      prevBtn.className = 'dock-btn dock-btn-secondary cursor-pointer';
-    }
+    prevBtn.disabled = idx === 0;
+    prevBtn.className = idx === 0
+      ? 'dock-btn dock-btn-secondary opacity-50 cursor-not-allowed'
+      : 'dock-btn dock-btn-secondary cursor-pointer';
   }
 
   if (nextLabel) {
@@ -3949,6 +4195,14 @@ function updateFloatingDock() {
 
 function buildSubmissionPayload() {
   const p = getPreset(state.activePresetKey);
+  const isRecruit = state.activePresetKey === 'recruit';
+  const customFields = isRecruit ? getHrCustomFields() : [];
+  const customAnswers = customFields.map((field) => {
+    const raw = state.userResponses[field.id] !== undefined ? state.userResponses[field.id] : '';
+    let display = raw;
+    if (raw && typeof raw === 'object') display = raw.url || raw.name || '';
+    return { id: field.id, label: field.label, type: field.type, required: field.required, value: raw, display };
+  });
   return {
     submittedAt: new Date().toISOString(),
     preset: state.activePresetKey,
@@ -3958,12 +4212,15 @@ function buildSubmissionPayload() {
     formSlug: p.slug,
     companyName: state.hrCompanyName,
     companyLogoMode: state.hrCompanyLogo ? 'uploaded' : 'initials',
-    companyProfile: state.activePresetKey === 'recruit' ? { ...state.hrCompanyProfile } : null,
-    hrUiTemplate: state.activePresetKey === 'recruit' ? state.hrUiTemplate : null,
-    hrUiTier: state.activePresetKey === 'recruit' ? state.hrUiTier : null,
+    companyProfile: isRecruit ? { ...state.hrCompanyProfile } : null,
+    hrUiTemplate: isRecruit ? state.hrUiTemplate : null,
+    hrUiTier: isRecruit ? state.hrUiTier : null,
+    benefit: isRecruit ? String(currentHrRequirement().benefit || '').trim() : '',
+    customFieldDefinitions: customFields.map((field) => ({ ...field })),
+    customAnswers,
     sourceUrl: state.gformUrl,
     simulation: state.isSimulation,
-    hrRequirement: state.activePresetKey === 'recruit' ? { ...currentHrRequirement() } : null,
+    hrRequirement: isRecruit ? cloneHrRequirement(currentHrRequirement()) : null,
     selectionStatus: state.activePresetKey === 'recruit' ? state.hrSelectionStatus : null,
     cvMatch: state.cvParse ? {
       score: state.cvParse.score,
@@ -4006,9 +4263,18 @@ async function sendToGoogleSheet(payload, webhookUrl) {
 async function triggerFormSubmissionSuccess() {
   if (state.view !== 'form') return;
   clearAdvanceTimer();
+  const p = getPreset(state.activePresetKey);
+  if (state.activePresetKey === 'recruit' && !state.isSimulation) {
+    const invalidIndex = p.questions.findIndex((item) => !isQuestionAnswerValid(item));
+    if (invalidIndex >= 0) {
+      state.currentStepIndex = invalidIndex;
+      renderCurrentQuestion();
+      showToast(invalidIndex === 0 ? t('toast.requiredFieldsMissing') : t('toast.required'));
+      return;
+    }
+  }
   triggerConfetti();
   const modal = document.getElementById('success-submit-modal');
-  const p = getPreset(state.activePresetKey);
   if (state.activePresetKey === 'recruit') {
     state.hrLastCandidate = {
       name: getHrAnswerValue('recruit_name'),
@@ -4021,6 +4287,13 @@ async function triggerFormSubmissionSuccess() {
       salary: getHrAnswerValue('recruit_salary'),
       notice: getHrAnswerValue('recruit_notice'),
       screening: getHrAnswerValue('recruit_screening'),
+      benefit: String(currentHrRequirement().benefit || '').trim(),
+      customAnswers: getHrCustomFields().map((field) => {
+        const raw = state.userResponses[field.id] !== undefined ? state.userResponses[field.id] : '';
+        let display = raw;
+        if (raw && typeof raw === 'object') display = raw.url || raw.name || '';
+        return { id: field.id, label: field.label, type: field.type, required: field.required, value: raw, display };
+      }),
       match: state.cvParse ? state.cvParse.level : t('cv.levelLow'),
       score: state.cvParse ? state.cvParse.score : 0,
       status: state.hrSelectionStatus

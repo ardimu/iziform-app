@@ -525,6 +525,11 @@
                     <span data-i18n="hr.mustHave">Syarat mutlak / wajib</span>
                     <textarea id="hr-must-have-input" rows="2" oninput="updateHrRequirement('mustHave', this.value)"></textarea>
                   </label>
+                  <label class="hr-form-field hr-form-wide">
+                    <span data-i18n="hr.benefit">Benefit / tunjangan</span>
+                    <textarea id="hr-benefit-input" rows="2" data-i18n-placeholder="hr.benefitPlaceholder" placeholder="Contoh: BPJS, asuransi, flexible working, learning budget" oninput="updateHrRequirement('benefit', this.value)"></textarea>
+                    <small class="hr-field-hint" data-i18n="hr.benefitHint">Kosongkan untuk menyembunyikan bagian Benefit di portal kandidat.</small>
+                  </label>
                 </div>
               </div>
               <div class="hr-block">
@@ -568,6 +573,14 @@
                     </select>
                   </label>
                 </div>
+              </div>
+              <div class="hr-block hr-custom-fields-block">
+                <div class="hr-ui-head">
+                  <h3 class="hr-block-title" data-i18n="hr.customFieldsTitle">Kolom tambahan pelamar</h3>
+                  <button type="button" onclick="addHrCustomField()" id="hr-add-custom-field" class="btn btn-secondary" data-i18n="hr.customFieldAdd">Tambah kolom</button>
+                </div>
+                <p class="hr-block-desc" data-i18n="hr.customFieldsDesc">Tambah field di luar standar; tampil otomatis di Sisi B dan rekap Sheet HR.</p>
+                <div id="hr-custom-fields-list" class="hr-custom-fields-list"></div>
               </div>
               <div class="hr-block hr-ui-block">
                 <div class="hr-ui-head">
@@ -653,6 +666,7 @@
                   <span><b data-i18n="hr.salary">Ekspektasi gaji</b><i id="hr-preview-salary">Rp25–35 juta</i></span>
                   <span><b data-i18n="hr.notice">Notice period</b><i id="hr-preview-notice">30 hari</i></span>
                   <span><b data-i18n="hr.screening">Pertanyaan penyaring</b><i id="hr-preview-screening">Ceritakan pengalaman Anda.</i></span>
+                  <span data-hr-benefit-wrap><b data-i18n="hr.benefit">Benefit / tunjangan</b><i id="hr-preview-benefit" data-hr-benefit-value>Belum diisi</i></span>
                 </div>
                 <div class="hr-status-block">
                   <span class="hr-status-label" data-i18n="hr.statusLabel">Status seleksi</span>
@@ -664,6 +678,8 @@
                       <th data-i18n="hr.colCandidate">Kandidat</th>
                       <th data-i18n="hr.matchStatus">Status kecocokan</th>
                       <th data-i18n="hr.colSelection">Seleksi</th>
+                      <th data-i18n="hr.colBenefit">Benefit</th>
+                      <th data-i18n="hr.colCustom">Kolom tambahan</th>
                     </tr></thead>
                     <tbody id="hr-recap-body"></tbody>
                   </table>
@@ -762,6 +778,7 @@
             <h2 id="candidate-position"></h2>
             <p><b data-i18n="hr.roleSummary">Ringkasan peran</b><span id="showcase-role-summary"></span></p>
             <p><b data-i18n="portal.responsibilitiesLabel">Tanggung jawab</b><span id="showcase-responsibilities"></span></p>
+            <p data-hr-benefit-wrap class="career-benefit-line hidden"><b data-i18n="hr.benefit">Benefit / tunjangan</b><span data-hr-benefit-value></span></p>
             <div class="career-fact-row">
               <span><b data-i18n="portal.jobTypeLabel">Tipe kerja</b><i id="showcase-job-type"></i></span>
               <span><b data-i18n="hr.location">Domisili / lokasi kerja</b><i id="candidate-location"></i></span>
@@ -817,7 +834,7 @@
             </div>
             <div class="candidate-cv-actions">
               <span id="candidate-cv-match" class="candidate-match-badge" data-i18n="portal.matchLabel">Kecocokan</span>
-              <button type="button" onclick="jumpToCandidateStep(10)" class="btn btn-secondary" data-i18n="portal.jumpCv">Isi CV</button>
+              <button type="button" onclick="jumpToQuestionById('recruit_cv')" class="btn btn-secondary" data-i18n="portal.jumpCv">Isi CV</button>
             </div>
           </div>
         </section>
@@ -860,31 +877,24 @@
         <h3 class="question-headline" id="q-headline-text">Siapa nama lengkap Anda?</h3>
         <p class="question-subtitle" id="q-subtitle-text">Masukkan nama resmi Anda sesuai yang tertera pada resume atau KTP.</p>
         <div id="q-interactive-body"></div>
-          <div id="cv-match-panel" class="cv-match-panel hidden"></div>
+        <div id="cv-match-panel" class="cv-match-panel hidden"></div>
+        <div class="question-nav-row">
+          <button type="button" onclick="prevStepQuestion()" id="question-btn-prev" class="dock-btn dock-btn-secondary opacity-50 cursor-not-allowed" disabled>
+            <span>&uarr;</span> <span data-i18n="form.previous">Sebelumnya</span>
+          </button>
+          <div class="dock-progress-wrap">
+            <div class="dock-progress-track">
+              <div id="question-progress-bar" class="dock-progress-bar" style="width: 20%"></div>
+            </div>
+            <span class="dock-percent" id="question-percent-text">20%</span>
+          </div>
+          <button type="button" onclick="nextStepQuestion()" id="question-btn-next" class="dock-btn dock-btn-primary">
+            <span id="question-next-label">Lanjutkan</span>
+            <span>&rarr;</span>
+          </button>
+        </div>
         </section>
         </div>
-      </div>
-
-      <div class="floating-bottom-dock" id="form-dock">
-        <button onclick="prevStepQuestion()" id="dock-btn-prev" class="dock-btn dock-btn-secondary opacity-50 cursor-not-allowed">
-          <span>&uarr;</span> <span data-i18n="form.previous">Sebelumnya</span>
-        </button>
-
-        <div class="dock-progress-wrap">
-          <div class="dock-keyboard-hint">
-            <span data-i18n="form.hint">Pilih kartu atau tekan</span>
-            <kbd class="dock-kbd">Enter ↵</kbd>
-          </div>
-          <div class="dock-progress-track">
-            <div id="dock-progress-bar" class="dock-progress-bar" style="width: 20%"></div>
-          </div>
-          <span class="dock-percent" id="dock-percent-text">20%</span>
-        </div>
-
-        <button onclick="nextStepQuestion()" id="dock-btn-next" class="dock-btn dock-btn-primary">
-          <span id="dock-next-label">Lanjutkan</span>
-          <span>&rarr;</span>
-        </button>
       </div>
     </div>
   </main>

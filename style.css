@@ -569,29 +569,13 @@ body.theme-midnight header, body.theme-cyber header { background-color: rgba(15,
   box-shadow: 0 0 0 4px var(--accent-glow);
 }
 
-/* Floating Bottom Dock */
-.floating-bottom-dock {
-  position: sticky;
-  bottom: 1.25rem;
-  max-width: 620px;
-  margin-left: auto;
-  margin-right: auto;
-  background-color: rgba(255, 255, 255, 0.92);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-subtle);
-  border-radius: 9999px;
-  padding: 0.625rem 1.25rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.15);
-  z-index: 40;
-  margin-top: 2rem;
-}
-body.theme-midnight .floating-bottom-dock,
-body.theme-cyber .floating-bottom-dock {
-  background-color: rgba(13, 19, 34, 0.92);
+/* Question Navigation */
+.question-nav-row {
+  display: flex; align-items: center; justify-content: space-between; gap: 0.85rem;
+  margin-top: clamp(1.5rem, 2.5vw, 2.25rem);
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--border-subtle); border-radius: 999px;
+  background: var(--surface-raised); box-shadow: var(--shadow-soft);
 }
 
 .dock-btn {
@@ -1983,13 +1967,14 @@ body[data-preset="recruit"] .hr-career-ribbon { display: flex; }
 .cv-meta { margin-top: 0.2rem; font-size: 0.6875rem; line-height: 1.6; color: var(--text-faint); overflow-wrap: anywhere; }
 .cv-meta b { color: var(--text-headline); }
 
-.floating-bottom-dock {
-  margin-top: 2rem; max-width: 640px; padding: 0.7rem 0.9rem;
-  background: var(--dock-bg); border: 1px solid var(--border-subtle); border-radius: 999px;
+.question-nav-row {
+  padding: 0.65rem 0.8rem;
+  background: var(--dock-bg); border-color: var(--border-subtle); border-radius: 999px;
   backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  box-shadow: 0 24px 50px -18px rgba(15, 23, 42, 0.28); gap: 0.75rem;
+  box-shadow: 0 18px 40px -20px rgba(15, 23, 42, 0.3); gap: 0.75rem;
 }
 .dock-btn { padding: 0.6rem 1.15rem; border-radius: 999px; font-size: 0.75rem; font-weight: 900; }
+.dock-btn:disabled { pointer-events: none; }
 .dock-btn-secondary:hover { background: var(--surface-hover); color: var(--text-headline); }
 .dock-btn-primary { background: var(--accent-color); color: #ffffff; box-shadow: 0 10px 24px -10px var(--accent-ring); }
 .dock-btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 14px 28px -10px var(--accent-ring); }
@@ -2236,7 +2221,7 @@ body[data-preset="recruit"] .hr-career-ribbon { display: flex; }
   .company-logo-avatar { width: 60px; height: 60px; font-size: 1rem; border-radius: 1.1rem; }
   .open-question-card { padding: 1.5rem; }
   .open-question-card::before { left: 1.5rem; right: 1.5rem; }
-  .floating-bottom-dock { flex-wrap: wrap; border-radius: 1.5rem; padding: 0.75rem; }
+  .question-nav-row { flex-wrap: wrap; border-radius: 1.5rem; padding: 0.75rem; }
   .dock-progress-wrap { order: 3; width: 100%; justify-content: center; }
   .dock-keyboard-hint { display: none; }
   .hr-ribbon-status { display: none; }
@@ -2408,6 +2393,42 @@ body[data-preset="recruit"] #form-view .recruit-apply-column::-webkit-scrollbar-
 }
 @media (max-width: 640px) {
   body[data-preset="recruit"] #form-view { --sticky-portal-top: 12.5rem; }
+}
+.hr-field-hint { margin-top: 0.2rem; font-size: 0.5625rem; line-height: 1.5; color: var(--text-faint); }
+.hr-block-desc { margin: -0.35rem 0 0.85rem; font-size: 0.625rem; line-height: 1.6; color: var(--text-faint); }
+.hr-custom-fields-list { display: grid; gap: 0.65rem; margin-top: 0.85rem; }
+.hr-custom-fields-empty { padding: 0.8rem 0.9rem; border: 1px dashed var(--border-subtle); border-radius: 0.9rem; font-size: 0.625rem; color: var(--text-faint); }
+.hr-custom-field-row {
+  display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto auto; align-items: end; gap: 0.6rem;
+  padding: 0.75rem; border: 1px solid var(--border-subtle); border-radius: 0.95rem; background: var(--surface-raised);
+}
+.hr-custom-field-row .hr-check-field { align-self: center; }
+.hr-custom-field-remove {
+  align-self: end; padding: 0.6rem 0.75rem; border-radius: 0.85rem;
+  border: 1px solid var(--border-subtle); background: var(--surface-soft); color: var(--text-faint);
+  font-family: inherit; font-size: 0.625rem; font-weight: 900; cursor: pointer; transition: all 0.2s ease;
+}
+.hr-custom-field-remove:hover { border-color: var(--accent-color); color: var(--accent-color); }
+.career-benefit-line { display: flex; align-items: baseline; gap: 0.75rem; margin-top: 0.85rem; padding: 0.7rem 0.85rem; border-left: 2px solid var(--career-accent); background: color-mix(in srgb, var(--career-accent) 8%, transparent); border-radius: 0 0.75rem 0.75rem 0; }
+.career-benefit-line b { flex: 0 0 auto; font-size: 0.5625rem; letter-spacing: 0.09em; text-transform: uppercase; color: var(--career-hero-muted); }
+.career-benefit-line span { min-width: 0; font-size: 0.8125rem; line-height: 1.6; font-weight: 750; color: var(--career-hero-ink); overflow-wrap: anywhere; }
+body[data-preset="recruit"] #form-view .recruit-apply-column { padding-top: 0.75rem; }
+body[data-preset="recruit"] #form-view .recruit-portal-layout .open-question-card { scroll-margin-top: calc(var(--sticky-portal-top) + 1rem); }
+#form-view[data-hr-ui-tier] .question-nav-row { border-color: color-mix(in srgb, var(--career-accent) 34%, var(--border-subtle)); }
+#form-view[data-hr-ui-tier="pro"] .career-hero-copy h1 { font-family: var(--career-font-heading); letter-spacing: -0.05em; }
+#form-view[data-hr-ui-tier="pro"] .career-showcase-card .section-eyebrow { color: var(--career-accent); }
+#form-view[data-hr-ui-tier="pro"] .career-showcase-card p span { font-family: var(--career-font-body); }
+#form-view[data-hr-ui-tier="pro"] .open-question-card { box-shadow: inset 0 1px 0 color-mix(in srgb, var(--career-accent) 30%, transparent), 0 20px 50px -28px rgba(15, 23, 42, 0.45); }
+#form-view[data-hr-ui-tier="business"] .career-company-banner { filter: saturate(0.92) contrast(1.06); }
+#form-view[data-hr-ui-tier="business"] .career-hero-copy h1 { text-transform: uppercase; letter-spacing: -0.055em; }
+#form-view[data-hr-ui-tier="business"] .career-showcase-card { padding-left: 1.1rem; border-left: 2px solid color-mix(in srgb, var(--career-accent) 60%, var(--career-border)); }
+#form-view[data-hr-ui-tier="business"] .career-hero-actions .btn-primary { border-radius: 0.6rem; letter-spacing: 0.08em; text-transform: uppercase; }
+#form-view[data-hr-ui-tier="business"] .question-nav-row { border-radius: 1rem; }
+@media (max-width: 768px) {
+  .hr-custom-field-row { grid-template-columns: 1fr; align-items: stretch; }
+  .hr-custom-field-row .hr-check-field { align-self: stretch; }
+  .hr-custom-field-remove { justify-self: start; }
+  body[data-preset="recruit"] #form-view .recruit-portal-layout .open-question-card { scroll-margin-top: calc(var(--sticky-portal-top) + 0.75rem); }
 }
 @media (prefers-reduced-motion: reduce) {
   .animate-question-in { animation: none; }
