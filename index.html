@@ -59,32 +59,33 @@
         </div>
       </div>
 
-      <div class="control-group payment-control">
-        <span class="control-label" data-i18n="payment.label">Metode Pembayaran</span>
-        <div class="payment-switch" role="group" data-i18n-aria="payment.aria" aria-label="Pilih metode pembayaran dan mata uang">
-          <button type="button" id="payment-idr-btn" class="payment-option active" aria-pressed="true" onclick="setPaymentMethod('idr')" data-i18n="payment.idr">QRIS (IDR)</button>
-          <button type="button" id="payment-usd-btn" class="payment-option" aria-pressed="false" onclick="setPaymentMethod('usd')" data-i18n="payment.usd">Global / USD ($)</button>
+      <div class="control-group display-control" id="display-control">
+        <span class="control-label" data-i18n="controls.display">Tampilan</span>
+        <button type="button" id="display-menu-btn" class="display-trigger" aria-expanded="false" aria-controls="display-menu" onclick="toggleDisplayMenu()" data-i18n-aria="controls.displayAria" aria-label="Buka pengaturan tampilan">
+          <span data-i18n="controls.theme">Aksen UI</span>
+          <span class="display-trigger-value" id="display-trigger-value">Silicon Clean</span>
+          <span class="display-caret" aria-hidden="true">&#9662;</span>
+        </button>
+        <div id="display-menu" class="display-menu hidden">
+          <div class="display-menu-head">
+            <span data-i18n="controls.display">Tampilan</span>
+            <button type="button" onclick="closeDisplayMenu()" class="display-menu-close" data-i18n-aria="common.close" aria-label="Tutup">&#10005;</button>
+          </div>
+          <span class="control-label" data-i18n="controls.theme">Aksen UI</span>
+          <div class="theme-chips">
+            <button onclick="setUITheme('silicon')" id="theme-btn-silicon" class="style-chip active" data-i18n="theme.silicon">Silicon Clean</button>
+            <button onclick="setUITheme('midnight')" id="theme-btn-midnight" class="style-chip" data-i18n="theme.midnight">Midnight Gold</button>
+            <button onclick="setUITheme('cyber')" id="theme-btn-cyber" class="style-chip" data-i18n="theme.cyber">Cyber Neo</button>
+            <button onclick="setUITheme('terracotta')" id="theme-btn-terracotta" class="style-chip" data-i18n="theme.terracotta">Terracotta</button>
+          </div>
+          <span class="control-label" data-i18n="controls.font">Font</span>
+          <select onchange="changeFontFamily(this.value)" class="font-select" data-i18n-aria="controls.fontAria" aria-label="Pilih font tampilan">
+            <option value="Plus Jakarta Sans" data-i18n="font.jakarta">Jakarta Sans (Modern)</option>
+            <option value="Outfit" data-i18n="font.outfit">Outfit (Tech Ceria)</option>
+            <option value="Space Grotesk" data-i18n="font.space">Space Grotesk (Trendy)</option>
+            <option value="Playfair Display" data-i18n="font.playfair">Playfair (Mewah &amp; Serif)</option>
+          </select>
         </div>
-      </div>
-
-      <div class="control-group">
-        <span class="control-label" data-i18n="controls.theme">Aksen UI</span>
-        <div class="theme-chips">
-          <button onclick="setUITheme('silicon')" id="theme-btn-silicon" class="style-chip active" data-i18n="theme.silicon">Silicon Clean</button>
-          <button onclick="setUITheme('midnight')" id="theme-btn-midnight" class="style-chip" data-i18n="theme.midnight">Midnight Gold</button>
-          <button onclick="setUITheme('cyber')" id="theme-btn-cyber" class="style-chip" data-i18n="theme.cyber">Cyber Neo</button>
-          <button onclick="setUITheme('terracotta')" id="theme-btn-terracotta" class="style-chip" data-i18n="theme.terracotta">Terracotta</button>
-        </div>
-      </div>
-
-      <div class="control-group font-control">
-        <span class="control-label" data-i18n="controls.font">Font</span>
-        <select onchange="changeFontFamily(this.value)" class="font-select" data-i18n-aria="controls.fontAria" aria-label="Pilih font tampilan">
-          <option value="Plus Jakarta Sans" data-i18n="font.jakarta">Jakarta Sans (Modern)</option>
-          <option value="Outfit" data-i18n="font.outfit">Outfit (Tech Ceria)</option>
-          <option value="Space Grotesk" data-i18n="font.space">Space Grotesk (Trendy)</option>
-          <option value="Playfair Display" data-i18n="font.playfair">Playfair (Mewah &amp; Serif)</option>
-        </select>
       </div>
     </div>
   </div>
@@ -285,7 +286,17 @@
             <h2 data-i18n="pricing.title">Mulai gratis, scale saat dibutuhkan.</h2>
             <p data-i18n="pricing.desc">Semua paket tetap mengutamakan data di Google Sheet akun Anda sendiri.</p>
           </div>
-          <p class="pricing-single-note" id="pricing-payment-note" data-i18n="pricing.singlePassNote">Tanpa langganan. Pilih QRIS (IDR) atau Global / USD; Free tetap tersedia sebagai paket awal.</p>
+          <div class="pricing-controls">
+            <div class="control-group payment-control payment-control-pricing">
+              <span class="control-label" data-i18n="payment.label">Metode Pembayaran</span>
+              <div class="payment-switch" role="group" data-i18n-aria="payment.aria" aria-label="Pilih metode pembayaran dan mata uang">
+                <button type="button" id="payment-idr-btn" class="payment-option active" aria-pressed="true" onclick="setPaymentMethod('idr')" data-i18n="payment.idr">QRIS (IDR)</button>
+                <button type="button" id="payment-usd-btn" class="payment-option" aria-pressed="false" onclick="setPaymentMethod('usd')" data-i18n="payment.usd">Global / USD ($)</button>
+              </div>
+            </div>
+            <p class="payment-note" id="payment-note" data-i18n="payment.note">Bahasa tidak mengubah metode pembayaran. Pilih bebas QRIS IDR atau Global USD.</p>
+            <p class="pricing-single-note" id="pricing-payment-note" data-i18n="pricing.singlePassNote">Tanpa langganan. Pilih QRIS (IDR) atau Global / USD; Free tetap tersedia sebagai paket awal.</p>
+          </div>
           <div class="pricing-grid">
             <article class="price-card">
               <span class="price-ribbon price-ribbon-free" data-i18n="pricing.freeRibbon">PAKET AWAL</span>

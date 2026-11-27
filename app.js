@@ -796,6 +796,8 @@ const I18N = {
     'common.close': 'Tutup',
     'lang.label': 'Bahasa',
     'lang.aria': 'Pilih bahasa tampilan',
+    'controls.display': 'Tampilan',
+    'controls.displayAria': 'Buka pengaturan tampilan',
     'controls.theme': 'Aksen UI',
     'controls.font': 'Font',
     'controls.fontAria': 'Pilih font tampilan',
@@ -1053,6 +1055,8 @@ const I18N = {
     'common.close': 'Close',
     'lang.label': 'Language',
     'lang.aria': 'Choose display language',
+    'controls.display': 'Appearance',
+    'controls.displayAria': 'Open appearance settings',
     'controls.theme': 'UI accent',
     'controls.font': 'Font',
     'controls.fontAria': 'Choose display font',
@@ -1310,6 +1314,8 @@ const I18N = {
     'common.close': '关闭',
     'lang.label': '语言',
     'lang.aria': '选择显示语言',
+    'controls.display': '外观',
+    'controls.displayAria': '打开外观设置',
     'controls.theme': '界面配色',
     'controls.font': '字体',
     'controls.fontAria': '选择显示字体',
@@ -1613,6 +1619,27 @@ function applyFontStack() {
   document.body.style.fontFamily = state.currentLanguage === 'zh' ? `'Noto Sans SC', ${stack}` : stack;
 }
 
+function updateDisplayTrigger() {
+  const value = document.getElementById('display-trigger-value');
+  if (value) value.textContent = t(`theme.${state.currentTheme}`);
+}
+
+function toggleDisplayMenu() {
+  const menu = document.getElementById('display-menu');
+  const button = document.getElementById('display-menu-btn');
+  if (!menu || !button) return;
+  const shouldOpen = menu.classList.contains('hidden');
+  menu.classList.toggle('hidden', !shouldOpen);
+  button.setAttribute('aria-expanded', String(shouldOpen));
+}
+
+function closeDisplayMenu() {
+  const menu = document.getElementById('display-menu');
+  const button = document.getElementById('display-menu-btn');
+  if (menu) menu.classList.add('hidden');
+  if (button) button.setAttribute('aria-expanded', 'false');
+}
+
 function applyTranslations() {
   document.title = t('meta.title');
   document.documentElement.lang = state.currentLanguage === 'zh' ? 'zh-CN' : state.currentLanguage;
@@ -1650,6 +1677,7 @@ function setLanguage(lang) {
   state.currentLanguage = lang;
   if (!state.paymentMethodManuallySet) state.paymentMethod = defaultPaymentMethodForLanguage(lang);
   applyTranslations();
+  updateDisplayTrigger();
   renderPaymentMethod();
   renderPricing();
   if (state.view === 'form') {
@@ -1842,12 +1870,18 @@ function renderCvMatchPanel() {
 document.addEventListener('DOMContentLoaded', () => {
   state.paymentMethod = defaultPaymentMethodForLanguage(state.currentLanguage);
   applyTranslations();
+  updateDisplayTrigger();
   renderDashboard();
   renderSyncStatus();
   renderPaymentMethod();
   renderPricing();
   updateQrisPreview();
   setupKeyboardNavigation();
+  document.addEventListener('click', (event) => {
+    const control = document.getElementById('display-control');
+    if (!control || control.contains(event.target)) return;
+    closeDisplayMenu();
+  });
 });
 
 function toggleViews() {
@@ -2519,6 +2553,7 @@ function setUITheme(themeKey) {
     }
   });
 
+  updateDisplayTrigger();
   applyFontStack();
   showToast(t('toast.theme', { name: t(`theme.${themeKey}`) }));
 }
