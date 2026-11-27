@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>iziForm 3.0 — Bespoke Luxury Form Experience (Transformasi Total GForm)</title>
+  <title>iziForm — Landing Dashboard Form SaaS</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
@@ -11,33 +11,42 @@
 </head>
 <body class="theme-silicon font-jakarta">
 
-  <header class="app-header sticky top-0 z-50">
-    <div class="header-inner max-w-6xl mx-auto px-4 sm:px-6">
-      <div class="brand-mark">
+  <header class="app-header">
+    <div class="container-shell header-inner">
+      <a href="#top" class="brand-mark" onclick="scrollToSection('top'); return false;">
         <div class="brand-mark-icon">iF</div>
         <div class="brand-mark-copy">
           <span class="brand-name">iziForm</span>
-          <span class="brand-tier">PREMIUM</span>
+          <span class="brand-tier">SaaS Studio</span>
         </div>
-      </div>
+      </a>
+
+      <nav id="landing-nav" class="landing-nav" aria-label="Navigasi utama">
+        <a href="#kategori">Kategori</a>
+        <a href="#sync">Google Sheet</a>
+        <a href="#cara">Cara Pakai</a>
+        <a href="#showcase">Demo</a>
+        <a href="#harga">Harga</a>
+        <a href="#faq">FAQ</a>
+      </nav>
 
       <div class="header-actions">
-        <button onclick="openPasteModal()" class="header-button">
-          <span>🔗</span>
-          <span class="header-long-label">Ganti Link Google Form</span>
-          <span class="header-short-label">Ganti Link</span>
-        </button>
-
-        <div class="link-pill">
+        <div class="connection-pill" id="connection-pill">
+          <span class="connection-dot" id="connection-dot"></span>
+          <span id="header-connection-text">Belum terhubung</span>
+        </div>
+        <button type="button" id="header-dashboard-btn" class="header-button hidden" onclick="backToDashboard()">&larr; Dashboard</button>
+        <button type="button" onclick="openPasteModal()" class="header-button header-button-primary">Pengaturan Sheet</button>
+        <div class="link-pill hidden" id="header-link-pill-wrap">
           <span id="header-link-pill">iziform.app</span>
-          <button onclick="copyFormLink()" title="Salin Link" class="link-copy">📋</button>
+          <button type="button" onclick="copyFormLink()" title="Salin Link" class="link-copy">Salin</button>
         </div>
       </div>
     </div>
   </header>
 
-  <div class="app-subheader sticky top-16 z-30">
-    <div class="subheader-inner max-w-6xl mx-auto px-4 sm:px-6">
+  <div class="app-subheader">
+    <div class="container-shell subheader-inner">
       <div class="control-group">
         <span class="control-label">Aksen UI</span>
         <div class="theme-chips">
@@ -50,7 +59,7 @@
 
       <div class="control-group font-control">
         <span class="control-label">Font</span>
-        <select onchange="changeFontFamily(this.value)" class="font-select">
+        <select onchange="changeFontFamily(this.value)" class="font-select" aria-label="Pilih font tampilan">
           <option value="Plus Jakarta Sans">Jakarta Sans (Modern)</option>
           <option value="Outfit">Outfit (Tech Ceria)</option>
           <option value="Space Grotesk">Space Grotesk (Trendy)</option>
@@ -60,32 +69,237 @@
     </div>
   </div>
 
-  <main class="app-main relative max-w-4xl mx-auto px-4 sm:px-6 pt-8 pb-28 z-10">
-    <div class="open-canvas-mesh"></div>
+  <main class="app-main">
+    <div id="dashboard-view" class="dashboard-view">
+      <div class="container-shell">
 
-    <section id="dashboard-view" class="dashboard-view">
-      <div class="dashboard-intro">
-        <span class="dashboard-eyebrow">iziForm • Pemilih Kategori</span>
-        <h1 class="dashboard-headline">Mau bikin form untuk apa hari ini?</h1>
-        <p class="dashboard-subtitle">Pilih satu kategori untuk mengubah pertanyaan menjadi pengalaman form yang elegan, cepat, dan siap tersambung ke Google Sheet.</p>
+        <section id="top" class="landing-hero">
+          <div class="hero-copy">
+            <span class="hero-eyebrow">Form berkelas • Data otomatis • Sheet milik Anda</span>
+            <h1 class="hero-title">Mau bikin form untuk apa hari ini?</h1>
+            <p class="hero-description">Ubah pertanyaan yang kaku menjadi pengalaman form yang mewah dan menyenangkan. Setiap jawaban tersimpan rapi ke Google Sheet akun Anda sendiri, tanpa perlu rebuild dari nol.</p>
+            <div class="hero-actions">
+              <button type="button" onclick="scrollToSection('kategori')" class="btn btn-primary">Pilih Kategori <span>&rarr;</span></button>
+              <button type="button" onclick="scrollToSection('sync')" class="btn btn-secondary">Hubungkan Sheet</button>
+            </div>
+            <div class="hero-proof">
+              <span><b>6</b> kategori siap pakai</span>
+              <span><b>7</b> tipe input interaktif</span>
+              <span><b>4</b> tema premium</span>
+            </div>
+          </div>
+
+          <div class="hero-visual" aria-hidden="true">
+            <div class="hero-orbit"></div>
+            <div class="hero-preview">
+              <div class="preview-header">
+                <span class="preview-window-dots"><i></i><i></i><i></i></span>
+                <span class="preview-tag">LIVE PREVIEW</span>
+              </div>
+              <div class="preview-body">
+                <span class="preview-kicker">REKRUTMEN & LAMARAN KERJA</span>
+                <strong class="preview-title">Siapa nama lengkap Anda?</strong>
+                <div class="preview-input">Nadia Utami</div>
+                <div class="preview-choices">
+                  <span><b>A</b> Lead Fullstack</span>
+                  <span><b>B</b> HR Talent Lead</span>
+                  <span><b>C</b> Growth Lead</span>
+                </div>
+              </div>
+              <div class="preview-footer">
+                <div class="preview-sheet"><i></i><i></i><i></i></div>
+                <span class="preview-sync">Tersimpan otomatis</span>
+              </div>
+            </div>
+            <span class="floating-chip chip-one">Interaktif</span>
+            <span class="floating-chip chip-two">Google Sheet</span>
+          </div>
+        </section>
+
+        <section id="kategori" class="landing-section">
+          <div class="section-heading">
+            <span class="section-eyebrow">Pilih Kategori</span>
+            <h2>Satu kategori, satu alur form yang utuh.</h2>
+            <p>Klik kartu untuk langsung membuka mode form interaktif. Setiap kategori punya identitas, pertanyaan, dan tautan uniknya sendiri.</p>
+          </div>
+          <div id="category-grid" class="category-grid"></div>
+        </section>
+
+        <section id="sync" class="landing-section">
+          <div class="sync-panel">
+            <div class="sync-copy">
+              <span class="section-eyebrow">Google Account & Sheet Sync</span>
+              <h2>Data Anda, Sheet Anda.</h2>
+              <p>Hubungkan email Google dan webhook Google Sheet Anda. Setiap submission dikirim sebagai payload JSON ke sheet yang Anda tentukan.</p>
+              <div class="sync-status-list">
+                <div class="status-row">
+                  <span class="status-dot" id="google-status-dot"></span>
+                  <span>Email Google</span>
+                  <strong id="google-status-text">Belum diisi</strong>
+                </div>
+                <div class="status-row">
+                  <span class="status-dot" id="sheet-status-dot"></span>
+                  <span>Sheet Webhook</span>
+                  <strong id="sheet-status-text">Belum diisi</strong>
+                </div>
+              </div>
+              <p class="sync-note">iziForm tidak meminta kata sandi Google. Cukup email untuk identitas akun dan URL webhook Apps Script yang Anda buat sendiri.</p>
+            </div>
+
+            <div class="sync-form">
+              <label class="field-label" for="sync-email-input">Email Google</label>
+              <input type="email" id="sync-email-input" class="field-input" placeholder="nama@email.com">
+
+              <label class="field-label" for="sync-webhook-input">Google Sheet Webhook URL</label>
+              <input type="url" id="sync-webhook-input" class="field-input" placeholder="https://script.google.com/macros/s/.../exec">
+
+              <label class="field-label" for="sync-gform-input">Link Google Form (opsional)</label>
+              <input type="url" id="sync-gform-input" class="field-input" placeholder="https://docs.google.com/forms/d/e/.../viewform">
+
+              <button type="button" onclick="saveSyncSettings()" class="btn btn-primary btn-block">Simpan Koneksi <span>&rarr;</span></button>
+              <p id="sync-form-hint" class="form-hint">Status: webhook belum diisi — submission berjalan dalam mode simulasi lokal.</p>
+            </div>
+          </div>
+        </section>
+
+        <section id="cara" class="landing-section">
+          <div class="section-heading">
+            <span class="section-eyebrow">Cara Penggunaan</span>
+            <h2>Tiga langkah dari ide ke Sheet terisi.</h2>
+            <p>Tidak perlu coding, tidak perlu desain ulang. Cukup pilih, hubungkan, dan bagikan.</p>
+          </div>
+          <div class="steps-grid">
+            <article class="step-card">
+              <span class="step-number">01</span>
+              <h3>Pilih Kategori</h3>
+              <p>Tentukan jenis form: rekrutmen, event, pesanan, kelas, survei, atau brief klien.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-number">02</span>
+              <h3>Hubungkan Email & Sheet</h3>
+              <p>Isi email Google dan webhook Apps Script agar jawaban masuk ke sheet milik Anda.</p>
+            </article>
+            <article class="step-card">
+              <span class="step-number">03</span>
+              <h3>Bagikan Link & Pantau Sheet</h3>
+              <p>Salin tautan unik kategori, lalu pantau setiap jawaban langsung di Google Sheet.</p>
+            </article>
+          </div>
+        </section>
+
+        <section id="showcase" class="landing-section">
+          <div class="section-heading">
+            <span class="section-eyebrow">Showcase Gallery</span>
+            <h2>Lihat hasilnya, bukan cuma bayangkan.</h2>
+            <p>Kartu demo interaktif di bawah membuka alur form asli beserta tampilan datanya.</p>
+          </div>
+          <div class="showcase-grid">
+            <button type="button" class="showcase-card" onclick="chooseCategory('recruit')">
+              <span class="showcase-preview preview-one">
+                <span class="showcase-label">Demo Interaktif</span>
+                <span class="play-mark">&#9654;</span>
+                <span class="showcase-lines"><i></i><i></i><i></i></span>
+              </span>
+              <span class="showcase-meta">
+                <strong>Alur Lamaran Kerja</strong>
+                <span>Identitas kandidat sampai unggah CV.</span>
+              </span>
+            </button>
+            <button type="button" class="showcase-card" onclick="chooseCategory('event')">
+              <span class="showcase-preview preview-two">
+                <span class="showcase-label">Demo Interaktif</span>
+                <span class="play-mark">&#9654;</span>
+                <span class="showcase-lines"><i></i><i></i><i></i></span>
+              </span>
+              <span class="showcase-meta">
+                <strong>Pendaftaran Event</strong>
+                <span>Pilih jarak lomba dan konfirmasi e-tiket.</span>
+              </span>
+            </button>
+            <button type="button" class="showcase-card" onclick="chooseCategory('survey')">
+              <span class="showcase-preview preview-three">
+                <span class="showcase-label">Demo Interaktif</span>
+                <span class="play-mark">&#9654;</span>
+                <span class="showcase-lines"><i></i><i></i><i></i></span>
+              </span>
+              <span class="showcase-meta">
+                <strong>Survei Pelanggan</strong>
+                <span>Rating, masukan, dan ringkasan otomatis.</span>
+              </span>
+            </button>
+          </div>
+        </section>
+
+        <section id="harga" class="landing-section">
+          <div class="section-heading">
+            <span class="section-eyebrow">Harga</span>
+            <h2>Mulai gratis, scale saat dibutuhkan.</h2>
+            <p>Semua paket tetap mengutamakan data di Google Sheet akun Anda sendiri.</p>
+          </div>
+          <div class="pricing-grid">
+            <article class="price-card">
+              <span class="price-name">Free</span>
+              <span class="price-amount">Rp0</span>
+              <span class="price-note">Untuk coba-coba dan kebutuhan personal.</span>
+              <ul><li>6 kategori form</li><li>Simulasi lokal</li><li>4 tema dasar</li></ul>
+              <button type="button" onclick="scrollToSection('kategori')" class="btn btn-secondary btn-block">Mulai Gratis</button>
+            </article>
+            <article class="price-card price-popular">
+              <span class="price-ribbon">Populer UMKM</span>
+              <span class="price-name">Pro</span>
+              <span class="price-amount">Rp49rb</span>
+              <span class="price-note">Untuk UMKM dan panitia event.</span>
+              <ul><li>Sheet webhook aktif</li><li>Link kategori unik</li><li>Semua tipe input</li></ul>
+              <button type="button" onclick="scrollToSection('sync')" class="btn btn-primary btn-block">Pilih Pro</button>
+            </article>
+            <article class="price-card price-business">
+              <span class="price-ribbon">Pilihan Tim</span>
+              <span class="price-name">Business</span>
+              <span class="price-amount">Rp149rb</span>
+              <span class="price-note">Untuk tim, perusahaan, dan kebutuhan khusus.</span>
+              <ul><li>Semua fitur Pro</li><li>Prioritas kustomisasi</li><li>Pendampingan integrasi</li></ul>
+              <button type="button" onclick="openPasteModal()" class="btn btn-primary btn-block">Konsultasi Sheet</button>
+            </article>
+          </div>
+        </section>
+
+        <section id="faq" class="landing-section">
+          <div class="section-heading">
+            <span class="section-eyebrow">FAQ</span>
+            <h2>Pertanyaan yang paling sering ditanyakan.</h2>
+          </div>
+          <div class="faq-list">
+            <details class="faq-item" open>
+              <summary>Apakah data tersimpan di Google Sheet saya sendiri?</summary>
+              <p>Ya. Anda menentukan sendiri email Google dan URL webhook Sheet. iziForm hanya mengirim payload JSON ke webhook tersebut saat responden menekan submit.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Apakah perlu tahu coding untuk memakainya?</summary>
+              <p>Tidak. Pilih kategori, isi email dan webhook, lalu bagikan tautan. Tampilan form dan alur pertanyaannya sudah disiapkan.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Bagaimana jika webhook belum diisi?</summary>
+              <p>Form tetap bisa dicoba. Submission akan berstatus simulasi lokal sampai Anda menyimpan webhook Google Sheet yang aktif.</p>
+            </details>
+            <details class="faq-item">
+              <summary>Bisakah mengganti tema dan font?</summary>
+              <p>Bisa. Gunakan kontrol di bagian atas halaman untuk berganti antara Silicon Clean, Midnight Gold, Cyber Neo, dan Terracotta, serta empat pilihan font.</p>
+            </details>
+          </div>
+        </section>
+
       </div>
-
-      <div id="category-grid" class="category-grid"></div>
-
-      <p class="dashboard-footnote">Setiap kategori memiliki alur pertanyaan, identitas visual, dan tautan uniknya sendiri.</p>
-    </section>
+    </div>
 
     <div id="form-view" class="premium-shell hidden">
       <div class="form-nav-row">
-        <button type="button" onclick="backToDashboard()" class="form-back-btn">
-          <span aria-hidden="true">&larr;</span> <span>Dashboard</span>
-        </button>
+        <button type="button" onclick="backToDashboard()" class="form-back-btn"><span aria-hidden="true">&larr;</span> <span>Kembali ke Dashboard</span></button>
         <span class="form-nav-label">Form aktif: <strong id="form-category-label">Rekrutmen &amp; Lamaran Kerja</strong></span>
         <button type="button" onclick="backToDashboard()" class="form-change-btn">Ganti Kategori</button>
       </div>
 
       <div class="hr-career-ribbon" id="hr-career-ribbon">
-        <span class="hr-ribbon-icon">💼</span>
+        <span class="hr-ribbon-icon">iF</span>
         <div class="hr-ribbon-copy">
           <strong>Official Career Portal</strong>
           <span>PT Digital Nusantara Indonesia • Talent Acquisition 2026</span>
@@ -107,7 +321,7 @@
 
       <section class="brand-identity-card">
         <div class="brand-identity-main">
-          <div class="company-logo-avatar" id="company-logo-box">🏢</div>
+          <div class="company-logo-avatar" id="company-logo-box">iF</div>
           <div class="brand-identity-copy">
             <h2 class="company-name" id="company-name-text">PT Digital Nusantara Indonesia</h2>
             <div class="brand-meta-row">
@@ -156,39 +370,63 @@
     </div>
   </main>
 
+  <footer class="app-footer">
+    <div class="container-shell footer-inner">
+      <div class="footer-brand">
+        <div class="brand-mark-icon">iF</div>
+        <div>
+          <strong>iziForm</strong>
+          <p>Form berkelas, data tetap di Google Sheet Anda.</p>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#kategori">Kategori</a>
+        <a href="#sync">Integrasi</a>
+        <a href="#harga">Harga</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <span class="footer-copy">&copy; 2026 iziForm. Dibuat untuk form yang lebih manusiawi.</span>
+    </div>
+  </footer>
+
   <div id="paste-link-modal" class="modal-overlay hidden">
     <div class="modal-card">
-      <button onclick="closePasteModal()" class="modal-close">✕</button>
-      <span class="modal-eyebrow">Transformer Mesin GForm</span>
-      <h3 class="modal-title">Tempelkan Link Google Form Anda</h3>
-      <p class="modal-description">iziForm akan membaca pertanyaannya dan mengubahnya seketika menjadi tampilan mewah di atas.</p>
+      <button onclick="closePasteModal()" class="modal-close" aria-label="Tutup">&#10005;</button>
+      <span class="modal-eyebrow">Pengaturan Akun & Sheet</span>
+      <h3 class="modal-title">Hubungkan Google Sheet Anda</h3>
+      <p class="modal-description">Isi identitas email Google, tautan form, dan webhook Apps Script. Data submission dikirim ke webhook ini.</p>
 
       <div class="modal-form">
-        <div class="modal-input-wrap">
-          <span class="modal-input-icon">🔗</span>
-          <input type="url" id="modal-gform-input" class="modal-input" placeholder="https://docs.google.com/forms/d/e/.../viewform">
+        <div>
+          <label for="modal-email-input" class="modal-label">Email Google</label>
+          <input type="email" id="modal-email-input" class="modal-input modal-input-plain" placeholder="nama@email.com">
         </div>
         <div>
-          <label for="modal-webhook-input" class="modal-label">Google Sheet Sync URL / Webhook</label>
+          <label for="modal-gform-input" class="modal-label">Link Google Form</label>
+          <div class="modal-input-wrap">
+            <span class="modal-input-icon" aria-hidden="true">&gt;</span>
+            <input type="url" id="modal-gform-input" class="modal-input" placeholder="https://docs.google.com/forms/d/e/.../viewform">
+          </div>
+        </div>
+        <div>
+          <label for="modal-webhook-input" class="modal-label">Google Sheet Webhook URL</label>
           <input type="url" id="modal-webhook-input" class="modal-input modal-input-plain" placeholder="https://script.google.com/macros/s/.../exec">
           <p id="paste-sync-status" class="modal-hint">Webhook: belum diisi (mode simulasi)</p>
         </div>
-        <button onclick="applyPastedGForm()" class="modal-primary">⚡ Terapkan & Transformasi Sekarang</button>
+        <button onclick="applyPastedGForm()" class="modal-primary">Simpan Pengaturan</button>
       </div>
     </div>
   </div>
 
   <div id="success-submit-modal" class="modal-overlay hidden">
     <div class="modal-card modal-card-center">
-      <div class="success-icon">🎉</div>
-      <h3 class="modal-title">Pendaftaran Berhasil!</h3>
-      <p class="modal-description">
-        Payload JSON jawaban responden dikirim ke <b>webhook Google Sheet</b> yang Anda isi di pengaturan link. Jika webhook kosong, statusnya adalah simulasi lokal.
-      </p>
+      <div class="success-icon">&#10003;</div>
+      <h3 class="modal-title">Form berhasil dikirim!</h3>
+      <p class="modal-description">Payload JSON jawaban responden dikirim ke webhook Google Sheet yang Anda simpan. Jika webhook kosong, statusnya adalah simulasi lokal.</p>
 
       <div class="summary-card">
         <p class="summary-title">Data Ringkasan:</p>
-        <p class="summary-text" id="summary-payload-text">Nama: Budi Pratama • Status: Menyiapkan</p>
+        <p class="summary-text" id="summary-payload-text">Nama: Nadia Utami • Status: Menyiapkan</p>
         <p class="sync-status-text" id="sync-status-text">Status sync: menunggu pengiriman...</p>
       </div>
 

@@ -10,6 +10,7 @@ const state = {
   activePresetKey: 'recruit',
   currentStepIndex: 0,
   userResponses: {},
+  googleEmail: '',
   gformUrl: '',
   webhookUrl: '',
   presets: {
@@ -397,6 +398,7 @@ let advanceTimer = null;
 // Initialize on Load
 document.addEventListener('DOMContentLoaded', () => {
   renderDashboard();
+  renderSyncStatus();
   setupKeyboardNavigation();
 });
 
@@ -405,11 +407,18 @@ function toggleViews() {
   const form = document.getElementById('form-view');
   const dock = document.getElementById('form-dock');
   const ribbon = document.getElementById('hr-career-ribbon');
+  const landingNav = document.getElementById('landing-nav');
+  const dashboardButton = document.getElementById('header-dashboard-btn');
+  const linkPill = document.getElementById('header-link-pill-wrap');
+  const isForm = state.view === 'form';
 
   if (dashboard) dashboard.classList.toggle('hidden', state.view !== 'dashboard');
-  if (form) form.classList.toggle('hidden', state.view !== 'form');
-  if (dock) dock.classList.toggle('hidden', state.view !== 'form');
-  if (ribbon) ribbon.classList.toggle('hidden', !(state.view === 'form' && state.activePresetKey === 'recruit'));
+  if (form) form.classList.toggle('hidden', !isForm);
+  if (dock) dock.classList.toggle('hidden', !isForm);
+  if (ribbon) ribbon.classList.toggle('hidden', !(isForm && state.activePresetKey === 'recruit'));
+  if (landingNav) landingNav.classList.toggle('hidden', isForm);
+  if (dashboardButton) dashboardButton.classList.toggle('hidden', !isForm);
+  if (linkPill) linkPill.classList.toggle('hidden', !isForm);
 }
 
 function renderDashboard() {
@@ -421,9 +430,10 @@ function renderDashboard() {
 
   const grid = document.getElementById('category-grid');
   if (grid) {
-    grid.innerHTML = Object.entries(state.presets).map(([key, p]) => `
+    grid.innerHTML = Object.entries(state.presets).map(([key, p], index) => `
       <button type="button" onclick="chooseCategory('${key}')"
               class="category-card" aria-label="Buat form ${p.categoryLabel}">
+        <span class="category-index">${String(index + 1).padStart(2, '0')}</span>
         <span class="category-icon" aria-hidden="true">${p.categoryIcon}</span>
         <span class="category-card-copy">
           <span class="category-card-label">${p.categoryLabel}</span>
@@ -435,9 +445,103 @@ function renderDashboard() {
   }
 
   toggleViews();
+  renderSyncStatus();
 
   const headerPill = document.getElementById('header-link-pill');
   if (headerPill) headerPill.innerText = 'iziform.app';
+}
+
+function scrollToSection(sectionId) {
+  const target = document.getElementById(sectionId);
+  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function isValidEmail(value) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function isValidWebhook(value) {
+  if (!value) return true;
+  try {
+    const url = new URL(value);
+    return url.protocol === 'http:' || url.protocol === 'https:';
+  } catch (err) {
+    return false;
+  }
+}
+
+function setStatusDot(element, active) {
+  if (!element) return;
+  element.classList.toggle('active', active);
+}
+
+function renderSyncStatus() {
+  const emailReady = isValidEmail(state.googleEmail);
+  const sheetReady = Boolean(state.webhookUrl);
+
+  const googleText = document.getElementById('google-status-text');
+  const sheetText = document.getElementById('sheet-status-text');
+  const googleDot = document.getElementById('google-status-dot');
+  const sheetDot = document.getElementById('sheet-status-dot');
+  const headerText = document.getElementById('header-connection-text');
+  const headerDot = document.getElementById('connection-dot');
+  const formHint = document.getElementById('sync-form-hint');
+  const pasteHint = document.getElementById('paste-sync-status');
+
+  if (googleText) googleText.innerText = emailReady ? state.googleEmail : 'Belum diisi';
+  if (sheetText) sheetText.innerText = sheetReady ? 'Webhook aktif' : 'Belum diisi';
+  if (formHint) formHint.innerText = sheetReady
+    ? 'Status: webhook aktif — jawaban dikirim otomatis saat submit.'
+    : 'Status: webhook belum diisi — submission berjalan dalam mode simulasi lokal.';
+  if (pasteHint) pasteHint.innerText = sheetReady ? 'Webhook: aktif' : 'Webhook: belum diisi (mode simulasi)';
+
+  setStatusDot(googleDot, emailReady);
+  setStatusDot(sheetDot, sheetReady);
+  setStatusDot(headerDot, emailReady || sheetReady);
+
+  if (headerText) {
+    if (emailReady && sheetReady) headerText.innerText = 'Google & Sheet terhubung';
+    else if (sheetReady) headerText.innerText = 'Sheet webhook aktif';
+    else if (emailReady) headerText.innerText = 'Email Google tersimpan';
+    else headerText.innerText = 'Belum terhubung';
+  }
+
+  const emailInput = document.getElementById('sync-email-input');
+  const webhookInput = document.getElementById('sync-webhook-input');
+  const gformInput = document.getElementById('sync-gform-input');
+  if (emailInput && document.activeElement !== emailInput) emailInput.value = state.googleEmail;
+  if (webhookInput && document.activeElement !== webhookInput) webhookInput.value = state.webhookUrl;
+  if (gformInput && document.activeElement !== gformInput) gformInput.value = state.gformUrl;
+}
+
+function saveSyncSettings() {
+  const emailInput = document.getElementById('sync-email-input');
+  const webhookInput = document.getElementById('sync-webhook-input');
+  const gformInput = document.getElementById('sync-gform-input');
+
+  const email = emailInput ? emailInput.value.trim() : '';
+  const webhook = webhookInput ? webhookInput.value.trim() : '';
+  const gform = gformInput ? gformInput.value.trim() : '';
+
+  if (email && !isValidEmail(email)) {
+    showToast('Format email Google belum valid.');
+    return;
+  }
+  if (!isValidWebhook(webhook)) {
+    showToast('URL webhook harus diawali http:// atau https://.');
+    return;
+  }
+  if (!isValidWebhook(gform)) {
+    showToast('URL Google Form harus diawali http:// atau https://.');
+    return;
+  }
+
+  state.googleEmail = email;
+  state.webhookUrl = webhook;
+  state.gformUrl = gform;
+  renderSyncStatus();
+  triggerConfetti();
+  showToast(webhook ? 'Koneksi Sheet tersimpan. Submission siap dikirim otomatis.' : 'Email tersimpan. Webhook masih kosong — mode simulasi aktif.');
 }
 
 function chooseCategory(presetKey) {
@@ -731,6 +835,7 @@ function buildSubmissionPayload() {
     submittedAt: new Date().toISOString(),
     preset: state.activePresetKey,
     category: p.categoryLabel,
+    googleEmail: state.googleEmail,
     formTitle: p.companyName,
     formSlug: p.slug,
     sourceUrl: state.gformUrl,
@@ -851,12 +956,13 @@ function openPasteModal() {
   const m = document.getElementById('paste-link-modal');
   if (m) m.classList.remove('hidden');
 
+  const emailInput = document.getElementById('modal-email-input');
   const gformInput = document.getElementById('modal-gform-input');
-  if (gformInput) gformInput.value = state.gformUrl;
   const webhookInput = document.getElementById('modal-webhook-input');
+  if (emailInput) emailInput.value = state.googleEmail;
+  if (gformInput) gformInput.value = state.gformUrl;
   if (webhookInput) webhookInput.value = state.webhookUrl;
-  const syncStatus = document.getElementById('paste-sync-status');
-  if (syncStatus) syncStatus.innerText = state.webhookUrl ? 'Webhook: aktif' : 'Webhook: belum diisi (mode simulasi)';
+  renderSyncStatus();
 }
 
 function closePasteModal() {
@@ -865,20 +971,32 @@ function closePasteModal() {
 }
 
 function applyPastedGForm() {
-  const inp = document.getElementById('modal-gform-input');
-  const hook = document.getElementById('modal-webhook-input');
-  if (!inp || !inp.value.trim()) {
-    showToast('Mohon masukkan tautan Google Form.');
+  const emailInput = document.getElementById('modal-email-input');
+  const gformInput = document.getElementById('modal-gform-input');
+  const webhookInput = document.getElementById('modal-webhook-input');
+
+  const email = emailInput ? emailInput.value.trim() : '';
+  const gform = gformInput ? gformInput.value.trim() : '';
+  const webhook = webhookInput ? webhookInput.value.trim() : '';
+
+  if (email && !isValidEmail(email)) {
+    showToast('Format email Google belum valid.');
+    return;
+  }
+  if (!isValidWebhook(webhook) || !isValidWebhook(gform)) {
+    showToast('URL harus diawali http:// atau https://.');
     return;
   }
 
-  state.gformUrl = inp.value.trim();
-  state.webhookUrl = hook && hook.value.trim() ? hook.value.trim() : '';
+  state.googleEmail = email;
+  state.gformUrl = gform;
+  state.webhookUrl = webhook;
   closePasteModal();
+  renderSyncStatus();
   triggerConfetti();
-  showToast(state.webhookUrl
-    ? '✨ Link tersimpan. Webhook aktif — data dikirim saat submit.'
-    : '✨ Link tersimpan. Webhook belum diisi — submission berstatus simulasi.');
+  showToast(webhook
+    ? 'Pengaturan tersimpan. Webhook aktif — data dikirim saat submit.'
+    : 'Pengaturan tersimpan. Webhook kosong — submission berstatus simulasi.');
 }
 
 function copyFormLink() {
