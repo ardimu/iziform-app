@@ -1101,15 +1101,29 @@ body.theme-midnight .hr-form-field select, body.theme-cyber .hr-form-field selec
 .hr-ui-preview-copy { display: flex; flex-direction: column; min-width: 0; }
 .hr-ui-preview-copy b { font-size: 0.75rem; font-weight: 900; color: var(--text-headline); }
 .hr-ui-preview-copy i { font-size: 0.5625rem; font-style: normal; color: var(--text-faint); }
+.hr-font-pair-field { margin-top: 0.8rem; gap: 0.35rem; }
+.hr-font-pair-field select { width: 100%; }
+.hr-font-pair-field select:disabled { opacity: 0.65; cursor: not-allowed; }
+.hr-font-pair-hint { font-size: 0.5625rem; line-height: 1.4; color: var(--text-faint); }
 .hr-ui-template-btn[data-template], #hr-ui-preview[data-template] { --preview-bg: #f8fafc; --preview-border: #e2e8f0; --preview-accent: #4f46e5; }
-.hr-ui-template-btn[data-template="editorial"], #hr-ui-preview[data-template="editorial"] { --preview-bg: #faf3e8; --preview-border: #e8d5bc; --preview-accent: #b45309; }
-.hr-ui-template-btn[data-template="noir"], #hr-ui-preview[data-template="noir"] { --preview-bg: #141824; --preview-border: #2b3040; --preview-accent: #e5b567; }
+.hr-ui-template-btn[data-template="warm-editorial"], #hr-ui-preview[data-template="warm-editorial"] { --preview-bg: #f7efe2; --preview-border: #e3cdb2; --preview-accent: #a75a2b; }
+.hr-ui-template-btn[data-template="studio-frame"], #hr-ui-preview[data-template="studio-frame"] { --preview-bg: #eef1f5; --preview-border: #d5dbe5; --preview-accent: #2563eb; }
+.hr-ui-template-btn[data-template="soft-executive"], #hr-ui-preview[data-template="soft-executive"] { --preview-bg: #f2f1ec; --preview-border: #d9ded7; --preview-accent: #3f6f66; }
+.hr-ui-template-btn[data-template="obsidian"], #hr-ui-preview[data-template="obsidian"] { --preview-bg: #151820; --preview-border: #2b303b; --preview-accent: #d6b27a; }
+.hr-ui-template-btn[data-template="ivory-champagne"], #hr-ui-preview[data-template="ivory-champagne"] { --preview-bg: #fffdf7; --preview-border: #e6dcc8; --preview-accent: #8b6b37; }
+.hr-ui-template-btn[data-template="nordic-cobalt"], #hr-ui-preview[data-template="nordic-cobalt"] { --preview-bg: #eef2f7; --preview-border: #d6dfeb; --preview-accent: #1d4ed8; }
+.hr-ui-template-btn[data-template="deep-forest"], #hr-ui-preview[data-template="deep-forest"] { --preview-bg: #132722; --preview-border: #27463d; --preview-accent: #d4b25e; }
 .hr-ui-template-btn[data-template] { position: relative; padding-left: 1.6rem; }
 .hr-ui-template-btn[data-template]::before { content: ''; position: absolute; left: 0.6rem; top: 0.8rem; width: 0.7rem; height: 0.7rem; border-radius: 0.3rem; border: 1px solid var(--preview-border); background: var(--preview-bg); box-shadow: inset 0 0 0 2px var(--preview-accent); }
 #hr-ui-preview[data-template] { background: var(--preview-bg); border-color: var(--preview-border); }
 #hr-ui-preview[data-template] .hr-ui-preview-bar { background: var(--preview-accent); }
 #hr-ui-preview[data-template] .hr-ui-preview-logo { background: var(--preview-bg); border-color: var(--preview-border); color: var(--preview-accent); }
 #hr-ui-preview[data-template] .hr-ui-preview-copy b { color: var(--preview-accent); }
+#hr-ui-preview[data-font-pair="editorial"] .hr-ui-preview-copy b,
+#hr-ui-preview[data-font-pair="executive"] .hr-ui-preview-copy b,
+#hr-ui-preview[data-font-pair="heritage"] .hr-ui-preview-copy b { font-family: var(--font-playfair); }
+#hr-ui-preview[data-font-pair="studio"] .hr-ui-preview-copy b { font-family: var(--font-space); }
+#hr-ui-preview[data-font-pair="clean"] .hr-ui-preview-copy b { font-family: var(--font-jakarta); }
 .hr-preview-column { display: flex; flex-direction: column; gap: 1rem; }
 .hr-price-card { position: relative; display: flex; flex-direction: column; padding: 1.5rem; border-radius: 1.5rem; background: var(--surface-raised); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-soft); }
 .hr-price-label { font-size: 0.75rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-color); }
@@ -1260,30 +1274,111 @@ body[data-preset="recruit"] .brand-identity-card { display: none; }
   --border: #e2e8f0;
   --career-banner: linear-gradient(135deg, #e0e7ff, #1e1b4b 92%);
 }
-#form-view[data-hr-ui-template="editorial"] {
-  --bg: #faf3e8;
-  --surface: #fffaf2;
-  --text: #3d2415;
-  --muted: #8a6f57;
-  --accent: #b45309;
-  --border: #e8d5bc;
-  --career-font-body: var(--font-outfit);
-  --career-font-heading: var(--font-playfair);
-  --career-banner: linear-gradient(135deg, #fed7aa, #7c2d12 92%);
+#form-view[data-hr-ui-template="warm-editorial"] {
+  --bg: #f7efe2;
+  --surface: #fffaf1;
+  --text: #3b2a1d;
+  --muted: #806958;
+  --accent: #a75a2b;
+  --border: #e3cdb2;
+  --career-banner: linear-gradient(135deg, #f2d7b2, #6b3418 96%);
   --success-text: #166534;
 }
-#form-view[data-hr-ui-template="noir"] {
-  --bg: #0b0d14;
-  --surface: #141824;
-  --text: #f8fafc;
-  --muted: #a1a1aa;
-  --accent: #e5b567;
-  --border: #2b3040;
-  --accent-contrast: #1c1917;
-  --career-font-body: var(--font-space);
-  --career-font-heading: var(--font-space);
-  --career-banner: linear-gradient(135deg, #111827, #b45309 120%);
+#form-view[data-hr-ui-template="studio-frame"] {
+  --bg: #eef1f5;
+  --surface: #ffffff;
+  --text: #111827;
+  --muted: #667085;
+  --accent: #2563eb;
+  --border: #d5dbe5;
+  --career-banner: linear-gradient(135deg, #dbeafe, #172554 96%);
+  --success-text: #047857;
+}
+#form-view[data-hr-ui-template="soft-executive"] {
+  --bg: #f2f1ec;
+  --surface: #fcfbf7;
+  --text: #243330;
+  --muted: #6b7c76;
+  --accent: #3f6f66;
+  --border: #d9ded7;
+  --career-banner: linear-gradient(135deg, #d9e6df, #1f3d36 96%);
+  --success-text: #166534;
+}
+#form-view[data-hr-ui-template="obsidian"] {
+  --bg: #0d0f14;
+  --surface: #151820;
+  --text: #f2f4f7;
+  --muted: #a3a9b5;
+  --accent: #d6b27a;
+  --border: #2b303b;
+  --accent-contrast: #16130e;
+  --career-banner: linear-gradient(135deg, #111827, #7c5a2e 118%);
   --success-text: #6ee7b7;
+}
+#form-view[data-hr-ui-template="ivory-champagne"] {
+  --bg: #f7f3ea;
+  --surface: #fffdf7;
+  --text: #2e2a22;
+  --muted: #7c7464;
+  --accent: #8b6b37;
+  --border: #e6dcc8;
+  --accent-contrast: #ffffff;
+  --career-banner: linear-gradient(135deg, #f5e7c8, #6b522c 95%);
+  --success-text: #166534;
+}
+#form-view[data-hr-ui-template="nordic-cobalt"] {
+  --bg: #eef2f7;
+  --surface: #ffffff;
+  --text: #101c2c;
+  --muted: #5b6b80;
+  --accent: #1d4ed8;
+  --border: #d6dfeb;
+  --career-banner: linear-gradient(135deg, #cfe0ff, #0f2f6b 96%);
+  --success-text: #047857;
+}
+#form-view[data-hr-ui-template="deep-forest"] {
+  --bg: #0c1b18;
+  --surface: #132722;
+  --text: #eef5f1;
+  --muted: #a7beb4;
+  --accent: #d4b25e;
+  --border: #27463d;
+  --accent-contrast: #17160f;
+  --career-banner: linear-gradient(135deg, #123b31, #8a6b21 118%);
+  --success-text: #7ee7b8;
+}
+#form-view[data-font-pair="clean"] {
+  --career-font-heading: var(--font-jakarta);
+  --career-font-body: var(--font-jakarta);
+}
+#form-view[data-font-pair="editorial"] {
+  --career-font-heading: var(--font-playfair);
+  --career-font-body: var(--font-jakarta);
+}
+#form-view[data-font-pair="studio"] {
+  --career-font-heading: var(--font-space);
+  --career-font-body: var(--font-inter);
+}
+#form-view[data-font-pair="executive"] {
+  --career-font-heading: var(--font-playfair);
+  --career-font-body: var(--font-inter);
+}
+#form-view[data-font-pair="heritage"] {
+  --career-font-heading: var(--font-playfair);
+  --career-font-body: var(--font-outfit);
+}
+#form-view[data-hr-ui-template] input,
+#form-view[data-hr-ui-template] textarea,
+#form-view[data-hr-ui-template] select,
+#form-view[data-hr-ui-template] button,
+#form-view[data-hr-ui-template] .btn {
+  font-family: var(--career-font-body);
+}
+#form-view[data-hr-ui-template] button:hover,
+#form-view[data-hr-ui-template] button:focus,
+#form-view[data-hr-ui-template] select:hover,
+#form-view[data-hr-ui-template] select:focus {
+  font-family: var(--career-font-body);
 }
 #form-view[data-hr-ui-template] .career-hero { border-radius: 1.25rem; }
 #form-view[data-hr-ui-template] .career-showcase-card,
@@ -1302,26 +1397,112 @@ body[data-preset="recruit"] .brand-identity-card { display: none; }
 #form-view[data-hr-ui-template] .candidate-progress-track span { background: var(--career-accent); }
 #form-view[data-hr-ui-template] .candidate-step-dot.done { background: var(--career-accent); }
 #form-view[data-hr-ui-template] .candidate-step-dot.active { background: var(--career-accent); box-shadow: 0 0 0 3px var(--accent-ring); }
-#form-view[data-hr-ui-template="editorial"] .career-hero,
-#form-view[data-hr-ui-template="editorial"] .career-showcase-card,
-#form-view[data-hr-ui-template="editorial"] .candidate-portal,
-#form-view[data-hr-ui-template="editorial"] .open-question-card { border-radius: 1rem; }
-#form-view[data-hr-ui-template="editorial"] .career-showcase-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-#form-view[data-hr-ui-template="editorial"] .career-card-overview { grid-column: 1 / -1; }
-#form-view[data-hr-ui-template="editorial"] .career-fact-row span { border-radius: 0.45rem; }
-#form-view[data-hr-ui-template="editorial"] .candidate-portal { border-left: 4px solid var(--career-accent); }
-#form-view[data-hr-ui-template="editorial"] .sticky-apply-btn { border-radius: 0.35rem; }
-#form-view[data-hr-ui-template="noir"] .career-hero,
-#form-view[data-hr-ui-template="noir"] .career-showcase-card,
-#form-view[data-hr-ui-template="noir"] .candidate-portal,
-#form-view[data-hr-ui-template="noir"] .open-question-card { border-radius: 0.8rem; }
-#form-view[data-hr-ui-template="noir"] .career-showcase-grid { grid-template-columns: 1fr; }
-#form-view[data-hr-ui-template="noir"] .career-showcase-card { background: linear-gradient(135deg, var(--surface), color-mix(in srgb, var(--surface) 82%, var(--accent))); }
-#form-view[data-hr-ui-template="noir"] .career-fact-row span { background: color-mix(in srgb, var(--surface) 80%, var(--accent) 20%); }
-#form-view[data-hr-ui-template="noir"] .candidate-company-sticky,
-#form-view[data-hr-ui-template="noir"] .candidate-portal { backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
-#form-view[data-hr-ui-template="noir"] .verified-badge { background: color-mix(in srgb, var(--accent) 16%, transparent); border-color: var(--border); color: var(--text); }
-#form-view[data-hr-ui-template="noir"] .sticky-apply-btn { color: var(--accent-contrast); }
+#form-view[data-ornament]:not([data-ornament="none"]) :is(.career-showcase-card, .candidate-portal, .open-question-card) { position: relative; overflow: hidden; }
+#form-view[data-ornament]:not([data-ornament="none"]) :is(.career-hero, .career-showcase-card, .candidate-portal, .open-question-card)::after {
+  content: ''; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.14; background-repeat: no-repeat;
+  --ornament-ink: color-mix(in srgb, var(--accent) 70%, var(--text));
+}
+#form-view[data-ornament]:not([data-ornament="none"]) :is(.career-hero, .career-showcase-card, .candidate-portal, .open-question-card) > * { position: relative; z-index: 1; }
+#form-view[data-ornament]:not([data-ornament="none"]) .open-question-card::before { z-index: 2; }
+#form-view[data-ornament="batik"] :is(.career-hero, .career-showcase-card, .candidate-portal, .open-question-card)::after {
+  background-image: repeating-linear-gradient(45deg, transparent 0 10px, var(--ornament-ink) 10px 11px, transparent 11px 22px), radial-gradient(circle at 100% 0%, var(--ornament-ink) 0 1px, transparent 2px 100%);
+  background-size: 160px 160px, 110px 110px;
+  background-position: right -28px top 0, right 14px top 14px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 58%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 58%, #000 100%);
+}
+#form-view[data-ornament="frame"] :is(.career-hero, .career-showcase-card, .candidate-portal, .open-question-card)::after {
+  background-image: linear-gradient(var(--ornament-ink), var(--ornament-ink)), linear-gradient(var(--ornament-ink), var(--ornament-ink)), linear-gradient(var(--ornament-ink), var(--ornament-ink)), linear-gradient(var(--ornament-ink), var(--ornament-ink));
+  background-size: 44px 1px, 1px 44px, 44px 1px, 1px 44px;
+  background-position: 18px 18px, 18px 18px, calc(100% - 18px) calc(100% - 18px), calc(100% - 18px) calc(100% - 18px);
+}
+#form-view[data-ornament="heritage"] :is(.career-hero, .career-showcase-card, .candidate-portal, .open-question-card)::after {
+  background-image: repeating-linear-gradient(135deg, transparent 0 14px, var(--ornament-ink) 14px 15px, transparent 15px 30px), radial-gradient(circle at 0% 100%, transparent 0 10px, var(--ornament-ink) 11px 12px, transparent 13px 100%);
+  background-size: 180px 180px, 120px 120px;
+  background-position: left -34px bottom 0, left 12px bottom 12px;
+  -webkit-mask-image: linear-gradient(90deg, #000 0%, transparent 46%);
+  mask-image: linear-gradient(90deg, #000 0%, transparent 46%);
+}
+#form-view[data-ornament="executive"] :is(.career-hero, .career-showcase-card, .candidate-portal, .open-question-card)::after {
+  background-image: linear-gradient(135deg, transparent 48%, var(--ornament-ink) 49% 50%, transparent 51%), linear-gradient(315deg, transparent 48%, var(--ornament-ink) 49% 50%, transparent 51%);
+  background-size: 130px 130px, 130px 130px;
+  background-position: right -30px top -30px, left -30px bottom -30px;
+}
+#form-view[data-ornament="filigree"] :is(.career-hero, .career-showcase-card, .candidate-portal, .open-question-card)::after {
+  background-image: radial-gradient(circle, transparent 54%, var(--ornament-ink) 55% 56%, transparent 57%), repeating-linear-gradient(90deg, transparent 0 19px, var(--ornament-ink) 19px 20px);
+  background-size: 96px 96px, 120px 120px;
+  background-position: right 16px top 16px, left 16px bottom 16px;
+  -webkit-mask-image: linear-gradient(135deg, transparent 42%, #000 100%);
+  mask-image: linear-gradient(135deg, transparent 42%, #000 100%);
+}
+#form-view[data-ornament="nordic"] :is(.career-hero, .career-showcase-card, .candidate-portal, .open-question-card)::after {
+  background-image: repeating-linear-gradient(0deg, transparent 0 19px, var(--ornament-ink) 19px 20px), repeating-linear-gradient(90deg, transparent 0 19px, var(--ornament-ink) 19px 20px);
+  background-size: 140px 140px, 140px 140px;
+  background-position: calc(100% - 14px) 14px, calc(100% - 14px) 14px;
+  -webkit-mask-image: linear-gradient(90deg, transparent 62%, #000 100%);
+  mask-image: linear-gradient(90deg, transparent 62%, #000 100%);
+}
+#form-view[data-ornament="forest"] :is(.career-hero, .career-showcase-card, .candidate-portal, .open-question-card)::after {
+  background-image: repeating-linear-gradient(60deg, transparent 0 12px, var(--ornament-ink) 12px 13px, transparent 13px 26px), radial-gradient(ellipse at 100% 100%, var(--ornament-ink) 0 1px, transparent 2px 100%);
+  background-size: 180px 180px, 130px 130px;
+  background-position: right -36px bottom 0, right 12px bottom 12px;
+  -webkit-mask-image: linear-gradient(270deg, #000 0%, transparent 48%);
+  mask-image: linear-gradient(270deg, #000 0%, transparent 48%);
+}
+#form-view[data-hr-ui-template="warm-editorial"] .career-hero,
+#form-view[data-hr-ui-template="warm-editorial"] .career-showcase-card,
+#form-view[data-hr-ui-template="warm-editorial"] .candidate-portal,
+#form-view[data-hr-ui-template="warm-editorial"] .open-question-card,
+#form-view[data-hr-ui-template="ivory-champagne"] .career-hero,
+#form-view[data-hr-ui-template="ivory-champagne"] .career-showcase-card,
+#form-view[data-hr-ui-template="ivory-champagne"] .candidate-portal,
+#form-view[data-hr-ui-template="ivory-champagne"] .open-question-card { border-radius: 1rem; }
+#form-view[data-hr-ui-template="studio-frame"] .career-hero,
+#form-view[data-hr-ui-template="studio-frame"] .career-showcase-card,
+#form-view[data-hr-ui-template="studio-frame"] .candidate-portal,
+#form-view[data-hr-ui-template="studio-frame"] .open-question-card,
+#form-view[data-hr-ui-template="nordic-cobalt"] .career-hero,
+#form-view[data-hr-ui-template="nordic-cobalt"] .career-showcase-card,
+#form-view[data-hr-ui-template="nordic-cobalt"] .candidate-portal,
+#form-view[data-hr-ui-template="nordic-cobalt"] .open-question-card { border-radius: 0.65rem; }
+#form-view[data-hr-ui-template="soft-executive"] .career-hero,
+#form-view[data-hr-ui-template="soft-executive"] .career-showcase-card,
+#form-view[data-hr-ui-template="soft-executive"] .candidate-portal,
+#form-view[data-hr-ui-template="soft-executive"] .open-question-card,
+#form-view[data-hr-ui-template="obsidian"] .career-hero,
+#form-view[data-hr-ui-template="obsidian"] .career-showcase-card,
+#form-view[data-hr-ui-template="obsidian"] .candidate-portal,
+#form-view[data-hr-ui-template="obsidian"] .open-question-card,
+#form-view[data-hr-ui-template="deep-forest"] .career-hero,
+#form-view[data-hr-ui-template="deep-forest"] .career-showcase-card,
+#form-view[data-hr-ui-template="deep-forest"] .candidate-portal,
+#form-view[data-hr-ui-template="deep-forest"] .open-question-card { border-radius: 0.85rem; }
+#form-view[data-hr-ui-template="warm-editorial"] .career-showcase-grid,
+#form-view[data-hr-ui-template="soft-executive"] .career-showcase-grid,
+#form-view[data-hr-ui-template="ivory-champagne"] .career-showcase-grid,
+#form-view[data-hr-ui-template="deep-forest"] .career-showcase-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#form-view[data-hr-ui-template="obsidian"] .career-showcase-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+#form-view[data-hr-ui-template="warm-editorial"] .career-card-overview,
+#form-view[data-hr-ui-template="soft-executive"] .career-card-overview,
+#form-view[data-hr-ui-template="ivory-champagne"] .career-card-overview { grid-column: 1 / -1; }
+#form-view[data-hr-ui-template="warm-editorial"] .candidate-portal,
+#form-view[data-hr-ui-template="soft-executive"] .candidate-portal,
+#form-view[data-hr-ui-template="ivory-champagne"] .candidate-portal { border-left: 4px solid var(--career-accent); }
+#form-view[data-hr-ui-template="studio-frame"] .career-showcase-card,
+#form-view[data-hr-ui-template="nordic-cobalt"] .career-showcase-card { border-width: 2px; }
+#form-view[data-hr-ui-template="obsidian"] .career-showcase-card,
+#form-view[data-hr-ui-template="deep-forest"] .career-showcase-card { background: linear-gradient(135deg, var(--surface), color-mix(in srgb, var(--surface) 82%, var(--accent))); }
+#form-view[data-hr-ui-template="obsidian"] .career-fact-row span,
+#form-view[data-hr-ui-template="deep-forest"] .career-fact-row span { background: color-mix(in srgb, var(--surface) 80%, var(--accent) 20%); }
+#form-view[data-hr-ui-template="obsidian"] .candidate-company-sticky,
+#form-view[data-hr-ui-template="obsidian"] .candidate-portal,
+#form-view[data-hr-ui-template="deep-forest"] .candidate-company-sticky,
+#form-view[data-hr-ui-template="deep-forest"] .candidate-portal { backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+#form-view[data-hr-ui-template="obsidian"] .verified-badge,
+#form-view[data-hr-ui-template="deep-forest"] .verified-badge { background: color-mix(in srgb, var(--accent) 16%, transparent); border-color: var(--border); color: var(--text); }
+#form-view[data-hr-ui-template="obsidian"] .sticky-apply-btn,
+#form-view[data-hr-ui-template="deep-forest"] .sticky-apply-btn { color: var(--accent-contrast); }
 
 .candidate-portal { display: flex; flex-direction: column; gap: 1rem; padding: 1.5rem; border-radius: 1.75rem; background: var(--career-panel-bg); border: 1px solid var(--career-border); box-shadow: var(--shadow-soft); font-family: var(--career-font-body); }
 .candidate-portal-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
@@ -1878,8 +2059,16 @@ body[data-preset="recruit"] .hr-career-ribbon { display: flex; }
   .premium-shell { max-width: 820px; }
   .recruit-portal-layout { grid-template-columns: 1fr; }
   #form-view[data-hr-ui-template] { padding: 0.6rem; border-radius: 1rem; }
-  #form-view[data-hr-ui-template="editorial"] .career-showcase-grid { grid-template-columns: 1fr; }
-  #form-view[data-hr-ui-template="editorial"] .career-card-overview { grid-column: auto; }
+  #form-view[data-hr-ui-template="warm-editorial"] .career-showcase-grid,
+  #form-view[data-hr-ui-template="studio-frame"] .career-showcase-grid,
+  #form-view[data-hr-ui-template="soft-executive"] .career-showcase-grid,
+  #form-view[data-hr-ui-template="obsidian"] .career-showcase-grid,
+  #form-view[data-hr-ui-template="ivory-champagne"] .career-showcase-grid,
+  #form-view[data-hr-ui-template="nordic-cobalt"] .career-showcase-grid,
+  #form-view[data-hr-ui-template="deep-forest"] .career-showcase-grid { grid-template-columns: 1fr; }
+  #form-view[data-hr-ui-template="warm-editorial"] .career-card-overview,
+  #form-view[data-hr-ui-template="soft-executive"] .career-card-overview,
+  #form-view[data-hr-ui-template="ivory-champagne"] .career-card-overview { grid-column: auto; }
   .recruit-portal-layout > .career-portal-shell { display: flex; flex-direction: column; }
   .recruit-portal-layout .career-showcase-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .custom-track-grid, .custom-tier-grid, .hr-builder-grid, .hr-form-grid { grid-template-columns: 1fr; }

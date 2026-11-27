@@ -27,6 +27,7 @@ const state = {
   hrCompanyBanner: '',
   hrUiTemplate: 'clean01',
   hrUiTier: 'free',
+  hrFontPairOverrides: {},
   hrTemplateKey: 'tech',
   hrSelectionStatus: 'new',
   hrLastCandidate: null,
@@ -551,10 +552,25 @@ const HR_COMPANY_PRESETS = {
 };
 
 const HR_UI_TEMPLATES = [
-  { key: 'clean01', tier: 'free', theme: 'clean', labelKey: 'hr.uiTemplate.clean01' },
-  { key: 'editorial02', tier: 'free', theme: 'editorial', labelKey: 'hr.uiTemplate.editorial02' },
-  { key: 'noir03', tier: 'business', theme: 'noir', labelKey: 'hr.uiTemplate.noir03' }
+  { key: 'clean01', tier: 'free', theme: 'clean', ornament: 'none', fontPair: 'clean', labelKey: 'hr.uiTemplate.clean01' },
+  { key: 'editorial02', tier: 'pro', theme: 'warm-editorial', ornament: 'batik', fontPair: 'editorial', labelKey: 'hr.uiTemplate.pro01' },
+  { key: 'pro02', tier: 'pro', theme: 'studio-frame', ornament: 'frame', fontPair: 'studio', labelKey: 'hr.uiTemplate.pro02' },
+  { key: 'pro03', tier: 'pro', theme: 'soft-executive', ornament: 'heritage', fontPair: 'executive', labelKey: 'hr.uiTemplate.pro03' },
+  { key: 'business01', tier: 'business', theme: 'obsidian', ornament: 'executive', fontPair: 'executive', labelKey: 'hr.uiTemplate.business01' },
+  { key: 'business02', tier: 'business', theme: 'ivory-champagne', ornament: 'filigree', fontPair: 'editorial', labelKey: 'hr.uiTemplate.business02' },
+  { key: 'business03', tier: 'business', theme: 'nordic-cobalt', ornament: 'nordic', fontPair: 'studio', labelKey: 'hr.uiTemplate.business03' },
+  { key: 'business04', tier: 'business', theme: 'deep-forest', ornament: 'forest', fontPair: 'heritage', labelKey: 'hr.uiTemplate.business04' }
 ];
+
+const HR_FONT_PAIRS = {
+  clean: { heading: 'var(--font-jakarta)', body: 'var(--font-jakarta)' },
+  editorial: { heading: 'var(--font-playfair)', body: 'var(--font-jakarta)' },
+  studio: { heading: 'var(--font-space)', body: 'var(--font-inter)' },
+  executive: { heading: 'var(--font-playfair)', body: 'var(--font-inter)' },
+  heritage: { heading: 'var(--font-playfair)', body: 'var(--font-outfit)' }
+};
+
+const HR_FONT_PAIR_KEYS = ['editorial', 'studio', 'executive', 'heritage'];
 
 const HR_TEMPLATES = {
   tech: {
@@ -1045,8 +1061,20 @@ const I18N = {
     'hr.uiPreviewLabel': 'Pratinjau langsung',
     'hr.uiTier': 'Tier',
     'hr.uiTemplate.clean01': 'Netral',
-    'hr.uiTemplate.editorial02': 'Editorial Hangat',
-    'hr.uiTemplate.noir03': 'Elegan Gelap',
+    'hr.uiTemplate.pro01': 'Pro 1 — Warm Editorial Batik Accent',
+    'hr.uiTemplate.pro02': 'Pro 2 — Crisp Studio Frame',
+    'hr.uiTemplate.pro03': 'Pro 3 — Soft Executive Heritage',
+    'hr.uiTemplate.business01': 'Business 1 — Obsidian Executive',
+    'hr.uiTemplate.business02': 'Business 2 — Ivory & Champagne Atelier',
+    'hr.uiTemplate.business03': 'Business 3 — Nordic Slate & Cobalt',
+    'hr.uiTemplate.business04': 'Business 4 — Deep Forest & Brass Heritage',
+    'hr.fontPairLabel': 'Font pairing Sisi B',
+    'hr.fontPairTemplate': 'Ikuti template',
+    'hr.fontPairEditorial': 'Editorial Serif + Clean Sans',
+    'hr.fontPairStudio': 'Studio Grotesk + Sans Tajam',
+    'hr.fontPairExecutive': 'Heritage Serif + Sans Rapi',
+    'hr.fontPairHeritage': 'Serif Editorial + Soft Sans',
+    'hr.fontPairLocked': 'Terkunci pada Free',
     'portal.applyNow': 'Lamar Sekarang',
     'portal.aboutCompany': 'Tentang Perusahaan',
     'portal.jobOverview': 'Ringkasan Posisi',
@@ -1467,8 +1495,20 @@ const I18N = {
     'hr.uiPreviewLabel': 'Live preview',
     'hr.uiTier': 'Tier',
     'hr.uiTemplate.clean01': 'Neutral',
-    'hr.uiTemplate.editorial02': 'Warm Editorial',
-    'hr.uiTemplate.noir03': 'Dark Elegant',
+    'hr.uiTemplate.pro01': 'Pro 1 — Warm Editorial Batik Accent',
+    'hr.uiTemplate.pro02': 'Pro 2 — Crisp Studio Frame',
+    'hr.uiTemplate.pro03': 'Pro 3 — Soft Executive Heritage',
+    'hr.uiTemplate.business01': 'Business 1 — Obsidian Executive',
+    'hr.uiTemplate.business02': 'Business 2 — Ivory & Champagne Atelier',
+    'hr.uiTemplate.business03': 'Business 3 — Nordic Slate & Cobalt',
+    'hr.uiTemplate.business04': 'Business 4 — Deep Forest & Brass Heritage',
+    'hr.fontPairLabel': 'Candidate portal font pairing',
+    'hr.fontPairTemplate': 'Follow template',
+    'hr.fontPairEditorial': 'Editorial Serif + Clean Sans',
+    'hr.fontPairStudio': 'Studio Grotesk + Sharp Sans',
+    'hr.fontPairExecutive': 'Heritage Serif + Crisp Sans',
+    'hr.fontPairHeritage': 'Editorial Serif + Soft Sans',
+    'hr.fontPairLocked': 'Locked on Free',
     'portal.applyNow': 'Apply Now',
     'portal.aboutCompany': 'About the Company',
     'portal.jobOverview': 'Job Overview',
@@ -1889,8 +1929,20 @@ const I18N = {
     'hr.uiPreviewLabel': '实时预览',
     'hr.uiTier': '层级',
     'hr.uiTemplate.clean01': '中性',
-    'hr.uiTemplate.editorial02': '暖色编辑风',
-    'hr.uiTemplate.noir03': '暗色雅致',
+    'hr.uiTemplate.pro01': 'Pro 1 — 暖色编辑蜡染',
+    'hr.uiTemplate.pro02': 'Pro 2 — 清晰工作室框线',
+    'hr.uiTemplate.pro03': 'Pro 3 — 柔和传承行政风',
+    'hr.uiTemplate.business01': 'Business 1 — 黑曜行政风',
+    'hr.uiTemplate.business02': 'Business 2 — 象牙香槟工坊',
+    'hr.uiTemplate.business03': 'Business 3 — 北欧石板钴蓝',
+    'hr.uiTemplate.business04': 'Business 4 — 深林黄铜传承',
+    'hr.fontPairLabel': '候选人门户字体搭配',
+    'hr.fontPairTemplate': '跟随模板',
+    'hr.fontPairEditorial': '编辑衬线 + 清晰无衬线',
+    'hr.fontPairStudio': '工作室几何 + 锐利无衬线',
+    'hr.fontPairExecutive': '传承衬线 + 利落无衬线',
+    'hr.fontPairHeritage': '编辑衬线 + 柔和无衬线',
+    'hr.fontPairLocked': '免费版锁定',
     'portal.applyNow': '立即申请',
     'portal.aboutCompany': '关于公司',
     'portal.jobOverview': '职位概览',
@@ -2330,6 +2382,7 @@ function setLanguage(lang) {
   if (state.hrTemplateKey !== 'custom') applyHrTemplate(state.hrTemplateKey, true);
   applyTranslations();
   renderHrUiTemplateGallery();
+  renderHrFontPairControl();
   renderHrUiPreview();
   updateDisplayTrigger();
   renderPaymentMethod();
@@ -2851,23 +2904,62 @@ function getHrUiTemplate() {
   return HR_UI_TEMPLATES.find((item) => item.key === state.hrUiTemplate) || HR_UI_TEMPLATES[0];
 }
 
+function getHrFontPair() {
+  const template = getHrUiTemplate();
+  if (template.tier === 'free') return template.fontPair;
+  const override = state.hrFontPairOverrides[template.key];
+  return HR_FONT_PAIRS[override] ? override : template.fontPair;
+}
+
 function applyHrUiTemplate(isRecruitForm = false) {
   const formView = document.getElementById('form-view');
   const shell = document.getElementById('career-portal-shell');
   const sticky = document.getElementById('candidate-company-sticky');
-  const theme = getHrUiTemplate().theme;
-  if (formView) {
-    if (isRecruitForm) formView.dataset.hrUiTemplate = theme;
-    else formView.removeAttribute('data-hr-ui-template');
+  const template = getHrUiTemplate();
+  const theme = template.theme;
+  const ornament = template.ornament;
+  const fontPair = getHrFontPair();
+  const nodes = [formView, shell, sticky].filter(Boolean);
+  nodes.forEach((node) => {
+    if (isRecruitForm) {
+      node.dataset.hrUiTemplate = theme;
+      node.dataset.ornament = ornament;
+      node.dataset.fontPair = fontPair;
+    } else {
+      node.removeAttribute('data-hr-ui-template');
+      node.removeAttribute('data-ornament');
+      node.removeAttribute('data-font-pair');
+    }
+  });
+}
+
+function renderHrFontPairControl() {
+  const select = document.getElementById('hr-font-pair-select');
+  if (!select) return;
+  const template = getHrUiTemplate();
+  const locked = template.tier === 'free';
+  const value = locked ? 'template' : (state.hrFontPairOverrides[template.key] || 'template');
+  select.disabled = locked;
+  select.value = value;
+  const hint = document.getElementById('hr-font-pair-hint');
+  if (hint) {
+    const pairLabel = value === 'template' ? t('hr.fontPairTemplate') : t(`hr.fontPair${value.charAt(0).toUpperCase()}${value.slice(1)}`);
+    hint.textContent = `${getHrTemplateLabel(template)} · ${locked ? t('hr.fontPairLocked') : pairLabel}`;
   }
-  if (shell) {
-    if (isRecruitForm) shell.dataset.hrUiTemplate = theme;
-    else shell.removeAttribute('data-hr-ui-template');
-  }
-  if (sticky) {
-    if (isRecruitForm) sticky.dataset.hrUiTemplate = theme;
-    else sticky.removeAttribute('data-hr-ui-template');
-  }
+}
+
+function setHrFontPair(value) {
+  const template = getHrUiTemplate();
+  if (template.tier === 'free') return;
+  if (value !== 'template' && !HR_FONT_PAIR_KEYS.includes(value)) return;
+  if (value === 'template') delete state.hrFontPairOverrides[template.key];
+  else state.hrFontPairOverrides[template.key] = value;
+  renderHrFontPairControl();
+  applyHrUiTemplate(state.view === 'form' && state.activePresetKey === 'recruit');
+  renderHrUiPreview();
+  const select = document.getElementById('hr-font-pair-select');
+  const selectedLabel = select && select.selectedOptions[0] ? select.selectedOptions[0].textContent : value;
+  showToast(`${t('hr.fontPairLabel')}: ${selectedLabel}`);
 }
 
 function getHrTemplateLabel(template) {
@@ -2880,6 +2972,7 @@ function selectHrUiTemplate(templateKey) {
   state.hrUiTemplate = template.key;
   state.hrUiTier = template.tier;
   renderHrUiTemplateGallery();
+  renderHrFontPairControl();
   renderHrUiPreview();
   renderCompanyIdentity();
   if (state.view === 'form' && state.activePresetKey === 'recruit') renderActivePresetHeader();
@@ -2889,6 +2982,7 @@ function selectHrUiTemplate(templateKey) {
 
 function activateHrFreeMode() {
   setHrActiveSide('a', true);
+  delete state.hrFontPairOverrides.clean01;
   selectHrUiTemplate('clean01');
   const grid = document.getElementById('hr-ui-template-grid');
   if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -2913,7 +3007,11 @@ function renderHrUiTemplateGallery() {
 function renderHrUiPreview() {
   const template = getHrUiTemplate();
   const preview = document.getElementById('hr-ui-preview');
-  if (preview) preview.dataset.template = template.theme;
+  if (preview) {
+    preview.dataset.template = template.theme;
+    preview.dataset.ornament = template.ornament;
+    preview.dataset.fontPair = getHrFontPair();
+  }
   setTextById('hr-ui-preview-name', getHrTemplateLabel(template));
   setTextById('hr-ui-preview-tier', t(`pricing.${template.tier}`));
 }
@@ -3110,6 +3208,7 @@ function renderHrBuilder() {
   renderHrBannerPreview();
   renderHrTemplateButtons();
   renderHrUiTemplateGallery();
+  renderHrFontPairControl();
   renderHrUiPreview();
   renderHrPreview();
   renderHrPricing();

@@ -575,6 +575,17 @@
                   <span class="hr-template-label" data-i18n="hr.uiPreviewLabel">Pratinjau langsung</span>
                 </div>
                 <div id="hr-ui-template-grid" class="hr-ui-template-grid"></div>
+                <label class="hr-form-field hr-form-wide hr-font-pair-field">
+                  <span data-i18n="hr.fontPairLabel">Font pairing Sisi B</span>
+                  <select id="hr-font-pair-select" onchange="setHrFontPair(this.value)">
+                    <option value="template" data-i18n="hr.fontPairTemplate">Ikuti template</option>
+                    <option value="editorial" data-i18n="hr.fontPairEditorial">Editorial Serif + Clean Sans</option>
+                    <option value="studio" data-i18n="hr.fontPairStudio">Studio Grotesk + Sans Tajam</option>
+                    <option value="executive" data-i18n="hr.fontPairExecutive">Heritage Serif + Sans Rapi</option>
+                    <option value="heritage" data-i18n="hr.fontPairHeritage">Serif Editorial + Soft Sans</option>
+                  </select>
+                  <small id="hr-font-pair-hint" class="hr-font-pair-hint"></small>
+                </label>
                 <div id="hr-ui-preview" class="hr-ui-preview">
                   <span class="hr-ui-preview-bar"></span>
                   <span class="hr-ui-preview-logo">iF</span>
