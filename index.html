@@ -411,7 +411,8 @@
           </div>
           <div id="hr-setup-readiness" class="hr-setup-readiness" data-state="draft"></div>
           <div class="hr-builder-grid">
-            <div class="hr-builder-form">
+            <div class="hr-builder-action-column">
+              <div class="hr-builder-form">
               <details class="hr-accordion" id="hr-accordion-job-details">
                 <summary class="hr-accordion-summary">
                   <span data-i18n="hr.accordionJobDetails">Detail Posisi &amp; Profil Perusahaan</span>
@@ -670,6 +671,13 @@
               </div>
                 </div>
               </details>
+              </div>
+              <div class="custom-actions hr-builder-actions">
+                <button type="button" id="hr-finish-btn" data-hr-open-finishing class="btn btn-primary hr-finish-btn" data-i18n="hr.finishCta">Selesaikan &amp; Ringkas</button>
+                <button type="button" onclick="setHrActiveSide('b')" class="btn btn-secondary" data-i18n="hr.openPortal">Buka Portal Kandidat</button>
+                <button type="button" onclick="previewCategory('recruit')" class="btn btn-secondary" data-i18n="hr.demoPortal">Demo Portal Kandidat</button>
+                <button type="button" onclick="closeInfoPanel()" class="btn btn-secondary" data-i18n="panel.back">Kembali ke Kategori</button>
+              </div>
             </div>
             <aside class="hr-preview-column">
               <section id="hr-pricing-compact" class="hr-pricing-compact">
@@ -757,12 +765,6 @@
               </article>
             </aside>
           </div>
-          <div class="custom-actions">
-            <button type="button" id="hr-finish-btn" data-hr-open-finishing class="btn btn-primary hr-finish-btn" data-i18n="hr.finishCta">Selesaikan &amp; Ringkas</button>
-            <button type="button" onclick="setHrActiveSide('b')" class="btn btn-secondary" data-i18n="hr.openPortal">Buka Portal Kandidat</button>
-            <button type="button" onclick="previewCategory('recruit')" class="btn btn-secondary" data-i18n="hr.demoPortal">Demo Portal Kandidat</button>
-          </div>
-          <button type="button" onclick="closeInfoPanel()" class="btn btn-secondary panel-inline-cta" data-i18n="panel.back">Kembali ke Kategori</button>
         </section>
 
       </div>
