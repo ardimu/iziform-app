@@ -2869,6 +2869,8 @@ document.addEventListener('DOMContentLoaded', () => {
   updateQrisPreview();
   setupKeyboardNavigation();
   window.addEventListener('resize', updateCandidatePortalOffsets);
+  observeCandidatePortalOffsets();
+  if (document.fonts?.ready) document.fonts.ready.then(updateCandidatePortalOffsets);
   document.addEventListener('click', (event) => {
     const control = document.getElementById('display-control');
     if (!control || control.contains(event.target)) return;
@@ -3377,11 +3379,29 @@ function updateCandidatePortalOffsets() {
   const sticky = document.getElementById('candidate-company-sticky');
   if (!form || !sticky || form.classList.contains('hidden')) return;
   form.style.removeProperty('--sticky-portal-top');
-  const fallback = parseFloat(getComputedStyle(form).getPropertyValue('--sticky-portal-top')) || 0;
-  const stickyTop = parseFloat(getComputedStyle(sticky).top) || 0;
+  const fallback = cssLengthToPixels(getComputedStyle(form).getPropertyValue('--sticky-portal-top'));
+  const stickyTop = cssLengthToPixels(getComputedStyle(sticky).top);
   const stickyHeight = sticky.getBoundingClientRect().height || 0;
   const safeTop = Math.ceil(Math.max(fallback, stickyTop + stickyHeight + 16));
   form.style.setProperty('--sticky-portal-top', `${safeTop}px`);
+}
+
+function cssLengthToPixels(value) {
+  const raw = String(value || '').trim();
+  const amount = parseFloat(raw);
+  if (!Number.isFinite(amount)) return 0;
+  if (raw.endsWith('rem')) return amount * (parseFloat(getComputedStyle(document.documentElement).fontSize) || 16);
+  if (raw.endsWith('em')) return amount * (parseFloat(getComputedStyle(document.documentElement).fontSize) || 16);
+  return amount;
+}
+
+let candidatePortalOffsetObserver = null;
+
+function observeCandidatePortalOffsets() {
+  const sticky = document.getElementById('candidate-company-sticky');
+  if (!sticky || typeof ResizeObserver === 'undefined' || candidatePortalOffsetObserver) return;
+  candidatePortalOffsetObserver = new ResizeObserver(() => updateCandidatePortalOffsets());
+  candidatePortalOffsetObserver.observe(sticky);
 }
 
 function scrollElementToSafeTop(element) {
@@ -3389,8 +3409,8 @@ function scrollElementToSafeTop(element) {
   updateCandidatePortalOffsets();
   const form = document.getElementById('form-view');
   const styles = form ? getComputedStyle(form) : null;
-  const safeTop = parseFloat(styles?.getPropertyValue('--sticky-portal-top')) || 0;
-  const gap = parseFloat(styles?.getPropertyValue('--portal-scroll-gap')) || 16;
+  const safeTop = cssLengthToPixels(styles?.getPropertyValue('--sticky-portal-top'));
+  const gap = cssLengthToPixels(styles?.getPropertyValue('--portal-scroll-gap')) || 16;
   const target = window.scrollY + element.getBoundingClientRect().top - safeTop - gap;
   window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
 }

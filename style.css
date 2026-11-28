@@ -2388,9 +2388,6 @@ body[data-preset="recruit"] #form-view .recruit-apply-column::-webkit-scrollbar-
   body[data-preset="recruit"] #form-view .candidate-match-badge { display: none; }
   body[data-preset="recruit"] #form-view .candidate-cv-actions .btn { padding: 0.35rem 0.6rem; font-size: 0.5625rem; }
 }
-@media (max-width: 640px) {
-  body[data-preset="recruit"] #form-view { --sticky-portal-top: 12.5rem; }
-}
 .hr-field-hint { margin-top: 0.2rem; font-size: 0.5625rem; line-height: 1.5; color: var(--text-faint); }
 .hr-block-desc { margin: -0.35rem 0 0.85rem; font-size: 0.625rem; line-height: 1.6; color: var(--text-faint); }
 .hr-custom-fields-list { display: grid; gap: 0.65rem; margin-top: 0.85rem; }
@@ -2468,6 +2465,9 @@ body[data-preset="recruit"] #form-view .recruit-apply-column { padding-top: 0.75
   .hr-cardbox-row { grid-template-columns: 1fr; align-items: start; }
   .hr-cardbox-controls { flex-wrap: wrap; }
   body[data-preset="recruit"] #form-view { --sticky-portal-top: 11.75rem; --portal-scroll-gap: 0.75rem; }
+}
+@media (max-width: 640px) {
+  body[data-preset="recruit"] #form-view { --sticky-portal-top: 12.5rem; }
 }
 @media (prefers-reduced-motion: reduce) {
   .animate-question-in, .dashboard-view { animation: none; }
