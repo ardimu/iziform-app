@@ -1147,7 +1147,6 @@ const I18N = {
     'portal.educationLabel': 'Pendidikan',
     'portal.certificationLabel': 'Sertifikasi',
     'portal.plusPointsLabel': 'Nilai plus',
-    'portal.matchThresholdLabel': 'Minimum Match Score',
     'portal.cvDropTitle': 'Tarik & lepas CV PDF di sini',
     'portal.cvDropHint': 'atau klik untuk memilih berkas • auto-fill otomatis',
     'portal.cvDragActive': 'Lepaskan untuk memindai CV',
@@ -1572,6 +1571,7 @@ const I18N = {
     'toast.hrFreeMode': 'Mode dasar Free aktif — template Netral dipilih.',
     'toast.hrPackageSelected': 'Paket {plan} dipilih — lanjutkan pembayaran di ringkasan.',
     'toast.hrPackageCancelled': 'Paket {plan} dibatalkan — kembali ke Free.',
+    'toast.hrFreeFinishingConfirmed': 'Free Tier dikonfirmasi — form HR siap dipakai.',
     'toast.hrPackageConfirmed': 'Paket {plan} aktif. Form HR siap digunakan.',
     'toast.theme': 'Tema UI diubah: {name}',
     'toast.font': 'Font aktif: {name}',
@@ -1760,7 +1760,6 @@ const I18N = {
     'portal.educationLabel': 'Education',
     'portal.certificationLabel': 'Certification',
     'portal.plusPointsLabel': 'Plus points',
-    'portal.matchThresholdLabel': 'Minimum Match Score',
     'portal.cvDropTitle': 'Drag & drop your PDF CV here',
     'portal.cvDropHint': 'or click to choose a file • automatic auto-fill',
     'portal.cvDragActive': 'Release to scan the CV',
@@ -2185,6 +2184,7 @@ const I18N = {
     'toast.hrFreeMode': 'Free basic mode enabled — Neutral template selected.',
     'toast.hrPackageSelected': '{plan} selected — continue payment from the recap.',
     'toast.hrPackageCancelled': '{plan} cancelled — switched back to Free.',
+    'toast.hrFreeFinishingConfirmed': 'Free Tier confirmed — the HR form is ready to use.',
     'toast.hrPackageConfirmed': '{plan} is active. The HR form is ready to use.',
     'toast.theme': 'UI theme changed: {name}',
     'toast.font': 'Active font: {name}',
@@ -2373,7 +2373,6 @@ const I18N = {
     'portal.educationLabel': '学历',
     'portal.certificationLabel': '证书',
     'portal.plusPointsLabel': '加分项',
-    'portal.matchThresholdLabel': '最低匹配分',
     'portal.cvDropTitle': '将 PDF 简历拖放到此处',
     'portal.cvDropHint': '或点击选择文件 • 自动填充',
     'portal.cvDragActive': '松开以扫描简历',
@@ -2798,6 +2797,7 @@ const I18N = {
     'toast.hrFreeMode': '免费模式已启用 — 已选择中性模板。',
     'toast.hrPackageSelected': '已选择 {plan} — 请在汇总中继续付款。',
     'toast.hrPackageCancelled': '已取消 {plan} — 已切回 Free。',
+    'toast.hrFreeFinishingConfirmed': 'Free Tier 已确认 — HR 表单已可使用。',
     'toast.hrPackageConfirmed': '{plan} 已激活，HR 表单已可使用。',
     'toast.theme': '界面主题已更改：{name}',
     'toast.font': '当前字体：{name}',
@@ -3885,7 +3885,10 @@ function updateCandidatePortalOffsets() {
   const fallback = cssLengthToPixels(getComputedStyle(form).getPropertyValue('--sticky-portal-top'));
   const stickyTop = cssLengthToPixels(getComputedStyle(sticky).top);
   const stickyHeight = sticky.getBoundingClientRect().height || 0;
-  const safeTop = Math.ceil(Math.max(fallback, stickyTop + stickyHeight + 28));
+  const stickyGap = cssLengthToPixels(getComputedStyle(sticky).marginBottom) || 24;
+  const layout = document.getElementById('recruit-portal-layout');
+  const layoutGap = layout ? cssLengthToPixels(getComputedStyle(layout).paddingTop) : 0;
+  const safeTop = Math.ceil(Math.max(fallback, stickyTop + stickyHeight + stickyGap + layoutGap + 16));
   form.style.setProperty('--sticky-portal-top', `${safeTop}px`);
 }
 
@@ -3899,10 +3902,16 @@ function cssLengthToPixels(value) {
 }
 
 let candidatePortalOffsetObserver = null;
+let candidatePortalOffsetResizeBound = false;
 
 function observeCandidatePortalOffsets() {
   const sticky = document.getElementById('candidate-company-sticky');
-  if (!sticky || typeof ResizeObserver === 'undefined' || candidatePortalOffsetObserver) return;
+  if (!sticky) return;
+  if (!candidatePortalOffsetResizeBound) {
+    window.addEventListener('resize', updateCandidatePortalOffsets);
+    candidatePortalOffsetResizeBound = true;
+  }
+  if (typeof ResizeObserver === 'undefined' || candidatePortalOffsetObserver) return;
   candidatePortalOffsetObserver = new ResizeObserver(() => updateCandidatePortalOffsets());
   candidatePortalOffsetObserver.observe(sticky);
 }
@@ -4198,7 +4207,6 @@ function renderCompanyIdentity() {
   setText('showcase-qualification', r.qualification);
   setText('showcase-certification', r.certification);
   setText('showcase-plus-points', r.plusPoints);
-  setText('showcase-match-threshold', t(`cv.level${r.matchThreshold === 'high' ? 'High' : r.matchThreshold === 'low' ? 'Low' : 'Medium'}`));
   const banner = document.getElementById('career-company-banner');
   if (banner) banner.style.backgroundImage = state.hrCompanyBanner ? `url("${state.hrCompanyBanner}")` : '';
   updateCandidatePortalOffsets();
@@ -4767,7 +4775,7 @@ function renderHrFinishingSummary() {
   const activate = document.getElementById('hr-finishing-activate-btn');
   if (activate) {
     activate.textContent = needsPayment ? getHrTierPaymentCtaLabel(selectedPlan) : getHrTierCtaLabel(selectedPlan);
-    activate.classList.toggle('hidden', !needsPayment);
+    activate.classList.toggle('hidden', selectedPlan !== 'free' && !needsPayment);
   }
   renderHrFinishingReadiness();
 }
@@ -4826,9 +4834,37 @@ function copyHrFinishingSummary() {
 }
 
 function activateHrPackageFromFinishing() {
+  const data = getHrFinishingData();
   closeHrFinishingModal();
-  const plan = getHrFinishingData().plan;
-  runHrPaidTemplateGuard(() => openHrPackageModal(plan), plan);
+  if (data.plan === 'free') {
+    confirmHrFreeFinishing();
+    return;
+  }
+  runHrPaidTemplateGuard(() => openHrPackageModal(data.plan), data.plan);
+}
+
+function confirmHrFreeFinishing() {
+  const meta = getHrPackageMeta('free');
+  state.hrTemplatePaymentGate = false;
+  state.hrPackageModalPlan = 'free';
+  state.qrisPaymentPlan = '';
+  state.hrPackage = {
+    plan: 'free',
+    active: true,
+    paymentPending: false,
+    companyName: state.hrPackage.companyName || state.hrCompanyName,
+    email: state.hrPackage.email || state.googleEmail,
+    notes: state.hrPackage.notes || '',
+    currency: state.paymentMethod,
+    price: meta.price,
+    confirmedAt: new Date().toISOString()
+  };
+  setHrActiveSide('a', true);
+  syncHrPackageFromSettings();
+  renderSyncStatus();
+  renderHrPackageStatus();
+  renderHrFinishingSummary();
+  showToast(t('toast.hrFreeFinishingConfirmed'));
 }
 
 function setupHrFinishingTriggers() {

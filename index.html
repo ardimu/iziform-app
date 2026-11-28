@@ -538,8 +538,12 @@
                 <h3 class="hr-block-title" data-i18n="hr.block.requirement">3. Requirement</h3>
                 <div class="hr-form-grid">
                   <label class="hr-form-field">
-                    <span data-i18n="hr.minYears">Minimal tahun pengalaman</span>
-                    <input type="text" id="hr-min-years-input" oninput="updateHrRequirement('minYears', this.value)">
+                    <span data-i18n="hr.matchThreshold">Batas kriteria Match Score</span>
+                    <select id="hr-match-threshold-input" onchange="updateHrRequirement('matchThreshold', this.value)">
+                      <option value="low" data-i18n="cv.levelLow">Rendah</option>
+                      <option value="medium" data-i18n="cv.levelMedium">Sedang</option>
+                      <option value="high" data-i18n="cv.levelHigh">Tinggi</option>
+                    </select>
                   </label>
                   <label class="hr-form-field">
                     <span data-i18n="hr.skills">Skill / tools utama</span>
@@ -584,12 +588,8 @@
                     <input type="checkbox" id="hr-cv-required-input" checked onchange="updateHrRequirement('cvRequired', this.checked)">
                   </label>
                   <label class="hr-form-field">
-                    <span data-i18n="hr.matchThreshold">Batas kriteria Match Score</span>
-                    <select id="hr-match-threshold-input" onchange="updateHrRequirement('matchThreshold', this.value)">
-                      <option value="low" data-i18n="cv.levelLow">Rendah</option>
-                      <option value="medium" data-i18n="cv.levelMedium">Sedang</option>
-                      <option value="high" data-i18n="cv.levelHigh">Tinggi</option>
-                    </select>
+                    <span data-i18n="hr.minYears">Minimal tahun pengalaman</span>
+                    <input type="text" id="hr-min-years-input" oninput="updateHrRequirement('minYears', this.value)">
                   </label>
                 </div>
               </div>
@@ -880,7 +880,6 @@
               <div class="career-fact-row career-fact-row-qualification">
                 <span><b data-i18n="hr.minYears">Minimal tahun pengalaman</b><i id="candidate-years"></i></span>
                 <span><b data-i18n="hr.skills">Skill / tools utama</b><i id="candidate-skills"></i></span>
-                <span><b data-i18n="portal.matchThresholdLabel">Minimum Match Score</b><i id="showcase-match-threshold"></i></span>
               </div>
             </div>
           </article>
@@ -1247,8 +1246,9 @@
         <button type="button" id="hr-finishing-preview-btn" class="modal-primary" data-i18n="hr.finishingPreview">Lihat Portal Pelamar</button>
         <button type="button" id="hr-finishing-copy-btn" class="modal-secondary" data-i18n="hr.finishingCopy">Salin Link Form</button>
         <button type="button" id="hr-finishing-back-btn" class="modal-secondary" data-i18n="hr.finishingBack">Kembali ke Pengaturan HR</button>
-        <button type="button" id="hr-finishing-activate-btn" class="hr-finishing-activate hidden">Free Tier, Continue</button>
+        <button type="button" id="hr-finishing-activate-btn" class="hr-finishing-activate">Free Tier, Continue</button>
       </div>
+
     </div>
   </div>
 

@@ -1208,7 +1208,7 @@ body.theme-midnight .hr-form-field select, body.theme-cyber .hr-form-field selec
 
 .candidate-company-sticky {
   position: sticky; top: 8.75rem; z-index: 38; display: flex; align-items: center; gap: 0.75rem;
-  margin: 0 0 1.5rem; padding: 0.55rem 0.85rem; border-radius: 1rem;
+  margin: 0.5rem 0 clamp(1.75rem, 3vw, 2.5rem); padding: 0.55rem 0.85rem; border-radius: 1rem;
   background-color: var(--career-shell-bg); border: 1px solid var(--career-border);
   box-shadow: var(--shadow-soft); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
   font-family: var(--career-font-body);
@@ -1261,7 +1261,7 @@ body[data-preset="recruit"] .brand-identity-card { display: none; }
 .career-facts-group + .career-facts-group { padding-top: 0.9rem; border-top: 1px dashed var(--career-border); }
 .career-facts-group h3 { font-size: 0.6875rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--career-accent); font-family: var(--career-font-heading); }
 .career-fact-row-job { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.career-fact-row-qualification { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.career-fact-row-qualification { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 .career-hero-copy h1, .career-showcase-card h2, .career-showcase-card p span, .career-fact-row i { overflow-wrap: anywhere; }
 
 #form-view[data-hr-ui-template] {
@@ -1819,6 +1819,7 @@ body[data-preset="recruit"] #form-view.premium-shell { max-width: 1520px; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template] { padding: 0 clamp(1rem, 3vw, 2.5rem) 2rem; border-radius: 0; }
 body[data-preset="recruit"] #form-view .recruit-portal-layout { grid-template-columns: minmax(0, 1.9fr) minmax(21rem, 0.85fr); gap: clamp(1.5rem, 3vw, 3rem); }
 body[data-preset="recruit"] #form-view .recruit-portal-layout > .career-portal-shell { gap: 0; }
+body[data-preset="recruit"] #form-view .candidate-company-sticky:not(.hidden) + .recruit-portal-layout { padding-top: clamp(0.75rem, 1.5vw, 1.25rem); }
 body[data-preset="recruit"] #form-view .career-hero { border: 0; border-radius: 0; background: transparent; box-shadow: none; }
 body[data-preset="recruit"] #form-view .career-company-banner { height: clamp(9rem, 14vw, 13rem); border-radius: 1.25rem; }
 body[data-preset="recruit"] #form-view .career-hero-body { margin-top: -2.5rem; padding: 0 0 1.5rem; gap: 1.25rem; }
@@ -2532,14 +2533,16 @@ body[data-preset="recruit"] #form-view .recruit-apply-column { padding-top: 0.75
   .hr-custom-field-remove { justify-self: start; }
   .hr-cardbox-row { grid-template-columns: 1fr; align-items: start; }
   .hr-cardbox-controls { flex-wrap: wrap; }
-  body[data-preset="recruit"] #form-view { --sticky-portal-top: 14.5rem; --portal-scroll-gap: 1rem; }
+  body[data-preset="recruit"] #form-view { --sticky-portal-top: 15rem; --portal-scroll-gap: 1.25rem; }
 }
 @media (max-width: 640px) {
-  body[data-preset="recruit"] #form-view { --sticky-portal-top: 15.5rem; }
+  body[data-preset="recruit"] #form-view { --sticky-portal-top: 16rem; }
+  body[data-preset="recruit"] #form-view .candidate-company-sticky { margin-top: 0.75rem; margin-bottom: 1.75rem; }
+  body[data-preset="recruit"] #form-view .candidate-portal { top: calc(var(--sticky-portal-top) + 0.75rem); }
 }
 body[data-preset="recruit"] #form-view .career-card-facts .career-fact-row { margin-top: 0.75rem; padding-top: 0; border-top: 0; gap: 1rem 1.5rem; }
 body[data-preset="recruit"] #form-view .career-card-facts .career-fact-row-job { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-body[data-preset="recruit"] #form-view .career-card-facts .career-fact-row-qualification { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+body[data-preset="recruit"] #form-view .career-card-facts .career-fact-row-qualification { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 @media (max-width: 768px) {
   body[data-preset="recruit"] #form-view .career-card-facts .career-fact-row-job,
   body[data-preset="recruit"] #form-view .career-card-facts .career-fact-row-qualification { grid-template-columns: repeat(2, minmax(0, 1fr)); }
