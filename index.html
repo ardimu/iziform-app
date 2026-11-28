@@ -150,7 +150,7 @@
           <div class="section-heading">
             <span class="section-eyebrow" data-i18n="categories.eyebrow">Pilih Kategori</span>
             <h2 data-i18n="categories.title">Satu kategori, satu alur form yang utuh.</h2>
-            <p data-i18n="categories.desc">Klik kartu untuk membuka form, atau gunakan Pratinjau Cepat untuk mencoba alurnya dulu. Termasuk kategori Pilihan Sendiri.</p>
+            <p data-i18n="categories.desc">Klik kartu untuk membuka form dan langsung masuk ke alur yang dipilih. Termasuk kategori Pilihan Sendiri.</p>
           </div>
           <div id="category-grid" class="category-grid"></div>
         </section>
@@ -702,21 +702,18 @@
             <aside class="hr-preview-column">
               <section id="hr-pricing-compact" class="hr-pricing-compact">
                 <div class="hr-pricing-head">
-                  <span class="hr-price-label" data-i18n="hr.pricingTitle">Pro</span>
-                  <button type="button" onclick="activateHrFreeMode()" id="hr-free-try-btn" class="hr-free-chip" data-i18n="hr.freeTry">Free tersedia · coba</button>
+                  <span class="hr-price-label" data-i18n="pricing.free">Free</span>
+                  <button type="button" onclick="activateHrFreeMode()" id="hr-free-try-btn" class="hr-free-chip" data-i18n="hr.packageFreeChip">Free aktif</button>
                 </div>
                 <div class="hr-package-status" id="hr-package-status" data-plan="draft">
                   <span class="hr-package-status-dot" aria-hidden="true"></span>
                   <span class="hr-package-status-copy">
-                    <b id="hr-package-status-label">Paket belum diaktivasi</b>
-                    <i id="hr-package-status-detail">Pilih paket, lalu lanjutkan konfirmasi agar form HR siap dipakai.</i>
+                    <b id="hr-package-status-label">Free</b>
+                    <i id="hr-package-status-detail">1 form aktif · 50 respon/bulan · Google Sheet milik HR · watermark iziForm.</i>
                   </span>
                   <span class="hr-package-status-badge" id="hr-package-status-badge">—</span>
                   <button type="button" id="hr-package-change-btn" class="hr-package-change-btn hidden" data-i18n="hr.packageChange">Ubah paket</button>
                 </div>
-                <div id="hr-tier-actions" class="hr-tier-actions" aria-live="polite"></div>
-                <p class="hr-tier-action-hint" data-i18n="hr.tierActionHint">Pilihan paket menyesuaikan template yang sedang dipilih.</p>
-                <p class="hr-free-note" data-i18n="hr.freeNote">Mode dasar gratis tetap tersedia untuk mencoba alur Sisi A ↔ Sisi B.</p>
                 <div class="hr-pricing-mini-grid">
                   <article class="hr-pricing-mini-card" data-hr-package-plan="pro">
                     <span class="hr-pricing-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
@@ -732,8 +729,7 @@
                       <li data-i18n="hr.benefitCv">Auto-fill PDF CV + kecocokan Tinggi/Sedang/Rendah</li>
                       <li data-i18n="hr.benefitSheet">Rekap 1 Google Sheet HR</li>
                     </ul>
-                    <p class="hr-tier-note" data-i18n="hr.tierProNote">Mohon untuk menyelesaikan pembayaran Pro agar paket aktif dan form HR siap dipakai.</p>
-                    <button type="button" data-hr-package-trigger="pro" class="hr-package-next-btn">Pro Tier</button>
+                    <button type="button" data-hr-select-plan="pro" class="hr-package-next-btn" data-i18n="hr.packageSelect">Pilih</button>
                   </article>
                   <article class="hr-pricing-mini-card hr-pricing-mini-business" data-hr-package-plan="business">
                     <span class="hr-pricing-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
@@ -749,8 +745,7 @@
                       <li data-i18n="hr.benefitBusinessTemplate">Template portal karier Business</li>
                       <li data-i18n="hr.benefitFilter">Rekap &amp; penyaringan kandidat lebih leluasa</li>
                     </ul>
-                    <p class="hr-tier-note" data-i18n="hr.tierBusinessNote">Mohon untuk menyelesaikan pembayaran Business agar paket aktif dan form HR siap dipakai.</p>
-                    <button type="button" data-hr-package-trigger="business" class="hr-package-next-btn">Business Tier</button>
+                    <button type="button" data-hr-select-plan="business" class="hr-package-next-btn" data-i18n="hr.packageSelect">Pilih</button>
                   </article>
                 </div>
               </section>

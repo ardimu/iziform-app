@@ -1020,8 +1020,7 @@ const I18N = {
     'hero.chipSheet': 'Google Sheet',
     'categories.eyebrow': 'Pilih Kategori',
     'categories.title': 'Satu kategori, satu alur form yang utuh.',
-    'categories.desc': 'Klik kartu untuk membuka form, atau gunakan Pratinjau Cepat untuk mencoba alurnya dulu. Termasuk kategori Pilihan Sendiri.',
-    'categories.preview': 'Pratinjau Cepat',
+    'categories.desc': 'Klik kartu untuk membuka form dan langsung masuk ke alur yang dipilih. Termasuk kategori Pilihan Sendiri.',
     'categories.open': 'Buka Form',
     'pricing.startFrom': 'Mulai dari',
     'custom.eyebrow': 'Jalur Custom',
@@ -1059,7 +1058,6 @@ const I18N = {
     'hr.companyLogo': 'Logo / foto perusahaan',
     'hr.logoHint': 'Kosongkan untuk memakai inisial otomatis.',
     'hr.logoClear': 'Hapus Logo',
-    'hr.openWorkspace': 'Buka Workspace HR',
     'hr.sideA': 'Sisi A · HR / Builder',
     'hr.sideB': 'Sisi B · Portal Kandidat',
     'hr.companyPresetLabel': 'Preset perusahaan sampel',
@@ -1197,15 +1195,12 @@ const I18N = {
     'hr.accordionJobDetails': 'Detail Posisi & Profil Perusahaan',
     'hr.accordionFormSettings': 'Pengaturan Form & Dokumen Pelamar',
     'hr.accordionUiTemplate': 'Tampilan UI, Font & Template',
-    'hr.freeTry': 'Free tersedia · coba',
-    'hr.freeNote': 'Mode dasar gratis tetap tersedia untuk mencoba alur Sisi A ↔ Sisi B.',
+    'hr.packageFreeChip': 'Free aktif',
+    'hr.packageSelect': 'Pilih',
+    'hr.packageFreeLabel': 'Free',
+    'hr.packageFreeSummary': '1 form aktif · 50 respon/bulan · Google Sheet milik HR · watermark iziForm.',
     'hr.starterName': 'Pro Tier',
     'hr.packageDraft': 'Paket belum diaktivasi',
-    'hr.packageDraftHint': 'Pilih paket, lalu lanjutkan konfirmasi agar form HR siap dipakai.',
-    'hr.packageDraftPro': 'Pro siap diaktifkan',
-    'hr.packageDraftBusiness': 'Business siap diaktifkan',
-    'hr.packageDraftProHint': 'Template Pro dipilih. Selesaikan pembayaran Pro agar form HR siap dipakai.',
-    'hr.packageDraftBusinessHint': 'Template Business dipilih. Selesaikan pembayaran Business agar form HR siap dipakai.',
     'hr.packageActive': 'Paket aktif',
     'hr.packageActiveTier': 'Paket aktif · {tier}',
     'hr.packageReady': 'Form HR siap digunakan',
@@ -1265,7 +1260,6 @@ const I18N = {
     'hr.finishingSummaryTitle': 'Ringkasan Setup HR',
     'hr.finishingPortalLink': 'Link portal',
     'hr.packageBadgeDraft': 'Paket: belum aktif',
-    'hr.packageBadgeDraftTier': 'Draft · {tier}',
     'hr.packageBadgeActive': '{plan} Tier - Aktif',
     'hr.tierFreeCta': 'Free Tier, Continue',
     'hr.tierProCta': 'Pro Tier',
@@ -1274,9 +1268,6 @@ const I18N = {
     'hr.tierBusinessNote': 'Mohon untuk menyelesaikan pembayaran Business agar paket aktif dan form HR siap dipakai.',
     'hr.tierProPaymentCta': 'Pro — Lanjut Pembayaran',
     'hr.tierBusinessPaymentCta': 'Business — Lanjut Pembayaran',
-    'hr.tierActionHint': 'Pilihan paket menyesuaikan template yang sedang dipilih.',
-    'hr.tierCurrent': 'Fokus saat ini',
-    'hr.tierAlternative': 'Paket lain',
     'hr.templatePaymentRequired': 'Template {template} membutuhkan paket {tier} Tier. Silakan selesaikan pembayaran untuk menggunakannya.',
     'hr.packageStorageStatus': 'Status Storage HR',
     'hr.packageSheetReady': 'Google Sheet HR: aktif',
@@ -1417,7 +1408,7 @@ const I18N = {
     'how.step3Desc': 'Salin tautan unik kategori, lalu pantau setiap jawaban langsung di Google Sheet.',
     'showcase.eyebrow': 'Showcase Gallery',
     'showcase.title': 'Lihat hasilnya, bukan cuma bayangkan.',
-    'showcase.desc': 'Kartu demo di bawah membuka alur form asli dengan data contoh. Pratinjau Cepat juga tersedia di setiap kartu kategori.',
+    'showcase.desc': 'Kartu demo di bawah membuka alur form asli dengan data contoh.',
     'showcase.demoLabel': 'Demo Interaktif',
     'showcase.recruitTitle': 'Alur Lamaran Kerja',
     'showcase.recruitDesc': 'Identitas kandidat, PDF CV, dan indikator kecocokan.',
@@ -1641,8 +1632,7 @@ const I18N = {
     'hero.chipSheet': 'Google Sheet',
     'categories.eyebrow': 'Choose a category',
     'categories.title': 'One category, one complete form flow.',
-    'categories.desc': 'Click a card to open the form, or use Quick Preview to try the flow first. Includes a Custom category.',
-    'categories.preview': 'Quick preview',
+    'categories.desc': 'Click a card to open the form and enter the selected flow directly. Includes a Custom category.',
     'categories.open': 'Open form',
     'pricing.startFrom': 'Start from',
     'custom.eyebrow': 'Custom Paths',
@@ -1680,7 +1670,6 @@ const I18N = {
     'hr.companyLogo': 'Company logo / photo',
     'hr.logoHint': 'Leave empty to use automatic initials.',
     'hr.logoClear': 'Clear Logo',
-    'hr.openWorkspace': 'Open HR Workspace',
     'hr.sideA': 'Side A · HR / Builder',
     'hr.sideB': 'Side B · Candidate Portal',
     'hr.companyPresetLabel': 'Sample company presets',
@@ -1818,15 +1807,12 @@ const I18N = {
     'hr.accordionJobDetails': 'Job Details & Company Profile',
     'hr.accordionFormSettings': 'Applicant Form & Document Settings',
     'hr.accordionUiTemplate': 'UI, Font & Template',
-    'hr.freeTry': 'Free available · try it',
-    'hr.freeNote': 'The free basic mode still works for trying the Sisi A ↔ Sisi B flow.',
+    'hr.packageFreeChip': 'Free active',
+    'hr.packageSelect': 'Select',
+    'hr.packageFreeLabel': 'Free',
+    'hr.packageFreeSummary': '1 active form · 50 responses/month · HR-owned Google Sheet · iziForm watermark.',
     'hr.starterName': 'Pro Tier',
     'hr.packageDraft': 'Package not activated',
-    'hr.packageDraftHint': 'Choose a package, then continue the confirmation so the HR form is ready.',
-    'hr.packageDraftPro': 'Pro ready to activate',
-    'hr.packageDraftBusiness': 'Business ready to activate',
-    'hr.packageDraftProHint': 'Pro template selected. Complete the Pro payment to make the HR form ready.',
-    'hr.packageDraftBusinessHint': 'Business template selected. Complete the Business payment to make the HR form ready.',
     'hr.packageActive': 'Package active',
     'hr.packageActiveTier': 'Active package · {tier}',
     'hr.packageReady': 'HR form is ready to use',
@@ -1886,7 +1872,6 @@ const I18N = {
     'hr.finishingSummaryTitle': 'HR Setup Recap',
     'hr.finishingPortalLink': 'Portal link',
     'hr.packageBadgeDraft': 'Package: not active',
-    'hr.packageBadgeDraftTier': 'Draft · {tier}',
     'hr.packageBadgeActive': '{plan} Tier - Active',
     'hr.tierFreeCta': 'Free Tier, Continue',
     'hr.tierProCta': 'Pro Tier',
@@ -1895,9 +1880,6 @@ const I18N = {
     'hr.tierBusinessNote': 'Please complete the Business payment so the package is active and the HR form is ready.',
     'hr.tierProPaymentCta': 'Pro — Continue to Payment',
     'hr.tierBusinessPaymentCta': 'Business — Continue to Payment',
-    'hr.tierActionHint': 'Package options follow the template currently selected.',
-    'hr.tierCurrent': 'Current focus',
-    'hr.tierAlternative': 'Other package',
     'hr.templatePaymentRequired': 'The {template} template requires the {tier} Tier package. Please complete the payment to use it.',
     'hr.packageStorageStatus': 'HR Storage Status',
     'hr.packageSheetReady': 'HR Google Sheet: active',
@@ -2038,7 +2020,7 @@ const I18N = {
     'how.step3Desc': 'Copy the unique category link and monitor every answer directly in Google Sheet.',
     'showcase.eyebrow': 'Showcase Gallery',
     'showcase.title': 'See the result, not just the idea.',
-    'showcase.desc': 'The demo cards below open real form flows with sample data. Quick Preview is also available on every category card.',
+    'showcase.desc': 'The demo cards below open real form flows with sample data.',
     'showcase.demoLabel': 'Interactive demo',
     'showcase.recruitTitle': 'Application flow',
     'showcase.recruitDesc': 'Candidate identity, PDF CV, and match indicator.',
@@ -2262,8 +2244,7 @@ const I18N = {
     'hero.chipSheet': 'Google Sheet',
     'categories.eyebrow': '选择分类',
     'categories.title': '一个分类，一套完整表单流程。',
-    'categories.desc': '点击卡片打开表单，或使用快速预览先体验流程。也包含“自选分类”。',
-    'categories.preview': '快速预览',
+    'categories.desc': '点击卡片打开表单，直接进入所选流程。也包含“自选分类”。',
     'categories.open': '打开表单',
     'pricing.startFrom': '起价',
     'custom.eyebrow': '定制路径',
@@ -2301,7 +2282,6 @@ const I18N = {
     'hr.companyLogo': '公司标志 / 照片',
     'hr.logoHint': '留空则使用自动首字母。',
     'hr.logoClear': '清除标志',
-    'hr.openWorkspace': '打开 HR 工作区',
     'hr.sideA': 'A 侧 · HR / 构建器',
     'hr.sideB': 'B 侧 · 候选人门户',
     'hr.companyPresetLabel': '公司示例预设',
@@ -2439,15 +2419,12 @@ const I18N = {
     'hr.accordionJobDetails': '职位详情与公司资料',
     'hr.accordionFormSettings': '申请表与申请人资料设置',
     'hr.accordionUiTemplate': '界面、字体与模板',
-    'hr.freeTry': '免费可用 · 立即试用',
-    'hr.freeNote': '免费基础模式仍可体验 A 侧 ↔ B 侧完整流程。',
+    'hr.packageFreeChip': '免费已启用',
+    'hr.packageSelect': '选择',
+    'hr.packageFreeLabel': 'Free',
+    'hr.packageFreeSummary': '1 个表单 · 每月 50 份回复 · HR 自有 Google Sheet · iziForm 水印。',
     'hr.starterName': 'Pro Tier',
     'hr.packageDraft': '套餐尚未激活',
-    'hr.packageDraftHint': '选择套餐后继续确认，即可启用 HR 表单。',
-    'hr.packageDraftPro': 'Pro 可激活',
-    'hr.packageDraftBusiness': 'Business 可激活',
-    'hr.packageDraftProHint': '已选择 Pro 模板。完成 Pro 付款后，HR 表单即可使用。',
-    'hr.packageDraftBusinessHint': '已选择 Business 模板。完成 Business 付款后，HR 表单即可使用。',
     'hr.packageActive': '套餐已激活',
     'hr.packageActiveTier': '套餐已激活 · {tier}',
     'hr.packageReady': 'HR 表单已可使用',
@@ -2507,7 +2484,6 @@ const I18N = {
     'hr.finishingSummaryTitle': 'HR 设置汇总',
     'hr.finishingPortalLink': '门户链接',
     'hr.packageBadgeDraft': '套餐：未激活',
-    'hr.packageBadgeDraftTier': '草稿 · {tier}',
     'hr.packageBadgeActive': '{plan} 套餐 - 已激活',
     'hr.tierFreeCta': 'Free Tier, Continue',
     'hr.tierProCta': 'Pro Tier',
@@ -2516,9 +2492,6 @@ const I18N = {
     'hr.tierBusinessNote': '请完成 Business 付款，以启用套餐并让 HR 表单可用。',
     'hr.tierProPaymentCta': 'Pro — 继续付款',
     'hr.tierBusinessPaymentCta': 'Business — 继续付款',
-    'hr.tierActionHint': '套餐选项会跟随当前选择的模板更新。',
-    'hr.tierCurrent': '当前焦点',
-    'hr.tierAlternative': '其他套餐',
     'hr.templatePaymentRequired': '模板 {template} 需要 {tier} Tier 套餐。请完成付款后再使用该模板。',
     'hr.packageStorageStatus': 'HR 存储状态',
     'hr.packageSheetReady': 'HR Google Sheet：已启用',
@@ -2659,7 +2632,7 @@ const I18N = {
     'how.step3Desc': '复制分类专属链接，直接在 Google Sheet 中查看每条回答。',
     'showcase.eyebrow': '案例展示',
     'showcase.title': '看到结果，而不只是想象。',
-    'showcase.desc': '下方演示卡片会打开带有示例数据的真实表单流程。每个分类卡片也提供快速预览。',
+    'showcase.desc': '下方演示卡片会打开带有示例数据的真实表单流程。',
     'showcase.demoLabel': '交互演示',
     'showcase.recruitTitle': '求职申请流程',
     'showcase.recruitDesc': '候选人信息、PDF 简历和匹配度指标。',
@@ -2821,7 +2794,7 @@ const I18N = {
     'toast.cvRequired': '继续之前必须上传 PDF 简历。',
     'toast.required': '此项为必填项',
     'toast.requiredFieldsMissing': '提交前请填写所有必填项',
-    'toast.hrFreeMode': '免费基础模式已启用 — 已选择中性模板。',
+    'toast.hrFreeMode': '免费模式已启用 — 已选择中性模板。',
     'toast.hrPackageConfirmed': '{plan} 已激活，HR 表单已可使用。',
     'toast.theme': '界面主题已更改：{name}',
     'toast.font': '当前字体：{name}',
@@ -3353,11 +3326,7 @@ function renderDashboard() {
             </span>
             <span class="category-arrow" aria-hidden="true">&rarr;</span>
           </button>
-          <button type="button" onclick="previewCategory('${key}')" class="simulate-btn">
-            ${escapeHtml(t('categories.preview'))}
-          </button>
           ${key === 'custom' ? `<button type="button" onclick="openInfoPanel('custom')" class="custom-options-btn">${escapeHtml(t('custom.options'))}</button>` : ''}
-          ${key === 'recruit' ? `<button type="button" onclick="openRecruitWorkspace()" class="custom-options-btn">${escapeHtml(t('hr.openWorkspace'))}</button>` : ''}
           ${key === 'recruit' ? `<span id="hr-package-dashboard-badge" class="category-package-badge"></span>` : ''}
         </article>
       `;
@@ -4042,8 +4011,7 @@ function selectHrUiTemplate(templateKey) {
   if (state.view === 'form' && state.activePresetKey === 'recruit') renderActivePresetHeader();
   renderCandidatePortal();
   renderHrFinishingSummary();
-  renderHrPackageStatus(true);
-  animateHrTierActions();
+  renderHrPackageStatus();
   showToast(`${t('toast.hrTemplate')}: ${getHrTemplateLabel(template)}`);
 }
 
@@ -4497,64 +4465,6 @@ function getHrTierRank(planKey) {
   return { free: 0, pro: 1, business: 2 }[normalizeHrPackagePlan(planKey)] || 0;
 }
 
-function getHrTemplateTier() {
-  return normalizeHrPackagePlan(getHrUiTemplate().tier || state.hrUiTier || 'free');
-}
-
-function getHrDraftPackageTier() {
-  const selected = normalizeHrPackagePlan(state.hrPackageModalPlan || 'free');
-  return selected === 'free' ? getHrTemplateTier() : selected;
-}
-
-function getHrContextualTierCta(planKey) {
-  const plan = normalizeHrPackagePlan(planKey);
-  const focusTier = getHrDraftPackageTier();
-  const activePlan = state.hrPackage.active ? normalizeHrPackagePlan(state.hrPackage.plan) : '';
-  if (plan !== focusTier || activePlan === plan) return getHrTierCtaLabel(plan);
-  if (plan === 'pro') return t('hr.tierProPaymentCta');
-  if (plan === 'business') return t('hr.tierBusinessPaymentCta');
-  return t('hr.tierFreeCta');
-}
-
-let hrTierAnimationTimer = null;
-
-function animateHrTierActions() {
-  const box = document.getElementById('hr-tier-actions');
-  if (!box) return;
-  if (hrTierAnimationTimer) window.clearTimeout(hrTierAnimationTimer);
-  box.classList.remove('is-updating');
-  void box.offsetWidth;
-  box.classList.add('is-updating');
-  hrTierAnimationTimer = window.setTimeout(() => box.classList.remove('is-updating'), 520);
-}
-
-function renderHrDynamicTierActions() {
-  const box = document.getElementById('hr-tier-actions');
-  if (!box) return;
-  const focusTier = getHrDraftPackageTier();
-  const activePlan = state.hrPackage.active ? normalizeHrPackagePlan(state.hrPackage.plan) : '';
-  const plans = [focusTier, ...['free', 'pro', 'business'].filter((plan) => plan !== focusTier)];
-  box.dataset.tier = focusTier;
-  box.innerHTML = plans.map((plan, index) => {
-    const primary = index === 0;
-    const isActive = activePlan === plan;
-    return `
-      <button type="button" data-hr-dynamic-tier="${plan}" class="hr-tier-action-btn ${primary ? 'is-primary' : 'is-alternative'} ${isActive ? 'is-active' : ''}" ${isActive ? 'aria-current="true"' : ''}>
-        <small>${escapeHtml(primary ? t('hr.tierCurrent') : t('hr.tierAlternative'))}</small>
-        <span>${escapeHtml(getHrContextualTierCta(plan))}</span>
-      </button>`;
-  }).join('');
-}
-
-function animateHrPackageStatus() {
-  const status = document.getElementById('hr-package-status');
-  if (!status) return;
-  status.classList.remove('is-updating');
-  void status.offsetWidth;
-  status.classList.add('is-updating');
-  window.setTimeout(() => status.classList.remove('is-updating'), 520);
-}
-
 function getHrPackageStatusCopy(active, plan) {
   if (active) {
     const meta = getHrPackageMeta(plan);
@@ -4563,14 +4473,7 @@ function getHrPackageStatusCopy(active, plan) {
       detail: `${t('hr.packageReady')} · ${meta.name} · ${meta.price}`
     };
   }
-  const draftTier = getHrDraftPackageTier();
-  if (draftTier === 'pro') {
-    return { label: t('hr.packageDraftPro'), detail: t('hr.packageDraftProHint') };
-  }
-  if (draftTier === 'business') {
-    return { label: t('hr.packageDraftBusiness'), detail: t('hr.packageDraftBusinessHint') };
-  }
-  return { label: t('hr.packageDraft'), detail: t('hr.packageDraftHint') };
+  return { label: t('hr.packageFreeLabel'), detail: t('hr.packageFreeSummary') };
 }
 
 function getHrRequiredTemplatePlan() {
@@ -4589,8 +4492,7 @@ function runHrPaidTemplateGuard(action, requestedPlan) {
   state.hrPackageModalPlan = targetPlan;
   closeHrFinishingModal();
   openHrPackageModal(targetPlan);
-  renderHrPackageStatus(true);
-  animateHrTierActions();
+  renderHrPackageStatus();
   return false;
 }
 
@@ -4637,14 +4539,8 @@ function renderHrPackageSummary() {
 }
 
 function renderHrPackageTriggerLabels() {
-  document.querySelectorAll('[data-hr-package-trigger]').forEach((button) => {
-    if (button.closest('#hr-tier-actions')) return;
-    const plan = button.getAttribute('data-hr-package-trigger');
-    if (plan === 'checkout') {
-      button.textContent = t('hr.packageContinueCheckout');
-      return;
-    }
-    button.textContent = getHrTierCtaLabel(plan);
+  document.querySelectorAll('[data-hr-package-trigger="checkout"]').forEach((button) => {
+    button.textContent = t('hr.packageContinueCheckout');
   });
 }
 
@@ -4696,19 +4592,15 @@ function renderHrPackageReceipt() {
     <div><span>${escapeHtml(label)}</span><b>${escapeHtml(value)}</b></div>`).join('');
 }
 
-function renderHrPackageStatus(animate = false) {
+function renderHrPackageStatus() {
   const active = state.hrPackage.active === true;
   const plan = active ? normalizeHrPackagePlan(state.hrPackage.plan) : '';
-  const draftTier = getHrDraftPackageTier();
   if (active && !getHrRequiredTemplatePlan()) state.hrPackageModalPlan = plan;
   const meta = active ? getHrPackageMeta(plan) : null;
   const copy = getHrPackageStatusCopy(active, plan);
   const status = document.getElementById('hr-package-status');
   if (status) {
-    const contextKey = active ? `active:${plan}` : `draft:${draftTier}`;
-    const contextChanged = Boolean(status.dataset.context) && status.dataset.context !== contextKey;
-    status.dataset.context = contextKey;
-    status.dataset.plan = active ? plan : draftTier;
+    status.dataset.plan = active ? plan : 'free';
     const label = document.getElementById('hr-package-status-label');
     const detail = document.getElementById('hr-package-status-detail');
     const badge = document.getElementById('hr-package-status-badge');
@@ -4716,8 +4608,7 @@ function renderHrPackageStatus(animate = false) {
     if (detail) detail.textContent = copy.detail;
     if (badge) badge.textContent = active
       ? t('hr.packageBadgeActive', { plan: meta.tier })
-      : t('hr.packageBadgeDraftTier', { tier: t(`pricing.${draftTier}`) });
-    if (animate && contextChanged) animateHrPackageStatus();
+      : t('hr.packageFreeLabel');
   }
   const changeButton = document.getElementById('hr-package-change-btn');
   if (changeButton) changeButton.classList.toggle('hidden', !active);
@@ -4729,9 +4620,8 @@ function renderHrPackageStatus(animate = false) {
   const dashboardBadge = document.getElementById('hr-package-dashboard-badge');
   if (dashboardBadge) dashboardBadge.textContent = active
     ? t('hr.packageBadgeActive', { plan: meta.tier })
-    : t('hr.packageBadgeDraftTier', { tier: t(`pricing.${draftTier}`) });
+    : t('hr.packageFreeLabel');
   renderHrPackageTriggerLabels();
-  renderHrDynamicTierActions();
   renderHrPackageStorageStatus();
   renderHrPackageReceipt();
   renderHrFinishingSummary();
@@ -4953,11 +4843,41 @@ function setupHrFinishingTriggers() {
 
 function triggerHrPackage(planKey) {
   const plan = normalizeHrPackagePlan(planKey);
-  runHrPaidTemplateGuard(() => {
-    openHrPackageModal(plan);
-    renderHrPackageStatus(true);
-    animateHrTierActions();
-  }, plan);
+  runHrPaidTemplateGuard(() => openHrPackageModal(plan), plan);
+}
+
+function activateHrPackageDirect(planKey) {
+  const plan = normalizeHrPackagePlan(planKey);
+  if (plan === 'free') {
+    activateHrFreeMode();
+    return;
+  }
+  const requiredPlan = getHrRequiredTemplatePlan();
+  if (requiredPlan && getHrTierRank(plan) < getHrTierRank(requiredPlan)) {
+    showToast(t('hr.templatePaymentRequired', {
+      template: getHrTemplateLabel(getHrUiTemplate()),
+      tier: t(`pricing.${requiredPlan}`)
+    }));
+    return;
+  }
+  closeHrPackageModal();
+  state.hrTemplatePaymentGate = false;
+  state.hrPackageModalPlan = plan;
+  const meta = getHrPackageMeta(plan);
+  state.hrPackage = {
+    plan,
+    active: true,
+    companyName: state.hrPackage.companyName || state.hrCompanyName,
+    email: state.hrPackage.email || state.googleEmail,
+    notes: state.hrPackage.notes || '',
+    currency: state.paymentMethod,
+    price: meta.price,
+    confirmedAt: new Date().toISOString()
+  };
+  syncHrPackageFromSettings();
+  renderSyncStatus();
+  renderHrPackageStatus();
+  showToast(t('toast.hrPackageConfirmed', { plan: meta.tier }));
 }
 
 function setupHrPackageTriggers() {
@@ -4974,19 +4894,9 @@ function setupHrPackageTriggers() {
       triggerHrPackage(plan);
     });
   });
-  const tierActions = document.getElementById('hr-tier-actions');
-  if (tierActions) {
-    tierActions.addEventListener('click', (event) => {
-      const button = event.target.closest('[data-hr-dynamic-tier]');
-      if (button) triggerHrPackage(button.getAttribute('data-hr-dynamic-tier'));
-    });
-  }
-  document.querySelectorAll('[data-hr-package-plan]').forEach((card) => {
-    card.addEventListener('click', () => {
-      state.hrPackageModalPlan = normalizeHrPackagePlan(card.getAttribute('data-hr-package-plan'));
-      renderHrPackageModalTier();
-      renderHrPackageStatus(true);
-      animateHrTierActions();
+  document.querySelectorAll('[data-hr-select-plan]').forEach((button) => {
+    button.addEventListener('click', () => {
+      activateHrPackageDirect(button.getAttribute('data-hr-select-plan'));
     });
   });
   const changeButton = document.getElementById('hr-package-change-btn');
@@ -5051,8 +4961,7 @@ function confirmHrPackage() {
   updateHrCompanyName(company);
   syncHrPackageFromSettings();
   renderSyncStatus();
-  renderHrPackageStatus(true);
-  animateHrTierActions();
+  renderHrPackageStatus();
   const form = document.getElementById('hr-package-form');
   const success = document.getElementById('hr-package-success');
   if (form) form.classList.add('hidden');
