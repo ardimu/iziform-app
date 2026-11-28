@@ -479,6 +479,10 @@ const state = {
   }
 };
 
+if (window.pdfjsLib && window.pdfjsLib.GlobalWorkerOptions) {
+  window.pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+}
+
 const PRICING_PLANS = {
   free: {
     benefitKeys: ['pricing.freeBenefit1', 'pricing.freeBenefit2', 'pricing.freeBenefit3', 'pricing.freeBenefit4']
@@ -632,9 +636,11 @@ const HR_QUESTION_COPY = {
     { id: 'recruit_experience', category: '04 • PENGALAMAN', title: `Pengalaman kerja Anda (minimal ${r.minYears} tahun)`, subtitle: 'Ringkas pengalaman relevan Anda.', type: 'textarea', placeholder: 'Contoh: 6 tahun sebagai Fullstack Engineer', defaultValue: `${r.minYears}+ tahun pengalaman relevan` },
     { id: 'recruit_education', category: '05 • PENDIDIKAN', title: 'Pendidikan / sertifikasi / portofolio Anda', subtitle: `Sesuai requirement HR: ${r.education}.`, type: 'text', placeholder: 'S1, sertifikasi, atau link portofolio', defaultValue: r.education },
     { id: 'recruit_skills', category: '06 • SKILL & TOOLS', title: 'Skill / tools utama Anda', subtitle: `Sesuai requirement HR: ${r.skills}.`, type: 'textarea', placeholder: 'Pisahkan dengan koma', defaultValue: r.skills },
-    { id: 'recruit_salary', category: '07 • KOMPENSASI', title: 'Ekspektasi gaji Anda', subtitle: `Rentang HR: ${r.salary}.`, type: 'text', placeholder: 'Contoh: Rp25 juta', defaultValue: r.salary },
-    { id: 'recruit_notice', category: '08 • KESIAPAN', title: 'Notice period / kesiapan bergabung', subtitle: `Sesuai requirement HR: ${r.noticePeriod}.`, type: 'text', placeholder: 'Contoh: 30 hari', defaultValue: r.noticePeriod },
+    { id: 'recruit_salary', category: '07 • KOMPENSASI', title: 'Ekspektasi gaji Anda', subtitle: `Rentang HR: ${r.salary}.`, type: 'text', placeholder: 'Contoh: Rp25 juta', defaultValue: r.salary, tier: 'pro' },
+    { id: 'recruit_notice', category: '08 • KESIAPAN', title: 'Notice period / kesiapan bergabung', subtitle: `Sesuai requirement HR: ${r.noticePeriod}.`, type: 'text', placeholder: 'Contoh: 30 hari', defaultValue: r.noticePeriod, tier: 'pro' },
     { id: 'recruit_screening', category: '09 • PERTANYAAN PENYARING', title: 'Pertanyaan penyaring HR', subtitle: r.screening, type: 'textarea', placeholder: 'Tulis jawaban ringkas', defaultValue: '' },
+    { id: 'recruit_screening_detail', category: '09 • PERTANYAAN PENYARING', title: 'Screening lanjutan (Business)', subtitle: 'Jelaskan pendekatan kerja, prioritas, dan contoh hasil yang relevan.', type: 'textarea', placeholder: 'Tulis jawaban terstruktur', defaultValue: '', tier: 'business' },
+    { id: 'recruit_selection_note', category: '09 • PERTANYAAN PENYARING', title: 'Catatan seleksi lanjutan', subtitle: 'Tambahkan catatan untuk tim HR mengenai kelanjutan proses seleksi.', type: 'textarea', placeholder: 'Contoh: prioritas, ketersediaan, catatan HR', defaultValue: '', tier: 'business' },
     { id: 'recruit_cv', category: '10 • DOKUMEN', title: 'Unggah CV PDF Anda', subtitle: 'PDF akan dibaca untuk auto-fill dan indikator kecocokan.', type: 'file', placeholder: 'https://drive.google.com/...' }
     ];
     if (r.coverLetterEnabled) {
@@ -651,9 +657,11 @@ const HR_QUESTION_COPY = {
     { id: 'recruit_experience', category: '04 • EXPERIENCE', title: `Your work experience (minimum ${r.minYears} years)`, subtitle: 'Summarize your most relevant experience.', type: 'textarea', placeholder: 'Example: 6 years as a Fullstack Engineer', defaultValue: `${r.minYears}+ years of relevant experience` },
     { id: 'recruit_education', category: '05 • EDUCATION', title: 'Education / certification / portfolio', subtitle: `HR requirement: ${r.education}.`, type: 'text', placeholder: 'Degree, certification, or portfolio link', defaultValue: r.education },
     { id: 'recruit_skills', category: '06 • SKILLS & TOOLS', title: 'Your main skills / tools', subtitle: `HR requirement: ${r.skills}.`, type: 'textarea', placeholder: 'Separate with commas', defaultValue: r.skills },
-    { id: 'recruit_salary', category: '07 • COMPENSATION', title: 'Your salary expectation', subtitle: `HR range: ${r.salary}.`, type: 'text', placeholder: 'Example: IDR 25 million', defaultValue: r.salary },
-    { id: 'recruit_notice', category: '08 • AVAILABILITY', title: 'Notice period / joining availability', subtitle: `HR requirement: ${r.noticePeriod}.`, type: 'text', placeholder: 'Example: 30 days', defaultValue: r.noticePeriod },
+    { id: 'recruit_salary', category: '07 • COMPENSATION', title: 'Your salary expectation', subtitle: `HR range: ${r.salary}.`, type: 'text', placeholder: 'Example: IDR 25 million', defaultValue: r.salary, tier: 'pro' },
+    { id: 'recruit_notice', category: '08 • AVAILABILITY', title: 'Notice period / joining availability', subtitle: `HR requirement: ${r.noticePeriod}.`, type: 'text', placeholder: 'Example: 30 days', defaultValue: r.noticePeriod, tier: 'pro' },
     { id: 'recruit_screening', category: '09 • SCREENING QUESTION', title: 'HR screening question', subtitle: r.screening, type: 'textarea', placeholder: 'Write a concise answer', defaultValue: '' },
+    { id: 'recruit_screening_detail', category: '09 • SCREENING QUESTION', title: 'Advanced screening (Business)', subtitle: 'Explain your working approach, priorities, and relevant results.', type: 'textarea', placeholder: 'Write a structured answer', defaultValue: '', tier: 'business' },
+    { id: 'recruit_selection_note', category: '09 • SCREENING QUESTION', title: 'Advanced selection note', subtitle: 'Add notes for the HR team about the next selection step.', type: 'textarea', placeholder: 'Example: priority, availability, HR notes', defaultValue: '', tier: 'business' },
     { id: 'recruit_cv', category: '10 • DOCUMENT', title: 'Upload your PDF CV', subtitle: 'The PDF is read for autofill and a concise match indicator.', type: 'file', placeholder: 'https://drive.google.com/...' }
     ];
     if (r.coverLetterEnabled) {
@@ -670,9 +678,11 @@ const HR_QUESTION_COPY = {
     { id: 'recruit_experience', category: '04 • 工作经验', title: `您的工作经验（至少 ${r.minYears} 年）`, subtitle: '请简要说明最相关的工作经历。', type: 'textarea', placeholder: '示例：6 年全栈工程师经验', defaultValue: `${r.minYears}+ 年相关经验` },
     { id: 'recruit_education', category: '05 • 教育背景', title: '您的学历 / 证书 / 作品集', subtitle: `HR 要求：${r.education}。`, type: 'text', placeholder: '学历、证书或作品集链接', defaultValue: r.education },
     { id: 'recruit_skills', category: '06 • 技能与工具', title: '您的主要技能 / 工具', subtitle: `HR 要求：${r.skills}。`, type: 'textarea', placeholder: '请用逗号分隔', defaultValue: r.skills },
-    { id: 'recruit_salary', category: '07 • 薪资期望', title: '您的薪资期望', subtitle: `HR 范围：${r.salary}。`, type: 'text', placeholder: '示例：2500万印尼盾', defaultValue: r.salary },
-    { id: 'recruit_notice', category: '08 • 到岗时间', title: '通知期 / 到岗准备情况', subtitle: `HR 要求：${r.noticePeriod}。`, type: 'text', placeholder: '示例：30 天', defaultValue: r.noticePeriod },
+    { id: 'recruit_salary', category: '07 • 薪资期望', title: '您的薪资期望', subtitle: `HR 范围：${r.salary}。`, type: 'text', placeholder: '示例：2500万印尼盾', defaultValue: r.salary, tier: 'pro' },
+    { id: 'recruit_notice', category: '08 • 到岗时间', title: '通知期 / 到岗准备情况', subtitle: `HR 要求：${r.noticePeriod}。`, type: 'text', placeholder: '示例：30 天', defaultValue: r.noticePeriod, tier: 'pro' },
     { id: 'recruit_screening', category: '09 • 筛选问题', title: 'HR 筛选问题', subtitle: r.screening, type: 'textarea', placeholder: '请简要作答', defaultValue: '' },
+    { id: 'recruit_screening_detail', category: '09 • 筛选问题', title: '深度筛选（Business）', subtitle: '请说明工作方法、优先事项及相关成果。', type: 'textarea', placeholder: '请结构化作答', defaultValue: '', tier: 'business' },
+    { id: 'recruit_selection_note', category: '09 • 筛选问题', title: '高级选拔备注', subtitle: '请补充给 HR 团队的后续选拔说明。', type: 'textarea', placeholder: '示例：优先级、到岗情况、HR 备注', defaultValue: '', tier: 'business' },
     { id: 'recruit_cv', category: '10 • 文档', title: '上传 PDF 简历', subtitle: '系统会读取 PDF 以自动填写信息并给出匹配指标。', type: 'file', placeholder: 'https://drive.google.com/...' }
     ];
     if (r.coverLetterEnabled) {
@@ -987,6 +997,8 @@ const I18N = {
     'common.chooseFile': 'Choose File',
     'lang.label': 'Bahasa',
     'lang.aria': 'Pilih bahasa tampilan',
+    'lang.freeOnly': 'Bahasa Indonesia aktif • English tersedia di Pro/Business',
+    'lang.idEnReady': 'Bahasa Indonesia & English aktif',
     'controls.display': 'Tampilan',
     'controls.displayAria': 'Buka pengaturan tampilan',
     'controls.theme': 'Aksen UI',
@@ -1114,6 +1126,12 @@ const I18N = {
     'hr.uiPreviewLargeTitle': 'Pratinjau template UI',
     'hr.uiApplyPortal': 'Terapkan ke Sisi B',
     'hr.uiPreviewTagline': 'Tampilan portal kandidat mengikuti template yang dipilih.',
+    'hr.capabilityFree': 'Free: form standar & dokumen dasar • tanpa auto-fill CV atau skor kecocokan • template dasar • Bahasa Indonesia',
+    'hr.capabilityPro': 'Pro: auto-fill CV ringkas • kecocokan Tinggi/Sedang/Rendah • rekap terstruktur • template Pro • ID/EN',
+    'hr.capabilityBusiness': 'Business: screening menyeluruh • seleksi lanjutan • semua template termasuk Veilo • ID/EN',
+    'hr.templateAccess': 'Akses template: {tier}',
+    'hr.templateLocked': 'Template {tier} memerlukan paket {tier}. Pilih paket tersebut untuk membukanya.',
+    'hr.templateLockedOption': 'Terkunci • {tier}',
     'hr.uiTemplate.pro01': 'Pro — Warm Editorial Batik Accent',
     'hr.uiTemplate.pro02': 'Pro — Crisp Studio Frame',
     'hr.uiTemplate.pro03': 'Pro — Soft Executive Heritage',
@@ -1148,6 +1166,7 @@ const I18N = {
     'portal.plusPointsLabel': 'Nilai plus',
     'portal.cvDropTitle': 'Tarik & lepas CV PDF di sini',
     'portal.cvDropHint': 'atau klik untuk memilih berkas • auto-fill otomatis',
+    'portal.cvDropHintFree': 'atau klik untuk memilih berkas • unggah dokumen dasar',
     'portal.cvDragActive': 'Lepaskan untuk memindai CV',
     'portal.applicationPanel': 'Formulir Lamaran',
     'portal.companyLabel': 'Perusahaan',
@@ -1186,6 +1205,8 @@ const I18N = {
     'hr.colBenefitHint': 'Benefit yang diisi HR di pengaturan posisi; kosong berarti Belum diisi.',
     'hr.colCustomHint': 'Jawaban untuk kolom tambahan buatan HR yang tampil di cardbox.',
     'hr.colDocumentsHint': 'Tautan atau nama berkas CV dan surat lamaran dari Google Drive HR.',
+    'hr.colScreeningDetail': 'Screening lanjutan',
+    'hr.colScreeningDetailHint': 'Jawaban screening lanjutan dan catatan seleksi khusus Business.',
     'hr.noCandidateHint': 'Belum ada pengiriman dari Sisi B. Bagikan link portal untuk melihat baris contoh di sini.',
     'hr.noCandidateForStatus': 'Belum ada kandidat dengan status {status}.',
     'hr.priceDesc': 'Akses builder + portal kandidat sekali pakai.',
@@ -1482,7 +1503,7 @@ const I18N = {
     'faq.q3': 'Bagaimana jika webhook belum diisi?',
     'faq.a3': 'Form tetap bisa dicoba. Submission akan berstatus simulasi lokal sampai Anda menyimpan webhook Google Sheet yang aktif.',
     'faq.q4': 'Bisakah mengganti tema dan bahasa?',
-    'faq.a4': 'Bisa. Gunakan kontrol di bagian atas halaman untuk mengganti aksen tema serta bahasa Indonesia, Inggris, atau Mandarin Sederhana.',
+    'faq.a4': 'Bisa. Gunakan kontrol di bagian atas halaman untuk mengganti aksen tema serta bahasa Indonesia; English tersedia pada paket Pro dan Business.',
     'faq.q5': 'Apa bedanya Pro dan Business?',
     'faq.a5': 'Pro fokus pada satu form atau satu batch. Business untuk tim serta kampanye/event besar, dengan multi-form, kolaborasi tim, dan kerapian operasional.',
     'faq.q6': 'Apakah Free benar-benar tetap tersedia?',
@@ -1550,6 +1571,9 @@ const I18N = {
     'cv.matchedLabel': 'Kata kunci yang cocok',
     'cv.noMatch': 'Belum ada kata kunci yang terdeteksi',
     'cv.fieldsFilled': 'Field terisi otomatis',
+    'cv.autofilledBadge': 'Dari CV',
+    'hr.cvBasicHint': 'Unggah berkas atau tempel tautan dokumen Anda.',
+    'toast.cvAutofillLocked': 'Auto-fill CV tersedia pada paket Pro dan Business.',
     'cv.missingFields': 'Perlu dilengkapi manual',
     'cv.payloadLabel': 'Kecocokan CV',
     'toast.invalidEmail': 'Format email Google belum valid.',
@@ -1575,6 +1599,7 @@ const I18N = {
     'toast.theme': 'Tema UI diubah: {name}',
     'toast.font': 'Font aktif: {name}',
     'toast.language': 'Bahasa diubah: {name}',
+    'toast.languageLocked': 'English tersedia pada paket Pro dan Business.',
     'toast.copied': 'Link tersalin: {url}',
     'toast.link': 'Link: {url}',
     'toast.copyFailed': 'Salin otomatis tidak tersedia. Gunakan link yang ditampilkan.'
@@ -1599,6 +1624,8 @@ const I18N = {
     'common.chooseFile': 'Choose File',
     'lang.label': 'Language',
     'lang.aria': 'Choose display language',
+    'lang.freeOnly': 'Indonesian only • English is available on Pro/Business',
+    'lang.idEnReady': 'Indonesian & English are active',
     'controls.display': 'Appearance',
     'controls.displayAria': 'Open appearance settings',
     'controls.theme': 'UI accent',
@@ -1726,6 +1753,12 @@ const I18N = {
     'hr.uiPreviewLargeTitle': 'UI template preview',
     'hr.uiApplyPortal': 'Apply to candidate portal',
     'hr.uiPreviewTagline': 'The candidate portal follows the selected template.',
+    'hr.capabilityFree': 'Free: standard form & basic documents • no CV autofill or match score • basic templates • Indonesian only',
+    'hr.capabilityPro': 'Pro: concise CV autofill • High/Medium/Low match • structured recap • Pro templates • ID/EN',
+    'hr.capabilityBusiness': 'Business: deeper screening • advanced selection • all templates including Veilo • ID/EN',
+    'hr.templateAccess': 'Template access: {tier}',
+    'hr.templateLocked': 'The {tier} template requires the {tier} plan. Choose that plan to unlock it.',
+    'hr.templateLockedOption': 'Locked • {tier}',
     'hr.uiTemplate.pro01': 'Pro — Warm Editorial Batik Accent',
     'hr.uiTemplate.pro02': 'Pro — Crisp Studio Frame',
     'hr.uiTemplate.pro03': 'Pro — Soft Executive Heritage',
@@ -1760,6 +1793,7 @@ const I18N = {
     'portal.plusPointsLabel': 'Plus points',
     'portal.cvDropTitle': 'Drag & drop your PDF CV here',
     'portal.cvDropHint': 'or click to choose a file • automatic auto-fill',
+    'portal.cvDropHintFree': 'or click to choose a file • basic document upload',
     'portal.cvDragActive': 'Release to scan the CV',
     'portal.applicationPanel': 'Application Form',
     'portal.companyLabel': 'Company',
@@ -1798,6 +1832,8 @@ const I18N = {
     'hr.colBenefitHint': 'Benefits set by HR in the role settings; blank means Not specified.',
     'hr.colCustomHint': 'Answers to HR-added custom fields shown in the cardbox.',
     'hr.colDocumentsHint': 'Links or file names for the CV and cover letter from HR Google Drive.',
+    'hr.colScreeningDetail': 'Advanced screening',
+    'hr.colScreeningDetailHint': 'Business-only advanced screening answers and selection notes.',
     'hr.noCandidateHint': 'No submission from Side B yet. Share the portal link to see a sample row here.',
     'hr.noCandidateForStatus': 'No candidate with status {status} yet.',
     'hr.priceDesc': 'One-time builder + candidate portal access.',
@@ -2094,7 +2130,7 @@ const I18N = {
     'faq.q3': 'What if the webhook is empty?',
     'faq.a3': 'The form still works. Submissions are labeled as a local simulation until you save an active Google Sheet webhook.',
     'faq.q4': 'Can I switch themes and language?',
-    'faq.a4': 'Yes. Use the controls at the top to switch theme accents and between Indonesian, English, or Simplified Chinese.',
+    'faq.a4': 'Yes. Use the controls at the top to switch theme accents and Indonesian; English is available on the Pro and Business plans.',
     'faq.q5': 'What is the difference between Pro and Business?',
     'faq.a5': 'Pro focuses on one form or one batch. Business is for teams and larger campaigns/events, with multi-form flows, team collaboration, and tidy operations.',
     'faq.q6': 'Is Free really still available?',
@@ -2162,6 +2198,9 @@ const I18N = {
     'cv.matchedLabel': 'Matched keywords',
     'cv.noMatch': 'No keywords detected yet',
     'cv.fieldsFilled': 'Autofilled fields',
+    'cv.autofilledBadge': 'From CV',
+    'hr.cvBasicHint': 'Upload a file or paste your document link.',
+    'toast.cvAutofillLocked': 'CV autofill is available on the Pro and Business plans.',
     'cv.missingFields': 'Needs manual completion',
     'cv.payloadLabel': 'CV match',
     'toast.invalidEmail': 'The Google email format is not valid.',
@@ -2187,6 +2226,7 @@ const I18N = {
     'toast.theme': 'UI theme changed: {name}',
     'toast.font': 'Active font: {name}',
     'toast.language': 'Language changed: {name}',
+    'toast.languageLocked': 'English is available on the Pro and Business plans.',
     'toast.copied': 'Link copied: {url}',
     'toast.link': 'Link: {url}',
     'toast.copyFailed': 'Auto-copy is unavailable. Use the displayed link instead.'
@@ -2211,6 +2251,8 @@ const I18N = {
     'common.chooseFile': '选择文件',
     'lang.label': '语言',
     'lang.aria': '选择显示语言',
+    'lang.freeOnly': '仅印尼语 • English 适用于 Pro/Business',
+    'lang.idEnReady': '印尼语与 English 已启用',
     'controls.display': '外观',
     'controls.displayAria': '打开外观设置',
     'controls.theme': '界面配色',
@@ -2338,6 +2380,12 @@ const I18N = {
     'hr.uiPreviewLargeTitle': '界面模板预览',
     'hr.uiApplyPortal': '应用到候选人端',
     'hr.uiPreviewTagline': '候选人门户将跟随所选模板。',
+    'hr.capabilityFree': 'Free：标准表单与基础文档 • 无简历自动填充或匹配分数 • 基础模板 • 仅印尼语',
+    'hr.capabilityPro': 'Pro：简历自动填充 • 高/中/低匹配 • 结构化汇总 • Pro 模板 • ID/EN',
+    'hr.capabilityBusiness': 'Business：深度筛选 • 高级选拔 • 全部模板含 Veilo • ID/EN',
+    'hr.templateAccess': '模板权限：{tier}',
+    'hr.templateLocked': '{tier} 模板需要 {tier} 套餐。选择该套餐即可解锁。',
+    'hr.templateLockedOption': '已锁定 • {tier}',
     'hr.uiTemplate.pro01': 'Pro — 暖色编辑蜡染',
     'hr.uiTemplate.pro02': 'Pro — 清晰工作室框线',
     'hr.uiTemplate.pro03': 'Pro — 柔和传承行政风',
@@ -2372,6 +2420,7 @@ const I18N = {
     'portal.plusPointsLabel': '加分项',
     'portal.cvDropTitle': '将 PDF 简历拖放到此处',
     'portal.cvDropHint': '或点击选择文件 • 自动填充',
+    'portal.cvDropHintFree': '或点击选择文件 • 基础文档上传',
     'portal.cvDragActive': '松开以扫描简历',
     'portal.applicationPanel': '申请表',
     'portal.companyLabel': '公司',
@@ -2410,6 +2459,8 @@ const I18N = {
     'hr.colBenefitHint': 'HR 在职位设置中填写的福利；空白表示未填写。',
     'hr.colCustomHint': '卡片中显示的 HR 自定义字段回答。',
     'hr.colDocumentsHint': '来自 HR Google Drive 的简历与求职信链接或文件名。',
+    'hr.colScreeningDetail': '深度筛选',
+    'hr.colScreeningDetailHint': '仅适用于 Business 的深度筛选答案与选拔备注。',
     'hr.noCandidateHint': 'B 侧还没有提交。分享门户链接后，这里会显示示例行。',
     'hr.noCandidateForStatus': '暂无状态为 {status} 的候选人。',
     'hr.priceDesc': '一次性开通构建器 + 候选人门户。',
@@ -2706,7 +2757,7 @@ const I18N = {
     'faq.q3': '如果 Webhook 没填写怎么办？',
     'faq.a3': '表单仍可体验。在保存有效的 Google Sheet Webhook 之前，提交会标注为本地模拟。',
     'faq.q4': '可以更换主题和语言吗？',
-    'faq.a4': '可以。使用页面顶部的控件切换主题配色，以及印尼语、英语或简体中文。',
+    'faq.a4': '可以。使用页面顶部的控件切换主题配色与印尼语；English 适用于 Pro 和 Business 套餐。',
     'faq.q5': 'Pro 和 Business 有什么区别？',
     'faq.a5': 'Pro 聚焦一个表单或一次批次。Business 面向团队与更大型活动，支持多表单、团队协作和整齐的运营管理。',
     'faq.q6': 'Free 真的仍然可用吗？',
@@ -2774,6 +2825,9 @@ const I18N = {
     'cv.matchedLabel': '匹配关键词',
     'cv.noMatch': '尚未检测到关键词',
     'cv.fieldsFilled': '已自动填写',
+    'cv.autofilledBadge': '来自简历',
+    'hr.cvBasicHint': '请上传文件或粘贴文档链接。',
+    'toast.cvAutofillLocked': '简历自动填充适用于 Pro 和 Business 套餐。',
     'cv.missingFields': '需手动补充',
     'cv.payloadLabel': '简历匹配度',
     'toast.invalidEmail': 'Google 邮箱格式无效。',
@@ -2799,6 +2853,7 @@ const I18N = {
     'toast.theme': '界面主题已更改：{name}',
     'toast.font': '当前字体：{name}',
     'toast.language': '语言已更改：{name}',
+    'toast.languageLocked': 'English 适用于 Pro 和 Business 套餐。',
     'toast.copied': '链接已复制：{url}',
     'toast.link': '链接：{url}',
     'toast.copyFailed': '无法自动复制，请使用显示的链接。'
@@ -2864,8 +2919,7 @@ function getPreset(key) {
   }
   if (key === 'recruit') {
     const requirement = state.hrRequirement || HR_TEMPLATES.tech[state.currentLanguage] || HR_TEMPLATES.tech.id;
-    const buildQuestions = HR_QUESTION_COPY[state.currentLanguage] || HR_QUESTION_COPY.id;
-    const fixedQuestions = buildQuestions(requirement);
+    const fixedQuestions = getHrQuestionCopyForPlan();
     const customQuestions = getHrCustomFieldsRaw().map((field, index) => ({
       id: field.id,
       category: `${String(fixedQuestions.length + index + 1).padStart(2, '0')} • ${t('hr.additionalQuestions')}`,
@@ -2941,13 +2995,23 @@ function applyTranslations() {
     element.setAttribute('title', t(element.getAttribute('data-i18n-title')));
   });
 
-  ['id', 'en', 'zh'].forEach((lang) => {
+  ['id', 'en'].forEach((lang) => {
     const button = document.getElementById(`lang-${lang}`);
     if (!button) return;
     const active = lang === state.currentLanguage;
+    const locked = lang === 'en' && !hasHrCapability('pro');
     button.classList.toggle('active', active);
+    button.classList.toggle('locked', locked);
+    button.disabled = locked;
     button.setAttribute('aria-pressed', String(active));
+    button.title = locked ? t('toast.languageLocked') : '';
   });
+
+  const languageNote = document.getElementById('language-plan-note');
+  if (languageNote) {
+    languageNote.textContent = hasHrCapability('pro') ? t('lang.idEnReady') : t('lang.freeOnly');
+    languageNote.classList.toggle('locked', !hasHrCapability('pro'));
+  }
 
   applyFontStack();
 }
@@ -2956,22 +3020,33 @@ function defaultPaymentMethodForLanguage(lang) {
   return lang === 'id' ? 'idr' : 'usd';
 }
 
-function setLanguage(lang) {
-  if (!I18N[lang]) return;
-  state.currentLanguage = lang;
-  if (lang === 'zh') {
-    state.paymentMethod = 'usd';
-    state.paymentMethodManuallySet = false;
-  } else if (!state.paymentMethodManuallySet) {
-    state.paymentMethod = defaultPaymentMethodForLanguage(lang);
-  }
-  if (state.hrTemplateKey !== 'custom') applyHrTemplate(state.hrTemplateKey, true);
+function refreshLanguageUi() {
   applyTranslations();
   renderHrUiTemplateGallery();
   renderHrFontPairControl();
   renderHrUiPreview();
   renderHrCardboxOverview();
+  renderCvMatchPanel();
+  renderCandidatePortal();
   updateDisplayTrigger();
+  updateCandidatePortalOffsets();
+}
+
+function setLanguage(lang, options = {}) {
+  const preserveTemplate = options.preserveTemplate === true;
+  const silent = options.silent === true;
+  if (!I18N[lang]) return;
+  if (!canUseHrLanguage(lang)) {
+    if (!silent && lang !== state.currentLanguage) showToast(t('toast.languageLocked'));
+    return;
+  }
+  const previousLanguage = state.currentLanguage;
+  state.currentLanguage = lang;
+  if (!state.paymentMethodManuallySet) state.paymentMethod = defaultPaymentMethodForLanguage(lang);
+  if (!preserveTemplate && lang !== previousLanguage && state.hrTemplateKey !== 'custom') {
+    applyHrTemplate(state.hrTemplateKey, true);
+  }
+  refreshLanguageUi();
   renderPaymentMethod();
   renderPricing();
   if (state.view === 'form') {
@@ -2986,9 +3061,20 @@ function setLanguage(lang) {
   renderHrStatusList();
   renderHrRecapGuide();
   renderHrRecap();
-  renderCvMatchPanel();
-  updateCandidatePortalOffsets();
-  showToast(t('toast.language', { name: LANGUAGE_LABELS[lang] }));
+  if (!silent) showToast(t('toast.language', { name: LANGUAGE_LABELS[lang] }));
+}
+
+function enforceHrLanguagePlan() {
+  if (!canUseHrLanguage(state.currentLanguage)) {
+    setLanguage('id', { preserveTemplate: true, silent: true });
+    return;
+  }
+  applyTranslations();
+  const languageNote = document.getElementById('language-plan-note');
+  if (languageNote) {
+    languageNote.textContent = hasHrCapability('pro') ? t('lang.idEnReady') : t('lang.freeOnly');
+    languageNote.classList.toggle('locked', !hasHrCapability('pro'));
+  }
 }
 
 function seedSimulationAnswers(presetKey) {
@@ -3075,7 +3161,7 @@ function previewQrisImage(file) {
   updateQrisPreview('payment-qris-preview');
 }
 
-async function extractPdfText(file) {
+async function extractPdfTextLegacy(file) {
   const buffer = await file.arrayBuffer();
   const raw = new TextDecoder('latin1').decode(buffer);
   const streamRegex = /stream\r?\n([\s\S]*?)endstream/g;
@@ -3118,6 +3204,26 @@ async function extractPdfText(file) {
   return values.join(' ').replace(/\s+/g, ' ').trim();
 }
 
+async function extractPdfText(file) {
+  if (window.pdfjsLib && window.pdfjsLib.getDocument) {
+    try {
+      const buffer = await file.arrayBuffer();
+      const pdf = await window.pdfjsLib.getDocument({ data: new Uint8Array(buffer) }).promise;
+      const pages = [];
+      for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber += 1) {
+        const page = await pdf.getPage(pageNumber);
+        const content = await page.getTextContent();
+        pages.push(content.items.map((item) => item.str || '').join(' '));
+      }
+      const text = pages.join('\n').replace(/\s+/g, ' ').trim();
+      if (text) return text;
+    } catch (err) {
+      return extractPdfTextLegacy(file);
+    }
+  }
+  return extractPdfTextLegacy(file);
+}
+
 function computeCandidateMatch(text) {
   const requirement = currentHrRequirement();
   const lower = text.toLowerCase();
@@ -3137,6 +3243,10 @@ function computeCandidateMatch(text) {
 }
 
 function applyCvAutofill(text) {
+  if (!hasHrCapability('pro')) {
+    showToast(t('toast.cvAutofillLocked'));
+    return;
+  }
   const nameMatch = text.match(/(?:nama|name)[\s:]*([A-Za-zÀ-ÿ' .]{3,60})/i);
   const emailMatch = text.match(/[\w.+-]+@[\w.-]+\.[a-z]{2,}/i);
   const phoneMatch = text.match(/(?:\+?62|0)[\d\s-]{8,16}/);
@@ -3175,7 +3285,7 @@ function renderCvMatchPanel() {
   const panel = document.getElementById('cv-match-panel');
   if (!panel) return;
   const hasUpload = Boolean(state.userResponses['recruit_cv']);
-  if (state.activePresetKey !== 'recruit' || !hasUpload || !state.cvParse) {
+  if (state.activePresetKey !== 'recruit' || !hasHrCapability('pro') || !hasUpload || !state.cvParse) {
     panel.classList.add('hidden');
     panel.innerHTML = '';
     return;
@@ -3432,8 +3542,7 @@ function isHrCardboxVisible(id) {
 
 function getHrCardboxManifest() {
   const requirement = currentHrRequirement();
-  const buildQuestions = HR_QUESTION_COPY[state.currentLanguage] || HR_QUESTION_COPY.id;
-  const fixed = buildQuestions(requirement).map((question) => ({
+  const fixed = getHrQuestionCopyForPlan().map((question) => ({
     id: question.id,
     category: question.category,
     title: question.title,
@@ -3475,6 +3584,8 @@ function getHrCustomFields() {
 }
 
 function renderHrCardboxOverview() {
+  setTextById('hr-capability-note', getHrCapabilityCopy());
+  setTextById('hr-package-capability-detail', getHrCapabilityCopy());
   const list = document.getElementById('hr-cardbox-list');
   if (!list) return;
   const manifest = getHrCardboxManifest();
@@ -4009,9 +4120,14 @@ function getHrFinishingData() {
 function selectHrUiTemplate(templateKey) {
   const template = HR_UI_TEMPLATES.find((item) => item.key === templateKey);
   if (!template) return;
+  if (!isHrTemplateAllowed(templateKey)) {
+    showToast(t('hr.templateLocked', { tier: getHrTierDisplayLabel(template.tier) }));
+    openHrPackageModal(template.tier);
+    enforceHrLanguagePlan();
+    return;
+  }
   state.hrUiTemplate = template.key;
   state.hrUiTier = template.tier;
-  state.hrPackageModalPlan = template.tier;
   renderHrUiTemplateGallery();
   renderHrFontPairControl();
   renderHrUiPreview();
@@ -4020,6 +4136,7 @@ function selectHrUiTemplate(templateKey) {
   renderCandidatePortal();
   renderHrFinishingSummary();
   renderHrPackageStatus();
+  enforceHrLanguagePlan();
   showToast(`${t('toast.hrTemplate')}: ${getHrTemplateLabel(template)}`);
 }
 
@@ -4039,7 +4156,10 @@ function activateHrFreeMode() {
     price: meta.price,
     confirmedAt: new Date().toISOString()
   };
+  state.cvParse = null;
   setHrActiveSide('a', true);
+  enforceHrLanguagePlan();
+  refreshLanguageUi();
   delete state.hrFontPairOverrides.clean01;
   selectHrUiTemplate('clean01');
   const target = document.getElementById('hr-ui-template-select') || document.getElementById('hr-ui-preview');
@@ -4056,7 +4176,9 @@ function renderHrUiTemplateGallery() {
   if (!select) return;
   select.innerHTML = ['free', 'pro', 'business'].map((tier) => {
     const options = HR_UI_TEMPLATES.filter((template) => template.tier === tier).map((template) => {
-      return `<option value="${template.key}" data-template="${template.theme}">${escapeHtml(getHrTemplateLabel(template))}</option>`;
+      const allowed = isHrTemplateAllowed(template.key);
+      const suffix = allowed ? '' : ` · ${t('hr.templateLockedOption', { tier: getHrTierDisplayLabel(template.tier) })}`;
+      return `<option value="${template.key}" data-template="${template.theme}"${allowed ? '' : ' disabled'}>${escapeHtml(getHrTemplateLabel(template) + suffix)}</option>`;
     }).join('');
     return `<optgroup label="${escapeHtml(t(`pricing.${tier}`))}">${options}</optgroup>`;
   }).join('');
@@ -4073,6 +4195,7 @@ function renderHrUiPreview() {
   }
   setTextById('hr-ui-preview-name', getHrTemplateLabel(template));
   setTextById('hr-ui-preview-tier', t(`pricing.${template.tier}`));
+  setTextById('hr-template-access', t('hr.templateAccess', { tier: getHrTierDisplayLabel(getHrCapabilityPlan()) }));
   renderHrTemplatePreviewStage();
 }
 
@@ -4463,6 +4586,52 @@ function getHrTierRank(planKey) {
   return { free: 0, pro: 1, business: 2 }[normalizeHrPackagePlan(planKey)] || 0;
 }
 
+function getHrCapabilityPlan() {
+  const activePlan = state.hrPackage && state.hrPackage.active ? normalizeHrPackagePlan(state.hrPackage.plan) : 'free';
+  const selectedPlan = normalizeHrPackagePlan(state.hrPackageModalPlan || activePlan);
+  const templatePlan = normalizeHrPackagePlan(getHrUiTemplate().tier || state.hrUiTier || 'free');
+  return [activePlan, selectedPlan, templatePlan].reduce((best, plan) => (
+    getHrTierRank(plan) > getHrTierRank(best) ? plan : best
+  ), 'free');
+}
+
+function hasHrCapability(planKey) {
+  return getHrTierRank(getHrCapabilityPlan()) >= getHrTierRank(planKey);
+}
+
+function getHrCapabilityCopyForPlan(planKey) {
+  const plan = normalizeHrPackagePlan(planKey);
+  if (plan === 'business') return t('hr.capabilityBusiness');
+  if (plan === 'pro') return t('hr.capabilityPro');
+  return t('hr.capabilityFree');
+}
+
+function getHrCapabilityCopy() {
+  return getHrCapabilityCopyForPlan(getHrCapabilityPlan());
+}
+
+function canUseHrLanguage(lang) {
+  if (lang === 'zh') return false;
+  if (lang === 'en') return hasHrCapability('pro');
+  return true;
+}
+
+function getHrQuestionCopyForPlan() {
+  const builder = HR_QUESTION_COPY[state.currentLanguage] || HR_QUESTION_COPY.id;
+  const rank = getHrTierRank(getHrCapabilityPlan());
+  return builder(currentHrRequirement()).filter((question) => (
+    !question.tier || getHrTierRank(question.tier) <= rank
+  )).map((question) => {
+    if (question.id === 'recruit_cv' && rank === 0) return { ...question, subtitle: t('hr.cvBasicHint') };
+    return question;
+  });
+}
+
+function isHrTemplateAllowed(templateKey) {
+  const template = HR_UI_TEMPLATES.find((item) => item.key === templateKey);
+  return !!template && hasHrCapability(template.tier);
+}
+
 function getHrPackageStatusCopy(active, plan) {
   if (active) {
     const meta = getHrPackageMeta(plan);
@@ -4538,7 +4707,7 @@ function renderHrPackageSummary() {
       <strong>${escapeHtml(meta.name)}</strong>
       <span class="hr-package-summary-price">${escapeHtml(meta.price)} <small>${escapeHtml(t(meta.periodKey))}</small></span>
     </div>
-    <ul>${benefits}</ul>`;
+    <ul>${benefits}<li class="hr-package-capability">${escapeHtml(getHrCapabilityCopyForPlan(state.hrPackageModalPlan))}</li></ul>`;
   renderHrPackageModalTier();
 }
 
@@ -4602,7 +4771,9 @@ function renderHrPackageReceipt() {
 function renderHrPackageStatus() {
   const active = state.hrPackage.active === true;
   const plan = active ? normalizeHrPackagePlan(state.hrPackage.plan) : 'free';
-  if (active && !getHrRequiredTemplatePlan()) state.hrPackageModalPlan = plan;
+  const packageModal = document.getElementById('hr-package-modal');
+  const packageModalOpen = !!packageModal && !packageModal.classList.contains('hidden');
+  if (active && !packageModalOpen && !getHrRequiredTemplatePlan()) state.hrPackageModalPlan = plan;
   const meta = getHrPackageMeta(plan);
   const copy = getHrPackageStatusCopy(active, plan);
   const status = document.getElementById('hr-package-status');
@@ -4661,6 +4832,7 @@ function openActiveHrPackageModal() {
 function openHrPackageModal(planKey) {
   const plan = normalizeHrPackagePlan(planKey);
   state.hrPackageModalPlan = plan;
+  refreshLanguageUi();
   const modal = document.getElementById('hr-package-modal');
   if (!modal) return;
   const form = document.getElementById('hr-package-form');
@@ -4856,7 +5028,10 @@ function confirmHrFreeFinishing() {
     price: meta.price,
     confirmedAt: new Date().toISOString()
   };
+  state.cvParse = null;
   setHrActiveSide('a', true);
+  enforceHrLanguagePlan();
+  refreshLanguageUi();
   syncHrPackageFromSettings();
   renderSyncStatus();
   renderHrPackageStatus();
@@ -4928,6 +5103,7 @@ function activateHrPackageDirect(planKey) {
     price: meta.price,
     confirmedAt: ''
   };
+  refreshLanguageUi();
   syncHrPackageFromSettings();
   renderSyncStatus();
   renderHrPackageStatus();
@@ -5014,6 +5190,7 @@ function confirmHrPackage() {
   };
   state.googleEmail = email;
   updateHrCompanyName(company);
+  refreshLanguageUi();
   syncHrPackageFromSettings();
   renderSyncStatus();
   renderHrPackageStatus();
@@ -5105,14 +5282,15 @@ function renderHrStatusList() {
 function renderHrRecapGuide() {
   const list = document.getElementById('hr-recap-guide-list');
   if (!list) return;
-  const rows = [
-    ['hr.colCandidate', 'hr.colCandidateHint'],
-    ['hr.matchStatus', 'hr.matchStatusHint'],
+  const rows = [['hr.colCandidate', 'hr.colCandidateHint']];
+  if (hasHrCapability('pro')) rows.push(['hr.matchStatus', 'hr.matchStatusHint']);
+  rows.push(
     ['hr.colSelection', 'hr.colSelectionHint'],
     ['hr.colBenefit', 'hr.colBenefitHint'],
-    ['hr.colCustom', 'hr.colCustomHint'],
-    ['hr.colDocuments', 'hr.colDocumentsHint']
-  ];
+    ['hr.colCustom', 'hr.colCustomHint']
+  );
+  if (hasHrCapability('business')) rows.push(['hr.colScreeningDetail', 'hr.colScreeningDetailHint']);
+  rows.push(['hr.colDocuments', 'hr.colDocumentsHint']);
   list.innerHTML = rows.map(([labelKey, hintKey]) => `
     <div><b>${escapeHtml(t(labelKey))}</b><span>${escapeHtml(t(hintKey))}</span></div>
   `).join('');
@@ -5173,15 +5351,22 @@ function renderHrDocumentCell(label, documentValue) {
 function renderHrRecap(animate = false) {
   const body = document.getElementById('hr-recap-body');
   if (!body) return;
+  const matchEnabled = hasHrCapability('pro');
+  const businessEnabled = hasHrCapability('business');
+  const colSpan = 5 + Number(matchEnabled) + Number(businessEnabled);
+  const matchCol = document.getElementById('hr-recap-match-col');
+  if (matchCol) matchCol.classList.toggle('hidden', !matchEnabled);
+  const screeningCol = document.getElementById('hr-recap-screening-col');
+  if (screeningCol) screeningCol.classList.toggle('hidden', !businessEnabled);
   const candidate = state.hrLastCandidate;
   if (!candidate) {
-    body.innerHTML = `<tr><td colspan="6"><b>${escapeHtml(t('hr.noCandidate'))}</b><small>${escapeHtml(t('hr.noCandidateHint'))}</small></td></tr>`;
+    body.innerHTML = `<tr><td colspan="${colSpan}"><b>${escapeHtml(t('hr.noCandidate'))}</b><small>${escapeHtml(t('hr.noCandidateHint'))}</small></td></tr>`;
     return;
   }
   const activeStatus = HR_STATUS_KEYS.includes(state.hrSelectionStatus) ? state.hrSelectionStatus : 'new';
   if (!HR_STATUS_KEYS.includes(candidate.status)) candidate.status = 'new';
   if (candidate.status !== activeStatus) {
-    body.innerHTML = `<tr><td colspan="6"><b>${escapeHtml(t('hr.noCandidateForStatus', { status: hrStatusLabel(activeStatus) }))}</b><small>${escapeHtml(t('hr.statusHint'))}</small></td></tr>`;
+    body.innerHTML = `<tr><td colspan="${colSpan}"><b>${escapeHtml(t('hr.noCandidateForStatus', { status: hrStatusLabel(activeStatus) }))}</b><small>${escapeHtml(t('hr.statusHint'))}</small></td></tr>`;
     return;
   }
   const score = candidate.score ? ` (${candidate.score})` : '';
@@ -5197,16 +5382,23 @@ function renderHrRecap(animate = false) {
     renderHrDocumentCell(t('hr.docCv'), candidate.cv),
     renderHrDocumentCell(t('hr.docCover'), candidate.coverLetter)
   ].join('<br>');
-  body.innerHTML = `
-    <tr${animate ? ' class="is-updated"' : ''}>
-      <td><b>${escapeHtml(candidate.name || '-')}</b><br><span>${escapeHtml(candidate.email || '-')} · ${escapeHtml(candidate.wa || '-')}</span></td>
-      <td>${escapeHtml(candidate.match || t('cv.levelLow'))}${escapeHtml(score)}</td>
-      <td>${escapeHtml(hrStatusLabel(candidate.status))}</td>
-      <td>${escapeHtml(benefit)}</td>
-      <td>${customAnswers}</td>
-      <td>${documents}</td>
-    </tr>
-  `;
+  const screeningDetail = [candidate.screeningDetail, candidate.selectionNote]
+    .map((value) => String(value || '').trim())
+    .filter(Boolean)
+    .join(' · ') || '-';
+  const cells = [`
+      <td><b>${escapeHtml(candidate.name || '-')}</b><br><span>${escapeHtml(candidate.email || '-')} · ${escapeHtml(candidate.wa || '-')}</span></td>`];
+  if (matchEnabled) {
+    cells.push(`<td>${escapeHtml(candidate.match || t('cv.levelLow'))}${escapeHtml(score)}</td>`);
+  }
+  cells.push(
+    `<td>${escapeHtml(hrStatusLabel(candidate.status))}</td>`,
+    `<td>${escapeHtml(benefit)}</td>`,
+    `<td>${customAnswers}</td>`
+  );
+  if (businessEnabled) cells.push(`<td>${escapeHtml(screeningDetail)}</td>`);
+  cells.push(`<td>${documents}</td>`);
+  body.innerHTML = `<tr${animate ? ' class="is-updated"' : ''}>${cells.join('')}</tr>`;
 }
 
 function renderCandidatePortal() {
@@ -5246,9 +5438,19 @@ function renderCandidatePortal() {
     `).join('');
   }
 
+  const autofillEnabled = hasHrCapability('pro');
+  const cvDropHint = document.getElementById('candidate-cv-drop-hint');
+  if (cvDropHint) cvDropHint.textContent = autofillEnabled ? t('portal.cvDropHint') : t('portal.cvDropHintFree');
   const cvState = document.getElementById('candidate-cv-state');
   const cvMatch = document.getElementById('candidate-cv-match');
-  if (state.cvParse) {
+  const cvAutofillBadge = document.getElementById('candidate-cv-autofill-badge');
+  const filledCount = state.cvParse && Array.isArray(state.cvParse.filled) ? state.cvParse.filled.length : 0;
+  if (cvAutofillBadge) {
+    cvAutofillBadge.textContent = `${t('cv.autofilledBadge')}: ${filledCount}`;
+    cvAutofillBadge.classList.toggle('hidden', !autofillEnabled || !filledCount);
+  }
+  if (cvMatch) cvMatch.classList.toggle('hidden', !autofillEnabled);
+  if (state.cvParse && autofillEnabled) {
     if (cvState) cvState.textContent = `${t('portal.cvReady')} · ${state.cvParse.level} · ${state.cvParse.score}`;
     if (cvMatch) {
       cvMatch.textContent = `${t('portal.matchLabel')}: ${state.cvParse.level}`;
@@ -5541,6 +5743,13 @@ function renderActivePresetHeader() {
 }
 
 // Render Current Question Card (Breathable & Luxurious)
+function getCvAutofillChip(question) {
+  const supported = ['text', 'tel', 'textarea', 'date'].includes(question.type);
+  if (!supported || !hasHrCapability('pro') || !state.cvParse) return '';
+  if (!Array.isArray(state.cvParse.filled) || !state.cvParse.filled.includes(question.id)) return '';
+  return `<span class="autofill-chip">${escapeHtml(t('cv.autofilledBadge'))}</span>`;
+}
+
 function renderCurrentQuestion() {
   if (state.view !== 'form') return;
 
@@ -5568,6 +5777,7 @@ function renderCurrentQuestion() {
 
   let bodyHtml = '';
   const requiredAttr = q.required ? ' required aria-required="true"' : '';
+  const autofillChip = getCvAutofillChip(q);
 
   if (q.type === 'text' || q.type === 'tel') {
     const val = state.userResponses[q.id] !== undefined ? state.userResponses[q.id] : q.defaultValue;
@@ -5578,9 +5788,10 @@ function renderCurrentQuestion() {
                value="${escapeHtml(val)}"
                placeholder="${escapeHtml(q.placeholder)}"
                oninput="state.userResponses['${q.id}'] = this.value"
-               class="large-open-input"${requiredAttr}>
-      </div>
-    `;
+                class="large-open-input"${requiredAttr}>
+         ${autofillChip}
+       </div>
+     `;
   } else if (q.type === 'textarea') {
     const val = state.userResponses[q.id] !== undefined ? state.userResponses[q.id] : q.defaultValue;
     bodyHtml = `
@@ -5588,18 +5799,20 @@ function renderCurrentQuestion() {
         <textarea id="large-textarea-field" rows="4"
                   placeholder="${escapeHtml(q.placeholder)}"
                   oninput="state.userResponses['${q.id}'] = this.value"
-                  class="large-open-input large-textarea"${requiredAttr}>${escapeHtml(val)}</textarea>
-      </div>
-    `;
+                   class="large-open-input large-textarea"${requiredAttr}>${escapeHtml(val)}</textarea>
+         ${autofillChip}
+       </div>
+     `;
   } else if (q.type === 'date') {
     const val = state.userResponses[q.id] !== undefined ? state.userResponses[q.id] : q.defaultValue;
     bodyHtml = `
       <div>
         <input type="date" id="large-date-field" value="${escapeHtml(val)}"
                onchange="state.userResponses['${q.id}'] = this.value"
-               class="large-open-input date-input"${requiredAttr}>
-      </div>
-    `;
+                class="large-open-input date-input"${requiredAttr}>
+         ${autofillChip}
+       </div>
+     `;
   } else if (q.type === 'rating') {
     const selected = state.userResponses[q.id] !== undefined ? state.userResponses[q.id] : q.defaultValue;
     bodyHtml = `
@@ -5759,6 +5972,10 @@ async function handleFileInput(qId, file) {
 
   const isPdf = file.type === 'application/pdf' || /\.pdf$/i.test(file.name);
   if (qId !== 'recruit_cv' || !isPdf) return;
+  if (!hasHrCapability('pro')) {
+    showToast(t('toast.cvAutofillLocked'));
+    return;
+  }
 
   showToast(t('toast.pdfReading'));
   try {
@@ -5883,6 +6100,7 @@ function buildHrSheetTabsPayload(customAnswers = []) {
   const email = answer('recruit_email');
   const selectionStatus = state.hrSelectionStatus || '';
   const benefit = String(currentHrRequirement().benefit || '').trim();
+  const businessEnabled = hasHrCapability('business');
 
   return [
     {
@@ -5896,8 +6114,16 @@ function buildHrSheetTabsPayload(customAnswers = []) {
     },
     {
       name: 'Screening',
-      columns: ['Timestamp', 'Nama Lengkap', 'Email', 'Jawaban Screening', 'Tingkat Kecocokan', 'Catatan Kecocokan', 'Status Seleksi', ...customColumns],
-      rows: [[timestamp, name, email, answer('recruit_screening'), cvLevel, cvMatched, selectionStatus, ...customRow]]
+      columns: [
+        'Timestamp', 'Nama Lengkap', 'Email', 'Jawaban Screening',
+        ...(businessEnabled ? ['Screening Lanjutan', 'Catatan Seleksi'] : []),
+        'Tingkat Kecocokan', 'Catatan Kecocokan', 'Status Seleksi', ...customColumns
+      ],
+      rows: [[
+        timestamp, name, email, answer('recruit_screening'),
+        ...(businessEnabled ? [answer('recruit_screening_detail'), answer('recruit_selection_note')] : []),
+        cvLevel, cvMatched, selectionStatus, ...customRow
+      ]]
     },
     {
       name: 'Detail Pelamar',
@@ -5957,7 +6183,7 @@ function buildSubmissionPayload() {
     simulation: state.isSimulation,
     hrRequirement: isRecruit ? cloneHrRequirement(currentHrRequirement()) : null,
     selectionStatus: state.activePresetKey === 'recruit' ? state.hrSelectionStatus : null,
-    cvMatch: state.cvParse ? {
+    cvMatch: hasHrCapability('pro') && state.cvParse ? {
       score: state.cvParse.score,
       level: state.cvParse.level,
       matched: state.cvParse.matched,
@@ -6022,6 +6248,8 @@ async function triggerFormSubmissionSuccess() {
       salary: getHrAnswerValue('recruit_salary'),
       notice: getHrAnswerValue('recruit_notice'),
       screening: getHrAnswerValue('recruit_screening'),
+      screeningDetail: getHrAnswerValue('recruit_screening_detail'),
+      selectionNote: getHrAnswerValue('recruit_selection_note'),
       benefit: getHrBenefitText(),
       cv: getHrDocument('recruit_cv'),
       coverLetter: getHrDocument('recruit_cover_letter'),
@@ -6031,8 +6259,8 @@ async function triggerFormSubmissionSuccess() {
         if (raw && typeof raw === 'object') display = raw.url || raw.name || '';
         return { id: field.id, label: field.label, type: field.type, required: field.required, value: raw, display };
       }),
-      match: state.cvParse ? state.cvParse.level : t('cv.levelLow'),
-      score: state.cvParse ? state.cvParse.score : 0,
+      match: hasHrCapability('pro') && state.cvParse ? state.cvParse.level : t('cv.levelLow'),
+      score: hasHrCapability('pro') && state.cvParse ? state.cvParse.score : 0,
       status: state.hrSelectionStatus
     };
     renderHrRecap();
@@ -6048,7 +6276,9 @@ async function triggerFormSubmissionSuccess() {
   if (summaryText) {
     summaryText.textContent = t('success.respondent', { name: nameVal, form: p.companyName });
     if (state.activePresetKey === 'recruit') {
-      summaryText.textContent += ` • ${t('portal.matchLabel')}: ${state.cvParse ? state.cvParse.level : t('cv.levelLow')}`;
+      if (hasHrCapability('pro')) {
+        summaryText.textContent += ` • ${t('portal.matchLabel')}: ${state.cvParse ? state.cvParse.level : t('cv.levelLow')}`;
+      }
       summaryText.textContent += ` • ${t('hr.statusLabel')}: ${hrStatusLabel(state.hrSelectionStatus)}`;
     }
   }

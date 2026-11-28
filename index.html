@@ -54,8 +54,8 @@
         <div class="language-switch" role="group" data-i18n-aria="lang.aria" aria-label="Pilih bahasa tampilan">
           <button type="button" id="lang-id" class="language-option active" aria-pressed="true" onclick="setLanguage('id')">ID</button>
           <button type="button" id="lang-en" class="language-option" aria-pressed="false" onclick="setLanguage('en')">EN</button>
-          <button type="button" id="lang-zh" class="language-option" aria-pressed="false" onclick="setLanguage('zh')">中文</button>
         </div>
+        <span id="language-plan-note" class="language-plan-note" data-i18n="lang.freeOnly">Bahasa Indonesia aktif • English tersedia di Pro/Business</span>
       </div>
 
       <div class="control-group display-control" id="display-control">
@@ -229,7 +229,7 @@
             </details>
             <details class="faq-item">
               <summary data-i18n="faq.q4">Bisakah mengganti tema dan bahasa?</summary>
-              <p data-i18n="faq.a4">Bisa. Gunakan kontrol di bagian atas halaman untuk mengganti aksen tema serta bahasa Indonesia, Inggris, atau Mandarin Sederhana.</p>
+              <p data-i18n="faq.a4">Bisa. Gunakan kontrol di bagian atas halaman untuk mengganti aksen tema serta bahasa Indonesia; English tersedia pada paket Pro dan Business.</p>
             </details>
             <details class="faq-item">
               <summary data-i18n="faq.q5">Apa bedanya Pro dan Business?</summary>
@@ -613,6 +613,7 @@
                   <button type="button" onclick="resetHrCardboxSettings()" id="hr-cardbox-reset" class="hr-cardbox-reset" data-i18n="hr.cardboxReset">Reset tampilan</button>
                 </div>
                 <p class="hr-block-desc" data-i18n="hr.cardboxDesc">Semua cardbox yang diisi pelamar di Sisi B, lengkap dengan status tampil, wajib/opsional, sumber field, dan hubungannya dengan rekap Google Sheet HR.</p>
+                <p id="hr-capability-note" class="hr-capability-note"></p>
                 <div id="hr-cardbox-summary" class="hr-cardbox-summary"></div>
                 <div id="hr-cardbox-list" class="hr-cardbox-list"></div>
                 <p class="hr-cardbox-footnote" data-i18n="hr.cardboxFootnote">Perubahan di sini langsung diterapkan ke cardbox Sisi B dan payload Sheet HR. Status wajib CV tetap mengikuti Bagian 5.</p>
@@ -676,6 +677,7 @@
                   <span class="hr-ui-preview-copy"><b id="hr-ui-preview-name">Netral</b><i id="hr-ui-preview-tier">Free</i></span>
                 </div>
                 <p class="hr-ui-preview-caption" data-i18n="hr.uiPreviewTagline">Tampilan portal kandidat mengikuti template yang dipilih.</p>
+                <p id="hr-template-access" class="hr-template-access"></p>
                 <div class="hr-ui-preview-actions">
                   <button type="button" onclick="applyUiTemplateToCandidate()" class="btn btn-primary" data-i18n="hr.uiApplyPortal">Terapkan ke Sisi B</button>
                   <button type="button" onclick="openHrTemplatePreviewModal()" class="btn btn-secondary" data-i18n="hr.uiPreviewLarge">Preview besar</button>
@@ -699,6 +701,7 @@
                   <span class="hr-package-status-copy">
                     <b id="hr-package-status-label">Free</b>
                     <i id="hr-package-status-detail">1 form aktif · 50 respon/bulan · Google Sheet milik HR · watermark iziForm.</i>
+                    <i id="hr-package-capability-detail" class="hr-package-capability-detail"></i>
                   </span>
                   <span class="hr-package-status-badge" id="hr-package-status-badge">—</span>
                   <button type="button" id="hr-package-change-btn" class="hr-package-change-btn hidden" data-i18n="hr.packageChange">Ubah paket</button>
@@ -763,13 +766,14 @@
                   <div id="hr-recap-guide-list" class="hr-recap-guide-list"></div>
                 </details>
                 <div class="hr-table-wrap">
-                  <table class="hr-recap-table">
+                  <table id="hr-recap-table" class="hr-recap-table">
                     <thead><tr>
                       <th data-i18n="hr.colCandidate">Kandidat</th>
-                      <th data-i18n="hr.matchStatus">Status kecocokan</th>
+                      <th id="hr-recap-match-col" data-i18n="hr.matchStatus">Status kecocokan</th>
                       <th data-i18n="hr.colSelection">Seleksi</th>
                       <th data-i18n="hr.colBenefit">Benefit</th>
                       <th data-i18n="hr.colCustom">Kolom tambahan</th>
+                      <th id="hr-recap-screening-col" class="hr-business-col hidden" data-i18n="hr.colScreeningDetail">Screening lanjutan</th>
                       <th data-i18n="hr.colDocuments">Dokumen</th>
                     </tr></thead>
                     <tbody id="hr-recap-body"></tbody>
@@ -934,10 +938,11 @@
             <div class="candidate-cv-drop-icon">PDF</div>
             <div class="candidate-cv-drop-copy">
               <strong id="candidate-cv-drop-title" data-i18n="portal.cvDropTitle">Tarik &amp; lepas CV PDF di sini</strong>
-              <span data-i18n="portal.cvDropHint">atau klik untuk memilih berkas • auto-fill otomatis</span>
+              <span id="candidate-cv-drop-hint" data-i18n="portal.cvDropHint">atau klik untuk memilih berkas • auto-fill otomatis</span>
               <p id="candidate-cv-state" data-i18n="portal.cvEmpty">Belum ada CV diunggah</p>
             </div>
             <div class="candidate-cv-actions">
+              <span id="candidate-cv-autofill-badge" class="candidate-autofill-badge hidden"></span>
               <span id="candidate-cv-match" class="candidate-match-badge" data-i18n="portal.matchLabel">Kecocokan</span>
               <button type="button" onclick="jumpToQuestionById('recruit_cv')" class="btn btn-secondary" data-i18n="portal.jumpCv">Isi CV</button>
             </div>
@@ -1250,6 +1255,7 @@
 
   <div id="toast-box" class="toast-box"></div>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
