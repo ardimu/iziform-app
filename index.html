@@ -602,6 +602,13 @@
                     <small class="hr-field-hint" data-i18n="hr.benefitHint">Kosongkan untuk menyembunyikan bagian Benefit di portal kandidat.</small>
                   </label>
                 </div>
+                <div class="hr-benefit-extra">
+                  <div class="hr-ui-head hr-benefit-extra-head">
+                    <p class="hr-block-desc" data-i18n="hr.benefitExtraDesc">Tambah benefit setelah slot utama; otomatis tampil di portal kandidat bila diisi.</p>
+                    <button type="button" onclick="addHrExtraBenefit()" id="hr-add-extra-benefit" class="btn btn-secondary" data-i18n="hr.benefitAdd">+ Tambah Benefit</button>
+                  </div>
+                  <div id="hr-extra-benefits-list" class="hr-benefit-extra-list"></div>
+                </div>
               </div>
                 </div>
               </details>
@@ -868,27 +875,37 @@
         </section>
 
         <section class="career-content-flow career-showcase-grid">
+          <article class="career-content-section career-showcase-card career-card-facts">
+            <span class="section-eyebrow" data-i18n="portal.jobInfoBlockTitle">Informasi Posisi &amp; Kualifikasi</span>
+            <h2 data-i18n="portal.jobInfoBlockTitle">Informasi Posisi &amp; Kualifikasi</h2>
+            <div class="career-facts-group">
+              <h3 data-i18n="portal.jobFactsTitle">Informasi Posisi</h3>
+              <div class="career-fact-row career-fact-row-job">
+                <span><b data-i18n="portal.jobTypeLabel">Tipe kerja</b><i id="showcase-job-type"></i></span>
+                <span><b data-i18n="hr.location">Domisili / lokasi kerja</b><i id="candidate-location"></i></span>
+                <span><b data-i18n="hr.salary">Ekspektasi gaji</b><i id="candidate-salary"></i></span>
+                <span><b data-i18n="hr.notice">Notice period</b><i id="candidate-notice"></i></span>
+              </div>
+            </div>
+            <div class="career-facts-group">
+              <h3 data-i18n="portal.qualificationFactsTitle">Kualifikasi &amp; Screening</h3>
+              <div class="career-fact-row career-fact-row-qualification">
+                <span><b data-i18n="hr.minYears">Minimal tahun pengalaman</b><i id="candidate-years"></i></span>
+                <span><b data-i18n="hr.skills">Skill / tools utama</b><i id="candidate-skills"></i></span>
+                <span><b data-i18n="portal.matchThresholdLabel">Minimum Match Score</b><i id="showcase-match-threshold"></i></span>
+              </div>
+            </div>
+          </article>
           <article class="career-content-section career-showcase-card career-card-overview">
             <span class="section-eyebrow" data-i18n="portal.jobOverview">Ringkasan Posisi</span>
             <h2 id="candidate-position"></h2>
             <p><b data-i18n="hr.roleSummary">Ringkasan peran</b><span id="showcase-role-summary"></span></p>
             <p><b data-i18n="portal.responsibilitiesLabel">Tanggung jawab</b><span id="showcase-responsibilities"></span></p>
-            <div class="career-fact-row">
-              <span><b data-i18n="portal.jobTypeLabel">Tipe kerja</b><i id="showcase-job-type"></i></span>
-              <span><b data-i18n="hr.location">Domisili / lokasi kerja</b><i id="candidate-location"></i></span>
-              <span><b data-i18n="hr.salary">Ekspektasi gaji</b><i id="candidate-salary"></i></span>
-              <span><b data-i18n="hr.notice">Notice period</b><i id="candidate-notice"></i></span>
-            </div>
           </article>
           <article class="career-content-section career-showcase-card career-card-requirement">
             <span class="section-eyebrow" data-i18n="portal.requirements">Requirement</span>
             <h2 data-i18n="portal.requirements">Requirement</h2>
             <p><b data-i18n="portal.mustHaveLabel">Syarat wajib</b><span id="showcase-must-have"></span></p>
-            <div class="career-fact-row">
-              <span><b data-i18n="hr.minYears">Minimal tahun pengalaman</b><i id="candidate-years"></i></span>
-              <span><b data-i18n="hr.skills">Skill / tools utama</b><i id="candidate-skills"></i></span>
-              <span><b data-i18n="portal.matchThresholdLabel">Minimum Match Score</b><i id="showcase-match-threshold"></i></span>
-            </div>
           </article>
           <article class="career-content-section career-showcase-card career-card-qualification">
             <span class="section-eyebrow" data-i18n="portal.qualifications">Qualification</span>

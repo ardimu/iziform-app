@@ -1221,8 +1221,8 @@ body.theme-midnight .hr-form-field select, body.theme-cyber .hr-form-field selec
 @keyframes hrRecapFlash { from { background: var(--accent-soft); } to { background: transparent; } }
 
 .candidate-company-sticky {
-  position: sticky; top: 7.25rem; z-index: 38; display: flex; align-items: center; gap: 0.75rem;
-  margin: 0 0 1rem; padding: 0.55rem 0.85rem; border-radius: 1rem;
+  position: sticky; top: 8.75rem; z-index: 38; display: flex; align-items: center; gap: 0.75rem;
+  margin: 0 0 1.5rem; padding: 0.55rem 0.85rem; border-radius: 1rem;
   background-color: var(--career-shell-bg); border: 1px solid var(--career-border);
   box-shadow: var(--shadow-soft); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
   font-family: var(--career-font-body);
@@ -1270,7 +1270,12 @@ body.theme-midnight .hr-form-field select, body.theme-cyber .hr-form-field selec
 body[data-preset="recruit"] .brand-cover-wrapper { display: none; }
 body[data-preset="recruit"] .brand-identity-card { display: none; }
 .career-portal-shell, .career-hero, .career-showcase-grid, .career-showcase-card, .candidate-portal { min-width: 0; max-width: 100%; }
-.career-card-overview, .career-card-requirement, .career-card-qualification { min-width: 0; }
+.career-card-overview, .career-card-requirement, .career-card-qualification, .career-card-facts { min-width: 0; }
+.career-card-facts { display: grid; gap: 0.9rem; }
+.career-facts-group + .career-facts-group { padding-top: 0.9rem; border-top: 1px dashed var(--career-border); }
+.career-facts-group h3 { font-size: 0.6875rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--career-accent); font-family: var(--career-font-heading); }
+.career-fact-row-job { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.career-fact-row-qualification { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 .career-hero-copy h1, .career-showcase-card h2, .career-showcase-card p span, .career-fact-row i { overflow-wrap: anywhere; }
 
 #form-view[data-hr-ui-template] {
@@ -1901,7 +1906,7 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template="ivory-champagne"] .c
 .simulation-banner button:hover { text-decoration: underline; }
 
 .hr-career-ribbon {
-  display: none; align-items: center; gap: 0.875rem; margin-bottom: 1rem;
+  display: none; align-items: center; gap: 0.875rem; margin-bottom: 1.25rem;
   padding: 0.75rem 1rem; border-radius: 1.1rem;
   background: linear-gradient(100deg, var(--accent-soft), transparent 85%);
   border: 1px solid var(--accent-ring);
@@ -2248,7 +2253,7 @@ body[data-preset="recruit"] .hr-career-ribbon { display: flex; }
   .hr-accordion-body { padding: 0.6rem; }
   .hr-pricing-mini-grid { grid-template-columns: 1fr; }
   .candidate-portal-head, .candidate-cv-card { flex-direction: column; }
-  .candidate-company-sticky { top: 7rem; padding: 0.5rem 0.65rem; }
+  .candidate-company-sticky { top: 8.5rem; padding: 0.5rem 0.65rem; }
   .candidate-company-meta > span:first-child { max-width: 6rem; }
   .candidate-progress-card { width: 100%; }
   .career-showcase-grid { grid-template-columns: 1fr; }
@@ -2430,8 +2435,8 @@ body[data-preset="recruit"] #form-view .sticky-apply-btn:focus-visible { outline
   body[data-preset="recruit"] #form-view .candidate-company-copy strong { font-size: 0.8125rem; }
 }
 body[data-preset="recruit"] #form-view {
-  --sticky-portal-top: 11.25rem;
-  --portal-scroll-gap: 1rem;
+  --sticky-portal-top: 13.5rem;
+  --portal-scroll-gap: 1.25rem;
 }
 body[data-preset="recruit"] #form-view #candidate-portal,
 body[data-preset="recruit"] #form-view .recruit-portal-layout .open-question-card {
@@ -2448,7 +2453,7 @@ body[data-preset="recruit"] #form-view .recruit-apply-column::-webkit-scrollbar-
 @media (max-width: 768px) {
   body[data-preset="recruit"] #form-view .recruit-apply-column { position: static; max-height: none; overflow: visible; padding-right: 0; }
   body[data-preset="recruit"] #form-view .recruit-portal-layout .candidate-portal {
-    position: sticky; top: var(--sticky-portal-top); z-index: 36;
+    position: sticky; top: calc(var(--sticky-portal-top) + 0.5rem); z-index: 36;
     flex-direction: row; align-items: center; gap: 0.5rem;
     max-height: 3.5rem; padding: 0.45rem 0.65rem;
     border: 1px solid var(--career-border); border-radius: 1rem;
@@ -2485,6 +2490,14 @@ body[data-preset="recruit"] #form-view .recruit-apply-column::-webkit-scrollbar-
 }
 .hr-custom-field-remove:hover { border-color: var(--accent-color); color: var(--accent-color); }
 .hr-benefit-block { margin-top: 0.25rem; }
+.hr-benefit-extra { margin-top: 0.9rem; padding-top: 0.85rem; border-top: 1px dashed var(--border-subtle); }
+.hr-benefit-extra-head { margin-bottom: 0.35rem; }
+.hr-benefit-extra-head .hr-block-desc { margin: 0; }
+.hr-benefit-extra-list { display: grid; gap: 0.65rem; margin-top: 0.7rem; }
+.hr-benefit-extra-empty { padding: 0.8rem 0.9rem; border: 1px dashed var(--border-subtle); border-radius: 0.9rem; font-size: 0.625rem; color: var(--text-faint); }
+.hr-benefit-extra-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 0.6rem; padding: 0.75rem; border: 1px solid var(--border-subtle); border-radius: 0.95rem; background: var(--surface-raised); }
+.hr-benefit-extra-remove { align-self: end; padding: 0.6rem 0.75rem; border-radius: 0.85rem; border: 1px solid var(--border-subtle); background: var(--surface-soft); color: var(--text-faint); font-family: inherit; font-size: 0.625rem; font-weight: 900; cursor: pointer; transition: all 0.2s ease; }
+.hr-benefit-extra-remove:hover { border-color: var(--accent-color); color: var(--accent-color); }
 .hr-cardbox-block { margin-top: 0.25rem; }
 .hr-cardbox-reset { padding: 0.35rem 0.7rem; border-radius: 999px; border: 1px solid var(--border-subtle); background: var(--surface-raised); color: var(--text-faint); font-family: inherit; font-size: 0.5625rem; font-weight: 900; cursor: pointer; transition: all 0.2s ease; }
 .hr-cardbox-reset:hover { border-color: var(--accent-color); color: var(--accent-color); }
@@ -2544,12 +2557,25 @@ body[data-preset="recruit"] #form-view .recruit-apply-column { padding-top: 0.75
   .hr-custom-field-row .hr-check-field { align-self: stretch; }
   .hr-identity-item-row { grid-template-columns: 1fr; align-items: stretch; }
   .hr-custom-field-remove { justify-self: start; }
+  .hr-benefit-extra-row { grid-template-columns: 1fr; align-items: stretch; }
+  .hr-benefit-extra-remove { justify-self: start; }
   .hr-cardbox-row { grid-template-columns: 1fr; align-items: start; }
   .hr-cardbox-controls { flex-wrap: wrap; }
-  body[data-preset="recruit"] #form-view { --sticky-portal-top: 11.75rem; --portal-scroll-gap: 0.75rem; }
+  body[data-preset="recruit"] #form-view { --sticky-portal-top: 14.5rem; --portal-scroll-gap: 1rem; }
 }
 @media (max-width: 640px) {
-  body[data-preset="recruit"] #form-view { --sticky-portal-top: 12.5rem; }
+  body[data-preset="recruit"] #form-view { --sticky-portal-top: 15.5rem; }
+}
+body[data-preset="recruit"] #form-view .career-card-facts .career-fact-row { margin-top: 0.75rem; padding-top: 0; border-top: 0; gap: 1rem 1.5rem; }
+body[data-preset="recruit"] #form-view .career-card-facts .career-fact-row-job { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+body[data-preset="recruit"] #form-view .career-card-facts .career-fact-row-qualification { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 768px) {
+  body[data-preset="recruit"] #form-view .career-card-facts .career-fact-row-job,
+  body[data-preset="recruit"] #form-view .career-card-facts .career-fact-row-qualification { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 640px) {
+  body[data-preset="recruit"] #form-view .career-card-facts .career-fact-row-job,
+  body[data-preset="recruit"] #form-view .career-card-facts .career-fact-row-qualification { grid-template-columns: 1fr; gap: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .animate-question-in, .dashboard-view { animation: none; }

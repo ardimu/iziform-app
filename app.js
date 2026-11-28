@@ -531,9 +531,9 @@ const CUSTOM_PRICING = {
 };
 
 const HR_BASE_COPY = {
-  id: { industry: 'Teknologi & Digital', description: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', website: 'https://iziform.app', roleSummary: 'Memimpin inisiatif utama dan mengirimkan dampak yang terukur bagi tim.', responsibilities: 'Merancang solusi, berkolaborasi lintas fungsi, dan menjaga kualitas hasil akhir.', jobType: 'Full-time', mustHave: 'Pengalaman relevan, tools wajib sesuai posisi, dan domisili sesuai ketentuan.', qualification: 'Latar belakang profesional dengan portofolio atau pengalaman yang relevan.', certification: 'Sertifikasi relevan menjadi nilai tambah.', plusPoints: 'Pengalaman tim, komunikasi kuat, dan kemampuan belajar cepat.', benefit: 'BPJS Kesehatan & Ketenagakerjaan, fleksibel hybrid, tunjangan belajar Rp2 juta/tahun, dan cuti wellbeing.', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' },
-  en: { industry: 'Technology & Digital', description: 'A digital company building modern work products for Indonesian teams.', website: 'https://iziform.app', roleSummary: 'Lead key initiatives and deliver measurable impact for the team.', responsibilities: 'Design solutions, collaborate cross-functionally, and protect final quality.', jobType: 'Full-time', mustHave: 'Relevant experience, required tools, and location that matches the rule.', qualification: 'Professional background with a relevant portfolio or track record.', certification: 'Relevant certification is an advantage.', plusPoints: 'Team experience, strong communication, and fast learning.', benefit: 'Health and employment insurance, flexible hybrid work, IDR 2M yearly learning budget, and wellbeing leave.', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' },
-  zh: { industry: '科技与数字化', description: '一家为印尼团队打造现代工作产品的数字公司。', website: 'https://iziform.app', roleSummary: '主导关键项目，为团队带来可衡量的成果。', responsibilities: '设计解决方案、跨职能协作并把控最终质量。', jobType: 'Full-time', mustHave: '具备相关经验、指定工具，并符合所在地要求。', qualification: '具备相关专业背景及作品集或项目经历。', certification: '相关证书者优先。', plusPoints: '团队经验、沟通能力强、学习速度快。', benefit: '社保与公积金、灵活混合办公、每年 200 万印尼盾学习津贴及健康休假。', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' }
+  id: { industry: 'Teknologi & Digital', description: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', website: 'https://iziform.app', roleSummary: 'Memimpin inisiatif utama dan mengirimkan dampak yang terukur bagi tim.', responsibilities: 'Merancang solusi, berkolaborasi lintas fungsi, dan menjaga kualitas hasil akhir.', jobType: 'Full-time', mustHave: 'Pengalaman relevan, tools wajib sesuai posisi, dan domisili sesuai ketentuan.', qualification: 'Latar belakang profesional dengan portofolio atau pengalaman yang relevan.', certification: 'Sertifikasi relevan menjadi nilai tambah.', plusPoints: 'Pengalaman tim, komunikasi kuat, dan kemampuan belajar cepat.', benefit: 'BPJS Kesehatan & Ketenagakerjaan, fleksibel hybrid, tunjangan belajar Rp2 juta/tahun, dan cuti wellbeing.', customFields: [], extraBenefits: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' },
+  en: { industry: 'Technology & Digital', description: 'A digital company building modern work products for Indonesian teams.', website: 'https://iziform.app', roleSummary: 'Lead key initiatives and deliver measurable impact for the team.', responsibilities: 'Design solutions, collaborate cross-functionally, and protect final quality.', jobType: 'Full-time', mustHave: 'Relevant experience, required tools, and location that matches the rule.', qualification: 'Professional background with a relevant portfolio or track record.', certification: 'Relevant certification is an advantage.', plusPoints: 'Team experience, strong communication, and fast learning.', benefit: 'Health and employment insurance, flexible hybrid work, IDR 2M yearly learning budget, and wellbeing leave.', customFields: [], extraBenefits: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' },
+  zh: { industry: '科技与数字化', description: '一家为印尼团队打造现代工作产品的数字公司。', website: 'https://iziform.app', roleSummary: '主导关键项目，为团队带来可衡量的成果。', responsibilities: '设计解决方案、跨职能协作并把控最终质量。', jobType: 'Full-time', mustHave: '具备相关经验、指定工具，并符合所在地要求。', qualification: '具备相关专业背景及作品集或项目经历。', certification: '相关证书者优先。', plusPoints: '团队经验、沟通能力强、学习速度快。', benefit: '社保与公积金、灵活混合办公、每年 200 万印尼盾学习津贴及健康休假。', customFields: [], extraBenefits: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' }
 };
 
 const HR_COMPANY_PRESETS = {
@@ -1136,6 +1136,9 @@ const I18N = {
     'portal.applyNow': 'Lamar Sekarang',
     'portal.aboutCompany': 'Tentang Perusahaan',
     'portal.jobOverview': 'Ringkasan Posisi',
+    'portal.jobInfoBlockTitle': 'Informasi Posisi & Kualifikasi',
+    'portal.jobFactsTitle': 'Informasi Posisi',
+    'portal.qualificationFactsTitle': 'Kualifikasi & Screening',
     'portal.requirements': 'Requirement',
     'portal.qualifications': 'Qualification',
     'portal.industryLabel': 'Industri',
@@ -1283,6 +1286,12 @@ const I18N = {
     'hr.benefit': 'Benefit / tunjangan',
     'hr.benefitPlaceholder': 'Contoh: BPJS, asuransi, flexible working, learning budget',
     'hr.benefitHint': 'Kosongkan untuk menyembunyikan bagian Benefit di portal kandidat.',
+    'hr.benefitExtraDesc': 'Tambah benefit setelah slot utama; otomatis tampil di portal kandidat bila diisi.',
+    'hr.benefitAdd': '+ Tambah Benefit',
+    'hr.benefitExtraLabel': 'Benefit ke-{index}',
+    'hr.benefitExtraPlaceholder': 'Contoh: tunjangan transport, learning budget',
+    'hr.benefitExtraRemove': 'Hapus',
+    'hr.benefitExtraEmpty': 'Belum ada benefit tambahan.',
     'hr.noBenefit': 'Belum diisi',
     'hr.customFieldsTitle': 'Kolom tambahan pelamar',
     'hr.customFieldsDesc': 'Tambah field di luar standar; tampil otomatis di Sisi B dan rekap Sheet HR.',
@@ -1748,6 +1757,9 @@ const I18N = {
     'portal.applyNow': 'Apply Now',
     'portal.aboutCompany': 'About the Company',
     'portal.jobOverview': 'Job Overview',
+    'portal.jobInfoBlockTitle': 'Job & qualification information',
+    'portal.jobFactsTitle': 'Job information',
+    'portal.qualificationFactsTitle': 'Qualifications & screening',
     'portal.requirements': 'Requirements',
     'portal.qualifications': 'Qualifications',
     'portal.industryLabel': 'Industry',
@@ -1895,6 +1907,12 @@ const I18N = {
     'hr.benefit': 'Benefits / perks',
     'hr.benefitPlaceholder': 'Example: health insurance, flexible work, learning budget',
     'hr.benefitHint': 'Leave blank to hide the Benefits section on the candidate portal.',
+    'hr.benefitExtraDesc': 'Add benefits after the main slot; filled items appear automatically on the candidate portal.',
+    'hr.benefitAdd': '+ Add Benefit',
+    'hr.benefitExtraLabel': 'Benefit {index}',
+    'hr.benefitExtraPlaceholder': 'Example: transport allowance, learning budget',
+    'hr.benefitExtraRemove': 'Remove',
+    'hr.benefitExtraEmpty': 'No extra benefits yet.',
     'hr.noBenefit': 'Not specified',
     'hr.customFieldsTitle': 'Additional applicant fields',
     'hr.customFieldsDesc': 'Add fields beyond the defaults; they appear on Sisi B and in the HR Sheet recap.',
@@ -2360,6 +2378,9 @@ const I18N = {
     'portal.applyNow': '立即申请',
     'portal.aboutCompany': '关于公司',
     'portal.jobOverview': '职位概览',
+    'portal.jobInfoBlockTitle': '职位与资格信息',
+    'portal.jobFactsTitle': '职位信息',
+    'portal.qualificationFactsTitle': '资格与筛选',
     'portal.requirements': '任职要求',
     'portal.qualifications': '资格条件',
     'portal.industryLabel': '行业',
@@ -2507,6 +2528,12 @@ const I18N = {
     'hr.benefit': '福利 / 待遇',
     'hr.benefitPlaceholder': '例如：社保、商业保险、弹性办公、学习津贴',
     'hr.benefitHint': '留空即可在候选人门户隐藏福利区块。',
+    'hr.benefitExtraDesc': '在主福利栏之后添加福利；填写后会自动显示在候选人门户。',
+    'hr.benefitAdd': '+ 添加福利',
+    'hr.benefitExtraLabel': '第 {index} 项福利',
+    'hr.benefitExtraPlaceholder': '例如：交通补贴、学习津贴',
+    'hr.benefitExtraRemove': '删除',
+    'hr.benefitExtraEmpty': '暂无附加福利。',
     'hr.noBenefit': '未填写',
     'hr.customFieldsTitle': '候选人附加字段',
     'hr.customFieldsDesc': '添加标准字段以外的项目；会自动显示在 B 侧和 HR Sheet 汇总中。',
@@ -2967,6 +2994,7 @@ function setLanguage(lang) {
   }
   if (state.hrTemplateKey !== 'custom') applyHrTemplate(state.hrTemplateKey, true);
   applyTranslations();
+  renderHrExtraBenefitEditor();
   renderHrUiTemplateGallery();
   renderHrFontPairControl();
   renderHrUiPreview();
@@ -3404,8 +3432,26 @@ function cloneHrRequirement(source = currentHrRequirement()) {
   const base = source || {};
   return {
     ...base,
-    customFields: (Array.isArray(base.customFields) ? base.customFields : []).map((field) => ({ ...field }))
+    customFields: (Array.isArray(base.customFields) ? base.customFields : []).map((field) => ({ ...field })),
+    extraBenefits: (Array.isArray(base.extraBenefits) ? base.extraBenefits : []).map((item) => ({ ...item }))
   };
+}
+
+function getHrExtraBenefitsRaw() {
+  const items = currentHrRequirement().extraBenefits;
+  if (!Array.isArray(items)) return [];
+  return items
+    .filter((item) => item && typeof item.value === 'string' && item.value.trim())
+    .map((item, index) => ({ id: String(item.id || `hr_benefit_${index}`), value: item.value.trim() }));
+}
+
+function getHrBenefitParts() {
+  const base = String(currentHrRequirement().benefit || '').trim();
+  return [base, ...getHrExtraBenefitsRaw().map((item) => item.value)].filter(Boolean);
+}
+
+function getHrBenefitText() {
+  return getHrBenefitParts().join(' \u2022 ');
 }
 
 function getHrCustomFieldsRaw() {
@@ -3570,6 +3616,7 @@ function resetHrCardboxSettings() {
     state.hrRequirement.coverLetterRequired = false;
   }
   renderHrCustomFieldEditor();
+  renderHrExtraBenefitEditor();
   renderHrCoverLetterControl();
   refreshHrRequirementViews();
   updateFloatingDock();
@@ -3577,7 +3624,7 @@ function resetHrCardboxSettings() {
 }
 
 function renderBenefitDisplays() {
-  const benefit = String(currentHrRequirement().benefit || '').trim();
+  const benefit = getHrBenefitText();
   document.querySelectorAll('[data-hr-benefit-value]').forEach((node) => {
     node.textContent = benefit || t('hr.noBenefit');
   });
@@ -3873,7 +3920,7 @@ function updateCandidatePortalOffsets() {
   const fallback = cssLengthToPixels(getComputedStyle(form).getPropertyValue('--sticky-portal-top'));
   const stickyTop = cssLengthToPixels(getComputedStyle(sticky).top);
   const stickyHeight = sticky.getBoundingClientRect().height || 0;
-  const safeTop = Math.ceil(Math.max(fallback, stickyTop + stickyHeight + 16));
+  const safeTop = Math.ceil(Math.max(fallback, stickyTop + stickyHeight + 28));
   form.style.setProperty('--sticky-portal-top', `${safeTop}px`);
 }
 
@@ -4289,6 +4336,54 @@ function renderHrCustomFieldEditor() {
   applyTranslations();
 }
 
+function renderHrExtraBenefitEditor() {
+  const list = document.getElementById('hr-extra-benefits-list');
+  if (!list) return;
+  const items = Array.isArray(currentHrRequirement().extraBenefits) ? currentHrRequirement().extraBenefits : [];
+  if (!items.length) {
+    list.innerHTML = `<p class="hr-benefit-extra-empty">${escapeHtml(t('hr.benefitExtraEmpty'))}</p>`;
+    return;
+  }
+  list.innerHTML = items.map((item, index) => `
+    <div class="hr-benefit-extra-row">
+      <label class="hr-form-field hr-form-wide">
+        <span>${escapeHtml(t('hr.benefitExtraLabel', { index: index + 7 }))}</span>
+        <input type="text" value="${escapeHtml(item.value || '')}" data-i18n-placeholder="hr.benefitExtraPlaceholder" placeholder="${escapeHtml(t('hr.benefitExtraPlaceholder'))}" oninput="updateHrExtraBenefit(${index}, this.value)">
+      </label>
+      <button type="button" class="hr-benefit-extra-remove" onclick="removeHrExtraBenefit(${index})" aria-label="Remove benefit"><span aria-hidden="true">&times;</span> <span>${escapeHtml(t('hr.benefitExtraRemove'))}</span></button>
+    </div>`).join('');
+}
+
+function addHrExtraBenefit() {
+  if (!state.hrRequirement) return;
+  if (!Array.isArray(state.hrRequirement.extraBenefits)) state.hrRequirement.extraBenefits = [];
+  const index = state.hrRequirement.extraBenefits.length + 1;
+  state.hrRequirement.extraBenefits.push({
+    id: `hr_benefit_${Date.now().toString(36)}_${index}`,
+    value: ''
+  });
+  state.hrTemplateKey = 'custom';
+  renderHrExtraBenefitEditor();
+  refreshHrRequirementViews();
+}
+
+function updateHrExtraBenefit(index, value) {
+  if (!state.hrRequirement || !Array.isArray(state.hrRequirement.extraBenefits)) return;
+  const target = state.hrRequirement.extraBenefits[index];
+  if (!target) return;
+  target.value = String(value || '');
+  state.hrTemplateKey = 'custom';
+  refreshHrRequirementViews();
+}
+
+function removeHrExtraBenefit(index) {
+  if (!state.hrRequirement || !Array.isArray(state.hrRequirement.extraBenefits)) return;
+  state.hrRequirement.extraBenefits.splice(index, 1);
+  state.hrTemplateKey = 'custom';
+  renderHrExtraBenefitEditor();
+  refreshHrRequirementViews();
+}
+
 function renderHrCoverLetterControl() {
   const requirement = currentHrRequirement();
   const enabledInput = document.getElementById('hr-cover-letter-enabled-input');
@@ -4371,7 +4466,7 @@ function renderHrPreview() {
   setText('hr-preview-salary', r.salary);
   setText('hr-preview-notice', r.noticePeriod);
   setText('hr-preview-screening', r.screening);
-  setText('hr-preview-benefit', r.benefit || t('hr.noBenefit'));
+  setText('hr-preview-benefit', getHrBenefitText() || t('hr.noBenefit'));
   renderBenefitDisplays();
 }
 
@@ -5030,6 +5125,7 @@ function renderHrBuilder() {
   renderHrUiPreview();
   renderHrPreview();
   renderHrCustomFieldEditor();
+  renderHrExtraBenefitEditor();
   renderHrCardboxOverview();
   renderHrPricing();
   renderHrStatusList();
@@ -5171,7 +5267,7 @@ function renderCandidatePortal() {
 
   setText('candidate-position', r.position);
   setText('candidate-location', r.location);
-  setText('candidate-years', `${t('hr.minYears')}: ${r.minYears}`);
+  setText('candidate-years', r.minYears);
   setText('candidate-skills', r.skills);
   setText('candidate-education', r.education);
   setText('candidate-salary', r.salary);
@@ -5877,7 +5973,7 @@ function buildSubmissionPayload() {
     companyIdentityItems: isRecruit ? getFilledHrCompanyIdentityItems() : [],
     hrUiTemplate: isRecruit ? state.hrUiTemplate : null,
     hrUiTier: isRecruit ? state.hrUiTier : null,
-    benefit: isRecruit ? String(currentHrRequirement().benefit || '').trim() : '',
+    benefit: isRecruit ? getHrBenefitText() : '',
     customFieldDefinitions: customFields.map((field) => ({ ...field })),
     customAnswers,
     cardbox: isRecruit ? getHrCardboxManifest().map((item) => ({
@@ -5964,7 +6060,7 @@ async function triggerFormSubmissionSuccess() {
       salary: getHrAnswerValue('recruit_salary'),
       notice: getHrAnswerValue('recruit_notice'),
       screening: getHrAnswerValue('recruit_screening'),
-      benefit: String(currentHrRequirement().benefit || '').trim(),
+      benefit: getHrBenefitText(),
       cv: getHrDocument('recruit_cv'),
       coverLetter: getHrDocument('recruit_cover_letter'),
       customAnswers: getHrCustomFields().map((field) => {
