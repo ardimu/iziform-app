@@ -411,8 +411,14 @@
           </div>
           <div class="hr-builder-grid">
             <div class="hr-builder-form">
+              <details class="hr-accordion" id="hr-accordion-job-details">
+                <summary class="hr-accordion-summary">
+                  <span data-i18n="hr.accordionJobDetails">Detail Posisi &amp; Profil Perusahaan</span>
+                  <span class="hr-accordion-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="hr-accordion-body">
               <div class="hr-block">
-                <h3 class="hr-block-title" data-i18n="hr.block.identity">1. Identitas & Profil Perusahaan</h3>
+                <h3 class="hr-block-title" data-i18n="hr.block.identity">1. Identitas &amp; Profil Perusahaan</h3>
                 <div class="hr-template-row">
                   <span class="hr-template-label" data-i18n="hr.companyPresetLabel">Preset perusahaan sampel</span>
                   <div class="hr-template-buttons">
@@ -579,6 +585,14 @@
                   </label>
                 </div>
               </div>
+                </div>
+              </details>
+              <details class="hr-accordion" id="hr-accordion-form-settings">
+                <summary class="hr-accordion-summary">
+                  <span data-i18n="hr.accordionFormSettings">Pengaturan Form &amp; Dokumen Pelamar</span>
+                  <span class="hr-accordion-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="hr-accordion-body">
               <div class="hr-block hr-cardbox-block">
                 <div class="hr-ui-head">
                   <h3 class="hr-block-title" data-i18n="hr.block.cardbox">7. Daftar Cardbox Isian Pelamar</h3>
@@ -614,6 +628,14 @@
                   <small class="hr-field-hint" data-i18n="hr.coverLetterHint">Saat nonaktif, cardbox surat lamaran tidak tampil di Sisi B dan tidak masuk rekap.</small>
                 </div>
               </div>
+                </div>
+              </details>
+              <details class="hr-accordion" id="hr-accordion-ui-template">
+                <summary class="hr-accordion-summary">
+                  <span data-i18n="hr.accordionUiTemplate">Tampilan UI, Font &amp; Template</span>
+                  <span class="hr-accordion-icon" aria-hidden="true"></span>
+                </summary>
+                <div class="hr-accordion-body">
               <div class="hr-block hr-ui-block">
                 <div class="hr-ui-head">
                   <h3 class="hr-block-title" data-i18n="hr.uiTemplateLabel">Template UI HR</h3>
@@ -645,6 +667,8 @@
                   <button type="button" onclick="openHrTemplatePreviewModal()" class="btn btn-secondary" data-i18n="hr.uiPreviewLarge">Preview besar</button>
                 </div>
               </div>
+                </div>
+              </details>
             </div>
             <aside class="hr-preview-column">
               <section id="hr-pricing-compact" class="hr-pricing-compact">
@@ -915,22 +939,22 @@
         <p class="question-subtitle" id="q-subtitle-text">Masukkan nama resmi Anda sesuai yang tertera pada resume atau KTP.</p>
         <div id="q-interactive-body"></div>
         <div id="cv-match-panel" class="cv-match-panel hidden"></div>
-        <div class="question-nav-row">
-          <button type="button" onclick="prevStepQuestion()" id="question-btn-prev" class="dock-btn dock-btn-secondary opacity-50 cursor-not-allowed" disabled>
-            <span>&uarr;</span> <span data-i18n="form.previous">Sebelumnya</span>
-          </button>
-          <div class="dock-progress-wrap">
-            <div class="dock-progress-track">
-              <div id="question-progress-bar" class="dock-progress-bar" style="width: 20%"></div>
-            </div>
-            <span class="dock-percent" id="question-percent-text">20%</span>
+      </section>
+      <div class="question-nav-row">
+          <button type="button" onclick="prevStepQuestion()" id="question-btn-prev" class="dock-btn dock-btn-secondary cursor-not-allowed" disabled>
+          <span>&uarr;</span> <span data-i18n="form.previous">Sebelumnya</span>
+        </button>
+        <div class="dock-progress-wrap">
+          <div class="dock-progress-track">
+            <div id="question-progress-bar" class="dock-progress-bar" style="width: 20%"></div>
           </div>
-          <button type="button" onclick="nextStepQuestion()" id="question-btn-next" class="dock-btn dock-btn-primary">
-            <span id="question-next-label">Lanjutkan</span>
-            <span>&rarr;</span>
-          </button>
+          <span class="dock-percent" id="question-percent-text">20%</span>
         </div>
-        </section>
+        <button type="button" onclick="nextStepQuestion()" id="question-btn-next" class="dock-btn dock-btn-primary">
+          <span id="question-next-label">Lanjutkan</span>
+          <span>&rarr;</span>
+        </button>
+      </div>
         </div>
       </div>
     </div>

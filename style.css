@@ -1028,6 +1028,17 @@ body[data-lang-theme="en"] .hero-preview { border-radius: 1.1rem; transform: non
 
 .hr-builder-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr); gap: 1.25rem; }
 .hr-builder-form, .hr-recap-card { padding: 1.5rem; border-radius: 1.5rem; background: var(--surface-raised); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-soft); }
+.hr-accordion { margin-top: 0.85rem; border: 1px solid var(--border-subtle); border-radius: 1.25rem; background: var(--surface-soft); overflow: hidden; }
+.hr-accordion-summary { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.9rem 1rem; cursor: pointer; list-style: none; font-size: 0.75rem; font-weight: 900; letter-spacing: 0.04em; color: var(--text-headline); background: var(--surface-raised); }
+.hr-accordion-summary::-webkit-details-marker { display: none; }
+.hr-accordion-summary:focus-visible { outline: 2px solid var(--accent-color); outline-offset: -2px; }
+.hr-accordion-icon { width: 1.25rem; height: 1.25rem; flex: 0 0 auto; display: grid; place-items: center; border: 1px solid var(--border-subtle); border-radius: 999px; background: var(--surface-soft); color: var(--accent-color); font-size: 0.75rem; line-height: 1; }
+.hr-accordion-icon::before { content: '+'; }
+.hr-accordion[open] .hr-accordion-icon::before { content: '\2212'; }
+.hr-accordion[open] .hr-accordion-summary { border-bottom: 1px solid var(--border-subtle); }
+.hr-accordion-body { padding: 0.75rem; }
+.hr-accordion[open] .hr-accordion-body { display: grid; gap: 0.75rem; }
+.hr-accordion .hr-block { background: var(--surface-raised); border-radius: 1rem; }
 .hr-template-row { display: flex; flex-direction: column; gap: 0.7rem; }
 .hr-template-label { font-size: 0.5625rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-faint); }
 .hr-template-buttons { display: flex; flex-wrap: wrap; gap: 0.5rem; }
@@ -2689,3 +2700,6 @@ body[data-preset] .hr-template-preview-stage[data-ornament="veilo"]::after { opa
   body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .question-nav-row { flex-wrap: wrap; }
   body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .dock-progress-wrap { order: 3; width: 100%; }
 }
+body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .question-nav-row { position: sticky; bottom: 0.5rem; z-index: 12; }
+body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .dock-btn { flex: 0 0 auto; }
+body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] #question-btn-prev:disabled { opacity: 0.78; }

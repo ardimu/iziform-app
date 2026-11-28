@@ -1163,6 +1163,9 @@ const I18N = {
     'hr.demoPortal': 'Demo Portal Kandidat',
     'hr.priceDesc': 'Akses builder + portal kandidat sekali pakai.',
     'hr.pricingTitle': 'Paket HR & Rekrutmen',
+    'hr.accordionJobDetails': 'Detail Posisi & Profil Perusahaan',
+    'hr.accordionFormSettings': 'Pengaturan Form & Dokumen Pelamar',
+    'hr.accordionUiTemplate': 'Tampilan UI, Font & Template',
     'hr.freeTry': 'Free tersedia · coba',
     'hr.freeNote': 'Mode dasar gratis tetap tersedia untuk mencoba alur Sisi A ↔ Sisi B.',
     'hr.starterName': 'Paket Mulai',
@@ -1663,6 +1666,9 @@ const I18N = {
     'hr.demoPortal': 'Candidate Portal Demo',
     'hr.priceDesc': 'One-time builder + candidate portal access.',
     'hr.pricingTitle': 'HR & Recruitment Plans',
+    'hr.accordionJobDetails': 'Job Details & Company Profile',
+    'hr.accordionFormSettings': 'Applicant Form & Document Settings',
+    'hr.accordionUiTemplate': 'UI, Font & Template',
     'hr.freeTry': 'Free available · try it',
     'hr.freeNote': 'The free basic mode still works for trying the Sisi A ↔ Sisi B flow.',
     'hr.starterName': 'Starter',
@@ -2163,6 +2169,9 @@ const I18N = {
     'hr.demoPortal': '候选人门户演示',
     'hr.priceDesc': '一次性开通构建器 + 候选人门户。',
     'hr.pricingTitle': 'HR 与招聘套餐',
+    'hr.accordionJobDetails': '职位详情与公司资料',
+    'hr.accordionFormSettings': '申请表与申请人资料设置',
+    'hr.accordionUiTemplate': '界面、字体与模板',
     'hr.freeTry': '免费可用 · 立即试用',
     'hr.freeNote': '免费基础模式仍可体验 A 侧 ↔ B 侧完整流程。',
     'hr.starterName': '入门套餐',
@@ -2466,6 +2475,7 @@ const I18N = {
 };
 
 let advanceTimer = null;
+let lastRenderedQuestionKey = null;
 
 const FONT_STACKS = {
   'Plus Jakarta Sans': "'Plus Jakarta Sans', sans-serif",
@@ -4421,12 +4431,14 @@ function renderCurrentQuestion() {
   renderCvMatchPanel();
   renderCandidatePortal();
 
+  const questionKey = `${state.activePresetKey}:${idx}`;
   const card = document.getElementById('active-question-card');
-  if (card) {
+  if (card && lastRenderedQuestionKey !== questionKey) {
     card.classList.remove('animate-question-in');
     void card.offsetWidth;
     card.classList.add('animate-question-in');
   }
+  lastRenderedQuestionKey = questionKey;
 
   updateFloatingDock();
 
@@ -4616,7 +4628,7 @@ function updateFloatingDock() {
   if (prevBtn) {
     prevBtn.disabled = idx === 0;
     prevBtn.className = idx === 0
-      ? 'dock-btn dock-btn-secondary opacity-50 cursor-not-allowed'
+      ? 'dock-btn dock-btn-secondary cursor-not-allowed'
       : 'dock-btn dock-btn-secondary cursor-pointer';
   }
 
