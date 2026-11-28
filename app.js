@@ -3056,6 +3056,7 @@ function toggleViews() {
 
 function renderInfoPanels() {
   const hasPanel = Boolean(state.activePanel) && Object.prototype.hasOwnProperty.call(INFO_PANEL_IDS, state.activePanel);
+  document.body.dataset.hrBuilder = state.activePanel === 'hrBuilder' ? 'open' : 'closed';
   MAIN_SECTION_IDS.forEach((id) => {
     const section = document.getElementById(id);
     if (section) section.classList.toggle('hidden', hasPanel);

@@ -880,6 +880,7 @@ body.theme-terracotta {
 .style-chip.active { background: var(--accent-color); border-color: var(--accent-color); color: #ffffff; box-shadow: 0 6px 16px -6px var(--accent-ring); }
 
 .app-main { position: relative; z-index: 10; min-height: calc(100vh - 8rem); padding-top: 2.5rem; padding-bottom: 4rem; }
+body[data-hr-builder="open"] .app-main { min-height: 0; }
 .dashboard-view { animation: questionSwap 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
 
 .landing-hero { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); align-items: center; gap: 3rem; padding: 4rem 0 5rem; }
@@ -1026,8 +1027,8 @@ body[data-lang-theme="en"] .hero-preview { border-radius: 1.1rem; transform: non
 .custom-options-btn::before { content: '\25C6'; margin-right: 0.35rem; font-size: 0.5rem; }
 .custom-options-btn:hover { opacity: 0.82; }
 
-.hr-builder-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr); gap: 1.25rem; }
-.hr-builder-form, .hr-recap-card { padding: 1.5rem; border-radius: 1.5rem; background: var(--surface-raised); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-soft); }
+.hr-builder-grid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr); align-items: start; gap: 1.25rem; }
+.hr-builder-form, .hr-recap-card { min-height: 0; height: fit-content; padding: 1.5rem; border-radius: 1.5rem; background: var(--surface-raised); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-soft); }
 .hr-accordion { margin-top: 0.85rem; border: 1px solid var(--border-subtle); border-radius: 1.25rem; background: var(--surface-soft); overflow: hidden; }
 .hr-accordion-summary { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.9rem 1rem; cursor: pointer; list-style: none; font-size: 0.75rem; font-weight: 900; letter-spacing: 0.04em; color: var(--text-headline); background: var(--surface-raised); }
 .hr-accordion-summary::-webkit-details-marker { display: none; }
@@ -1125,7 +1126,7 @@ body.theme-midnight .hr-form-field select, body.theme-cyber .hr-form-field selec
 .hr-ui-preview-caption { margin-top: 0.45rem; font-size: 0.5625rem; line-height: 1.5; color: var(--text-faint); }
 .hr-ui-preview-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.65rem; }
 .hr-ui-preview-actions button { flex: 1 1 8rem; min-height: 2.25rem; }
-.hr-preview-column { display: flex; flex-direction: column; gap: 1rem; }
+.hr-preview-column { display: flex; flex-direction: column; min-height: 0; height: fit-content; align-self: start; gap: 1rem; }
 .hr-price-card { position: relative; display: flex; flex-direction: column; padding: 1.5rem; border-radius: 1.5rem; background: var(--surface-raised); border: 1px solid var(--border-subtle); box-shadow: var(--shadow-soft); }
 .hr-price-label { font-size: 0.75rem; font-weight: 900; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-color); }
 .hr-price-desc { margin-top: 0.75rem; font-size: 0.6875rem; line-height: 1.6; color: var(--text-faint); }
@@ -2176,6 +2177,11 @@ body[data-preset="recruit"] .hr-career-ribbon { display: flex; }
   .recruit-portal-layout > .career-portal-shell { display: flex; flex-direction: column; }
   .recruit-portal-layout .career-showcase-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .custom-track-grid, .custom-tier-grid, .hr-builder-grid, .hr-form-grid { grid-template-columns: 1fr; }
+  #panel-hr-builder .panel-heading { margin-bottom: 1.25rem; }
+  .hr-builder-form, .hr-recap-card { padding: 1.1rem; border-radius: 1.2rem; }
+  .hr-accordion { margin-top: 0.65rem; }
+  .hr-accordion-summary { padding: 0.75rem 0.85rem; }
+  .hr-accordion-body { padding: 0.6rem; }
   .hr-pricing-mini-grid { grid-template-columns: 1fr; }
   .candidate-portal-head, .candidate-cv-card { flex-direction: column; }
   .candidate-company-sticky { top: 7rem; padding: 0.5rem 0.65rem; }
