@@ -2834,3 +2834,54 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template] .recruit-question-do
     flex: 0 0 auto; overflow: visible;
   }
 }
+
+.modal-secondary {
+  width: 100%; padding: 0.85rem 1rem; border-radius: 1rem;
+  background: var(--surface-soft); border: 1px solid var(--border-subtle); color: var(--text-body);
+  font-family: inherit; font-size: 0.6875rem; font-weight: 900; letter-spacing: 0.05em;
+  text-transform: uppercase; cursor: pointer; transition: all 0.2s ease;
+}
+.modal-secondary:hover { border-color: var(--accent-color); color: var(--accent-color); }
+.hr-package-actions { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 0.6rem; margin-top: 1rem; }
+.hr-package-actions .modal-primary, .hr-package-actions .modal-secondary { margin-top: 0; }
+.hr-package-summary { margin-top: 1.1rem; padding: 1rem; border-radius: 1.1rem; background: var(--surface-soft); border: 1px solid var(--border-subtle); }
+.hr-package-summary-head { display: flex; align-items: center; flex-wrap: wrap; gap: 0.5rem 0.6rem; }
+.hr-package-summary-badge { padding: 0.25rem 0.55rem; border-radius: 999px; background: var(--accent-soft); border: 1px solid var(--accent-ring); color: var(--accent-color); font-size: 0.5625rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; }
+.hr-package-summary-head strong { font-size: 1rem; font-weight: 900; color: var(--text-headline); }
+.hr-package-summary-price { margin-left: auto; font-size: 1.1rem; font-weight: 900; color: var(--accent-color); }
+.hr-package-summary ul { margin-top: 0.8rem; padding-left: 1.1rem; font-size: 0.6875rem; line-height: 1.7; color: var(--text-body); }
+.hr-package-summary li::marker { color: var(--accent-color); }
+.hr-package-storage { display: grid; gap: 0.5rem; }
+.hr-package-check { display: flex; align-items: flex-start; gap: 0.5rem; font-size: 0.6875rem; font-weight: 700; line-height: 1.5; color: var(--text-body); cursor: pointer; }
+.hr-package-check input { width: auto; margin: 0.1rem 0 0; accent-color: var(--accent-color); }
+.hr-package-error { margin-top: 0.75rem; padding: 0.6rem 0.75rem; border-radius: 0.8rem; background: rgba(220, 38, 38, 0.08); border: 1px solid rgba(220, 38, 38, 0.25); color: #b91c1c; font-size: 0.6875rem; font-weight: 800; line-height: 1.5; }
+.hr-package-success { margin-top: 1.25rem; text-align: center; }
+.hr-package-success h4 { font-size: 1.1rem; font-weight: 900; color: var(--text-headline); }
+.hr-package-success .modal-description { margin-bottom: 0; }
+.hr-package-receipt { display: grid; gap: 0.45rem; margin: 1rem 0; padding: 0.9rem; border-radius: 1rem; background: var(--surface-soft); border: 1px solid var(--border-subtle); text-align: left; }
+.hr-package-receipt div { display: flex; justify-content: space-between; gap: 0.75rem; font-size: 0.6875rem; line-height: 1.5; }
+.hr-package-receipt span { flex: 0 0 auto; color: var(--text-faint); font-weight: 700; }
+.hr-package-receipt b { color: var(--text-headline); font-weight: 900; text-align: right; overflow-wrap: anywhere; }
+.hr-package-status { display: flex; align-items: center; flex-wrap: wrap; gap: 0.45rem 0.6rem; margin-bottom: 0.85rem; padding: 0.65rem 0.75rem; border-radius: 0.95rem; background: var(--surface-soft); border: 1px solid var(--border-subtle); }
+.hr-package-status-dot { width: 0.5rem; height: 0.5rem; flex: 0 0 auto; border-radius: 999px; background: var(--text-faint); }
+.hr-package-status[data-plan="free"] .hr-package-status-dot,
+.hr-package-status[data-plan="pro"] .hr-package-status-dot,
+.hr-package-status[data-plan="business"] .hr-package-status-dot { background: var(--accent-color); box-shadow: 0 0 0 3px var(--accent-ring); }
+.hr-package-status-copy { display: flex; flex-direction: column; flex: 1 1 10rem; min-width: 0; line-height: 1.35; }
+.hr-package-status-copy b { font-size: 0.6875rem; font-weight: 900; color: var(--text-headline); }
+.hr-package-status-copy i { margin-top: 0.15rem; font-size: 0.5625rem; font-style: normal; line-height: 1.45; color: var(--text-faint); overflow-wrap: anywhere; }
+.hr-package-status-badge { padding: 0.2rem 0.5rem; border-radius: 999px; background: var(--surface-raised); border: 1px solid var(--border-subtle); color: var(--text-faint); font-size: 0.5625rem; font-weight: 900; }
+.hr-package-status[data-plan="business"] .hr-package-status-badge { background: var(--accent-color); border-color: transparent; color: var(--accent-contrast, #ffffff); }
+.hr-package-change-btn { padding: 0.25rem 0.55rem; border-radius: 999px; border: 1px solid var(--border-subtle); background: var(--surface-raised); color: var(--accent-color); font-family: inherit; font-size: 0.5625rem; font-weight: 900; cursor: pointer; }
+.hr-package-change-btn:hover { border-color: var(--accent-color); }
+.hr-pricing-mini-card.is-active { border-color: var(--accent-color); box-shadow: 0 0 0 2px var(--accent-ring); }
+.hr-free-chip.is-active { background: var(--accent-color); border-color: transparent; color: var(--accent-contrast, #ffffff); }
+.hr-package-next-btn { width: 100%; margin-top: 0.9rem; padding: 0.55rem 0.75rem; border-radius: 0.8rem; border: 1px solid var(--accent-ring); background: var(--accent-soft); color: var(--accent-color); font-family: inherit; font-size: 0.625rem; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease; }
+.hr-package-next-btn:hover { border-color: var(--accent-color); background: var(--accent-color); color: var(--accent-contrast, #ffffff); }
+.hr-package-free-btn { width: 100%; margin-top: 0.75rem; padding: 0.5rem 0.75rem; border-radius: 0.8rem; border: 1px dashed var(--border-subtle); background: transparent; color: var(--text-faint); font-family: inherit; font-size: 0.5625rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
+.hr-package-free-btn:hover { border-color: var(--accent-color); color: var(--accent-color); }
+.category-package-badge { display: inline-flex; margin-top: 0.35rem; padding: 0.2rem 0.5rem; border-radius: 999px; background: var(--accent-soft); border: 1px solid var(--accent-ring); color: var(--accent-color); font-size: 0.5rem; font-weight: 900; letter-spacing: 0.05em; }
+@media (max-width: 480px) {
+  .hr-package-actions { grid-template-columns: 1fr; }
+  .hr-package-summary-price { margin-left: 0; width: 100%; }
+}

@@ -676,9 +676,18 @@
                   <span class="hr-price-label" data-i18n="hr.pricingTitle">Paket HR &amp; Rekrutmen</span>
                   <button type="button" onclick="activateHrFreeMode()" id="hr-free-try-btn" class="hr-free-chip" data-i18n="hr.freeTry">Free tersedia · coba</button>
                 </div>
+                <div class="hr-package-status" id="hr-package-status" data-plan="draft">
+                  <span class="hr-package-status-dot" aria-hidden="true"></span>
+                  <span class="hr-package-status-copy">
+                    <b id="hr-package-status-label">Paket belum diaktivasi</b>
+                    <i id="hr-package-status-detail">Pilih paket, lalu lanjutkan konfirmasi agar form HR siap dipakai.</i>
+                  </span>
+                  <span class="hr-package-status-badge" id="hr-package-status-badge">—</span>
+                  <button type="button" onclick="openActiveHrPackageModal()" id="hr-package-change-btn" class="hr-package-change-btn hidden" data-i18n="hr.packageChange">Ubah paket</button>
+                </div>
                 <p class="hr-free-note" data-i18n="hr.freeNote">Mode dasar gratis tetap tersedia untuk mencoba alur Sisi A ↔ Sisi B.</p>
                 <div class="hr-pricing-mini-grid">
-                  <article class="hr-pricing-mini-card">
+                  <article class="hr-pricing-mini-card" data-hr-package-plan="pro">
                     <span class="hr-pricing-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
                     <strong class="hr-pricing-mini-name" data-i18n="hr.starterName">Paket Mulai</strong>
                     <span class="start-from"><i aria-hidden="true"></i><span data-i18n="pricing.startFrom">Mulai dari</span></span>
@@ -692,8 +701,9 @@
                       <li data-i18n="hr.benefitCv">Auto-fill PDF CV + kecocokan Tinggi/Sedang/Rendah</li>
                       <li data-i18n="hr.benefitSheet">Rekap 1 Google Sheet HR</li>
                     </ul>
+                    <button type="button" onclick="openHrPackageModal('pro')" class="hr-package-next-btn" data-i18n="hr.packageContinue">Lanjutkan paket ini</button>
                   </article>
-                  <article class="hr-pricing-mini-card hr-pricing-mini-business">
+                  <article class="hr-pricing-mini-card hr-pricing-mini-business" data-hr-package-plan="business">
                     <span class="hr-pricing-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
                     <strong class="hr-pricing-mini-name" data-i18n="pricing.business">Business</strong>
                     <span class="start-from"><i aria-hidden="true"></i><span data-i18n="pricing.startFrom">Mulai dari</span></span>
@@ -707,8 +717,10 @@
                       <li data-i18n="hr.benefitBusinessTemplate">Template portal karier Business</li>
                       <li data-i18n="hr.benefitFilter">Rekap &amp; penyaringan kandidat lebih leluasa</li>
                     </ul>
+                    <button type="button" onclick="openHrPackageModal('business')" class="hr-package-next-btn" data-i18n="hr.packageContinue">Lanjutkan paket ini</button>
                   </article>
                 </div>
+                <button type="button" onclick="openHrPackageModal('free')" class="hr-package-free-btn" data-i18n="hr.packageContinue">Lanjutkan paket ini</button>
               </section>
               <article class="hr-recap-card">
                 <span class="custom-track-label" data-i18n="hr.previewTitle">Pratinjau rekap Google Sheet HR</span>
@@ -1105,6 +1117,7 @@
       </div>
 
       <button id="checkout-confirm-btn" onclick="confirmQrisPayment()" class="modal-primary" data-i18n="qris.confirm">Saya sudah transfer</button>
+      <button type="button" onclick="continueHrPackageFromCheckout()" class="modal-secondary" data-i18n="hr.packageContinueCheckout">Lanjutkan ke setup HR</button>
     </div>
   </div>
 
@@ -1117,6 +1130,58 @@
       <div class="hr-template-preview-actions">
         <button type="button" onclick="applyUiTemplateToCandidate()" class="modal-primary" data-i18n="hr.uiApplyPortal">Terapkan ke Sisi B</button>
         <button type="button" onclick="closeHrTemplatePreviewModal()" class="btn btn-secondary" data-i18n="common.close">Tutup</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="hr-package-modal" class="modal-overlay hidden" onclick="if (event.target === this) closeHrPackageModal()">
+    <div class="modal-card modal-card-wide hr-package-modal">
+      <button onclick="closeHrPackageModal()" class="modal-close" data-i18n-aria="common.close" aria-label="Tutup">&#10005;</button>
+      <span class="modal-eyebrow" data-i18n="hr.packageModalEyebrow">Aktivasi Paket HR</span>
+      <h3 class="modal-title" data-i18n="hr.packageModalTitle">Selesaikan paket HR Anda</h3>
+      <p class="modal-description" data-i18n="hr.packageModalDesc">Periksa ringkasan paket dan tujuan penyimpanan sebelum form HR dinyatakan siap.</p>
+
+      <div id="hr-package-summary" class="hr-package-summary"></div>
+
+      <div id="hr-package-form">
+        <div class="modal-form">
+          <div>
+            <label for="hr-package-company-input" class="modal-label" data-i18n="hr.packageCompany">Nama Perusahaan</label>
+            <input type="text" id="hr-package-company-input" class="modal-input" data-i18n-placeholder="hr.packageCompanyPlaceholder" placeholder="Nama perusahaan sesuai data HR">
+          </div>
+          <div>
+            <label for="hr-package-email-input" class="modal-label" data-i18n="hr.packageEmail">Email Penyimpanan / HR</label>
+            <input type="email" id="hr-package-email-input" class="modal-input" data-i18n-placeholder="hr.packageEmailPlaceholder" placeholder="nama@email.com">
+            <p class="modal-hint" data-i18n="hr.packageEmailHint">Email Google pemilik Google Sheet dan Google Drive HR.</p>
+          </div>
+          <div class="hr-package-storage">
+            <label class="hr-package-check">
+              <input type="checkbox" id="hr-package-sheet-check">
+              <span data-i18n="hr.packageSheetConfirm">Google Sheet HR dipakai sebagai tujuan rekap</span>
+            </label>
+            <label class="hr-package-check">
+              <input type="checkbox" id="hr-package-drive-check">
+              <span data-i18n="hr.packageDriveConfirm">Google Drive HR dipakai untuk CV &amp; surat lamaran</span>
+            </label>
+          </div>
+          <div>
+            <label for="hr-package-notes-input" class="modal-label" data-i18n="hr.packageNotes">Catatan opsional</label>
+            <textarea id="hr-package-notes-input" class="modal-input" rows="2" data-i18n-placeholder="hr.packageNotesPlaceholder" placeholder="Contoh: kebutuhan kolom tambahan atau catatan tim"></textarea>
+          </div>
+        </div>
+        <p id="hr-package-error" class="hr-package-error hidden"></p>
+        <div class="hr-package-actions">
+          <button type="button" onclick="closeHrPackageModal()" class="modal-secondary" data-i18n="common.cancel">Batal</button>
+          <button type="button" onclick="confirmHrPackage()" class="modal-primary" data-i18n="hr.packageConfirm">Konfirmasi &amp; selesaikan</button>
+        </div>
+      </div>
+
+      <div id="hr-package-success" class="hr-package-success hidden">
+        <div class="success-icon" aria-hidden="true">&#10003;</div>
+        <h4 data-i18n="hr.packageSuccessTitle">Setup HR selesai</h4>
+        <p class="modal-description" data-i18n="hr.packageSuccessDesc">Paket aktif dan form HR siap digunakan.</p>
+        <div id="hr-package-receipt" class="hr-package-receipt"></div>
+        <button type="button" onclick="closeHrPackageModal()" class="modal-primary" data-i18n="hr.packageDone">Selesai</button>
       </div>
     </div>
   </div>

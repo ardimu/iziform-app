@@ -32,6 +32,8 @@ const state = {
   hrFontPairOverrides: {},
   hrTemplateKey: 'tech',
   hrSelectionStatus: 'new',
+  hrPackage: { plan: '', active: false, companyName: '', email: '', notes: '', currency: 'idr', price: '', confirmedAt: '' },
+  hrPackageModalPlan: 'free',
   hrLastCandidate: null,
   qrisImageUrl: '',
   qrisPaymentPlan: '',
@@ -979,6 +981,7 @@ const I18N = {
     'common.copy': 'Salin',
     'common.copyLink': 'Salin Link',
     'common.close': 'Tutup',
+    'common.cancel': 'Batal',
     'common.chooseFile': 'Choose File',
     'lang.label': 'Bahasa',
     'lang.aria': 'Pilih bahasa tampilan',
@@ -1169,6 +1172,40 @@ const I18N = {
     'hr.freeTry': 'Free tersedia · coba',
     'hr.freeNote': 'Mode dasar gratis tetap tersedia untuk mencoba alur Sisi A ↔ Sisi B.',
     'hr.starterName': 'Paket Mulai',
+    'hr.packageDraft': 'Paket belum diaktivasi',
+    'hr.packageDraftHint': 'Pilih paket, lalu lanjutkan konfirmasi agar form HR siap dipakai.',
+    'hr.packageActive': 'Paket aktif',
+    'hr.packageReady': 'Form HR siap digunakan',
+    'hr.packageChange': 'Ubah paket',
+    'hr.packageContinue': 'Lanjutkan paket ini',
+    'hr.packageContinueCheckout': 'Lanjutkan ke setup HR',
+    'hr.packageModalEyebrow': 'Aktivasi Paket HR',
+    'hr.packageModalTitle': 'Selesaikan paket HR Anda',
+    'hr.packageModalDesc': 'Periksa ringkasan paket dan tujuan penyimpanan sebelum form HR dinyatakan siap.',
+    'hr.packageCompany': 'Nama Perusahaan',
+    'hr.packageCompanyPlaceholder': 'Nama perusahaan sesuai data HR',
+    'hr.packageEmail': 'Email Penyimpanan / HR',
+    'hr.packageEmailPlaceholder': 'nama@email.com',
+    'hr.packageEmailHint': 'Email Google pemilik Google Sheet dan Google Drive HR.',
+    'hr.packageSheetConfirm': 'Google Sheet HR dipakai sebagai tujuan rekap',
+    'hr.packageDriveConfirm': 'Google Drive HR dipakai untuk CV & surat lamaran',
+    'hr.packageNotes': 'Catatan opsional',
+    'hr.packageNotesPlaceholder': 'Contoh: kebutuhan kolom tambahan atau catatan tim',
+    'hr.packageConfirm': 'Konfirmasi & selesaikan',
+    'hr.packageErrorCompany': 'Nama perusahaan wajib diisi.',
+    'hr.packageErrorEmail': 'Email HR tidak valid.',
+    'hr.packageErrorStorage': 'Konfirmasi Google Sheet dan Google Drive HR terlebih dahulu.',
+    'hr.packageSuccessTitle': 'Setup HR selesai',
+    'hr.packageSuccessDesc': 'Paket aktif dan form HR siap digunakan.',
+    'hr.packageReceiptPlan': 'Paket terpilih',
+    'hr.packageReceiptName': 'Nama perusahaan',
+    'hr.packageReceiptEmail': 'Email HR',
+    'hr.packageReceiptStorage': 'Tujuan penyimpanan',
+    'hr.packageReceiptStorageValue': 'Google Sheet HR + Google Drive HR',
+    'hr.packageReceiptNotes': 'Catatan',
+    'hr.packageDone': 'Selesai',
+    'hr.packageBadgeDraft': 'Paket: belum aktif',
+    'hr.packageBadgeActive': 'Paket: {plan}',
     'hr.benefit': 'Benefit / tunjangan',
     'hr.benefitPlaceholder': 'Contoh: BPJS, asuransi, flexible working, learning budget',
     'hr.benefitHint': 'Kosongkan untuk menyembunyikan bagian Benefit di portal kandidat.',
@@ -1459,6 +1496,7 @@ const I18N = {
     'toast.required': 'Field ini wajib diisi',
     'toast.requiredFieldsMissing': 'Lengkapi kolom wajib sebelum mengirim',
     'toast.hrFreeMode': 'Mode dasar Free aktif — template Netral dipilih.',
+    'toast.hrPackageConfirmed': 'Paket {plan} aktif. Form HR siap digunakan.',
     'toast.theme': 'Tema UI diubah: {name}',
     'toast.font': 'Font aktif: {name}',
     'toast.language': 'Bahasa diubah: {name}',
@@ -1482,6 +1520,7 @@ const I18N = {
     'common.copy': 'Copy',
     'common.copyLink': 'Copy link',
     'common.close': 'Close',
+    'common.cancel': 'Cancel',
     'common.chooseFile': 'Choose File',
     'lang.label': 'Language',
     'lang.aria': 'Choose display language',
@@ -1672,6 +1711,40 @@ const I18N = {
     'hr.freeTry': 'Free available · try it',
     'hr.freeNote': 'The free basic mode still works for trying the Sisi A ↔ Sisi B flow.',
     'hr.starterName': 'Starter',
+    'hr.packageDraft': 'Package not activated',
+    'hr.packageDraftHint': 'Choose a package, then continue the confirmation so the HR form is ready.',
+    'hr.packageActive': 'Package active',
+    'hr.packageReady': 'HR form is ready to use',
+    'hr.packageChange': 'Change package',
+    'hr.packageContinue': 'Continue this package',
+    'hr.packageContinueCheckout': 'Continue to HR setup',
+    'hr.packageModalEyebrow': 'HR Package Activation',
+    'hr.packageModalTitle': 'Finish your HR package',
+    'hr.packageModalDesc': 'Review the package summary and storage destination before marking the HR form ready.',
+    'hr.packageCompany': 'Company Name',
+    'hr.packageCompanyPlaceholder': 'Company name from HR data',
+    'hr.packageEmail': 'Storage / HR Email',
+    'hr.packageEmailPlaceholder': 'name@email.com',
+    'hr.packageEmailHint': 'The Google email that owns the HR Sheet and Drive.',
+    'hr.packageSheetConfirm': 'HR Google Sheet is used as the recap destination',
+    'hr.packageDriveConfirm': 'HR Google Drive is used for CV & cover letter',
+    'hr.packageNotes': 'Optional notes',
+    'hr.packageNotesPlaceholder': 'Example: extra columns or team notes',
+    'hr.packageConfirm': 'Confirm & finish',
+    'hr.packageErrorCompany': 'Company name is required.',
+    'hr.packageErrorEmail': 'Enter a valid HR email.',
+    'hr.packageErrorStorage': 'Confirm HR Google Sheet and Drive first.',
+    'hr.packageSuccessTitle': 'HR setup complete',
+    'hr.packageSuccessDesc': 'The package is active and the HR form is ready to use.',
+    'hr.packageReceiptPlan': 'Selected package',
+    'hr.packageReceiptName': 'Company name',
+    'hr.packageReceiptEmail': 'HR email',
+    'hr.packageReceiptStorage': 'Storage destination',
+    'hr.packageReceiptStorageValue': 'HR Google Sheet + HR Google Drive',
+    'hr.packageReceiptNotes': 'Notes',
+    'hr.packageDone': 'Done',
+    'hr.packageBadgeDraft': 'Package: not active',
+    'hr.packageBadgeActive': 'Package: {plan}',
     'hr.benefit': 'Benefits / perks',
     'hr.benefitPlaceholder': 'Example: health insurance, flexible work, learning budget',
     'hr.benefitHint': 'Leave blank to hide the Benefits section on the candidate portal.',
@@ -1962,6 +2035,7 @@ const I18N = {
     'toast.required': 'This field is required',
     'toast.requiredFieldsMissing': 'Complete the required fields before submitting',
     'toast.hrFreeMode': 'Free basic mode enabled — Neutral template selected.',
+    'toast.hrPackageConfirmed': '{plan} is active. The HR form is ready to use.',
     'toast.theme': 'UI theme changed: {name}',
     'toast.font': 'Active font: {name}',
     'toast.language': 'Language changed: {name}',
@@ -1985,6 +2059,7 @@ const I18N = {
     'common.copy': '复制',
     'common.copyLink': '复制链接',
     'common.close': '关闭',
+    'common.cancel': '取消',
     'common.chooseFile': '选择文件',
     'lang.label': '语言',
     'lang.aria': '选择显示语言',
@@ -2175,6 +2250,40 @@ const I18N = {
     'hr.freeTry': '免费可用 · 立即试用',
     'hr.freeNote': '免费基础模式仍可体验 A 侧 ↔ B 侧完整流程。',
     'hr.starterName': '入门套餐',
+    'hr.packageDraft': '套餐尚未激活',
+    'hr.packageDraftHint': '选择套餐后继续确认，即可启用 HR 表单。',
+    'hr.packageActive': '套餐已激活',
+    'hr.packageReady': 'HR 表单已可使用',
+    'hr.packageChange': '更换套餐',
+    'hr.packageContinue': '继续此套餐',
+    'hr.packageContinueCheckout': '继续完成 HR 设置',
+    'hr.packageModalEyebrow': 'HR 套餐激活',
+    'hr.packageModalTitle': '完成 HR 套餐设置',
+    'hr.packageModalDesc': '在标记 HR 表单可用前，请确认套餐摘要与存储目标。',
+    'hr.packageCompany': '公司名称',
+    'hr.packageCompanyPlaceholder': 'HR 数据中的公司名称',
+    'hr.packageEmail': '存储 / HR 邮箱',
+    'hr.packageEmailPlaceholder': 'name@email.com',
+    'hr.packageEmailHint': '拥有 HR Google Sheet 与 Drive 的 Google 邮箱。',
+    'hr.packageSheetConfirm': '使用 HR Google Sheet 作为汇总目标',
+    'hr.packageDriveConfirm': '使用 HR Google Drive 保存简历与求职信',
+    'hr.packageNotes': '可选备注',
+    'hr.packageNotesPlaceholder': '例如：额外列需求或团队备注',
+    'hr.packageConfirm': '确认并完成',
+    'hr.packageErrorCompany': '公司名称必填。',
+    'hr.packageErrorEmail': '请输入有效的 HR 邮箱。',
+    'hr.packageErrorStorage': '请先确认 HR Google Sheet 与 Drive。',
+    'hr.packageSuccessTitle': 'HR 设置完成',
+    'hr.packageSuccessDesc': '套餐已激活，HR 表单已可使用。',
+    'hr.packageReceiptPlan': '已选套餐',
+    'hr.packageReceiptName': '公司名称',
+    'hr.packageReceiptEmail': 'HR 邮箱',
+    'hr.packageReceiptStorage': '存储目标',
+    'hr.packageReceiptStorageValue': 'HR Google Sheet + HR Google Drive',
+    'hr.packageReceiptNotes': '备注',
+    'hr.packageDone': '完成',
+    'hr.packageBadgeDraft': '套餐：未激活',
+    'hr.packageBadgeActive': '套餐：{plan}',
     'hr.benefit': '福利 / 待遇',
     'hr.benefitPlaceholder': '例如：社保、商业保险、弹性办公、学习津贴',
     'hr.benefitHint': '留空即可在候选人门户隐藏福利区块。',
@@ -2465,6 +2574,7 @@ const I18N = {
     'toast.required': '此项为必填项',
     'toast.requiredFieldsMissing': '提交前请填写所有必填项',
     'toast.hrFreeMode': '免费基础模式已启用 — 已选择中性模板。',
+    'toast.hrPackageConfirmed': '{plan} 已激活，HR 表单已可使用。',
     'toast.theme': '界面主题已更改：{name}',
     'toast.font': '当前字体：{name}',
     'toast.language': '语言已更改：{name}',
@@ -2651,6 +2761,7 @@ function setLanguage(lang) {
     renderDashboard();
   }
   renderSyncStatus();
+  renderHrPackageStatus();
   renderCvMatchPanel();
   updateCandidatePortalOffsets();
   showToast(t('toast.language', { name: LANGUAGE_LABELS[lang] }));
@@ -2991,11 +3102,13 @@ function renderDashboard() {
           </button>
           ${key === 'custom' ? `<button type="button" onclick="openInfoPanel('custom')" class="custom-options-btn">${escapeHtml(t('custom.options'))}</button>` : ''}
           ${key === 'recruit' ? `<button type="button" onclick="openRecruitWorkspace()" class="custom-options-btn">${escapeHtml(t('hr.openWorkspace'))}</button>` : ''}
+          ${key === 'recruit' ? `<span id="hr-package-dashboard-badge" class="category-package-badge"></span>` : ''}
         </article>
       `;
     }).join('');
   }
 
+  renderHrPackageStatus();
   toggleViews();
   renderSyncStatus();
   renderCvMatchPanel();
@@ -3265,6 +3378,7 @@ function setCompanyLogoMarkup(element, logo, name) {
 
 function updateHrCompanyName(value) {
   state.hrCompanyName = String(value || '').trim() || state.hrCompanyName;
+  syncHrPackageFromSettings();
   renderHrLogoPreview();
   renderCompanyIdentity();
   if (state.view === 'form' && state.activePresetKey === 'recruit') {
@@ -3822,6 +3936,193 @@ function renderHrPreview() {
   renderBenefitDisplays();
 }
 
+function normalizeHrPackagePlan(planKey) {
+  if (planKey === 'starter') return 'pro';
+  return ['free', 'pro', 'business'].indexOf(planKey) >= 0 ? planKey : 'free';
+}
+
+function getHrPackageMeta(planKey) {
+  const plan = normalizeHrPackagePlan(planKey);
+  const data = HR_PRICING[state.paymentMethod] || HR_PRICING.idr;
+  const tierKeys = { free: 'pricing.free', pro: 'pricing.pro', business: 'pricing.business' };
+  const config = {
+    free: {
+      name: t('pricing.free'),
+      price: state.paymentMethod === 'usd' ? '$0' : 'Rp0',
+      periodKey: 'pricing.freeScope',
+      benefitKeys: PRICING_PLANS.free.benefitKeys
+    },
+    pro: {
+      name: t('hr.starterName'),
+      price: data.price,
+      periodKey: 'pricing.perForm',
+      benefitKeys: ['hr.benefitPortal', 'hr.benefitCv', 'hr.benefitSheet']
+    },
+    business: {
+      name: t('pricing.business'),
+      price: data.businessPrice,
+      periodKey: 'pricing.perProject',
+      benefitKeys: ['hr.benefitMultiRole', 'hr.benefitBusinessTemplate', 'hr.benefitFilter']
+    }
+  };
+  return { key: plan, tier: t(tierKeys[plan]), ...config[plan] };
+}
+
+function renderHrPackageSummary() {
+  const summary = document.getElementById('hr-package-summary');
+  if (!summary) return;
+  const meta = getHrPackageMeta(state.hrPackageModalPlan);
+  const benefits = meta.benefitKeys.map((key) => `<li>${escapeHtml(t(key))}</li>`).join('');
+  summary.innerHTML = `
+    <div class="hr-package-summary-head">
+      <span class="hr-package-summary-badge">${escapeHtml(meta.tier)}</span>
+      <strong>${escapeHtml(meta.name)}</strong>
+      <span class="hr-package-summary-price">${escapeHtml(meta.price)} <small>${escapeHtml(t(meta.periodKey))}</small></span>
+    </div>
+    <ul>${benefits}</ul>`;
+}
+
+function renderHrPackageReceipt() {
+  const receipt = document.getElementById('hr-package-receipt');
+  if (!receipt) return;
+  if (!state.hrPackage.active) {
+    receipt.innerHTML = '';
+    return;
+  }
+  const meta = getHrPackageMeta(state.hrPackage.plan);
+  const rows = [
+    [t('hr.packageReceiptPlan'), `${meta.name} · ${state.hrPackage.price || meta.price}`],
+    [t('hr.packageReceiptName'), state.hrPackage.companyName || state.hrCompanyName],
+    [t('hr.packageReceiptEmail'), state.hrPackage.email || state.googleEmail],
+    [t('hr.packageReceiptStorage'), t('hr.packageReceiptStorageValue')]
+  ];
+  if (state.hrPackage.notes) rows.push([t('hr.packageReceiptNotes'), state.hrPackage.notes]);
+  receipt.innerHTML = rows.map(([label, value]) => `
+    <div><span>${escapeHtml(label)}</span><b>${escapeHtml(value)}</b></div>`).join('');
+}
+
+function renderHrPackageStatus() {
+  const active = state.hrPackage.active === true;
+  const plan = active ? normalizeHrPackagePlan(state.hrPackage.plan) : '';
+  const meta = active ? getHrPackageMeta(plan) : null;
+  const status = document.getElementById('hr-package-status');
+  if (status) {
+    status.dataset.plan = active ? plan : 'draft';
+    const label = document.getElementById('hr-package-status-label');
+    const detail = document.getElementById('hr-package-status-detail');
+    const badge = document.getElementById('hr-package-status-badge');
+    if (label) label.textContent = active ? t('hr.packageActive') : t('hr.packageDraft');
+    if (detail) detail.textContent = active ? `${t('hr.packageReady')} · ${meta.name} · ${meta.price}` : t('hr.packageDraftHint');
+    if (badge) badge.textContent = active ? t('hr.packageBadgeActive', { plan: meta.name }) : t('hr.packageBadgeDraft');
+  }
+  const changeButton = document.getElementById('hr-package-change-btn');
+  if (changeButton) changeButton.classList.toggle('hidden', !active);
+  document.querySelectorAll('[data-hr-package-plan]').forEach((card) => {
+    card.classList.toggle('is-active', active && card.getAttribute('data-hr-package-plan') === plan);
+  });
+  const freeChip = document.getElementById('hr-free-try-btn');
+  if (freeChip) freeChip.classList.toggle('is-active', active && plan === 'free');
+  const dashboardBadge = document.getElementById('hr-package-dashboard-badge');
+  if (dashboardBadge) dashboardBadge.textContent = active ? t('hr.packageBadgeActive', { plan: meta.name }) : t('hr.packageBadgeDraft');
+  renderHrPackageReceipt();
+  const modal = document.getElementById('hr-package-modal');
+  if (modal && !modal.classList.contains('hidden')) renderHrPackageSummary();
+}
+
+function syncHrPackageFromSettings() {
+  if (!state.hrPackage.active) return;
+  if (state.hrCompanyName) state.hrPackage.companyName = state.hrCompanyName;
+  if (state.googleEmail) state.hrPackage.email = state.googleEmail;
+  renderHrPackageReceipt();
+}
+
+function openActiveHrPackageModal() {
+  openHrPackageModal(state.hrPackage.active ? state.hrPackage.plan : 'free');
+}
+
+function openHrPackageModal(planKey) {
+  const plan = normalizeHrPackagePlan(planKey);
+  state.hrPackageModalPlan = plan;
+  const modal = document.getElementById('hr-package-modal');
+  if (!modal) return;
+  const form = document.getElementById('hr-package-form');
+  const success = document.getElementById('hr-package-success');
+  const error = document.getElementById('hr-package-error');
+  if (form) form.classList.remove('hidden');
+  if (success) success.classList.add('hidden');
+  if (error) error.classList.add('hidden');
+  const reuse = state.hrPackage.active && state.hrPackage.plan === plan;
+  const companyInput = document.getElementById('hr-package-company-input');
+  const emailInput = document.getElementById('hr-package-email-input');
+  const notesInput = document.getElementById('hr-package-notes-input');
+  const sheetCheck = document.getElementById('hr-package-sheet-check');
+  const driveCheck = document.getElementById('hr-package-drive-check');
+  if (companyInput) companyInput.value = reuse ? (state.hrPackage.companyName || state.hrCompanyName) : state.hrCompanyName;
+  if (emailInput) emailInput.value = reuse ? (state.hrPackage.email || state.googleEmail) : state.googleEmail;
+  if (notesInput) notesInput.value = reuse ? state.hrPackage.notes : '';
+  if (sheetCheck) sheetCheck.checked = reuse;
+  if (driveCheck) driveCheck.checked = reuse;
+  renderHrPackageSummary();
+  modal.classList.remove('hidden');
+}
+
+function closeHrPackageModal() {
+  const modal = document.getElementById('hr-package-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function continueHrPackageFromCheckout() {
+  closeQrisPaymentModal();
+  openHrPackageModal(state.qrisPaymentPlan || state.hrPackageModalPlan || 'pro');
+}
+
+function confirmHrPackage() {
+  const companyInput = document.getElementById('hr-package-company-input');
+  const emailInput = document.getElementById('hr-package-email-input');
+  const notesInput = document.getElementById('hr-package-notes-input');
+  const sheetCheck = document.getElementById('hr-package-sheet-check');
+  const driveCheck = document.getElementById('hr-package-drive-check');
+  const error = document.getElementById('hr-package-error');
+  const company = companyInput ? companyInput.value.trim() : '';
+  const email = emailInput ? emailInput.value.trim() : '';
+  const notes = notesInput ? notesInput.value.trim() : '';
+  let message = '';
+  if (!company) message = t('hr.packageErrorCompany');
+  else if (!isValidEmail(email)) message = t('hr.packageErrorEmail');
+  else if (!sheetCheck || !sheetCheck.checked || !driveCheck || !driveCheck.checked) message = t('hr.packageErrorStorage');
+  if (message) {
+    if (error) {
+      error.textContent = message;
+      error.classList.remove('hidden');
+    }
+    return;
+  }
+  if (error) error.classList.add('hidden');
+  const plan = normalizeHrPackagePlan(state.hrPackageModalPlan);
+  const meta = getHrPackageMeta(plan);
+  state.hrPackage = {
+    plan,
+    active: true,
+    companyName: company,
+    email,
+    notes,
+    currency: state.paymentMethod,
+    price: meta.price,
+    confirmedAt: new Date().toISOString()
+  };
+  state.googleEmail = email;
+  updateHrCompanyName(company);
+  syncHrPackageFromSettings();
+  renderSyncStatus();
+  renderHrPackageStatus();
+  const form = document.getElementById('hr-package-form');
+  const success = document.getElementById('hr-package-success');
+  if (form) form.classList.add('hidden');
+  if (success) success.classList.remove('hidden');
+  triggerConfetti();
+  showToast(t('toast.hrPackageConfirmed', { plan: meta.tier }));
+}
+
 function renderHrPricing() {
   const data = HR_PRICING[state.paymentMethod] || HR_PRICING.idr;
   const prices = [
@@ -3834,6 +4135,7 @@ function renderHrPricing() {
     const element = document.getElementById(id);
     if (element) element.textContent = value;
   });
+  renderHrPackageStatus();
 }
 
 function renderHrBuilder() {
@@ -4154,8 +4456,8 @@ function confirmQrisPayment() {
   const input = document.getElementById('payment-proof-input');
   const file = input && input.files ? input.files[0] : null;
   if (file) showToast(t('toast.qrisProofSaved', { name: file.name }));
-  showToast(t('toast.qrisPaymentConfirmed', { plan: t(`pricing.${planKey}`) }));
-  closeQrisPaymentModal();
+  showToast(t('toast.qrisPaymentConfirmed', { plan: t(`pricing.${normalizeHrPackagePlan(planKey)}`) }));
+  continueHrPackageFromCheckout();
 }
 
 function saveQrisMerchant(value) {
@@ -4247,6 +4549,7 @@ function saveSyncSettings() {
   state.webhookUrl = webhook;
   state.gformUrl = gform;
   state.hrDriveFolderUrl = drive;
+  syncHrPackageFromSettings();
   renderSyncStatus();
   triggerConfetti();
   showToast(webhook ? t('toast.settingsSavedWebhook') : t('toast.settingsSavedSim'));
@@ -4894,6 +5197,7 @@ function applyPastedGForm() {
   state.gformUrl = gform;
   state.webhookUrl = webhook;
   state.hrDriveFolderUrl = drive;
+  syncHrPackageFromSettings();
   closePasteModal();
   renderSyncStatus();
   triggerConfetti();
