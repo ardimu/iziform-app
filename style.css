@@ -2717,7 +2717,7 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template] .recruit-form-stack:
 body[data-preset="recruit"] #form-view[data-hr-ui-template] .recruit-form-stack > .brand-cover-wrapper { display: none; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template] .recruit-form-stack > .brand-identity-card { margin-top: 0; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template] .recruit-question-dock {
-  flex: 0 0 auto; display: flex; flex-direction: column; min-width: 0;
+  flex: 0 0 auto; display: flex; flex-direction: column; min-width: 0; padding-right: 0.35rem;
 }
 body[data-preset="recruit"] #form-view[data-hr-ui-template] .recruit-question-dock .open-question-card {
   height: auto; max-height: none; overflow: visible;
