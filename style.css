@@ -2897,6 +2897,7 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template] .recruit-question-do
 .hr-pricing-mini-card.is-active { border-color: var(--accent-color); box-shadow: 0 0 0 2px var(--accent-ring); }
 .hr-free-chip.is-active { background: var(--accent-color); border-color: transparent; color: var(--accent-contrast, #ffffff); }
 .hr-tier-note { margin: 0.75rem 0 0; color: var(--text-faint); font-size: 0.5625rem; line-height: 1.55; }
+.hr-package-tier-prompt { margin-top: 0.65rem; color: var(--text-body); }
 .hr-package-next-btn { width: 100%; margin-top: 0.9rem; padding: 0.65rem 0.8rem; border-radius: 0.8rem; border: 1px solid var(--accent-color); background: var(--accent-color); color: var(--accent-contrast, #ffffff); box-shadow: 0 12px 22px -12px var(--accent-ring); font-family: inherit; font-size: 0.625rem; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease; }
 .hr-package-next-btn:hover { transform: translateY(-1px); box-shadow: 0 16px 28px -12px var(--accent-ring); filter: brightness(1.05); }
 .hr-package-free-btn { width: 100%; margin-top: 0.75rem; padding: 0.5rem 0.75rem; border-radius: 0.8rem; border: 1px dashed var(--border-subtle); background: transparent; color: var(--text-faint); font-family: inherit; font-size: 0.5625rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }

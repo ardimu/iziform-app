@@ -1179,8 +1179,8 @@ const I18N = {
     'hr.packageChange': 'Ubah paket',
     'hr.packageContinue': 'Lanjutkan paket ini',
     'hr.packageContinueCheckout': 'Lanjutkan ke setup HR',
-    'hr.packageModalEyebrow': 'Aktivasi Paket HR',
-    'hr.packageModalTitle': 'Selesaikan paket HR Anda',
+    'hr.packageModalEyebrow': 'Setup Paket HR',
+    'hr.packageModalTitle': 'Setup {tier} Tier',
     'hr.packageModalDesc': 'Periksa ringkasan paket dan tujuan penyimpanan sebelum form HR dinyatakan siap.',
     'hr.packageCompany': 'Nama Perusahaan',
     'hr.packageCompanyPlaceholder': 'Nama perusahaan sesuai data HR',
@@ -1226,20 +1226,18 @@ const I18N = {
     'hr.finishingPreview': 'Lihat Portal Pelamar',
     'hr.finishingCopy': 'Salin Link Form',
     'hr.finishingBack': 'Kembali ke Pengaturan HR',
-    'hr.finishingActivate': 'Aktifkan paket dulu',
-    'hr.finishingNoteDraft': 'Aktifkan paket agar status Siap Pakai dan link siap dibagikan.',
+    'hr.finishingNoteDraft': 'Lanjutkan konfirmasi paket agar status Siap Pakai dan link siap dibagikan.',
     'hr.finishingCopied': 'Ringkasan HR dan link portal disalin.',
     'hr.finishingCopyFailed': 'Clipboard tidak tersedia. Link portal: {url}',
     'hr.finishingSummaryTitle': 'Ringkasan Setup HR',
     'hr.finishingPortalLink': 'Link portal',
     'hr.packageBadgeDraft': 'Paket: belum aktif',
     'hr.packageBadgeActive': '{plan} Tier - Aktif',
-    'hr.packageActivate': 'Aktifkan Paket {plan}',
     'hr.tierFreeCta': 'Free Tier, Continue',
-    'hr.tierProCta': 'Pro Tier — Lanjut Pembayaran',
-    'hr.tierBusinessCta': 'Business Tier — Lanjut Pembayaran',
-    'hr.tierProNote': 'Form tetap bisa disusun dulu. Selesaikan pembayaran Pro di langkah konfirmasi untuk mengunci tier ini.',
-    'hr.tierBusinessNote': 'Template dan requirement bisa disiapkan lebih dulu. Selesaikan pembayaran Business di langkah konfirmasi untuk mengunci tier ini.',
+    'hr.tierProCta': 'Pro Tier',
+    'hr.tierBusinessCta': 'Business Tier',
+    'hr.tierProNote': 'Mohon untuk menyelesaikan pembayaran agar paket Pro Tier dapat aktif.',
+    'hr.tierBusinessNote': 'Mohon untuk menyelesaikan pembayaran agar paket Business Tier dapat aktif.',
     'hr.packageStorageStatus': 'Status Storage HR',
     'hr.packageSheetReady': 'Google Sheet HR: aktif',
     'hr.packageSheetPending': 'Google Sheet HR: belum diisi',
@@ -1758,8 +1756,8 @@ const I18N = {
     'hr.packageChange': 'Change package',
     'hr.packageContinue': 'Continue this package',
     'hr.packageContinueCheckout': 'Continue to HR setup',
-    'hr.packageModalEyebrow': 'HR Package Activation',
-    'hr.packageModalTitle': 'Finish your HR package',
+    'hr.packageModalEyebrow': 'HR Package Setup',
+    'hr.packageModalTitle': '{tier} Tier setup',
     'hr.packageModalDesc': 'Review the package summary and storage destination before marking the HR form ready.',
     'hr.packageCompany': 'Company Name',
     'hr.packageCompanyPlaceholder': 'Company name from HR data',
@@ -1805,20 +1803,18 @@ const I18N = {
     'hr.finishingPreview': 'View Applicant Portal',
     'hr.finishingCopy': 'Copy Form Link',
     'hr.finishingBack': 'Back to HR Settings',
-    'hr.finishingActivate': 'Activate a package first',
-    'hr.finishingNoteDraft': 'Activate a package to mark it Ready to Use and share the portal link.',
+    'hr.finishingNoteDraft': 'Continue the package confirmation to mark it Ready to Use and share the portal link.',
     'hr.finishingCopied': 'HR recap and portal link copied.',
     'hr.finishingCopyFailed': 'Clipboard unavailable. Portal link: {url}',
     'hr.finishingSummaryTitle': 'HR Setup Recap',
     'hr.finishingPortalLink': 'Portal link',
     'hr.packageBadgeDraft': 'Package: not active',
     'hr.packageBadgeActive': '{plan} Tier - Active',
-    'hr.packageActivate': 'Activate {plan} Package',
     'hr.tierFreeCta': 'Free Tier, Continue',
-    'hr.tierProCta': 'Pro Tier — Continue to Payment',
-    'hr.tierBusinessCta': 'Business Tier — Continue to Payment',
-    'hr.tierProNote': 'You can still prepare your form first. Complete the Pro payment at confirmation to secure this tier.',
-    'hr.tierBusinessNote': 'Templates and requirements can be prepared first. Complete the Business payment at confirmation to secure this tier.',
+    'hr.tierProCta': 'Pro Tier',
+    'hr.tierBusinessCta': 'Business Tier',
+    'hr.tierProNote': 'Please complete the payment so the Pro Tier package can be activated.',
+    'hr.tierBusinessNote': 'Please complete the payment so the Business Tier package can be activated.',
     'hr.packageStorageStatus': 'HR Storage Status',
     'hr.packageSheetReady': 'HR Google Sheet: active',
     'hr.packageSheetPending': 'HR Google Sheet: not set',
@@ -2337,8 +2333,8 @@ const I18N = {
     'hr.packageChange': '更换套餐',
     'hr.packageContinue': '继续此套餐',
     'hr.packageContinueCheckout': '继续完成 HR 设置',
-    'hr.packageModalEyebrow': 'HR 套餐激活',
-    'hr.packageModalTitle': '完成 HR 套餐设置',
+    'hr.packageModalEyebrow': 'HR 套餐设置',
+    'hr.packageModalTitle': '{tier} Tier 设置',
     'hr.packageModalDesc': '在标记 HR 表单可用前，请确认套餐摘要与存储目标。',
     'hr.packageCompany': '公司名称',
     'hr.packageCompanyPlaceholder': 'HR 数据中的公司名称',
@@ -2384,20 +2380,18 @@ const I18N = {
     'hr.finishingPreview': '查看申请者门户',
     'hr.finishingCopy': '复制表单链接',
     'hr.finishingBack': '返回 HR 设置',
-    'hr.finishingActivate': '请先激活套餐',
-    'hr.finishingNoteDraft': '激活套餐后才会标记为可投入使用并分享门户链接。',
+    'hr.finishingNoteDraft': '继续完成套餐确认后，才会标记为可投入使用并分享门户链接。',
     'hr.finishingCopied': 'HR 汇总与门户链接已复制。',
     'hr.finishingCopyFailed': '剪贴板不可用。门户链接：{url}',
     'hr.finishingSummaryTitle': 'HR 设置汇总',
     'hr.finishingPortalLink': '门户链接',
     'hr.packageBadgeDraft': '套餐：未激活',
     'hr.packageBadgeActive': '{plan} 套餐 - 已激活',
-    'hr.packageActivate': '激活 {plan} 套餐',
     'hr.tierFreeCta': 'Free Tier, Continue',
-    'hr.tierProCta': 'Pro Tier — 继续付款',
-    'hr.tierBusinessCta': 'Business Tier — 继续付款',
-    'hr.tierProNote': '您可以先完成表单配置。确认时完成 Pro 付款即可锁定该套餐。',
-    'hr.tierBusinessNote': '模板与要求可先准备好。确认时完成 Business 付款即可锁定该套餐。',
+    'hr.tierProCta': 'Pro Tier',
+    'hr.tierBusinessCta': 'Business Tier',
+    'hr.tierProNote': '请完成付款，以启用 Pro Tier 套餐。',
+    'hr.tierBusinessNote': '请完成付款，以启用 Business Tier 套餐。',
     'hr.packageStorageStatus': 'HR 存储状态',
     'hr.packageSheetReady': 'HR Google Sheet：已启用',
     'hr.packageSheetPending': 'HR Google Sheet：未填写',
@@ -3753,11 +3747,13 @@ function selectHrUiTemplate(templateKey) {
 }
 
 function activateHrFreeMode() {
+  state.hrPackageModalPlan = 'free';
   setHrActiveSide('a', true);
   delete state.hrFontPairOverrides.clean01;
   selectHrUiTemplate('clean01');
   const target = document.getElementById('hr-ui-template-select') || document.getElementById('hr-ui-preview');
   if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  renderHrFinishingSummary();
   showToast(t('toast.hrFreeMode'));
 }
 
@@ -4103,6 +4099,24 @@ function normalizeHrPackagePlan(planKey) {
   return ['free', 'pro', 'business'].indexOf(planKey) >= 0 ? planKey : 'free';
 }
 
+function getHrSelectedPackagePlan() {
+  return normalizeHrPackagePlan(state.hrPackageModalPlan || state.hrPackage.plan || 'free');
+}
+
+function getHrTierCtaLabel(planKey) {
+  const plan = normalizeHrPackagePlan(planKey);
+  if (plan === 'free') return t('hr.tierFreeCta');
+  if (plan === 'pro') return t('hr.tierProCta');
+  return t('hr.tierBusinessCta');
+}
+
+function getHrTierPaymentPrompt(planKey) {
+  const plan = normalizeHrPackagePlan(planKey);
+  if (plan === 'pro') return t('hr.tierProNote');
+  if (plan === 'business') return t('hr.tierBusinessNote');
+  return '';
+}
+
 function getHrPackageMeta(planKey) {
   const plan = normalizeHrPackagePlan(planKey);
   const data = HR_PRICING[state.paymentMethod] || HR_PRICING.idr;
@@ -4142,6 +4156,7 @@ function renderHrPackageSummary() {
       <span class="hr-package-summary-price">${escapeHtml(meta.price)} <small>${escapeHtml(t(meta.periodKey))}</small></span>
     </div>
     <ul>${benefits}</ul>`;
+  renderHrPackageModalTier();
 }
 
 function renderHrPackageTriggerLabels() {
@@ -4151,15 +4166,22 @@ function renderHrPackageTriggerLabels() {
       button.textContent = t('hr.packageContinueCheckout');
       return;
     }
-    const tierCtaKey = plan === 'free'
-      ? 'hr.tierFreeCta'
-      : plan === 'pro'
-        ? 'hr.tierProCta'
-        : plan === 'business'
-          ? 'hr.tierBusinessCta'
-          : '';
-    button.textContent = tierCtaKey ? t(tierCtaKey) : t('hr.packageActivate', { plan: getHrPackageMeta(plan).tier });
+    button.textContent = getHrTierCtaLabel(plan);
   });
+}
+
+function renderHrPackageModalTier() {
+  const plan = getHrSelectedPackagePlan();
+  const prompt = document.getElementById('hr-package-tier-prompt');
+  if (prompt) {
+    const message = getHrTierPaymentPrompt(plan);
+    prompt.textContent = message;
+    prompt.classList.toggle('hidden', !message);
+  }
+  const confirmButton = document.getElementById('hr-package-confirm-btn');
+  if (confirmButton) confirmButton.textContent = getHrTierCtaLabel(plan);
+  const title = document.querySelector('#hr-package-modal .modal-title');
+  if (title) title.textContent = t('hr.packageModalTitle', { tier: getHrPackageMeta(plan).tier });
 }
 
 function renderHrPackageStorageStatus() {
@@ -4194,6 +4216,7 @@ function renderHrPackageReceipt() {
 function renderHrPackageStatus() {
   const active = state.hrPackage.active === true;
   const plan = active ? normalizeHrPackagePlan(state.hrPackage.plan) : '';
+  if (active) state.hrPackageModalPlan = plan;
   const meta = active ? getHrPackageMeta(plan) : null;
   const status = document.getElementById('hr-package-status');
   if (status) {
@@ -4257,6 +4280,7 @@ function openHrPackageModal(planKey) {
   if (driveCheck) driveCheck.checked = reuse;
   renderHrPackageSummary();
   renderHrPackageStorageStatus();
+  renderHrFinishingSummary();
   modal.classList.remove('hidden');
 }
 
@@ -4334,13 +4358,17 @@ function renderHrFinishingSummary() {
         </div>
       </div>`;
   }
+  const selectedPlan = getHrSelectedPackagePlan();
   const note = document.getElementById('hr-finishing-note');
   if (note) {
-    note.textContent = data.active ? '' : t('hr.finishingNoteDraft');
+    note.textContent = data.active ? '' : (getHrTierPaymentPrompt(selectedPlan) || t('hr.finishingNoteDraft'));
     note.classList.toggle('hidden', data.active);
   }
   const activate = document.getElementById('hr-finishing-activate-btn');
-  if (activate) activate.classList.toggle('hidden', data.active);
+  if (activate) {
+    activate.textContent = getHrTierCtaLabel(selectedPlan);
+    activate.classList.toggle('hidden', data.active);
+  }
   renderHrFinishingReadiness();
 }
 
@@ -4399,7 +4427,7 @@ function copyHrFinishingSummary() {
 
 function activateHrPackageFromFinishing() {
   closeHrFinishingModal();
-  openHrPackageModal(state.hrPackage.plan || state.hrPackageModalPlan || 'pro');
+  openHrPackageModal(getHrSelectedPackagePlan());
 }
 
 function setupHrFinishingTriggers() {
@@ -4432,6 +4460,13 @@ function setupHrPackageTriggers() {
       const plan = button.getAttribute('data-hr-package-trigger');
       if (plan === 'checkout') continueHrPackageFromCheckout();
       else openHrPackageModal(plan);
+    });
+  });
+  document.querySelectorAll('[data-hr-package-plan]').forEach((card) => {
+    card.addEventListener('click', () => {
+      state.hrPackageModalPlan = normalizeHrPackagePlan(card.getAttribute('data-hr-package-plan'));
+      renderHrPackageModalTier();
+      renderHrFinishingSummary();
     });
   });
   const changeButton = document.getElementById('hr-package-change-btn');

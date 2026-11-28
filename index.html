@@ -710,8 +710,8 @@
                       <li data-i18n="hr.benefitCv">Auto-fill PDF CV + kecocokan Tinggi/Sedang/Rendah</li>
                       <li data-i18n="hr.benefitSheet">Rekap 1 Google Sheet HR</li>
                     </ul>
-                    <p class="hr-tier-note" data-i18n="hr.tierProNote">Form tetap bisa disusun dulu. Selesaikan pembayaran Pro di langkah konfirmasi untuk mengunci tier ini.</p>
-                    <button type="button" data-hr-package-trigger="pro" class="hr-package-next-btn">Pro Tier — Lanjut Pembayaran</button>
+                    <p class="hr-tier-note" data-i18n="hr.tierProNote">Mohon untuk menyelesaikan pembayaran agar paket Pro Tier dapat aktif.</p>
+                    <button type="button" data-hr-package-trigger="pro" class="hr-package-next-btn">Pro Tier</button>
                   </article>
                   <article class="hr-pricing-mini-card hr-pricing-mini-business" data-hr-package-plan="business">
                     <span class="hr-pricing-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
@@ -727,8 +727,8 @@
                       <li data-i18n="hr.benefitBusinessTemplate">Template portal karier Business</li>
                       <li data-i18n="hr.benefitFilter">Rekap &amp; penyaringan kandidat lebih leluasa</li>
                     </ul>
-                    <p class="hr-tier-note" data-i18n="hr.tierBusinessNote">Template dan requirement bisa disiapkan lebih dulu. Selesaikan pembayaran Business di langkah konfirmasi untuk mengunci tier ini.</p>
-                    <button type="button" data-hr-package-trigger="business" class="hr-package-next-btn">Business Tier — Lanjut Pembayaran</button>
+                    <p class="hr-tier-note" data-i18n="hr.tierBusinessNote">Mohon untuk menyelesaikan pembayaran agar paket Business Tier dapat aktif.</p>
+                    <button type="button" data-hr-package-trigger="business" class="hr-package-next-btn">Business Tier</button>
                   </article>
                 </div>
                 <button type="button" data-hr-package-trigger="free" class="hr-package-free-btn">Free Tier, Continue</button>
@@ -1147,9 +1147,10 @@
   <div id="hr-package-modal" class="modal-overlay hidden">
     <div class="modal-card modal-card-wide hr-package-modal">
       <button type="button" data-hr-package-close class="modal-close" data-i18n-aria="common.close" aria-label="Tutup">&#10005;</button>
-      <span class="modal-eyebrow" data-i18n="hr.packageModalEyebrow">Aktivasi Paket HR</span>
-      <h3 class="modal-title" data-i18n="hr.packageModalTitle">Selesaikan paket HR Anda</h3>
+      <span class="modal-eyebrow" data-i18n="hr.packageModalEyebrow">Setup Paket HR</span>
+      <h3 class="modal-title">Setup Paket HR</h3>
       <p class="modal-description" data-i18n="hr.packageModalDesc">Periksa ringkasan paket dan tujuan penyimpanan sebelum form HR dinyatakan siap.</p>
+      <p id="hr-package-tier-prompt" class="hr-tier-note hr-package-tier-prompt hidden"></p>
 
       <div id="hr-package-summary" class="hr-package-summary"></div>
       <div id="hr-package-storage-status" class="hr-package-storage-status"></div>
@@ -1183,7 +1184,7 @@
         <p id="hr-package-error" class="hr-package-error hidden"></p>
         <div class="hr-package-actions">
           <button type="button" data-hr-package-close class="modal-secondary" data-i18n="common.cancel">Batal</button>
-          <button type="button" id="hr-package-confirm-btn" class="modal-primary" data-i18n="hr.packageConfirm">Konfirmasi &amp; Selesaikan Form</button>
+          <button type="button" id="hr-package-confirm-btn" class="modal-primary">Free Tier, Continue</button>
         </div>
       </div>
 
@@ -1216,7 +1217,7 @@
         <button type="button" id="hr-finishing-preview-btn" class="modal-primary" data-i18n="hr.finishingPreview">Lihat Portal Pelamar</button>
         <button type="button" id="hr-finishing-copy-btn" class="modal-secondary" data-i18n="hr.finishingCopy">Salin Link Form</button>
         <button type="button" id="hr-finishing-back-btn" class="modal-secondary" data-i18n="hr.finishingBack">Kembali ke Pengaturan HR</button>
-        <button type="button" id="hr-finishing-activate-btn" class="hr-finishing-activate hidden" data-i18n="hr.finishingActivate">Aktifkan paket dulu</button>
+        <button type="button" id="hr-finishing-activate-btn" class="hr-finishing-activate hidden">Free Tier, Continue</button>
       </div>
     </div>
   </div>
