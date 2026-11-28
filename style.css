@@ -7,8 +7,11 @@
   --font-jakarta: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
   --font-outfit: 'Outfit', system-ui, sans-serif;
   --font-inter: 'Inter', system-ui, sans-serif;
-  --font-space: 'Space Grotesk', system-ui, monospace;
+  --font-space: 'Space Grotesk', system-ui, sans-serif;
   --font-playfair: 'Playfair Display', Georgia, serif;
+  --font-fraunces: 'Fraunces', Georgia, serif;
+  --font-cormorant: 'Cormorant Garamond', Georgia, serif;
+  --font-dm-sans: 'DM Sans', system-ui, sans-serif;
 
   /* Default Theme: Silicon Clean */
   --bg-page: #f8fafc;
@@ -316,6 +319,9 @@ body {
 .font-inter { font-family: var(--font-inter); }
 .font-space-grotesk { font-family: var(--font-space); }
 .font-playfair-display { font-family: var(--font-playfair); }
+.font-fraunces { font-family: var(--font-fraunces); }
+.font-cormorant { font-family: var(--font-cormorant); }
+.font-dm-sans { font-family: var(--font-dm-sans); }
 
 /* Colors */
 .text-white { color: #ffffff; }
@@ -1121,11 +1127,13 @@ body.theme-midnight .hr-form-field select, body.theme-cyber .hr-form-field selec
 #hr-ui-preview[data-template] .hr-ui-preview-bar { background: var(--preview-accent); }
 #hr-ui-preview[data-template] .hr-ui-preview-logo { background: var(--preview-bg); border-color: var(--preview-border); color: var(--preview-accent); }
 #hr-ui-preview[data-template] .hr-ui-preview-copy b { color: var(--preview-accent); }
-#hr-ui-preview[data-font-pair="editorial"] .hr-ui-preview-copy b,
-#hr-ui-preview[data-font-pair="executive"] .hr-ui-preview-copy b,
-#hr-ui-preview[data-font-pair="heritage"] .hr-ui-preview-copy b { font-family: var(--font-playfair); }
-#hr-ui-preview[data-font-pair="studio"] .hr-ui-preview-copy b { font-family: var(--font-space); }
-#hr-ui-preview[data-font-pair="clean"] .hr-ui-preview-copy b { font-family: var(--font-jakarta); }
+#hr-ui-preview[data-font-pair="clean"] { --preview-font-heading: var(--font-jakarta); --preview-font-body: var(--font-jakarta); }
+#hr-ui-preview[data-font-pair="editorial"] { --preview-font-heading: var(--font-fraunces); --preview-font-body: var(--font-jakarta); }
+#hr-ui-preview[data-font-pair="studio"] { --preview-font-heading: var(--font-space); --preview-font-body: var(--font-inter); }
+#hr-ui-preview[data-font-pair="executive"] { --preview-font-heading: var(--font-playfair); --preview-font-body: var(--font-outfit); }
+#hr-ui-preview[data-font-pair="heritage"] { --preview-font-heading: var(--font-cormorant); --preview-font-body: var(--font-dm-sans); }
+#hr-ui-preview :is(.hr-ui-preview-logo, .hr-ui-preview-copy b) { font-family: var(--preview-font-heading, var(--font-jakarta)); }
+#hr-ui-preview .hr-ui-preview-copy i { font-family: var(--preview-font-body, var(--font-jakarta)); }
 .hr-template-select-field { margin-top: 0.8rem; gap: 0.35rem; }
 .hr-template-select-field select { width: 100%; min-height: 2.5rem; font-family: inherit; font-size: 0.75rem; font-weight: 700; }
 .hr-template-select-field select option, .hr-template-select-field select optgroup { font-family: inherit; }
@@ -1384,7 +1392,7 @@ body[data-preset="recruit"] .brand-identity-card { display: none; }
   --career-font-body: var(--font-jakarta);
 }
 #form-view[data-font-pair="editorial"] {
-  --career-font-heading: var(--font-playfair);
+  --career-font-heading: var(--font-fraunces);
   --career-font-body: var(--font-jakarta);
 }
 #form-view[data-font-pair="studio"] {
@@ -1393,11 +1401,11 @@ body[data-preset="recruit"] .brand-identity-card { display: none; }
 }
 #form-view[data-font-pair="executive"] {
   --career-font-heading: var(--font-playfair);
-  --career-font-body: var(--font-inter);
+  --career-font-body: var(--font-outfit);
 }
 #form-view[data-font-pair="heritage"] {
-  --career-font-heading: var(--font-playfair);
-  --career-font-body: var(--font-outfit);
+  --career-font-heading: var(--font-cormorant);
+  --career-font-body: var(--font-dm-sans);
 }
 #form-view[data-hr-ui-template] input,
 #form-view[data-hr-ui-template] textarea,
@@ -2031,11 +2039,13 @@ body[data-preset="recruit"] .hr-career-ribbon { display: flex; }
 .hr-template-stage-grid b, .hr-template-stage-form b { font-size: 0.75rem; font-weight: 900; line-height: 1.35; color: var(--preview-ink); overflow-wrap: anywhere; }
 .hr-template-stage-grid i { font-size: 0.625rem; font-style: normal; line-height: 1.45; color: var(--preview-muted); overflow-wrap: anywhere; }
 .hr-template-stage-form { display: flex; flex-direction: column; gap: 0.35rem; margin-top: 0.75rem; padding: 0.9rem; border-top: 3px solid var(--preview-accent); border-radius: 0 0 0.9rem 0.9rem; background: color-mix(in srgb, var(--preview-bg) 90%, var(--preview-accent)); }
-.hr-template-preview-stage[data-font-pair="editorial"] .hr-template-stage-hero-copy b,
-.hr-template-preview-stage[data-font-pair="executive"] .hr-template-stage-hero-copy b,
-.hr-template-preview-stage[data-font-pair="heritage"] .hr-template-stage-hero-copy b { font-family: var(--font-playfair); }
-.hr-template-preview-stage[data-font-pair="studio"] .hr-template-stage-hero-copy b { font-family: var(--font-space); }
-.hr-template-preview-stage[data-font-pair="clean"] .hr-template-stage-hero-copy b { font-family: var(--font-jakarta); }
+.hr-template-preview-stage[data-font-pair="clean"] { --preview-font-heading: var(--font-jakarta); --preview-font-body: var(--font-jakarta); }
+.hr-template-preview-stage[data-font-pair="editorial"] { --preview-font-heading: var(--font-fraunces); --preview-font-body: var(--font-jakarta); }
+.hr-template-preview-stage[data-font-pair="studio"] { --preview-font-heading: var(--font-space); --preview-font-body: var(--font-inter); }
+.hr-template-preview-stage[data-font-pair="executive"] { --preview-font-heading: var(--font-playfair); --preview-font-body: var(--font-outfit); }
+.hr-template-preview-stage[data-font-pair="heritage"] { --preview-font-heading: var(--font-cormorant); --preview-font-body: var(--font-dm-sans); }
+.hr-template-preview-stage :is(.hr-template-stage-logo, .hr-template-stage-hero-copy b, .hr-template-stage-grid b, .hr-template-stage-form b) { font-family: var(--preview-font-heading, var(--font-jakarta)); }
+.hr-template-preview-stage :is(.hr-template-stage-hero-copy i, .hr-template-stage-grid span, .hr-template-stage-grid i, .hr-template-stage-form span, .hr-template-stage-form i) { font-family: var(--preview-font-body, var(--font-jakarta)); }
 .hr-template-preview-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1rem; }
 .hr-template-preview-actions .modal-primary, .hr-template-preview-actions .btn { flex: 1 1 10rem; }
 @media (max-width: 640px) {
@@ -2565,10 +2575,10 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-comp
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-hero-body { margin-top: -2rem; padding: 0 1.25rem 1.25rem; gap: 1rem; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-hero .career-company-logo { width: 4.25rem; height: 4.25rem; border: 4px solid #d6e4e8; border-radius: 1.25rem; background: #ffffff; color: #111111; box-shadow: var(--shadow-soft); }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-hero-copy { min-width: 0; padding-top: 1.9rem; }
-body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-hero-copy h1 { display: flex; flex-direction: column; gap: 0.12rem; margin-top: 0.3rem; font-family: var(--font-outfit); font-size: clamp(1.45rem, 2.2vw, 2rem); line-height: 1.05; letter-spacing: -0.04em; text-transform: none; color: #111111; overflow-wrap: anywhere; }
+body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-hero-copy h1 { display: flex; flex-direction: column; gap: 0.12rem; margin-top: 0.3rem; font-family: var(--career-font-heading); font-size: clamp(1.45rem, 2.2vw, 2rem); line-height: 1.05; letter-spacing: -0.04em; text-transform: none; color: #111111; overflow-wrap: anywhere; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .veilo-headline-strong { font-weight: 800; color: #111111; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .veilo-headline-soft { font-size: 0.78em; font-weight: 400; color: #5a5a5a; letter-spacing: -0.01em; }
-body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .veilo-headline-accent { font-family: var(--font-playfair); font-size: 0.88em; font-weight: 600; font-style: italic; color: #111111; }
+body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .veilo-headline-accent { font-family: var(--career-font-heading); font-size: 0.88em; font-weight: 600; font-style: italic; color: #111111; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-hero-meta > span { padding: 0.3rem 0.6rem; border-radius: 999px; color: #111111; font-size: 0.5625rem; font-weight: 900; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-hero-meta > span:first-child { background: #dceaa0; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-hero-meta > span:nth-child(2) { background: #fbd5a0; }
@@ -2682,7 +2692,7 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .dock-percen
 body[data-preset] .hr-template-preview-stage[data-ornament="veilo"]::after { opacity: 0.34; background: radial-gradient(circle at 88% 10%, rgba(221, 232, 160, 0.9), transparent 40%), radial-gradient(circle at 8% 96%, rgba(214, 228, 232, 0.9), transparent 44%); filter: blur(18px); -webkit-mask-image: none; mask-image: none; }
 .hr-template-preview-stage[data-template="veilo"] { background: linear-gradient(135deg, #f7f6ec, #e6f0c0); }
 .hr-template-preview-stage[data-template="veilo"] .hr-template-stage-hero { background: #d6e4e8; border-color: rgba(17, 17, 17, 0.12); }
-.hr-template-preview-stage[data-template="veilo"] .hr-template-stage-hero-copy b { font-family: var(--font-outfit); }
+.hr-template-preview-stage[data-template="veilo"] .hr-template-stage-hero-copy b { font-family: var(--preview-font-heading, var(--font-outfit)); }
 .hr-template-preview-stage[data-template="veilo"] .hr-template-stage-badge { background: #dceaa0; color: #111111; }
 .hr-template-preview-stage[data-template="veilo"] .hr-template-stage-grid article { background: #ffffff; border-color: rgba(17, 17, 17, 0.12); }
 .hr-template-preview-stage[data-template="veilo"] .hr-template-stage-grid article:first-child { background: #f5e9b8; }
