@@ -2642,6 +2642,7 @@ function setLanguage(lang) {
   }
   renderSyncStatus();
   renderCvMatchPanel();
+  updateCandidatePortalOffsets();
   showToast(t('toast.language', { name: LANGUAGE_LABELS[lang] }));
 }
 
@@ -2867,6 +2868,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderPricing();
   updateQrisPreview();
   setupKeyboardNavigation();
+  window.addEventListener('resize', updateCandidatePortalOffsets);
   document.addEventListener('click', (event) => {
     const control = document.getElementById('display-control');
     if (!control || control.contains(event.target)) return;
@@ -2907,6 +2909,7 @@ function toggleViews() {
   renderHrSideSwitcher();
   renderCompanyIdentity();
   renderCandidatePortal();
+  updateCandidatePortalOffsets();
 }
 
 function renderInfoPanels() {
@@ -3366,6 +3369,34 @@ function applyHrUiTemplate(isRecruitForm = false) {
       node.removeAttribute('data-font-pair');
     }
   });
+  updateCandidatePortalOffsets();
+}
+
+function updateCandidatePortalOffsets() {
+  const form = document.getElementById('form-view');
+  const sticky = document.getElementById('candidate-company-sticky');
+  if (!form || !sticky || form.classList.contains('hidden')) return;
+  form.style.removeProperty('--sticky-portal-top');
+  const fallback = parseFloat(getComputedStyle(form).getPropertyValue('--sticky-portal-top')) || 0;
+  const stickyTop = parseFloat(getComputedStyle(sticky).top) || 0;
+  const stickyHeight = sticky.getBoundingClientRect().height || 0;
+  const safeTop = Math.ceil(Math.max(fallback, stickyTop + stickyHeight + 16));
+  form.style.setProperty('--sticky-portal-top', `${safeTop}px`);
+}
+
+function scrollElementToSafeTop(element) {
+  if (!element || !element.getClientRects().length) return;
+  updateCandidatePortalOffsets();
+  const form = document.getElementById('form-view');
+  const styles = form ? getComputedStyle(form) : null;
+  const safeTop = parseFloat(styles?.getPropertyValue('--sticky-portal-top')) || 0;
+  const gap = parseFloat(styles?.getPropertyValue('--portal-scroll-gap')) || 16;
+  const target = window.scrollY + element.getBoundingClientRect().top - safeTop - gap;
+  window.scrollTo({ top: Math.max(0, target), behavior: 'smooth' });
+}
+
+function scrollCandidateCardIntoView() {
+  scrollElementToSafeTop(document.getElementById('active-question-card'));
 }
 
 function renderHrFontPairControl() {
@@ -3501,7 +3532,7 @@ function applyUiTemplateToCandidate() {
   setHrActiveSide('b', true);
   renderCandidatePortal();
   const portal = document.getElementById('candidate-portal');
-  if (portal) portal.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  scrollElementToSafeTop(portal);
   showToast(`${t('toast.hrTemplate')}: ${getHrTemplateLabel(getHrUiTemplate())}`);
 }
 
@@ -3544,6 +3575,7 @@ function renderCompanyIdentity() {
   setText('showcase-match-threshold', t(`cv.level${r.matchThreshold === 'high' ? 'High' : r.matchThreshold === 'low' ? 'Low' : 'Medium'}`));
   const banner = document.getElementById('career-company-banner');
   if (banner) banner.style.backgroundImage = state.hrCompanyBanner ? `url("${state.hrCompanyBanner}")` : '';
+  updateCandidatePortalOffsets();
 }
 
 function renderHrSideSwitcher() {
@@ -3981,6 +4013,7 @@ function jumpToCandidateStep(index) {
   clearAdvanceTimer();
   state.currentStepIndex = Math.max(0, Math.min(index, total - 1));
   renderCurrentQuestion();
+  scrollCandidateCardIntoView();
 }
 
 function getRecruitQuestionIndex(id) {
@@ -4380,7 +4413,7 @@ function renderCurrentQuestion() {
   setTimeout(() => {
     if (document.activeElement && document.activeElement.closest && document.activeElement.closest('.hr-builder-grid')) return;
     const inp = document.getElementById('large-input-field') || document.getElementById('large-textarea-field') || document.getElementById('large-date-field');
-    if (inp) inp.focus();
+    if (inp) inp.focus({ preventScroll: true });
   }, 80);
 }
 
