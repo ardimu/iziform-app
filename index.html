@@ -462,10 +462,10 @@
                     <textarea id="hr-description-input" rows="2" oninput="updateHrCompanyField('description', this.value)"></textarea>
                   </label>
                   <div class="hr-form-field hr-form-wide hr-identity-items-field">
-                    <span data-i18n="hr.identityItemsTitle">Item identitas tambahan</span>
+                    <span data-i18n="hr.identityItemsTitle">Item detail posisi / profil perusahaan</span>
                     <div id="hr-company-identity-list" class="hr-identity-items-list"></div>
-                    <button type="button" onclick="addHrCompanyIdentityItem()" class="hr-identity-add" data-i18n="hr.identityItemAdd">Tambah item identitas</button>
-                    <small class="hr-logo-hint" data-i18n="hr.identityItemsHint">Hanya item yang terisi yang tampil di portal kandidat.</small>
+                    <button type="button" onclick="addHrCompanyIdentityItem()" class="hr-identity-add" data-i18n="hr.identityItemAdd">Tambah item detail</button>
+                    <small class="hr-logo-hint" data-i18n="hr.identityItemsHint">Hanya item yang terisi yang tampil di portal kandidat dan bisa dihapus.</small>
                   </div>
                   <div class="hr-form-field hr-form-wide">
                     <span data-i18n="hr.banner">Banner header</span>
@@ -602,15 +602,8 @@
                     <small class="hr-field-hint" data-i18n="hr.benefitHint">Kosongkan untuk menyembunyikan bagian Benefit di portal kandidat.</small>
                   </label>
                 </div>
-                <div class="hr-benefit-extra">
-                  <div class="hr-ui-head hr-benefit-extra-head">
-                    <p class="hr-block-desc" data-i18n="hr.benefitExtraDesc">Tambah benefit setelah slot utama; otomatis tampil di portal kandidat bila diisi.</p>
-                    <button type="button" onclick="addHrExtraBenefit()" id="hr-add-extra-benefit" class="btn btn-secondary" data-i18n="hr.benefitAdd">+ Tambah Benefit</button>
-                  </div>
-                  <div id="hr-extra-benefits-list" class="hr-benefit-extra-list"></div>
-                </div>
               </div>
-                </div>
+              </div>
               </details>
               <details class="hr-accordion" id="hr-accordion-form-settings">
                 <summary class="hr-accordion-summary">
@@ -912,6 +905,11 @@
               <span><b data-i18n="portal.plusPointsLabel">Nilai plus</b><i id="showcase-plus-points"></i></span>
               <span><b data-i18n="hr.screening">Pertanyaan penyaring</b><i id="candidate-screening"></i></span>
             </div>
+          </article>
+          <article class="career-content-section career-showcase-card career-card-detail-items hidden" id="career-detail-items-card">
+            <span class="section-eyebrow" data-i18n="hr.identityItemsTitle">Item detail posisi / profil perusahaan</span>
+            <h2 data-i18n="hr.identityItemsTitle">Item detail posisi / profil perusahaan</h2>
+            <div id="career-extra-detail-items" class="career-extra-detail-items"></div>
           </article>
           <article class="career-content-section career-showcase-card career-card-benefit" data-hr-benefit-wrap hidden>
             <span class="section-eyebrow" data-i18n="hr.benefit">Benefit / tunjangan</span>

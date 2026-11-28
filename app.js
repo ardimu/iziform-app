@@ -33,7 +33,7 @@ const state = {
   hrFontPairOverrides: {},
   hrTemplateKey: 'tech',
   hrSelectionStatus: 'new',
-  hrPackage: { plan: '', active: false, companyName: '', email: '', notes: '', currency: 'idr', price: '', confirmedAt: '' },
+  hrPackage: { plan: 'free', active: true, paymentPending: false, companyName: '', email: '', notes: '', currency: 'idr', price: '', confirmedAt: '' },
   hrPackageModalPlan: 'free',
   hrTemplatePaymentGate: false,
   hrLastCandidate: null,
@@ -531,9 +531,9 @@ const CUSTOM_PRICING = {
 };
 
 const HR_BASE_COPY = {
-  id: { industry: 'Teknologi & Digital', description: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', website: 'https://iziform.app', roleSummary: 'Memimpin inisiatif utama dan mengirimkan dampak yang terukur bagi tim.', responsibilities: 'Merancang solusi, berkolaborasi lintas fungsi, dan menjaga kualitas hasil akhir.', jobType: 'Full-time', mustHave: 'Pengalaman relevan, tools wajib sesuai posisi, dan domisili sesuai ketentuan.', qualification: 'Latar belakang profesional dengan portofolio atau pengalaman yang relevan.', certification: 'Sertifikasi relevan menjadi nilai tambah.', plusPoints: 'Pengalaman tim, komunikasi kuat, dan kemampuan belajar cepat.', benefit: 'BPJS Kesehatan & Ketenagakerjaan, fleksibel hybrid, tunjangan belajar Rp2 juta/tahun, dan cuti wellbeing.', customFields: [], extraBenefits: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' },
-  en: { industry: 'Technology & Digital', description: 'A digital company building modern work products for Indonesian teams.', website: 'https://iziform.app', roleSummary: 'Lead key initiatives and deliver measurable impact for the team.', responsibilities: 'Design solutions, collaborate cross-functionally, and protect final quality.', jobType: 'Full-time', mustHave: 'Relevant experience, required tools, and location that matches the rule.', qualification: 'Professional background with a relevant portfolio or track record.', certification: 'Relevant certification is an advantage.', plusPoints: 'Team experience, strong communication, and fast learning.', benefit: 'Health and employment insurance, flexible hybrid work, IDR 2M yearly learning budget, and wellbeing leave.', customFields: [], extraBenefits: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' },
-  zh: { industry: '科技与数字化', description: '一家为印尼团队打造现代工作产品的数字公司。', website: 'https://iziform.app', roleSummary: '主导关键项目，为团队带来可衡量的成果。', responsibilities: '设计解决方案、跨职能协作并把控最终质量。', jobType: 'Full-time', mustHave: '具备相关经验、指定工具，并符合所在地要求。', qualification: '具备相关专业背景及作品集或项目经历。', certification: '相关证书者优先。', plusPoints: '团队经验、沟通能力强、学习速度快。', benefit: '社保与公积金、灵活混合办公、每年 200 万印尼盾学习津贴及健康休假。', customFields: [], extraBenefits: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' }
+  id: { industry: 'Teknologi & Digital', description: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', website: 'https://iziform.app', roleSummary: 'Memimpin inisiatif utama dan mengirimkan dampak yang terukur bagi tim.', responsibilities: 'Merancang solusi, berkolaborasi lintas fungsi, dan menjaga kualitas hasil akhir.', jobType: 'Full-time', mustHave: 'Pengalaman relevan, tools wajib sesuai posisi, dan domisili sesuai ketentuan.', qualification: 'Latar belakang profesional dengan portofolio atau pengalaman yang relevan.', certification: 'Sertifikasi relevan menjadi nilai tambah.', plusPoints: 'Pengalaman tim, komunikasi kuat, dan kemampuan belajar cepat.', benefit: 'BPJS Kesehatan & Ketenagakerjaan, fleksibel hybrid, tunjangan belajar Rp2 juta/tahun, dan cuti wellbeing.', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' },
+  en: { industry: 'Technology & Digital', description: 'A digital company building modern work products for Indonesian teams.', website: 'https://iziform.app', roleSummary: 'Lead key initiatives and deliver measurable impact for the team.', responsibilities: 'Design solutions, collaborate cross-functionally, and protect final quality.', jobType: 'Full-time', mustHave: 'Relevant experience, required tools, and location that matches the rule.', qualification: 'Professional background with a relevant portfolio or track record.', certification: 'Relevant certification is an advantage.', plusPoints: 'Team experience, strong communication, and fast learning.', benefit: 'Health and employment insurance, flexible hybrid work, IDR 2M yearly learning budget, and wellbeing leave.', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' },
+  zh: { industry: '科技与数字化', description: '一家为印尼团队打造现代工作产品的数字公司。', website: 'https://iziform.app', roleSummary: '主导关键项目，为团队带来可衡量的成果。', responsibilities: '设计解决方案、跨职能协作并把控最终质量。', jobType: 'Full-time', mustHave: '具备相关经验、指定工具，并符合所在地要求。', qualification: '具备相关专业背景及作品集或项目经历。', certification: '相关证书者优先。', plusPoints: '团队经验、沟通能力强、学习速度快。', benefit: '社保与公积金、灵活混合办公、每年 200 万印尼盾学习津贴及健康休假。', customFields: [], cvRequired: true, coverLetterEnabled: false, coverLetterRequired: false, matchThreshold: 'medium' }
 };
 
 const HR_COMPANY_PRESETS = {
@@ -1080,14 +1080,14 @@ const I18N = {
     'hr.uploadInvalidType': 'File harus berupa gambar PNG, JPG, WEBP, atau SVG.',
     'hr.uploadTooLarge': 'Ukuran file terlalu besar. Maksimal {size} MB.',
     'hr.uploadReadError': 'Gambar gagal dibaca. Coba file lain.',
-    'hr.identityItemsTitle': 'Item identitas tambahan',
-    'hr.identityItemsHint': 'Hanya item yang terisi yang tampil di portal kandidat.',
+    'hr.identityItemsTitle': 'Item detail posisi / profil perusahaan',
+    'hr.identityItemsHint': 'Hanya item yang terisi yang tampil di portal kandidat dan bisa dihapus.',
     'hr.identityItemLabel': 'Label item',
     'hr.identityItemValue': 'Nilai item',
     'hr.identityItemNew': 'Item baru',
-    'hr.identityItemAdd': 'Tambah item identitas',
+    'hr.identityItemAdd': 'Tambah item detail',
     'hr.identityItemRemove': 'Hapus item',
-    'hr.identityItemsEmpty': 'Belum ada item identitas tambahan.',
+    'hr.identityItemsEmpty': 'Belum ada item detail tambahan.',
     'hr.roleSummary': 'Ringkasan peran',
     'hr.responsibilities': 'Tanggung jawab utama',
     'hr.jobType': 'Tipe kerja',
@@ -1196,6 +1196,7 @@ const I18N = {
     'hr.accordionFormSettings': 'Pengaturan Form & Dokumen Pelamar',
     'hr.accordionUiTemplate': 'Tampilan UI, Font & Template',
     'hr.packageFreeChip': 'Free aktif',
+    'hr.packageFreeSwitch': 'Ganti ke Free',
     'hr.packageSelect': 'Pilih',
     'hr.packageFreeLabel': 'Free',
     'hr.packageFreeSummary': '1 form aktif · 50 respon/bulan · Google Sheet milik HR · watermark iziForm.',
@@ -1203,6 +1204,8 @@ const I18N = {
     'hr.packageDraft': 'Paket belum diaktivasi',
     'hr.packageActive': 'Paket aktif',
     'hr.packageActiveTier': 'Paket aktif · {tier}',
+    'hr.packageSelectedTier': '{tier} Tier · Dipilih',
+    'hr.packageSelectedPending': 'Menunggu pembayaran — ringkasan form tetap bisa dibuka.',
     'hr.packageReady': 'Form HR siap digunakan',
     'hr.packageChange': 'Ubah paket',
     'hr.packageContinue': 'Lanjutkan paket ini',
@@ -1242,7 +1245,7 @@ const I18N = {
     'hr.finishingPackage': 'Paket & pembayaran',
     'hr.finishingPaymentConfirmed': 'Aktif · pembayaran terkonfirmasi',
     'hr.finishingPaymentFree': 'Aktif · tanpa pembayaran',
-    'hr.finishingPaymentPending': 'Belum diaktivasi',
+    'hr.finishingPaymentPending': 'Menunggu pembayaran',
     'hr.finishingPaymentStatus': 'Status pembayaran',
     'hr.finishingRole': 'Posisi & perusahaan',
     'hr.finishingFields': 'Field pelamar',
@@ -1255,12 +1258,14 @@ const I18N = {
     'hr.finishingCopy': 'Salin Link Form',
     'hr.finishingBack': 'Kembali ke Pengaturan HR',
     'hr.finishingNoteDraft': 'Lanjutkan konfirmasi paket agar status Siap Pakai dan link siap dibagikan.',
+    'hr.finishingFreeTierDesc': 'Paket gratis siap dipakai — form HR & portal kandidat dapat langsung digunakan.',
     'hr.finishingCopied': 'Ringkasan HR dan link portal disalin.',
     'hr.finishingCopyFailed': 'Clipboard tidak tersedia. Link portal: {url}',
     'hr.finishingSummaryTitle': 'Ringkasan Setup HR',
     'hr.finishingPortalLink': 'Link portal',
     'hr.packageBadgeDraft': 'Paket: belum aktif',
     'hr.packageBadgeActive': '{plan} Tier - Aktif',
+    'hr.tierFreeLabel': 'Free Tier',
     'hr.tierFreeCta': 'Free Tier, Continue',
     'hr.tierProCta': 'Pro Tier',
     'hr.tierBusinessCta': 'Business Tier',
@@ -1277,12 +1282,6 @@ const I18N = {
     'hr.benefit': 'Benefit / tunjangan',
     'hr.benefitPlaceholder': 'Contoh: BPJS, asuransi, flexible working, learning budget',
     'hr.benefitHint': 'Kosongkan untuk menyembunyikan bagian Benefit di portal kandidat.',
-    'hr.benefitExtraDesc': 'Tambah benefit setelah slot utama; otomatis tampil di portal kandidat bila diisi.',
-    'hr.benefitAdd': '+ Tambah Benefit',
-    'hr.benefitExtraLabel': 'Benefit ke-{index}',
-    'hr.benefitExtraPlaceholder': 'Contoh: tunjangan transport, learning budget',
-    'hr.benefitExtraRemove': 'Hapus',
-    'hr.benefitExtraEmpty': 'Belum ada benefit tambahan.',
     'hr.noBenefit': 'Belum diisi',
     'hr.customFieldsTitle': 'Kolom tambahan pelamar',
     'hr.customFieldsDesc': 'Tambah field di luar standar; tampil otomatis di Sisi B dan rekap Sheet HR.',
@@ -1571,6 +1570,8 @@ const I18N = {
     'toast.required': 'Field ini wajib diisi',
     'toast.requiredFieldsMissing': 'Lengkapi kolom wajib sebelum mengirim',
     'toast.hrFreeMode': 'Mode dasar Free aktif — template Netral dipilih.',
+    'toast.hrPackageSelected': 'Paket {plan} dipilih — lanjutkan pembayaran di ringkasan.',
+    'toast.hrPackageCancelled': 'Paket {plan} dibatalkan — kembali ke Free.',
     'toast.hrPackageConfirmed': 'Paket {plan} aktif. Form HR siap digunakan.',
     'toast.theme': 'Tema UI diubah: {name}',
     'toast.font': 'Font aktif: {name}',
@@ -1692,14 +1693,14 @@ const I18N = {
     'hr.uploadInvalidType': 'Only PNG, JPG, WEBP, or SVG image files are supported.',
     'hr.uploadTooLarge': 'File is too large. Maximum {size} MB.',
     'hr.uploadReadError': 'The image could not be read. Try another file.',
-    'hr.identityItemsTitle': 'Additional identity items',
-    'hr.identityItemsHint': 'Only filled items appear on the candidate portal.',
+    'hr.identityItemsTitle': 'Position / company profile detail items',
+    'hr.identityItemsHint': 'Only filled items appear on the candidate portal and can be removed.',
     'hr.identityItemLabel': 'Item label',
     'hr.identityItemValue': 'Item value',
     'hr.identityItemNew': 'New item',
-    'hr.identityItemAdd': 'Add identity item',
+    'hr.identityItemAdd': 'Add detail item',
     'hr.identityItemRemove': 'Remove item',
-    'hr.identityItemsEmpty': 'No additional identity items yet.',
+    'hr.identityItemsEmpty': 'No additional detail items yet.',
     'hr.roleSummary': 'Role summary',
     'hr.responsibilities': 'Key responsibilities',
     'hr.jobType': 'Work type',
@@ -1808,6 +1809,7 @@ const I18N = {
     'hr.accordionFormSettings': 'Applicant Form & Document Settings',
     'hr.accordionUiTemplate': 'UI, Font & Template',
     'hr.packageFreeChip': 'Free active',
+    'hr.packageFreeSwitch': 'Switch to Free',
     'hr.packageSelect': 'Select',
     'hr.packageFreeLabel': 'Free',
     'hr.packageFreeSummary': '1 active form · 50 responses/month · HR-owned Google Sheet · iziForm watermark.',
@@ -1815,6 +1817,8 @@ const I18N = {
     'hr.packageDraft': 'Package not activated',
     'hr.packageActive': 'Package active',
     'hr.packageActiveTier': 'Active package · {tier}',
+    'hr.packageSelectedTier': '{tier} Tier · Selected',
+    'hr.packageSelectedPending': 'Payment pending — the form recap stays accessible.',
     'hr.packageReady': 'HR form is ready to use',
     'hr.packageChange': 'Change package',
     'hr.packageContinue': 'Continue this package',
@@ -1854,7 +1858,7 @@ const I18N = {
     'hr.finishingPackage': 'Package & payment',
     'hr.finishingPaymentConfirmed': 'Active · payment confirmed',
     'hr.finishingPaymentFree': 'Active · no payment',
-    'hr.finishingPaymentPending': 'Not activated',
+    'hr.finishingPaymentPending': 'Payment pending',
     'hr.finishingPaymentStatus': 'Payment status',
     'hr.finishingRole': 'Position & company',
     'hr.finishingFields': 'Applicant fields',
@@ -1867,12 +1871,14 @@ const I18N = {
     'hr.finishingCopy': 'Copy Form Link',
     'hr.finishingBack': 'Back to HR Settings',
     'hr.finishingNoteDraft': 'Continue the package confirmation to mark it Ready to Use and share the portal link.',
+    'hr.finishingFreeTierDesc': 'Free Tier is ready — the HR form and candidate portal can be used right away.',
     'hr.finishingCopied': 'HR recap and portal link copied.',
     'hr.finishingCopyFailed': 'Clipboard unavailable. Portal link: {url}',
     'hr.finishingSummaryTitle': 'HR Setup Recap',
     'hr.finishingPortalLink': 'Portal link',
     'hr.packageBadgeDraft': 'Package: not active',
     'hr.packageBadgeActive': '{plan} Tier - Active',
+    'hr.tierFreeLabel': 'Free Tier',
     'hr.tierFreeCta': 'Free Tier, Continue',
     'hr.tierProCta': 'Pro Tier',
     'hr.tierBusinessCta': 'Business Tier',
@@ -1889,12 +1895,6 @@ const I18N = {
     'hr.benefit': 'Benefits / perks',
     'hr.benefitPlaceholder': 'Example: health insurance, flexible work, learning budget',
     'hr.benefitHint': 'Leave blank to hide the Benefits section on the candidate portal.',
-    'hr.benefitExtraDesc': 'Add benefits after the main slot; filled items appear automatically on the candidate portal.',
-    'hr.benefitAdd': '+ Add Benefit',
-    'hr.benefitExtraLabel': 'Benefit {index}',
-    'hr.benefitExtraPlaceholder': 'Example: transport allowance, learning budget',
-    'hr.benefitExtraRemove': 'Remove',
-    'hr.benefitExtraEmpty': 'No extra benefits yet.',
     'hr.noBenefit': 'Not specified',
     'hr.customFieldsTitle': 'Additional applicant fields',
     'hr.customFieldsDesc': 'Add fields beyond the defaults; they appear on Sisi B and in the HR Sheet recap.',
@@ -2183,6 +2183,8 @@ const I18N = {
     'toast.required': 'This field is required',
     'toast.requiredFieldsMissing': 'Complete the required fields before submitting',
     'toast.hrFreeMode': 'Free basic mode enabled — Neutral template selected.',
+    'toast.hrPackageSelected': '{plan} selected — continue payment from the recap.',
+    'toast.hrPackageCancelled': '{plan} cancelled — switched back to Free.',
     'toast.hrPackageConfirmed': '{plan} is active. The HR form is ready to use.',
     'toast.theme': 'UI theme changed: {name}',
     'toast.font': 'Active font: {name}',
@@ -2304,14 +2306,14 @@ const I18N = {
     'hr.uploadInvalidType': '仅支持 PNG、JPG、WEBP 或 SVG 图片文件。',
     'hr.uploadTooLarge': '文件过大，最大 {size} MB。',
     'hr.uploadReadError': '无法读取图片，请换一个文件。',
-    'hr.identityItemsTitle': '附加身份信息',
-    'hr.identityItemsHint': '只有填写的项目会显示在候选人门户。',
+    'hr.identityItemsTitle': '职位 / 公司资料自定义项',
+    'hr.identityItemsHint': '只有填写的项目会显示在候选人门户，并可随时删除。',
     'hr.identityItemLabel': '项目名称',
     'hr.identityItemValue': '项目内容',
     'hr.identityItemNew': '新项目',
-    'hr.identityItemAdd': '添加身份信息',
+    'hr.identityItemAdd': '添加详情项',
     'hr.identityItemRemove': '删除项目',
-    'hr.identityItemsEmpty': '暂无附加身份信息。',
+    'hr.identityItemsEmpty': '暂无自定义详情项。',
     'hr.roleSummary': '职位摘要',
     'hr.responsibilities': '主要职责',
     'hr.jobType': '工作类型',
@@ -2420,6 +2422,7 @@ const I18N = {
     'hr.accordionFormSettings': '申请表与申请人资料设置',
     'hr.accordionUiTemplate': '界面、字体与模板',
     'hr.packageFreeChip': '免费已启用',
+    'hr.packageFreeSwitch': '切换回 Free',
     'hr.packageSelect': '选择',
     'hr.packageFreeLabel': 'Free',
     'hr.packageFreeSummary': '1 个表单 · 每月 50 份回复 · HR 自有 Google Sheet · iziForm 水印。',
@@ -2427,6 +2430,8 @@ const I18N = {
     'hr.packageDraft': '套餐尚未激活',
     'hr.packageActive': '套餐已激活',
     'hr.packageActiveTier': '套餐已激活 · {tier}',
+    'hr.packageSelectedTier': '{tier} Tier · 已选择',
+    'hr.packageSelectedPending': '等待付款 — 表单汇总仍可查看。',
     'hr.packageReady': 'HR 表单已可使用',
     'hr.packageChange': '更换套餐',
     'hr.packageContinue': '继续此套餐',
@@ -2466,7 +2471,7 @@ const I18N = {
     'hr.finishingPackage': '套餐与付款',
     'hr.finishingPaymentConfirmed': '已激活 · 付款已确认',
     'hr.finishingPaymentFree': '已激活 · 无需付款',
-    'hr.finishingPaymentPending': '尚未激活',
+    'hr.finishingPaymentPending': '等待付款',
     'hr.finishingPaymentStatus': '付款状态',
     'hr.finishingRole': '职位与公司',
     'hr.finishingFields': '申请人字段',
@@ -2479,12 +2484,14 @@ const I18N = {
     'hr.finishingCopy': '复制表单链接',
     'hr.finishingBack': '返回 HR 设置',
     'hr.finishingNoteDraft': '继续完成套餐确认后，才会标记为可投入使用并分享门户链接。',
+    'hr.finishingFreeTierDesc': 'Free Tier 已可使用 — HR 表单与候选人门户可以立即启用。',
     'hr.finishingCopied': 'HR 汇总与门户链接已复制。',
     'hr.finishingCopyFailed': '剪贴板不可用。门户链接：{url}',
     'hr.finishingSummaryTitle': 'HR 设置汇总',
     'hr.finishingPortalLink': '门户链接',
     'hr.packageBadgeDraft': '套餐：未激活',
     'hr.packageBadgeActive': '{plan} 套餐 - 已激活',
+    'hr.tierFreeLabel': 'Free Tier',
     'hr.tierFreeCta': 'Free Tier, Continue',
     'hr.tierProCta': 'Pro Tier',
     'hr.tierBusinessCta': 'Business Tier',
@@ -2501,12 +2508,6 @@ const I18N = {
     'hr.benefit': '福利 / 待遇',
     'hr.benefitPlaceholder': '例如：社保、商业保险、弹性办公、学习津贴',
     'hr.benefitHint': '留空即可在候选人门户隐藏福利区块。',
-    'hr.benefitExtraDesc': '在主福利栏之后添加福利；填写后会自动显示在候选人门户。',
-    'hr.benefitAdd': '+ 添加福利',
-    'hr.benefitExtraLabel': '第 {index} 项福利',
-    'hr.benefitExtraPlaceholder': '例如：交通补贴、学习津贴',
-    'hr.benefitExtraRemove': '删除',
-    'hr.benefitExtraEmpty': '暂无附加福利。',
     'hr.noBenefit': '未填写',
     'hr.customFieldsTitle': '候选人附加字段',
     'hr.customFieldsDesc': '添加标准字段以外的项目；会自动显示在 B 侧和 HR Sheet 汇总中。',
@@ -2795,6 +2796,8 @@ const I18N = {
     'toast.required': '此项为必填项',
     'toast.requiredFieldsMissing': '提交前请填写所有必填项',
     'toast.hrFreeMode': '免费模式已启用 — 已选择中性模板。',
+    'toast.hrPackageSelected': '已选择 {plan} — 请在汇总中继续付款。',
+    'toast.hrPackageCancelled': '已取消 {plan} — 已切回 Free。',
     'toast.hrPackageConfirmed': '{plan} 已激活，HR 表单已可使用。',
     'toast.theme': '界面主题已更改：{name}',
     'toast.font': '当前字体：{name}',
@@ -2967,7 +2970,6 @@ function setLanguage(lang) {
   }
   if (state.hrTemplateKey !== 'custom') applyHrTemplate(state.hrTemplateKey, true);
   applyTranslations();
-  renderHrExtraBenefitEditor();
   renderHrUiTemplateGallery();
   renderHrFontPairControl();
   renderHrUiPreview();
@@ -3401,26 +3403,12 @@ function cloneHrRequirement(source = currentHrRequirement()) {
   const base = source || {};
   return {
     ...base,
-    customFields: (Array.isArray(base.customFields) ? base.customFields : []).map((field) => ({ ...field })),
-    extraBenefits: (Array.isArray(base.extraBenefits) ? base.extraBenefits : []).map((item) => ({ ...item }))
+    customFields: (Array.isArray(base.customFields) ? base.customFields : []).map((field) => ({ ...field }))
   };
 }
 
-function getHrExtraBenefitsRaw() {
-  const items = currentHrRequirement().extraBenefits;
-  if (!Array.isArray(items)) return [];
-  return items
-    .filter((item) => item && typeof item.value === 'string' && item.value.trim())
-    .map((item, index) => ({ id: String(item.id || `hr_benefit_${index}`), value: item.value.trim() }));
-}
-
-function getHrBenefitParts() {
-  const base = String(currentHrRequirement().benefit || '').trim();
-  return [base, ...getHrExtraBenefitsRaw().map((item) => item.value)].filter(Boolean);
-}
-
 function getHrBenefitText() {
-  return getHrBenefitParts().join(' \u2022 ');
+  return String(currentHrRequirement().benefit || '').trim();
 }
 
 function getHrCustomFieldsRaw() {
@@ -3585,7 +3573,6 @@ function resetHrCardboxSettings() {
     state.hrRequirement.coverLetterRequired = false;
   }
   renderHrCustomFieldEditor();
-  renderHrExtraBenefitEditor();
   renderHrCoverLetterControl();
   refreshHrRequirementViews();
   updateFloatingDock();
@@ -3743,6 +3730,12 @@ function getHrCompanyIdentityItemsRaw() {
   return state.hrCompanyIdentityItems;
 }
 
+function getFilledHrCustomDetailItems() {
+  return getHrCompanyIdentityItemsRaw()
+    .map((item) => ({ label: String(item.label || '').trim(), value: String(item.value || '').trim() }))
+    .filter((item) => item.label && item.value);
+}
+
 function getFilledHrCompanyIdentityItems() {
   const profile = state.hrCompanyProfile || {};
   const builtIn = [
@@ -3750,7 +3743,7 @@ function getFilledHrCompanyIdentityItems() {
     { label: t('hr.description'), value: profile.description },
     { label: t('hr.website'), value: profile.website }
   ];
-  return [...builtIn, ...getHrCompanyIdentityItemsRaw()]
+  return [...builtIn, ...getFilledHrCustomDetailItems()]
     .map((item) => ({ label: String(item.label || '').trim(), value: String(item.value || '').trim() }))
     .filter((item) => item.label && item.value);
 }
@@ -3785,6 +3778,7 @@ function renderHrCompanyIdentityEditor() {
 function addHrCompanyIdentityItem() {
   const items = getHrCompanyIdentityItemsRaw();
   items.push({ label: `${t('hr.identityItemNew')} ${items.length + 1}`, value: '' });
+  state.hrTemplateKey = 'custom';
   renderHrCompanyIdentityEditor();
   renderCompanyIdentity();
 }
@@ -3793,6 +3787,7 @@ function updateHrCompanyIdentityItem(index, field, value) {
   const items = getHrCompanyIdentityItemsRaw();
   if (!items[index] || !['label', 'value'].includes(field)) return;
   items[index][field] = String(value || '');
+  state.hrTemplateKey = 'custom';
   renderCompanyIdentity();
 }
 
@@ -3800,6 +3795,7 @@ function removeHrCompanyIdentityItem(index) {
   const items = getHrCompanyIdentityItemsRaw();
   if (!items[index]) return;
   items.splice(index, 1);
+  state.hrTemplateKey = 'custom';
   renderHrCompanyIdentityEditor();
   renderCompanyIdentity();
 }
@@ -3967,21 +3963,27 @@ function getHrFontPairLabel() {
 
 function getHrFinishingData() {
   const active = state.hrPackage.active === true;
-  const plan = normalizeHrPackagePlan(active ? state.hrPackage.plan : 'free');
+  const requiredPlan = getHrRequiredTemplatePlan();
+  const plan = requiredPlan
+    ? normalizeHrPackagePlan(requiredPlan)
+    : normalizeHrPackagePlan(active ? state.hrPackage.plan : 'free');
   const meta = getHrPackageMeta(plan);
   const manifest = getHrCardboxManifest();
   const visibleFields = manifest.filter((item) => item.visible);
   const customFields = getHrCustomFieldsRaw().filter((field) => isHrCardboxVisible(field.id));
   const currency = state.hrPackage.currency || state.paymentMethod;
-  const paymentStatus = !active
-    ? t('hr.finishingPaymentPending')
-    : plan === 'free'
-      ? t('hr.finishingPaymentFree')
+  const paymentPending = plan !== 'free' && Boolean(requiredPlan || state.hrPackage.paymentPending === true || !state.hrPackage.confirmedAt);
+  const paymentStatus = plan === 'free'
+    ? t('hr.finishingPaymentFree')
+    : paymentPending
+      ? t('hr.finishingPaymentPending')
       : `${t('hr.finishingPaymentConfirmed')} · ${t(`payment.${currency}`)}`;
   return {
     active,
     plan,
     meta,
+    tierLabel: getHrTierDisplayLabel(plan),
+    paymentPending,
     paymentStatus,
     company: state.hrPackage.companyName || state.hrCompanyName || getPreset('recruit').companyName,
     position: currentHrRequirement().position || '-',
@@ -4016,12 +4018,29 @@ function selectHrUiTemplate(templateKey) {
 }
 
 function activateHrFreeMode() {
+  const meta = getHrPackageMeta('free');
+  state.hrTemplatePaymentGate = false;
   state.hrPackageModalPlan = 'free';
+  state.qrisPaymentPlan = '';
+  state.hrPackage = {
+    plan: 'free',
+    active: true,
+    paymentPending: false,
+    companyName: state.hrPackage.companyName || state.hrCompanyName,
+    email: state.hrPackage.email || state.googleEmail,
+    notes: state.hrPackage.notes || '',
+    currency: state.paymentMethod,
+    price: meta.price,
+    confirmedAt: new Date().toISOString()
+  };
   setHrActiveSide('a', true);
   delete state.hrFontPairOverrides.clean01;
   selectHrUiTemplate('clean01');
   const target = document.getElementById('hr-ui-template-select') || document.getElementById('hr-ui-preview');
   if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  syncHrPackageFromSettings();
+  renderSyncStatus();
+  renderHrPackageStatus();
   renderHrFinishingSummary();
   showToast(t('toast.hrFreeMode'));
 }
@@ -4139,6 +4158,15 @@ function renderCompanyIdentity() {
   const identityItemsElement = document.getElementById('company-identity-items');
   if (identityItemsElement) {
     identityItemsElement.innerHTML = identityItems.map((item) => `
+      <span class="company-identity-item"><b>${escapeHtml(item.label)}</b><i>${escapeHtml(item.value)}</i></span>
+    `).join('');
+  }
+  const customDetailItems = getFilledHrCustomDetailItems();
+  const detailItemsCard = document.getElementById('career-detail-items-card');
+  if (detailItemsCard) detailItemsCard.classList.toggle('hidden', !customDetailItems.length);
+  const detailItemsElement = document.getElementById('career-extra-detail-items');
+  if (detailItemsElement) {
+    detailItemsElement.innerHTML = customDetailItems.map((item) => `
       <span class="company-identity-item"><b>${escapeHtml(item.label)}</b><i>${escapeHtml(item.value)}</i></span>
     `).join('');
   }
@@ -4304,54 +4332,6 @@ function renderHrCustomFieldEditor() {
   applyTranslations();
 }
 
-function renderHrExtraBenefitEditor() {
-  const list = document.getElementById('hr-extra-benefits-list');
-  if (!list) return;
-  const items = Array.isArray(currentHrRequirement().extraBenefits) ? currentHrRequirement().extraBenefits : [];
-  if (!items.length) {
-    list.innerHTML = `<p class="hr-benefit-extra-empty">${escapeHtml(t('hr.benefitExtraEmpty'))}</p>`;
-    return;
-  }
-  list.innerHTML = items.map((item, index) => `
-    <div class="hr-benefit-extra-row">
-      <label class="hr-form-field hr-form-wide">
-        <span>${escapeHtml(t('hr.benefitExtraLabel', { index: index + 7 }))}</span>
-        <input type="text" value="${escapeHtml(item.value || '')}" data-i18n-placeholder="hr.benefitExtraPlaceholder" placeholder="${escapeHtml(t('hr.benefitExtraPlaceholder'))}" oninput="updateHrExtraBenefit(${index}, this.value)">
-      </label>
-      <button type="button" class="hr-benefit-extra-remove" onclick="removeHrExtraBenefit(${index})" aria-label="Remove benefit"><span aria-hidden="true">&times;</span> <span>${escapeHtml(t('hr.benefitExtraRemove'))}</span></button>
-    </div>`).join('');
-}
-
-function addHrExtraBenefit() {
-  if (!state.hrRequirement) return;
-  if (!Array.isArray(state.hrRequirement.extraBenefits)) state.hrRequirement.extraBenefits = [];
-  const index = state.hrRequirement.extraBenefits.length + 1;
-  state.hrRequirement.extraBenefits.push({
-    id: `hr_benefit_${Date.now().toString(36)}_${index}`,
-    value: ''
-  });
-  state.hrTemplateKey = 'custom';
-  renderHrExtraBenefitEditor();
-  refreshHrRequirementViews();
-}
-
-function updateHrExtraBenefit(index, value) {
-  if (!state.hrRequirement || !Array.isArray(state.hrRequirement.extraBenefits)) return;
-  const target = state.hrRequirement.extraBenefits[index];
-  if (!target) return;
-  target.value = String(value || '');
-  state.hrTemplateKey = 'custom';
-  refreshHrRequirementViews();
-}
-
-function removeHrExtraBenefit(index) {
-  if (!state.hrRequirement || !Array.isArray(state.hrRequirement.extraBenefits)) return;
-  state.hrRequirement.extraBenefits.splice(index, 1);
-  state.hrTemplateKey = 'custom';
-  renderHrExtraBenefitEditor();
-  refreshHrRequirementViews();
-}
-
 function renderHrCoverLetterControl() {
   const requirement = currentHrRequirement();
   const enabledInput = document.getElementById('hr-cover-letter-enabled-input');
@@ -4454,6 +4434,19 @@ function getHrTierCtaLabel(planKey) {
   return t('hr.tierBusinessCta');
 }
 
+function getHrTierPaymentCtaLabel(planKey) {
+  const plan = normalizeHrPackagePlan(planKey);
+  if (plan === 'pro') return t('hr.tierProPaymentCta');
+  if (plan === 'business') return t('hr.tierBusinessPaymentCta');
+  return t('hr.tierFreeCta');
+}
+
+function getHrTierDisplayLabel(planKey) {
+  const plan = normalizeHrPackagePlan(planKey);
+  if (plan === 'free') return t('hr.tierFreeLabel');
+  return `${getHrPackageMeta(plan).tier} Tier`;
+}
+
 function getHrTierPaymentPrompt(planKey) {
   const plan = normalizeHrPackagePlan(planKey);
   if (plan === 'pro') return t('hr.tierProNote');
@@ -4468,6 +4461,12 @@ function getHrTierRank(planKey) {
 function getHrPackageStatusCopy(active, plan) {
   if (active) {
     const meta = getHrPackageMeta(plan);
+    if (plan !== 'free' && state.hrPackage.paymentPending === true) {
+      return {
+        label: t('hr.packageSelectedTier', { tier: meta.tier }),
+        detail: t('hr.packageSelectedPending')
+      };
+    }
     return {
       label: t('hr.packageActiveTier', { tier: meta.tier }),
       detail: `${t('hr.packageReady')} · ${meta.name} · ${meta.price}`
@@ -4548,19 +4547,22 @@ function renderHrPackageModalTier() {
   const plan = getHrSelectedPackagePlan();
   const meta = getHrPackageMeta(plan);
   const gated = state.hrTemplatePaymentGate === true;
-  const gatedLabel = plan === 'business' ? t('hr.tierBusinessPaymentCta') : t('hr.tierProPaymentCta');
+  const pending = !gated && plan !== 'free' && state.hrPackage.paymentPending === true && normalizeHrPackagePlan(state.hrPackage.plan) === plan;
+  const paymentLabel = getHrTierPaymentCtaLabel(plan);
   const prompt = document.getElementById('hr-package-tier-prompt');
   if (prompt) {
     const message = gated
       ? t('hr.templatePaymentRequired', { template: getHrTemplateLabel(getHrUiTemplate()), tier: meta.tier })
-      : getHrTierPaymentPrompt(plan);
+      : pending
+        ? getHrTierPaymentPrompt(plan)
+        : '';
     prompt.textContent = message;
     prompt.classList.toggle('hidden', !message);
   }
   const confirmButton = document.getElementById('hr-package-confirm-btn');
-  if (confirmButton) confirmButton.textContent = gated ? gatedLabel : getHrTierCtaLabel(plan);
+  if (confirmButton) confirmButton.textContent = gated || pending ? paymentLabel : getHrTierCtaLabel(plan);
   const title = document.querySelector('#hr-package-modal .modal-title');
-  if (title) title.textContent = gated ? gatedLabel : t('hr.packageModalTitle', { tier: meta.tier });
+  if (title) title.textContent = gated || pending ? paymentLabel : t('hr.packageModalTitle', { tier: meta.tier });
 }
 
 function renderHrPackageStorageStatus() {
@@ -4594,13 +4596,13 @@ function renderHrPackageReceipt() {
 
 function renderHrPackageStatus() {
   const active = state.hrPackage.active === true;
-  const plan = active ? normalizeHrPackagePlan(state.hrPackage.plan) : '';
+  const plan = active ? normalizeHrPackagePlan(state.hrPackage.plan) : 'free';
   if (active && !getHrRequiredTemplatePlan()) state.hrPackageModalPlan = plan;
-  const meta = active ? getHrPackageMeta(plan) : null;
+  const meta = getHrPackageMeta(plan);
   const copy = getHrPackageStatusCopy(active, plan);
   const status = document.getElementById('hr-package-status');
   if (status) {
-    status.dataset.plan = active ? plan : 'free';
+    status.dataset.plan = plan;
     const label = document.getElementById('hr-package-status-label');
     const detail = document.getElementById('hr-package-status-detail');
     const badge = document.getElementById('hr-package-status-badge');
@@ -4611,12 +4613,22 @@ function renderHrPackageStatus() {
       : t('hr.packageFreeLabel');
   }
   const changeButton = document.getElementById('hr-package-change-btn');
-  if (changeButton) changeButton.classList.toggle('hidden', !active);
+  if (changeButton) changeButton.classList.toggle('hidden', !active || plan === 'free');
   document.querySelectorAll('[data-hr-package-plan]').forEach((card) => {
     card.classList.toggle('is-active', active && card.getAttribute('data-hr-package-plan') === plan);
   });
+  document.querySelectorAll('[data-hr-select-plan]').forEach((button) => {
+    const selected = active && button.getAttribute('data-hr-select-plan') === plan;
+    button.classList.toggle('is-selected', selected);
+    button.setAttribute('aria-pressed', String(selected));
+  });
   const freeChip = document.getElementById('hr-free-try-btn');
-  if (freeChip) freeChip.classList.toggle('is-active', active && plan === 'free');
+  if (freeChip) {
+    const isFree = active && plan === 'free';
+    freeChip.classList.toggle('is-active', isFree);
+    freeChip.textContent = isFree ? t('hr.packageFreeChip') : t('hr.packageFreeSwitch');
+    freeChip.setAttribute('aria-pressed', String(isFree));
+  }
   const dashboardBadge = document.getElementById('hr-package-dashboard-badge');
   if (dashboardBadge) dashboardBadge.textContent = active
     ? t('hr.packageBadgeActive', { plan: meta.tier })
@@ -4682,8 +4694,8 @@ function renderHrFinishingReadiness() {
     chip.dataset.state = data.active ? 'ready' : 'draft';
     chip.innerHTML = `
       <span class="hr-setup-readiness-dot" aria-hidden="true"></span>
-      <b>${escapeHtml(data.active ? t('hr.finishingReady') : t('hr.finishingDraft'))}</b>
-      <small>${escapeHtml(data.active ? `${t('hr.packageActive')} · ${data.meta.tier}` : t('hr.finishingNoteDraft'))}</small>`;
+        <b>${escapeHtml(data.active ? t('hr.finishingReady') : t('hr.finishingDraft'))}</b>
+      <small>${escapeHtml(data.active ? `${t('hr.packageActive')} · ${data.tierLabel}` : t('hr.finishingNoteDraft'))}</small>`;
   }
   const finishButton = document.getElementById('hr-finish-btn');
   if (finishButton) {
@@ -4698,16 +4710,17 @@ function renderHrFinishingSummary() {
   const data = getHrFinishingData();
   const status = document.getElementById('hr-finishing-status');
   if (status) {
-    status.dataset.state = data.active ? 'ready' : 'draft';
+    const isFree = data.plan === 'free';
+    status.dataset.state = data.active || isFree ? 'ready' : 'draft';
     status.innerHTML = `
-      <span class="hr-finishing-status-badge">${escapeHtml(data.active ? t('hr.finishingReady') : t('hr.finishingDraft'))}</span>
+      <span class="hr-finishing-status-badge">${escapeHtml(isFree ? data.tierLabel : (data.active ? t('hr.finishingReady') : t('hr.finishingDraft')))}</span>
       <span class="hr-finishing-status-copy">
-        <b>${escapeHtml(data.active ? t('hr.packageActive') : t('hr.packageDraft'))}</b>
+        <b>${escapeHtml(isFree ? t('hr.finishingFreeTierDesc') : (data.active ? t('hr.packageActive') : t('hr.packageDraft')))}</b>
         <small>${escapeHtml(data.paymentStatus)}</small>
       </span>`;
   }
   const rows = [
-    [t('hr.finishingPackage'), `${data.meta.tier} · ${data.meta.name} · ${data.meta.price}`, data.paymentStatus],
+    [t('hr.finishingPackage'), `${data.tierLabel} · ${data.meta.name} · ${data.meta.price}`, data.paymentStatus],
     [t('hr.finishingRole'), data.company, `${t('hr.position')}: ${data.position}`],
     [
       t('hr.finishingFields'),
@@ -4744,16 +4757,17 @@ function renderHrFinishingSummary() {
         </div>
       </div>`;
   }
-  const selectedPlan = getHrSelectedPackagePlan();
+  const selectedPlan = data.plan;
+  const needsPayment = data.paymentPending && selectedPlan !== 'free';
   const note = document.getElementById('hr-finishing-note');
   if (note) {
-    note.textContent = data.active ? '' : (getHrTierPaymentPrompt(selectedPlan) || t('hr.finishingNoteDraft'));
-    note.classList.toggle('hidden', data.active);
+    note.textContent = needsPayment ? (getHrTierPaymentPrompt(selectedPlan) || t('hr.finishingNoteDraft')) : '';
+    note.classList.toggle('hidden', !needsPayment);
   }
   const activate = document.getElementById('hr-finishing-activate-btn');
   if (activate) {
-    activate.textContent = getHrTierCtaLabel(selectedPlan);
-    activate.classList.toggle('hidden', data.active);
+    activate.textContent = needsPayment ? getHrTierPaymentCtaLabel(selectedPlan) : getHrTierCtaLabel(selectedPlan);
+    activate.classList.toggle('hidden', !needsPayment);
   }
   renderHrFinishingReadiness();
 }
@@ -4763,7 +4777,7 @@ function buildHrFinishingText() {
   return [
     t('hr.finishingSummaryTitle'),
     `${t('hr.finishingPaymentStatus')}: ${data.paymentStatus}`,
-    `${t('hr.finishingPackage')}: ${data.meta.tier} · ${data.meta.name} · ${data.meta.price}`,
+    `${t('hr.finishingPackage')}: ${data.tierLabel} · ${data.meta.name} · ${data.meta.price}`,
     `${t('hr.packageReceiptName')}: ${data.company}`,
     `${t('hr.position')}: ${data.position}`,
     `${t('hr.finishingFields')}: ${t('hr.finishingFieldsCount', { visible: data.visibleCount, total: data.totalCount, custom: data.customCount, required: data.requiredCount })}`,
@@ -4813,13 +4827,13 @@ function copyHrFinishingSummary() {
 
 function activateHrPackageFromFinishing() {
   closeHrFinishingModal();
-  const plan = getHrSelectedPackagePlan();
+  const plan = getHrFinishingData().plan;
   runHrPaidTemplateGuard(() => openHrPackageModal(plan), plan);
 }
 
 function setupHrFinishingTriggers() {
   document.querySelectorAll('[data-hr-open-finishing]').forEach((button) => {
-    button.addEventListener('click', () => runHrPaidTemplateGuard(openHrFinishingModal));
+    button.addEventListener('click', openHrFinishingModal);
   });
   document.querySelectorAll('[data-hr-finishing-close]').forEach((button) => {
     button.addEventListener('click', closeHrFinishingModal);
@@ -4848,8 +4862,14 @@ function triggerHrPackage(planKey) {
 
 function activateHrPackageDirect(planKey) {
   const plan = normalizeHrPackagePlan(planKey);
+  const meta = getHrPackageMeta(plan);
   if (plan === 'free') {
     activateHrFreeMode();
+    return;
+  }
+  if (state.hrPackage.active === true && normalizeHrPackagePlan(state.hrPackage.plan) === plan) {
+    activateHrFreeMode();
+    showToast(t('toast.hrPackageCancelled', { plan: meta.tier }));
     return;
   }
   const requiredPlan = getHrRequiredTemplatePlan();
@@ -4863,21 +4883,22 @@ function activateHrPackageDirect(planKey) {
   closeHrPackageModal();
   state.hrTemplatePaymentGate = false;
   state.hrPackageModalPlan = plan;
-  const meta = getHrPackageMeta(plan);
+  state.qrisPaymentPlan = plan;
   state.hrPackage = {
     plan,
     active: true,
+    paymentPending: true,
     companyName: state.hrPackage.companyName || state.hrCompanyName,
     email: state.hrPackage.email || state.googleEmail,
     notes: state.hrPackage.notes || '',
     currency: state.paymentMethod,
     price: meta.price,
-    confirmedAt: new Date().toISOString()
+    confirmedAt: ''
   };
   syncHrPackageFromSettings();
   renderSyncStatus();
   renderHrPackageStatus();
-  showToast(t('toast.hrPackageConfirmed', { plan: meta.tier }));
+  showToast(t('toast.hrPackageSelected', { plan: meta.tier }));
 }
 
 function setupHrPackageTriggers() {
@@ -4950,6 +4971,7 @@ function confirmHrPackage() {
   state.hrPackage = {
     plan,
     active: true,
+    paymentPending: false,
     companyName: company,
     email,
     notes,
@@ -5034,7 +5056,6 @@ function renderHrBuilder() {
   renderHrUiPreview();
   renderHrPreview();
   renderHrCustomFieldEditor();
-  renderHrExtraBenefitEditor();
   renderHrCardboxOverview();
   renderHrPricing();
   renderHrStatusList();
@@ -5880,6 +5901,7 @@ function buildSubmissionPayload() {
     companyLogoMode: state.hrCompanyLogo ? 'uploaded' : 'initials',
     companyProfile: isRecruit ? { ...state.hrCompanyProfile } : null,
     companyIdentityItems: isRecruit ? getFilledHrCompanyIdentityItems() : [],
+    customDetailItems: isRecruit ? getFilledHrCustomDetailItems() : [],
     hrUiTemplate: isRecruit ? state.hrUiTemplate : null,
     hrUiTier: isRecruit ? state.hrUiTier : null,
     benefit: isRecruit ? getHrBenefitText() : '',
