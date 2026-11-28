@@ -2153,6 +2153,8 @@ body[data-preset="recruit"] .hr-career-ribbon { display: flex; }
 .summary-title { font-size: 0.6875rem; font-weight: 900; color: var(--text-headline); }
 .summary-text, .sync-status-text { margin-top: 0.35rem; font-size: 0.6875rem; font-weight: 650; line-height: 1.55; color: var(--text-faint); overflow-wrap: anywhere; }
 .sync-status-text { font-weight: 900; color: var(--success-text); }
+.success-sheet-status { margin-top: 0.25rem; }
+.success-applicant-link { margin-top: 0.5rem; font-size: 0.5625rem; line-height: 1.5; color: var(--text-faint); overflow-wrap: anywhere; }
 
 .toast-box { position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50; display: flex; flex-direction: column; gap: 0.5rem; pointer-events: none; }
 .toast-card {
@@ -2482,6 +2484,7 @@ body[data-preset="recruit"] #form-view .recruit-apply-column::-webkit-scrollbar-
 .hr-cardbox-reset:hover { border-color: var(--accent-color); color: var(--accent-color); }
 .hr-cardbox-summary { display: flex; flex-wrap: wrap; gap: 0.4rem; }
 .hr-cardbox-summary-pill { padding: 0.3rem 0.65rem; border-radius: 999px; border: 1px solid var(--accent-ring); background: var(--accent-soft); color: var(--accent-color); font-size: 0.5625rem; font-weight: 900; }
+.hr-cardbox-summary-pill-plan { background: var(--surface-raised); border-color: var(--border-subtle); color: var(--text-body); }
 .hr-capability-note { margin: 0.45rem 0 0.65rem; padding: 0.55rem 0.7rem; border-radius: 0.7rem; border: 1px solid var(--border-subtle); background: var(--surface-soft); color: var(--text-body); font-size: 0.625rem; line-height: 1.55; }
 .hr-cardbox-list { display: grid; gap: 0.55rem; margin-top: 0.8rem; }
 .hr-cardbox-row { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1.15fr) auto; align-items: center; gap: 0.7rem; padding: 0.7rem 0.8rem; border: 1px solid var(--border-subtle); border-radius: 0.95rem; background: var(--surface-raised); transition: opacity 0.2s ease, border-color 0.2s ease; }
@@ -2976,6 +2979,23 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template] .recruit-question-do
 .hr-setup-readiness[data-state="ready"] .hr-setup-readiness-dot { background: #34d399; box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.16); }
 .hr-setup-readiness b { font-size: 0.6875rem; font-weight: 900; color: var(--text-headline); }
 .hr-setup-readiness small { flex: 1 1 14rem; font-size: 0.5625rem; line-height: 1.5; color: var(--text-faint); overflow-wrap: anywhere; }
+.hr-sheet-integration { margin: 0 0 1rem; padding: 0.85rem; border-radius: 1rem; background: var(--surface-soft); border: 1px solid var(--border-subtle); }
+.hr-sheet-head { display: flex; flex-direction: column; gap: 0.25rem; }
+.hr-sheet-eyebrow { font-size: 0.625rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent-color); }
+.hr-sheet-head p { margin: 0; font-size: 0.5625rem; line-height: 1.55; color: var(--text-faint); }
+.hr-sheet-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.65rem; margin-top: 0.75rem; }
+.hr-sheet-grid label { display: block; margin-bottom: 0.3rem; }
+.hr-sheet-grid input { width: 100%; }
+.hr-sheet-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.75rem; }
+.hr-sheet-status { margin-top: 0.7rem; padding: 0.55rem 0.7rem; border-radius: 0.75rem; border: 1px solid var(--border-subtle); font-size: 0.5625rem; font-weight: 800; line-height: 1.5; color: var(--text-faint); overflow-wrap: anywhere; }
+.hr-sheet-status[data-state="ready"] { border-color: rgba(52, 211, 153, 0.4); color: #047857; }
+.hr-sheet-status[data-state="failed"] { border-color: rgba(220, 38, 38, 0.3); color: #b91c1c; }
+.hr-sheet-tabs { margin-top: 0.85rem; padding-top: 0.75rem; border-top: 1px dashed var(--border-subtle); }
+.hr-sheet-tabs .hr-template-label { display: block; }
+.hr-sheet-tabs-list { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
+.hr-sheet-tab-chip { display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.3rem 0.55rem; border-radius: 999px; background: var(--surface-raised); border: 1px solid var(--border-subtle); }
+.hr-sheet-tab-chip b { font-size: 0.5625rem; font-weight: 900; color: var(--text-headline); }
+.hr-sheet-tab-chip small { font-size: 0.5rem; font-weight: 900; color: var(--accent-color); }
 .hr-finish-btn.is-ready { box-shadow: 0 14px 30px -12px var(--accent-ring); }
 .hr-finish-btn:not(.is-ready) { opacity: 0.88; }
 #hr-finishing-modal { background: rgba(2, 6, 23, 0.66); }
@@ -3001,6 +3021,13 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template] .recruit-question-do
 .hr-finishing-storage-row > div { display: flex; flex-direction: column; gap: 0.15rem; min-width: 0; }
 .hr-finishing-storage-row b { font-size: 0.6875rem; font-weight: 900; line-height: 1.45; color: var(--text-headline); overflow-wrap: anywhere; }
 .hr-finishing-storage-row small { font-size: 0.5625rem; line-height: 1.5; color: var(--text-faint); }
+.hr-finishing-link { margin-top: 0.9rem; padding: 0.85rem; border-radius: 1rem; background: var(--surface-soft); border: 1px solid var(--accent-ring); }
+.hr-finishing-link-head { display: flex; flex-direction: column; gap: 0.2rem; }
+.hr-finishing-link-head b { font-size: 0.6875rem; font-weight: 900; color: var(--text-headline); }
+.hr-finishing-link-head small { font-size: 0.5625rem; line-height: 1.5; color: var(--text-faint); overflow-wrap: anywhere; }
+.hr-finishing-link-input { width: 100%; margin-top: 0.6rem; font-size: 0.5625rem; color: var(--text-body); }
+.hr-finishing-link-actions { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 0.6rem; }
+.hr-finishing-link-status { display: block; margin-top: 0.45rem; font-size: 0.5625rem; font-weight: 800; line-height: 1.5; color: var(--success-text); overflow-wrap: anywhere; }
 .hr-finishing-note { margin-top: 0.75rem; padding: 0.6rem 0.75rem; border-radius: 0.8rem; background: rgba(220, 38, 38, 0.08); border: 1px solid rgba(220, 38, 38, 0.25); color: #b91c1c; font-size: 0.6875rem; font-weight: 800; line-height: 1.5; }
 .hr-finishing-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.6rem; margin-top: 1rem; }
 .hr-finishing-actions .modal-primary, .hr-finishing-actions .modal-secondary, .hr-finishing-actions .hr-finishing-activate { margin-top: 0; }
@@ -3008,7 +3035,7 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template] .recruit-question-do
 @media (max-width: 480px) {
   .hr-package-actions { grid-template-columns: 1fr; }
   .hr-package-summary-price { margin-left: 0; width: 100%; }
-  .hr-finishing-summary, .hr-finishing-actions { grid-template-columns: 1fr; }
+  .hr-finishing-summary, .hr-finishing-actions, .hr-sheet-grid { grid-template-columns: 1fr; }
   .hr-finishing-activate { grid-column: auto; }
   .hr-finishing-modal { max-height: calc(100vh - 2rem); }
 }

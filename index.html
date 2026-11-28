@@ -410,6 +410,36 @@
             <button type="button" onclick="setHrActiveSide('b')" id="hr-side-b-btn" class="recruit-side-btn" role="tab" aria-selected="false"><span data-i18n="hr.sideB">Sisi B · Portal Kandidat</span></button>
           </div>
           <div id="hr-setup-readiness" class="hr-setup-readiness" data-state="draft"></div>
+          <section id="hr-sheet-integration" class="hr-sheet-integration">
+            <div class="hr-sheet-head">
+              <span class="hr-sheet-eyebrow" data-i18n="hr.sheetIntegrationTitle">Kesiapan Google Sheet HR</span>
+              <p data-i18n="hr.sheetIntegrationHint">Atur endpoint Apps Script dan akun Google HR. Link pelamar membawa pengaturan ini agar submission masuk ke Sheet Anda.</p>
+            </div>
+            <div class="hr-sheet-grid">
+              <div>
+                <label for="hr-sheet-email-input" class="hr-template-label" data-i18n="hr.sheetEmailLabel">Email akun Google HR</label>
+                <input type="email" id="hr-sheet-email-input" placeholder="nama@email.com" data-i18n-placeholder="sync.emailPlaceholder">
+              </div>
+              <div>
+                <label for="hr-sheet-webhook-input" class="hr-template-label" data-i18n="hr.sheetEndpointLabel">Web App URL / Sheet endpoint</label>
+                <input type="url" id="hr-sheet-webhook-input" placeholder="https://script.google.com/macros/s/.../exec" data-i18n-placeholder="hr.sheetEndpointPlaceholder">
+              </div>
+              <div>
+                <label for="hr-sheet-drive-input" class="hr-template-label" data-i18n="hr.sheetDriveLabel">Folder Google Drive HR (opsional)</label>
+                <input type="url" id="hr-sheet-drive-input" placeholder="https://drive.google.com/drive/folders/..." data-i18n-placeholder="sync.drivePlaceholder">
+              </div>
+            </div>
+            <div class="hr-sheet-actions">
+              <button type="button" id="hr-sheet-test-btn" class="hr-cardbox-mini" onclick="testHrSheetConnection()" data-i18n="hr.sheetTest">Tes Koneksi</button>
+              <button type="button" id="hr-sheet-save-btn" class="hr-cardbox-mini" onclick="saveHrSheetIntegration()" data-i18n="hr.sheetSave">Simpan Integrasi</button>
+            </div>
+            <div id="hr-sheet-status" class="hr-sheet-status" data-state="idle"></div>
+            <div class="hr-sheet-tabs">
+              <span class="hr-template-label" data-i18n="hr.sheetTabsTitle">Struktur tab Google Sheet</span>
+              <small class="hr-field-hint" data-i18n="hr.sheetTabsHint">Kolom otomatis menyesuaikan paket aktif dan cardbox yang tampil.</small>
+              <div id="hr-sheet-tabs-list" class="hr-sheet-tabs-list"></div>
+            </div>
+          </section>
           <div class="hr-builder-grid">
             <div class="hr-builder-action-column">
               <div class="hr-builder-form">
@@ -1083,6 +1113,8 @@
         <p class="summary-title" data-i18n="success.summary">Data Ringkasan:</p>
         <p class="summary-text" id="summary-payload-text">Nama: Nadia Utami • Status: Menyiapkan</p>
         <p class="sync-status-text" id="sync-status-text">Status sync: menunggu pengiriman...</p>
+        <p class="sync-status-text success-sheet-status" id="success-sheet-status"></p>
+        <p class="success-applicant-link" id="success-applicant-link"></p>
       </div>
 
       <button onclick="closeSuccessModal()" class="modal-success" data-i18n="form.back">Kembali ke Dashboard</button>
@@ -1241,6 +1273,18 @@
       <div id="hr-finishing-status" class="hr-finishing-status"></div>
       <div id="hr-finishing-summary" class="hr-finishing-summary"></div>
       <div id="hr-finishing-storage" class="hr-finishing-storage"></div>
+      <div id="hr-finishing-link" class="hr-finishing-link">
+        <div class="hr-finishing-link-head">
+          <b data-i18n="hr.finishingLinkLabel">Link portal pelamar (siap dibagikan)</b>
+          <small data-i18n="hr.finishingLinkHint">Link ini membawa posisi, pertanyaan, bahasa, template, dan integrasi Sheet HR.</small>
+        </div>
+        <input type="text" id="hr-finishing-link-input" class="hr-finishing-link-input" readonly>
+        <div class="hr-finishing-link-actions">
+          <button type="button" id="hr-finishing-link-copy-btn" class="hr-cardbox-mini" data-i18n="hr.finishingCopyLink">Salin Link Pelamar</button>
+          <button type="button" id="hr-finishing-link-open-btn" class="hr-cardbox-mini" data-i18n="hr.finishingOpenLink">Buka Link</button>
+        </div>
+        <small id="hr-finishing-link-status" class="hr-finishing-link-status"></small>
+      </div>
       <p id="hr-finishing-note" class="hr-finishing-note hidden"></p>
 
       <div class="hr-finishing-actions">

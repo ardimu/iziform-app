@@ -16,6 +16,9 @@ const state = {
   gformUrl: '',
   webhookUrl: '',
   hrDriveFolderUrl: '',
+  hrSheetTested: false,
+  hrSheetTestNote: '',
+  hrSharedConfigApplied: false,
   paymentMethod: 'idr',
   paymentMethodManuallySet: false,
   isSimulation: false,
@@ -1282,6 +1285,27 @@ const I18N = {
     'hr.finishingCopyFailed': 'Clipboard tidak tersedia. Link portal: {url}',
     'hr.finishingSummaryTitle': 'Ringkasan Setup HR',
     'hr.finishingPortalLink': 'Link portal',
+    'hr.cardboxAlignment': 'Cardbox mengikuti {plan} · {capability}',
+    'hr.sheetIntegrationTitle': 'Kesiapan Google Sheet HR',
+    'hr.sheetIntegrationHint': 'Atur endpoint Apps Script dan akun Google HR. Link pelamar membawa pengaturan ini agar submission masuk ke Sheet Anda.',
+    'hr.sheetEmailLabel': 'Email akun Google HR',
+    'hr.sheetEndpointLabel': 'Web App URL / Sheet endpoint',
+    'hr.sheetEndpointPlaceholder': 'https://script.google.com/macros/s/.../exec',
+    'hr.sheetDriveLabel': 'Folder Google Drive HR (opsional)',
+    'hr.sheetTest': 'Tes Koneksi',
+    'hr.sheetSave': 'Simpan Integrasi',
+    'hr.sheetTabsTitle': 'Struktur tab Google Sheet',
+    'hr.sheetTabsHint': 'Kolom otomatis menyesuaikan paket aktif dan cardbox yang tampil.',
+    'hr.sheetStatusIdle': 'Belum diuji. Endpoint kosong berarti mode simulasi.',
+    'hr.sheetStatusReady': 'Tersambung · {message}',
+    'hr.sheetStatusFailed': 'Endpoint tersimpan, tetapi tes gagal: {message}',
+    'hr.finishingLinkLabel': 'Link portal pelamar (siap dibagikan)',
+    'hr.finishingLinkHint': 'Link ini membawa posisi, pertanyaan, bahasa, template, dan integrasi Sheet HR.',
+    'hr.finishingCopyLink': 'Salin Link Pelamar',
+    'hr.finishingOpenLink': 'Buka Link',
+    'hr.finishingLinkReady': 'Link siap dipakai di tab atau perangkat lain.',
+    'hr.finishingLinkCopied': 'Link pelamar disalin.',
+    'hr.finishingLinkCopyFailed': 'Gagal menyalin otomatis. Salin manual dari kolom link.',
     'hr.packageBadgeDraft': 'Paket: belum aktif',
     'hr.packageBadgeActive': '{plan} Tier - Aktif',
     'hr.tierFreeLabel': 'Free Tier',
@@ -1545,6 +1569,7 @@ const I18N = {
     'success.respondent': 'Responden: {name} • Form: {form}',
     'success.sending': 'Status sync: menyiapkan payload...',
     'success.statusPrefix': 'Status sync: ',
+    'success.applicantLink': 'Link form: {url}',
     'success.sent': 'Terkirim',
     'success.simulated': 'Simulasi',
     'success.failed': 'Gagal',
@@ -1578,6 +1603,11 @@ const I18N = {
     'cv.payloadLabel': 'Kecocokan CV',
     'toast.invalidEmail': 'Format email Google belum valid.',
     'toast.invalidUrl': 'URL harus diawali http:// atau https://.',
+    'toast.hrSheetSaved': 'Integrasi Sheet HR tersimpan.',
+    'toast.hrSheetInvalid': 'Periksa kembali email serta URL endpoint Sheet/Drive.',
+    'toast.hrSheetTestOk': 'Koneksi Sheet HR berhasil diuji.',
+    'toast.hrSheetTestFailed': 'Tes koneksi gagal. Endpoint tetap tersimpan.',
+    'toast.sharedConfigLoaded': 'Konfigurasi HR dari link pelamar diterapkan.',
     'toast.settingsSavedWebhook': 'Pengaturan tersimpan. Webhook aktif — data dikirim saat submit.',
     'toast.settingsSavedSim': 'Pengaturan tersimpan. Webhook kosong — submission berstatus simulasi.',
     'toast.backDashboard': 'Kembali ke dashboard kategori',
@@ -1909,6 +1939,27 @@ const I18N = {
     'hr.finishingCopyFailed': 'Clipboard unavailable. Portal link: {url}',
     'hr.finishingSummaryTitle': 'HR Setup Recap',
     'hr.finishingPortalLink': 'Portal link',
+    'hr.cardboxAlignment': 'Cardboxes follow {plan} · {capability}',
+    'hr.sheetIntegrationTitle': 'HR Google Sheet readiness',
+    'hr.sheetIntegrationHint': 'Set the Apps Script endpoint and HR Google account. The applicant link carries this setup so submissions reach your Sheet.',
+    'hr.sheetEmailLabel': 'HR Google account email',
+    'hr.sheetEndpointLabel': 'Web App URL / Sheet endpoint',
+    'hr.sheetEndpointPlaceholder': 'https://script.google.com/macros/s/.../exec',
+    'hr.sheetDriveLabel': 'HR Google Drive folder (optional)',
+    'hr.sheetTest': 'Test Connection',
+    'hr.sheetSave': 'Save Integration',
+    'hr.sheetTabsTitle': 'Google Sheet tab structure',
+    'hr.sheetTabsHint': 'Columns follow the active package and visible cardboxes automatically.',
+    'hr.sheetStatusIdle': 'Not tested yet. An empty endpoint means simulation mode.',
+    'hr.sheetStatusReady': 'Connected · {message}',
+    'hr.sheetStatusFailed': 'Endpoint saved, but the test failed: {message}',
+    'hr.finishingLinkLabel': 'Applicant portal link (ready to share)',
+    'hr.finishingLinkHint': 'This link carries the position, questions, language, template, and HR Sheet integration.',
+    'hr.finishingCopyLink': 'Copy Applicant Link',
+    'hr.finishingOpenLink': 'Open Link',
+    'hr.finishingLinkReady': 'The link is ready for another tab or device.',
+    'hr.finishingLinkCopied': 'Applicant link copied.',
+    'hr.finishingLinkCopyFailed': 'Automatic copy failed. Copy the link from the field manually.',
     'hr.packageBadgeDraft': 'Package: not active',
     'hr.packageBadgeActive': '{plan} Tier - Active',
     'hr.tierFreeLabel': 'Free Tier',
@@ -2172,6 +2223,7 @@ const I18N = {
     'success.respondent': 'Respondent: {name} • Form: {form}',
     'success.sending': 'Sync status: preparing payload...',
     'success.statusPrefix': 'Sync status: ',
+    'success.applicantLink': 'Form link: {url}',
     'success.sent': 'Sent',
     'success.simulated': 'Simulation',
     'success.failed': 'Failed',
@@ -2205,6 +2257,11 @@ const I18N = {
     'cv.payloadLabel': 'CV match',
     'toast.invalidEmail': 'The Google email format is not valid.',
     'toast.invalidUrl': 'The URL must start with http:// or https://.',
+    'toast.hrSheetSaved': 'HR Sheet integration saved.',
+    'toast.hrSheetInvalid': 'Check the email and Sheet/Drive endpoint URLs again.',
+    'toast.hrSheetTestOk': 'HR Sheet connection tested successfully.',
+    'toast.hrSheetTestFailed': 'Connection test failed. The endpoint is still saved.',
+    'toast.sharedConfigLoaded': 'HR configuration from the applicant link applied.',
     'toast.settingsSavedWebhook': 'Settings saved. Webhook active — data is sent on submit.',
     'toast.settingsSavedSim': 'Settings saved. Webhook empty — submissions stay in simulation mode.',
     'toast.backDashboard': 'Back to the category dashboard',
@@ -2536,6 +2593,27 @@ const I18N = {
     'hr.finishingCopyFailed': '剪贴板不可用。门户链接：{url}',
     'hr.finishingSummaryTitle': 'HR 设置汇总',
     'hr.finishingPortalLink': '门户链接',
+    'hr.cardboxAlignment': '卡片框跟随 {plan} · {capability}',
+    'hr.sheetIntegrationTitle': 'HR Google Sheet 就绪状态',
+    'hr.sheetIntegrationHint': '设置 Apps Script 端点与 HR Google 账号。申请者链接会携带此配置，让提交数据进入您的 Sheet。',
+    'hr.sheetEmailLabel': 'HR Google 账号邮箱',
+    'hr.sheetEndpointLabel': 'Web App URL / Sheet 端点',
+    'hr.sheetEndpointPlaceholder': 'https://script.google.com/macros/s/.../exec',
+    'hr.sheetDriveLabel': 'HR Google Drive 文件夹（可选）',
+    'hr.sheetTest': '测试连接',
+    'hr.sheetSave': '保存集成',
+    'hr.sheetTabsTitle': 'Google Sheet 标签结构',
+    'hr.sheetTabsHint': '列会随当前套餐与显示的卡片框自动调整。',
+    'hr.sheetStatusIdle': '尚未测试。端点为空时进入模拟模式。',
+    'hr.sheetStatusReady': '已连接 · {message}',
+    'hr.sheetStatusFailed': '端点已保存，但测试失败：{message}',
+    'hr.finishingLinkLabel': '申请者门户链接（可分享）',
+    'hr.finishingLinkHint': '此链接携带职位、问题、语言、模板与 HR Sheet 集成。',
+    'hr.finishingCopyLink': '复制申请者链接',
+    'hr.finishingOpenLink': '打开链接',
+    'hr.finishingLinkReady': '链接可在其他标签页或设备上使用。',
+    'hr.finishingLinkCopied': '申请者链接已复制。',
+    'hr.finishingLinkCopyFailed': '自动复制失败，请从链接输入框手动复制。',
     'hr.packageBadgeDraft': '套餐：未激活',
     'hr.packageBadgeActive': '{plan} 套餐 - 已激活',
     'hr.tierFreeLabel': 'Free Tier',
@@ -2799,6 +2877,7 @@ const I18N = {
     'success.respondent': '受访者：{name} • 表单：{form}',
     'success.sending': '同步状态：正在准备数据...',
     'success.statusPrefix': '同步状态：',
+    'success.applicantLink': '表单链接：{url}',
     'success.sent': '已发送',
     'success.simulated': '模拟',
     'success.failed': '失败',
@@ -2832,6 +2911,11 @@ const I18N = {
     'cv.payloadLabel': '简历匹配度',
     'toast.invalidEmail': 'Google 邮箱格式无效。',
     'toast.invalidUrl': '链接必须以 http:// 或 https:// 开头。',
+    'toast.hrSheetSaved': 'HR Sheet 集成已保存。',
+    'toast.hrSheetInvalid': '请再次检查邮箱与 Sheet/Drive 端点链接。',
+    'toast.hrSheetTestOk': 'HR Sheet 连接测试成功。',
+    'toast.hrSheetTestFailed': '连接测试失败，端点仍已保存。',
+    'toast.sharedConfigLoaded': '已应用申请者链接中的 HR 配置。',
     'toast.settingsSavedWebhook': '设置已保存。Webhook 已启用 — 提交时会发送数据。',
     'toast.settingsSavedSim': '设置已保存。Webhook 为空 — 提交保持模拟状态。',
     'toast.backDashboard': '返回分类仪表盘',
@@ -3326,6 +3410,7 @@ document.addEventListener('DOMContentLoaded', () => {
   setupHrFinishingTriggers();
   setupHrUploadDropzones();
   setupKeyboardNavigation();
+  if (applyHrSharedConfigFromUrl()) showToast(t('toast.sharedConfigLoaded'));
   window.addEventListener('resize', updateCandidatePortalOffsets);
   observeCandidatePortalOffsets();
   if (document.fonts?.ready) document.fonts.ready.then(updateCandidatePortalOffsets);
@@ -3592,7 +3677,10 @@ function renderHrCardboxOverview() {
   const visibleCount = manifest.filter((item) => item.visible).length;
   const summary = document.getElementById('hr-cardbox-summary');
   if (summary) {
-    summary.innerHTML = `<span class="hr-cardbox-summary-pill">${escapeHtml(t('hr.cardboxCount', { visible: visibleCount, total: manifest.length }))}</span>`;
+    const plan = getHrCapabilityPlan();
+    summary.innerHTML = `
+      <span class="hr-cardbox-summary-pill">${escapeHtml(t('hr.cardboxCount', { visible: visibleCount, total: manifest.length }))}</span>
+      <span class="hr-cardbox-summary-pill hr-cardbox-summary-pill-plan">${escapeHtml(t('hr.cardboxAlignment', { plan: getHrTierDisplayLabel(plan), capability: getHrCapabilityCopyForPlan(plan) }))}</span>`;
   }
   list.innerHTML = manifest.map((item) => {
     const requiredLabel = item.required ? t('form.required') : t('form.optional');
@@ -4113,7 +4201,7 @@ function getHrFinishingData() {
     email: state.hrPackage.email || state.googleEmail || '-',
     sheetReady: Boolean(state.webhookUrl),
     driveReady: Boolean(state.hrDriveFolderUrl),
-    portalUrl: `https://iziform.app/f/${getPreset('recruit').slug}`
+    portalUrl: getHrApplicantLink()
   };
 }
 
@@ -4932,8 +5020,12 @@ function renderHrFinishingSummary() {
           <b>${escapeHtml(t('hr.finishingDriveDetail'))}</b>
           <small>${escapeHtml(data.driveReady ? t('hr.packageDriveReady') : t('hr.packageDrivePending'))}</small>
         </div>
-      </div>`;
+        </div>`;
   }
+  const linkInput = document.getElementById('hr-finishing-link-input');
+  if (linkInput) linkInput.value = data.portalUrl;
+  const linkStatus = document.getElementById('hr-finishing-link-status');
+  if (linkStatus) linkStatus.textContent = t('hr.finishingLinkReady');
   const selectedPlan = data.plan;
   const needsPayment = data.paymentPending && selectedPlan !== 'free';
   const note = document.getElementById('hr-finishing-note');
@@ -5002,6 +5094,32 @@ function copyHrFinishingSummary() {
   });
 }
 
+function copyHrApplicantLink() {
+  const url = getHrApplicantLink();
+  const status = document.getElementById('hr-finishing-link-status');
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    if (status) status.textContent = t('hr.finishingLinkCopyFailed');
+    const input = document.getElementById('hr-finishing-link-input');
+    if (input) {
+      input.value = url;
+      input.focus();
+      input.select();
+    }
+    return;
+  }
+  navigator.clipboard.writeText(url).then(() => {
+    if (status) status.textContent = t('hr.finishingLinkCopied');
+    showToast(t('hr.finishingLinkCopied'));
+  }).catch(() => {
+    if (status) status.textContent = t('hr.finishingLinkCopyFailed');
+    showToast(t('hr.finishingLinkCopyFailed'));
+  });
+}
+
+function openHrApplicantLink() {
+  window.open(getHrApplicantLink(), '_blank', 'noopener');
+}
+
 function activateHrPackageFromFinishing() {
   const data = getHrFinishingData();
   closeHrFinishingModal();
@@ -5055,6 +5173,8 @@ function setupHrFinishingTriggers() {
   [
     ['hr-finishing-preview-btn', () => runHrPaidTemplateGuard(previewHrFinishingPortal)],
     ['hr-finishing-copy-btn', copyHrFinishingSummary],
+    ['hr-finishing-link-copy-btn', copyHrApplicantLink],
+    ['hr-finishing-link-open-btn', openHrApplicantLink],
     ['hr-finishing-back-btn', backHrFinishingToSettings],
     ['hr-finishing-activate-btn', activateHrPackageFromFinishing]
   ].forEach(([id, handler]) => {
@@ -5607,6 +5727,214 @@ function isValidWebhook(value) {
   }
 }
 
+function encodeHrSharePayload(payload) {
+  const bytes = new TextEncoder().encode(JSON.stringify(payload));
+  let binary = '';
+  bytes.forEach((byte) => { binary += String.fromCharCode(byte); });
+  return btoa(binary).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+}
+
+function decodeHrSharePayload(encoded) {
+  const normalized = String(encoded || '').replace(/-/g, '+').replace(/_/g, '/');
+  const padded = normalized + '='.repeat((4 - normalized.length % 4) % 4);
+  const binary = atob(padded);
+  const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+  return JSON.parse(new TextDecoder().decode(bytes));
+}
+
+function safeHrShareString(value, maxLength = 1200) {
+  return String(value === undefined || value === null ? '' : value).slice(0, maxLength);
+}
+
+function createHrSharePayload() {
+  const requirement = currentHrRequirement();
+  const template = getHrUiTemplate();
+  const sheet = {
+    email: state.googleEmail || '',
+    webhook: state.webhookUrl || '',
+    gform: state.gformUrl || '',
+    drive: state.hrDriveFolderUrl || '',
+    tested: state.hrSheetTested === true
+  };
+  return {
+    v: 1,
+    slug: getPreset('recruit').slug,
+    lang: state.currentLanguage === 'en' ? 'en' : 'id',
+    plan: normalizeHrPackagePlan(getHrCapabilityPlan()),
+    templateKey: state.hrUiTemplate,
+    hrTemplateKey: state.hrTemplateKey,
+    templateTier: template.tier,
+    fontPair: getHrFontPair(),
+    company: safeHrShareString(state.hrCompanyName, 180),
+    profile: {
+      industry: safeHrShareString(state.hrCompanyProfile.industry, 300),
+      description: safeHrShareString(state.hrCompanyProfile.description, 1200),
+      website: safeHrShareString(state.hrCompanyProfile.website, 500)
+    },
+    identityItems: getFilledHrCustomDetailItems().map((item) => ({
+      label: safeHrShareString(item.label, 180),
+      value: safeHrShareString(item.value, 600)
+    })),
+    requirement: {
+      position: safeHrShareString(requirement.position, 300),
+      location: safeHrShareString(requirement.location, 300),
+      minYears: safeHrShareString(requirement.minYears, 80),
+      skills: safeHrShareString(requirement.skills, 800),
+      education: safeHrShareString(requirement.education, 800),
+      salary: safeHrShareString(requirement.salary, 300),
+      noticePeriod: safeHrShareString(requirement.noticePeriod, 300),
+      screening: safeHrShareString(requirement.screening, 1600),
+      jobType: safeHrShareString(requirement.jobType, 300),
+      roleSummary: safeHrShareString(requirement.roleSummary, 1600),
+      responsibilities: safeHrShareString(requirement.responsibilities, 2400),
+      mustHave: safeHrShareString(requirement.mustHave, 1600),
+      qualification: safeHrShareString(requirement.qualification, 1600),
+      certification: safeHrShareString(requirement.certification, 1200),
+      plusPoints: safeHrShareString(requirement.plusPoints, 1600),
+      benefit: safeHrShareString(requirement.benefit, 1600),
+      matchThreshold: safeHrShareString(requirement.matchThreshold, 80),
+      coverLetterEnabled: requirement.coverLetterEnabled === true,
+      coverLetterRequired: requirement.coverLetterRequired === true,
+      customFields: getHrCustomFieldsRaw().map((field) => ({
+        id: safeHrShareString(field.id, 120),
+        label: safeHrShareString(field.label, 300),
+        type: field.type === 'textarea' ? 'textarea' : 'text',
+        required: field.required === true
+      }))
+    },
+    cardbox: Object.entries(state.hrCardboxSettings || {}).reduce((result, [id, setting]) => {
+      if (!id || id.length > 120) return result;
+      result[id] = { visible: setting && setting.visible !== false, required: Boolean(setting && setting.required) };
+      return result;
+    }, {}),
+    sheet
+  };
+}
+
+function getHrApplicantLink() {
+  const base = `${window.location.origin}${window.location.pathname}`;
+  return `${base}#hr=${encodeHrSharePayload(createHrSharePayload())}`;
+}
+
+function validateHrSharePayload(raw) {
+  if (!raw || raw.v !== 1 || typeof raw !== 'object') return null;
+  const plan = normalizeHrPackagePlan(raw.plan);
+  const lang = raw.lang === 'en' && plan !== 'free' ? 'en' : 'id';
+  const template = HR_UI_TEMPLATES.find((item) => (
+    item.key === raw.templateKey && getHrTierRank(item.tier) <= getHrTierRank(plan)
+  )) || HR_UI_TEMPLATES[0];
+  const baseTemplate = HR_TEMPLATES[raw.hrTemplateKey] || HR_TEMPLATES.tech;
+  const requirement = cloneHrRequirement(baseTemplate[lang] || baseTemplate.id);
+  const rawRequirement = raw.requirement && typeof raw.requirement === 'object' ? raw.requirement : {};
+  const textKeys = [
+    'position', 'location', 'minYears', 'skills', 'education', 'salary', 'noticePeriod',
+    'screening', 'jobType', 'roleSummary', 'responsibilities', 'mustHave', 'qualification',
+    'certification', 'plusPoints', 'benefit', 'matchThreshold'
+  ];
+  textKeys.forEach((key) => {
+    if (typeof rawRequirement[key] === 'string') requirement[key] = safeHrShareString(rawRequirement[key]);
+  });
+  requirement.coverLetterEnabled = rawRequirement.coverLetterEnabled === true;
+  requirement.coverLetterRequired = requirement.coverLetterEnabled && rawRequirement.coverLetterRequired === true;
+  requirement.customFields = Array.isArray(rawRequirement.customFields)
+    ? rawRequirement.customFields.slice(0, 30).filter((field) => field && field.id && typeof field.label === 'string' && field.label.trim()).map((field) => ({
+      id: safeHrShareString(field.id, 120),
+      label: safeHrShareString(field.label, 300),
+      type: field.type === 'textarea' ? 'textarea' : 'text',
+      required: field.required === true
+    }))
+    : [];
+
+  const cardbox = {};
+  Object.entries(raw.cardbox || {}).forEach(([id, setting]) => {
+    if (!id || typeof id !== 'string' || id.length > 120 || !setting || typeof setting !== 'object') return;
+    cardbox[id] = { visible: setting.visible !== false, required: setting.required === true };
+  });
+  const rawSheet = raw.sheet && typeof raw.sheet === 'object' ? raw.sheet : {};
+  const rawProfile = raw.profile && typeof raw.profile === 'object' ? raw.profile : {};
+  return {
+    lang,
+    plan,
+    templateKey: template.key,
+    hrTemplateKey: HR_TEMPLATES[raw.hrTemplateKey] ? raw.hrTemplateKey : 'tech',
+    fontPair: HR_FONT_PAIR_KEYS.includes(raw.fontPair) ? raw.fontPair : template.fontPair,
+    company: safeHrShareString(raw.company, 180),
+    profile: {
+      industry: safeHrShareString(rawProfile.industry, 300),
+      description: safeHrShareString(rawProfile.description, 1200),
+      website: safeHrShareString(rawProfile.website, 500)
+    },
+    identityItems: Array.isArray(raw.identityItems) ? raw.identityItems.slice(0, 30).map((item) => ({
+      label: safeHrShareString(item && item.label, 180),
+      value: safeHrShareString(item && item.value, 600)
+    })).filter((item) => item.label && item.value) : [],
+    requirement,
+    cardbox,
+    sheet: {
+      email: isValidEmail(rawSheet.email) ? rawSheet.email : '',
+      webhook: isValidWebhook(rawSheet.webhook) ? safeHrShareString(rawSheet.webhook, 2000) : '',
+      gform: isValidWebhook(rawSheet.gform) ? safeHrShareString(rawSheet.gform, 2000) : '',
+      drive: isValidWebhook(rawSheet.drive) ? safeHrShareString(rawSheet.drive, 2000) : '',
+      tested: rawSheet.tested === true
+    }
+  };
+}
+
+function getHrSharedConfigFromUrl() {
+  const match = (window.location.hash || '').match(/(?:^#|&)hr=([^&]+)/);
+  if (!match) return null;
+  try {
+    return validateHrSharePayload(decodeHrSharePayload(decodeURIComponent(match[1])));
+  } catch (err) {
+    return null;
+  }
+}
+
+function applyHrSharedConfigFromUrl() {
+  const config = getHrSharedConfigFromUrl();
+  if (!config) return false;
+  state.hrSharedConfigApplied = true;
+  state.hrPackage = {
+    ...state.hrPackage,
+    plan: config.plan,
+    active: true,
+    paymentPending: false,
+    companyName: config.company || state.hrPackage.companyName,
+    email: config.sheet.email || state.hrPackage.email,
+    confirmedAt: new Date().toISOString()
+  };
+  state.hrPackageModalPlan = config.plan;
+  state.hrTemplatePaymentGate = false;
+  state.hrTemplateKey = config.hrTemplateKey;
+  state.hrUiTemplate = config.templateKey;
+  state.hrUiTier = normalizeHrPackagePlan(getHrUiTemplate().tier || config.plan);
+  state.hrFontPairOverrides = {};
+  if (config.fontPair !== getHrFontPair() && HR_FONT_PAIR_KEYS.includes(config.fontPair)) {
+    state.hrFontPairOverrides[config.templateKey] = config.fontPair;
+  }
+  state.hrCompanyName = config.company || state.hrCompanyName;
+  state.hrCompanyProfile = { ...config.profile };
+  state.hrCompanyIdentityItems = config.identityItems;
+  state.hrCardboxSettings = config.cardbox;
+  state.hrRequirement = config.requirement;
+  state.googleEmail = config.sheet.email;
+  state.webhookUrl = config.sheet.webhook;
+  state.gformUrl = config.sheet.gform;
+  state.hrDriveFolderUrl = config.sheet.drive;
+  state.hrSheetTested = config.sheet.tested;
+  state.hrSheetTestNote = state.hrSheetTested ? t('sync.sendOk') : '';
+  syncHrPackageFromSettings();
+  applyHrUiTemplate(true);
+  if (state.currentLanguage !== config.lang) setLanguage(config.lang, { preserveTemplate: true, silent: true });
+  else applyTranslations();
+  refreshLanguageUi();
+  renderSyncStatus();
+  renderHrPackageStatus();
+  renderHrFinishingSummary();
+  setHrActiveSide('b', true);
+  return true;
+}
+
 function setStatusDot(element, active) {
   if (!element) return;
   element.classList.toggle('active', active);
@@ -5624,6 +5952,7 @@ function renderSyncStatus() {
   const headerDot = document.getElementById('connection-dot');
   const formHint = document.getElementById('sync-form-hint');
   const pasteHint = document.getElementById('paste-sync-status');
+  const sheetStatus = document.getElementById('hr-sheet-status');
 
   if (googleText) googleText.textContent = emailReady ? state.googleEmail : t('sync.googleEmpty');
   if (sheetText) sheetText.textContent = sheetReady ? t('sync.sheetFilled') : t('sync.sheetEmpty');
@@ -5641,14 +5970,29 @@ function renderSyncStatus() {
     else headerText.textContent = t('sync.notConnected');
   }
 
+  if (sheetStatus) {
+    sheetStatus.dataset.state = state.hrSheetTested ? 'ready' : state.hrSheetTestNote ? 'failed' : 'idle';
+    if (state.hrSheetTested) sheetStatus.textContent = t('hr.sheetStatusReady', { message: state.hrSheetTestNote || t('sync.sendOk') });
+    else if (state.hrSheetTestNote) sheetStatus.textContent = t('hr.sheetStatusFailed', { message: state.hrSheetTestNote });
+    else sheetStatus.textContent = t('hr.sheetStatusIdle');
+  }
+
+  renderHrSheetTabsPreview();
+
   const emailInput = document.getElementById('sync-email-input');
   const webhookInput = document.getElementById('sync-webhook-input');
   const gformInput = document.getElementById('sync-gform-input');
   const driveInput = document.getElementById('modal-drive-input') || document.getElementById('sync-drive-input');
+  const sheetEmailInput = document.getElementById('hr-sheet-email-input');
+  const sheetWebhookInput = document.getElementById('hr-sheet-webhook-input');
+  const sheetDriveInput = document.getElementById('hr-sheet-drive-input');
   if (emailInput && document.activeElement !== emailInput) emailInput.value = state.googleEmail;
   if (webhookInput && document.activeElement !== webhookInput) webhookInput.value = state.webhookUrl;
   if (gformInput && document.activeElement !== gformInput) gformInput.value = state.gformUrl;
   if (driveInput && document.activeElement !== driveInput) driveInput.value = state.hrDriveFolderUrl;
+  if (sheetEmailInput && document.activeElement !== sheetEmailInput) sheetEmailInput.value = state.googleEmail;
+  if (sheetWebhookInput && document.activeElement !== sheetWebhookInput) sheetWebhookInput.value = state.webhookUrl;
+  if (sheetDriveInput && document.activeElement !== sheetDriveInput) sheetDriveInput.value = state.hrDriveFolderUrl;
 }
 
 function saveSyncSettings() {
@@ -5679,6 +6023,79 @@ function saveSyncSettings() {
   renderSyncStatus();
   triggerConfetti();
   showToast(webhook ? t('toast.settingsSavedWebhook') : t('toast.settingsSavedSim'));
+}
+
+function readHrSheetIntegrationInputs() {
+  const emailInput = document.getElementById('hr-sheet-email-input');
+  const webhookInput = document.getElementById('hr-sheet-webhook-input');
+  const driveInput = document.getElementById('hr-sheet-drive-input');
+  const email = emailInput ? emailInput.value.trim() : state.googleEmail;
+  const webhook = webhookInput ? webhookInput.value.trim() : state.webhookUrl;
+  const drive = driveInput ? driveInput.value.trim() : state.hrDriveFolderUrl;
+
+  if (email && !isValidEmail(email)) {
+    showToast(t('toast.hrSheetInvalid'));
+    return null;
+  }
+  if (!isValidWebhook(webhook) || !isValidWebhook(drive)) {
+    showToast(t('toast.hrSheetInvalid'));
+    return null;
+  }
+  return { email, webhook, drive };
+}
+
+function saveHrSheetIntegration() {
+  const values = readHrSheetIntegrationInputs();
+  if (!values) return;
+  state.googleEmail = values.email;
+  state.webhookUrl = values.webhook;
+  state.hrDriveFolderUrl = values.drive;
+  state.hrSheetTested = false;
+  state.hrSheetTestNote = '';
+  syncHrPackageFromSettings();
+  renderSyncStatus();
+  renderHrPackageStatus();
+  renderHrFinishingSummary();
+  triggerConfetti();
+  showToast(t('toast.hrSheetSaved'));
+}
+
+async function testHrSheetConnection() {
+  const values = readHrSheetIntegrationInputs();
+  if (!values) return;
+  if (!values.webhook) {
+    state.hrSheetTested = false;
+    state.hrSheetTestNote = t('sync.sheetEmpty');
+    renderSyncStatus();
+    showToast(t('toast.hrSheetInvalid'));
+    return;
+  }
+  state.hrSheetTested = false;
+  state.hrSheetTestNote = t('success.sending');
+  renderSyncStatus();
+  const result = await sendToGoogleSheet({
+    action: 'ping',
+    source: 'iziform',
+    submittedAt: new Date().toISOString(),
+    googleEmail: values.email,
+    driveFolderUrl: values.drive,
+    sheetTabs: []
+  }, values.webhook);
+  state.hrSheetTested = result.ok;
+  state.hrSheetTestNote = result.message;
+  renderSyncStatus();
+  showToast(result.ok ? t('toast.hrSheetTestOk') : t('toast.hrSheetTestFailed'));
+}
+
+function renderHrSheetTabsPreview() {
+  const list = document.getElementById('hr-sheet-tabs-list');
+  if (!list) return;
+  const tabs = buildHrSheetTabsPayload([]);
+  list.innerHTML = tabs.map((tab, index) => `
+    <span class="hr-sheet-tab-chip" title="${escapeHtml(tab.columns.join(' · '))}">
+      <b>${index + 1}. ${escapeHtml(tab.name)}</b>
+      <small>${tab.columns.length}</small>
+    </span>`).join('');
 }
 
 function chooseCategory(presetKey, simulation = false) {
@@ -6148,6 +6565,7 @@ function buildSubmissionPayload() {
     return { id: field.id, label: field.label, type: field.type, required: field.required, value: raw, display };
   });
   return {
+    action: 'submit',
     submittedAt: new Date().toISOString(),
     preset: state.activePresetKey,
     category: p.categoryLabel,
@@ -6267,6 +6685,8 @@ async function triggerFormSubmissionSuccess() {
   }
   const summaryText = document.getElementById('summary-payload-text');
   const statusText = document.getElementById('sync-status-text');
+  const sheetStatusText = document.getElementById('success-sheet-status');
+  const applicantLinkText = document.getElementById('success-applicant-link');
   const firstQuestion = p.questions[0];
   const rawName = state.userResponses[firstQuestion.id];
   const nameVal = rawName && typeof rawName === 'object'
@@ -6283,12 +6703,14 @@ async function triggerFormSubmissionSuccess() {
     }
   }
   if (statusText) statusText.textContent = t('success.sending');
+  if (applicantLinkText && state.activePresetKey === 'recruit') applicantLinkText.textContent = t('success.applicantLink', { url: getHrApplicantLink() });
   if (modal) modal.classList.remove('hidden');
   showToast(t('success.title'));
 
   const result = await sendToGoogleSheet(buildSubmissionPayload(), state.webhookUrl);
   const statusLabel = result.ok ? t('success.sent') : result.simulated ? t('success.simulated') : t('success.failed');
   if (statusText) statusText.textContent = `${t('success.statusPrefix')}${result.message}`;
+  if (sheetStatusText) sheetStatusText.textContent = `${t('hr.packageStorageStatus')}: ${statusLabel} · ${result.message}`;
   if (summaryText) summaryText.textContent += ` • ${statusLabel}`;
   showToast(result.message);
 }
@@ -6407,7 +6829,7 @@ function applyPastedGForm() {
 
 function copyFormLink() {
   const p = getPreset(state.activePresetKey);
-  const url = `https://iziform.app/f/${p.slug}`;
+  const url = state.activePresetKey === 'recruit' ? getHrApplicantLink() : `https://iziform.app/f/${p.slug}`;
   if (!navigator.clipboard || !navigator.clipboard.writeText) {
     showToast(t('toast.copyFailed'));
     showToast(t('toast.link', { url }));
