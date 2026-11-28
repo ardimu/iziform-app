@@ -1086,6 +1086,20 @@ body.theme-midnight .hr-form-field select, body.theme-cyber .hr-form-field selec
 .hr-logo-clear { padding: 0.35rem 0.65rem; border-radius: 999px; border: 1px solid var(--border-subtle); background: var(--surface-raised); color: var(--text-faint); font-family: inherit; font-size: 0.5625rem; font-weight: 900; cursor: pointer; }
 .hr-logo-clear:hover { border-color: var(--accent-color); color: var(--accent-color); }
 .hr-logo-hint { margin-top: 0.25rem; font-size: 0.5625rem; color: var(--text-faint); }
+.hr-upload-dropzone { position: relative; display: flex; align-items: center; flex-wrap: wrap; gap: 0.6rem; width: 100%; padding: 0.7rem; border: 1px dashed var(--border-subtle); border-radius: 1rem; background: var(--surface-soft); cursor: pointer; transition: border-color 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease; }
+.hr-upload-dropzone:hover, .hr-upload-dropzone:focus-visible { border-color: var(--accent-color); outline: none; }
+.hr-upload-dropzone.is-dragover { border-color: var(--accent-color); background: var(--accent-soft); box-shadow: 0 0 0 3px var(--accent-ring); }
+.hr-upload-copy { display: flex; flex-direction: column; gap: 0.15rem; flex: 1 1 10rem; min-width: 0; }
+.hr-upload-copy b { font-size: 0.625rem; font-weight: 900; color: var(--text-body); }
+.hr-upload-copy small { font-size: 0.5625rem; line-height: 1.4; color: var(--text-faint); }
+.hr-upload-error { flex: 1 1 100%; font-size: 0.5625rem; font-weight: 900; line-height: 1.4; color: #dc2626; }
+.hr-identity-items-list { display: flex; flex-direction: column; gap: 0.6rem; }
+.hr-identity-items-empty { padding: 0.65rem 0.8rem; border-radius: 0.85rem; background: var(--surface-soft); color: var(--text-faint); font-size: 0.625rem; }
+.hr-identity-item-row { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr) auto; gap: 0.6rem; align-items: end; padding: 0.7rem; border: 1px solid var(--border-subtle); border-radius: 0.9rem; background: var(--surface-soft); }
+.hr-identity-add { align-self: flex-start; margin-top: 0.6rem; padding: 0.4rem 0.75rem; border-radius: 999px; border: 1px solid var(--accent-ring); background: var(--accent-soft); color: var(--accent-color); font-family: inherit; font-size: 0.5625rem; font-weight: 900; cursor: pointer; }
+.hr-identity-add:hover { border-color: var(--accent-color); }
+.hr-identity-remove { padding: 0.4rem 0.6rem; border-radius: 999px; border: 1px solid var(--border-subtle); background: var(--surface-raised); color: var(--text-faint); font-family: inherit; font-size: 0.5625rem; font-weight: 900; cursor: pointer; }
+.hr-identity-remove:hover { border-color: var(--accent-color); color: var(--accent-color); }
 .hr-block { padding: 1rem; border-radius: 1.25rem; border: 1px solid var(--border-subtle); background: var(--surface-soft); }
 .hr-block-title { margin-bottom: 0.9rem; font-size: 0.75rem; font-weight: 900; letter-spacing: 0.04em; color: var(--text-headline); }
 .hr-banner-preview { width: 5rem; height: 2.5rem; border-radius: 0.75rem; flex-shrink: 0; background: linear-gradient(135deg, var(--accent-color), #0f172a); background-size: cover; background-position: center; border: 1px solid var(--border-subtle); }
@@ -1928,6 +1942,10 @@ body[data-preset="recruit"] .hr-career-ribbon { display: flex; }
   flex: 1 1 220px; min-width: 0; font-size: 0.75rem; font-weight: 600; line-height: 1.55;
   color: var(--text-faint); overflow-wrap: anywhere;
 }
+.company-identity-items { display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; flex: 1 1 220px; min-width: 0; }
+.company-identity-item { display: inline-flex; align-items: baseline; gap: 0.3rem; min-width: 0; font-size: 0.75rem; font-weight: 600; line-height: 1.55; color: var(--text-faint); overflow-wrap: anywhere; }
+.company-identity-item b { flex-shrink: 0; font-size: 0.625rem; font-weight: 900; color: var(--text-body); }
+.company-identity-item i { font-style: normal; min-width: 0; overflow-wrap: anywhere; }
 .open-question-card {
   margin-top: 1.5rem; padding: 2.5rem;
   background: linear-gradient(180deg, var(--surface-raised), var(--surface-raised));
@@ -2498,6 +2516,7 @@ body[data-preset="recruit"] #form-view .recruit-apply-column { padding-top: 0.75
 @media (max-width: 768px) {
   .hr-custom-field-row { grid-template-columns: 1fr; align-items: stretch; }
   .hr-custom-field-row .hr-check-field { align-self: stretch; }
+  .hr-identity-item-row { grid-template-columns: 1fr; align-items: stretch; }
   .hr-custom-field-remove { justify-self: start; }
   .hr-cardbox-row { grid-template-columns: 1fr; align-items: start; }
   .hr-cardbox-controls { flex-wrap: wrap; }

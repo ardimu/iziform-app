@@ -25,6 +25,7 @@ const state = {
   hrActiveSide: 'a',
   hrCompanyName: 'PT Digital Nusantara Indonesia',
   hrCompanyProfile: { industry: 'Teknologi & Digital', description: 'Perusahaan digital yang membangun produk kerja modern untuk tim Indonesia.', website: 'https://iziform.app' },
+  hrCompanyIdentityItems: [],
   hrCompanyLogo: '',
   hrCompanyBanner: '',
   hrUiTemplate: 'clean01',
@@ -1075,6 +1076,20 @@ const I18N = {
     'hr.banner': 'Banner header',
     'hr.bannerHint': 'Kosongkan untuk memakai gradasi otomatis.',
     'hr.bannerClear': 'Hapus Banner',
+    'hr.uploadDragLogo': 'Tarik logo ke sini',
+    'hr.uploadDragBanner': 'Tarik banner ke sini',
+    'hr.uploadOrBrowse': 'atau klik untuk memilih file',
+    'hr.uploadInvalidType': 'File harus berupa gambar PNG, JPG, WEBP, atau SVG.',
+    'hr.uploadTooLarge': 'Ukuran file terlalu besar. Maksimal {size} MB.',
+    'hr.uploadReadError': 'Gambar gagal dibaca. Coba file lain.',
+    'hr.identityItemsTitle': 'Item identitas tambahan',
+    'hr.identityItemsHint': 'Hanya item yang terisi yang tampil di portal kandidat.',
+    'hr.identityItemLabel': 'Label item',
+    'hr.identityItemValue': 'Nilai item',
+    'hr.identityItemNew': 'Item baru',
+    'hr.identityItemAdd': 'Tambah item identitas',
+    'hr.identityItemRemove': 'Hapus item',
+    'hr.identityItemsEmpty': 'Belum ada item identitas tambahan.',
     'hr.roleSummary': 'Ringkasan peran',
     'hr.responsibilities': 'Tanggung jawab utama',
     'hr.jobType': 'Tipe kerja',
@@ -1653,6 +1668,20 @@ const I18N = {
     'hr.banner': 'Header banner',
     'hr.bannerHint': 'Leave empty to use automatic gradient.',
     'hr.bannerClear': 'Clear Banner',
+    'hr.uploadDragLogo': 'Drop the logo here',
+    'hr.uploadDragBanner': 'Drop the banner here',
+    'hr.uploadOrBrowse': 'or click to choose a file',
+    'hr.uploadInvalidType': 'Only PNG, JPG, WEBP, or SVG image files are supported.',
+    'hr.uploadTooLarge': 'File is too large. Maximum {size} MB.',
+    'hr.uploadReadError': 'The image could not be read. Try another file.',
+    'hr.identityItemsTitle': 'Additional identity items',
+    'hr.identityItemsHint': 'Only filled items appear on the candidate portal.',
+    'hr.identityItemLabel': 'Item label',
+    'hr.identityItemValue': 'Item value',
+    'hr.identityItemNew': 'New item',
+    'hr.identityItemAdd': 'Add identity item',
+    'hr.identityItemRemove': 'Remove item',
+    'hr.identityItemsEmpty': 'No additional identity items yet.',
     'hr.roleSummary': 'Role summary',
     'hr.responsibilities': 'Key responsibilities',
     'hr.jobType': 'Work type',
@@ -2231,6 +2260,20 @@ const I18N = {
     'hr.banner': '页眉横幅',
     'hr.bannerHint': '留空则使用自动渐变。',
     'hr.bannerClear': '清除横幅',
+    'hr.uploadDragLogo': '将标志拖到此处',
+    'hr.uploadDragBanner': '将横幅拖到此处',
+    'hr.uploadOrBrowse': '或点击选择文件',
+    'hr.uploadInvalidType': '仅支持 PNG、JPG、WEBP 或 SVG 图片文件。',
+    'hr.uploadTooLarge': '文件过大，最大 {size} MB。',
+    'hr.uploadReadError': '无法读取图片，请换一个文件。',
+    'hr.identityItemsTitle': '附加身份信息',
+    'hr.identityItemsHint': '只有填写的项目会显示在候选人门户。',
+    'hr.identityItemLabel': '项目名称',
+    'hr.identityItemValue': '项目内容',
+    'hr.identityItemNew': '新项目',
+    'hr.identityItemAdd': '添加身份信息',
+    'hr.identityItemRemove': '删除项目',
+    'hr.identityItemsEmpty': '暂无附加身份信息。',
     'hr.roleSummary': '职位摘要',
     'hr.responsibilities': '主要职责',
     'hr.jobType': '工作类型',
@@ -3108,6 +3151,7 @@ document.addEventListener('DOMContentLoaded', () => {
   updateQrisPreview();
   setupHrPackageTriggers();
   setupHrFinishingTriggers();
+  setupHrUploadDropzones();
   setupKeyboardNavigation();
   window.addEventListener('resize', updateCandidatePortalOffsets);
   observeCandidatePortalOffsets();
@@ -3498,7 +3542,7 @@ function setCompanyLogoMarkup(element, logo, name) {
 }
 
 function updateHrCompanyName(value) {
-  state.hrCompanyName = String(value || '').trim() || state.hrCompanyName;
+  state.hrCompanyName = String(value || '').trim();
   syncHrPackageFromSettings();
   renderHrLogoPreview();
   renderCompanyIdentity();
@@ -3508,6 +3552,9 @@ function updateHrCompanyName(value) {
   }
 }
 
+const HR_UPLOAD_ACCEPTED_TYPES = ['image/png', 'image/jpeg', 'image/webp', 'image/svg+xml'];
+const HR_UPLOAD_MAX_MB = { logo: 5, banner: 8 };
+
 function setHrCompanyLogo(value) {
   state.hrCompanyLogo = String(value || '');
   renderHrLogoPreview();
@@ -3515,15 +3562,86 @@ function setHrCompanyLogo(value) {
   if (state.view === 'form' && state.activePresetKey === 'recruit') renderActivePresetHeader();
 }
 
-function handleHrLogoInput(file) {
-  if (!file || !/^image\//.test(file.type)) return;
+function showHrUploadError(kind, message) {
+  const error = document.getElementById(kind === 'logo' ? 'hr-logo-error' : 'hr-banner-error');
+  if (!error) return;
+  error.textContent = message;
+  error.classList.remove('hidden');
+}
+
+function clearHrUploadError(kind) {
+  const error = document.getElementById(kind === 'logo' ? 'hr-logo-error' : 'hr-banner-error');
+  if (!error) return;
+  error.textContent = '';
+  error.classList.add('hidden');
+}
+
+function handleHrImageUpload(file, kind) {
+  if (!file) return;
+  clearHrUploadError(kind);
+  if (!HR_UPLOAD_ACCEPTED_TYPES.includes(file.type)) {
+    showHrUploadError(kind, t('hr.uploadInvalidType'));
+    return;
+  }
+  const maxMb = HR_UPLOAD_MAX_MB[kind] || 5;
+  if (file.size > maxMb * 1024 * 1024) {
+    showHrUploadError(kind, t('hr.uploadTooLarge', { size: maxMb }));
+    return;
+  }
   const reader = new FileReader();
-  reader.onload = () => setHrCompanyLogo(reader.result);
+  reader.onload = () => {
+    if (kind === 'logo') setHrCompanyLogo(reader.result);
+    else setHrCompanyBanner(reader.result);
+    clearHrUploadError(kind);
+  };
+  reader.onerror = () => showHrUploadError(kind, t('hr.uploadReadError'));
   reader.readAsDataURL(file);
+}
+
+function setupHrUploadDropzones() {
+  document.querySelectorAll('.hr-upload-dropzone').forEach((zone) => {
+    const kind = zone.getAttribute('data-upload-target');
+    const input = document.getElementById(kind === 'logo' ? 'hr-logo-input' : 'hr-banner-input');
+    if (!input) return;
+    ['dragenter', 'dragover'].forEach((name) => {
+      zone.addEventListener(name, (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        zone.classList.add('is-dragover');
+      });
+    });
+    zone.addEventListener('dragleave', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      if (!zone.contains(event.relatedTarget)) zone.classList.remove('is-dragover');
+    });
+    zone.addEventListener('drop', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+      zone.classList.remove('is-dragover');
+      const file = event.dataTransfer && event.dataTransfer.files ? event.dataTransfer.files[0] : null;
+      handleHrImageUpload(file, kind);
+      input.value = '';
+    });
+    zone.addEventListener('click', (event) => {
+      if (event.target.closest('button, label, input')) return;
+      input.click();
+    });
+    zone.addEventListener('keydown', (event) => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      input.click();
+    });
+  });
+}
+
+function handleHrLogoInput(file) {
+  handleHrImageUpload(file, 'logo');
 }
 
 function clearHrLogo() {
   setHrCompanyLogo('');
+  clearHrUploadError('logo');
   const input = document.getElementById('hr-logo-input');
   if (input) input.value = '';
 }
@@ -3541,6 +3659,72 @@ function updateHrCompanyField(field, value) {
   if (state.view === 'form' && state.activePresetKey === 'recruit') renderActivePresetHeader();
 }
 
+function getHrCompanyIdentityItemsRaw() {
+  if (!Array.isArray(state.hrCompanyIdentityItems)) state.hrCompanyIdentityItems = [];
+  return state.hrCompanyIdentityItems;
+}
+
+function getFilledHrCompanyIdentityItems() {
+  const profile = state.hrCompanyProfile || {};
+  const builtIn = [
+    { label: t('hr.industry'), value: profile.industry },
+    { label: t('hr.description'), value: profile.description },
+    { label: t('hr.website'), value: profile.website }
+  ];
+  return [...builtIn, ...getHrCompanyIdentityItemsRaw()]
+    .map((item) => ({ label: String(item.label || '').trim(), value: String(item.value || '').trim() }))
+    .filter((item) => item.label && item.value);
+}
+
+function hasFilledHrCompanyIdentity() {
+  return Boolean(String(state.hrCompanyName || '').trim()) || getFilledHrCompanyIdentityItems().length > 0;
+}
+
+function renderHrCompanyIdentityEditor() {
+  const list = document.getElementById('hr-company-identity-list');
+  if (!list) return;
+  const items = getHrCompanyIdentityItemsRaw();
+  if (!items.length) {
+    list.innerHTML = `<p class="hr-identity-items-empty">${escapeHtml(t('hr.identityItemsEmpty'))}</p>`;
+    return;
+  }
+  list.innerHTML = items.map((item, index) => `
+    <div class="hr-identity-item-row">
+      <label class="hr-form-field">
+        <span data-i18n="hr.identityItemLabel">Label item</span>
+        <input type="text" value="${escapeHtml(item.label)}" oninput="updateHrCompanyIdentityItem(${index}, 'label', this.value)">
+      </label>
+      <label class="hr-form-field">
+        <span data-i18n="hr.identityItemValue">Nilai item</span>
+        <input type="text" value="${escapeHtml(item.value)}" oninput="updateHrCompanyIdentityItem(${index}, 'value', this.value)">
+      </label>
+      <button type="button" class="hr-identity-remove" onclick="removeHrCompanyIdentityItem(${index})" aria-label="${escapeHtml(t('hr.identityItemRemove'))}"><span aria-hidden="true">&times;</span> <span data-i18n="hr.identityItemRemove">Hapus item</span></button>
+    </div>`).join('');
+  applyTranslations();
+}
+
+function addHrCompanyIdentityItem() {
+  const items = getHrCompanyIdentityItemsRaw();
+  items.push({ label: `${t('hr.identityItemNew')} ${items.length + 1}`, value: '' });
+  renderHrCompanyIdentityEditor();
+  renderCompanyIdentity();
+}
+
+function updateHrCompanyIdentityItem(index, field, value) {
+  const items = getHrCompanyIdentityItemsRaw();
+  if (!items[index] || !['label', 'value'].includes(field)) return;
+  items[index][field] = String(value || '');
+  renderCompanyIdentity();
+}
+
+function removeHrCompanyIdentityItem(index) {
+  const items = getHrCompanyIdentityItemsRaw();
+  if (!items[index]) return;
+  items.splice(index, 1);
+  renderHrCompanyIdentityEditor();
+  renderCompanyIdentity();
+}
+
 function setHrCompanyBanner(value) {
   state.hrCompanyBanner = String(value || '');
   renderHrBannerPreview();
@@ -3549,14 +3733,12 @@ function setHrCompanyBanner(value) {
 }
 
 function handleHrBannerInput(file) {
-  if (!file || !/^image\//.test(file.type)) return;
-  const reader = new FileReader();
-  reader.onload = () => setHrCompanyBanner(reader.result);
-  reader.readAsDataURL(file);
+  handleHrImageUpload(file, 'banner');
 }
 
 function clearHrBanner() {
   setHrCompanyBanner('');
+  clearHrUploadError('banner');
   const input = document.getElementById('hr-banner-input');
   if (input) input.value = '';
 }
@@ -3578,6 +3760,7 @@ function applyCompanyPreset(presetKey) {
   };
   state.hrCompanyLogo = '';
   state.hrCompanyBanner = '';
+  state.hrCompanyIdentityItems = [];
   renderHrBuilder();
   renderCompanyIdentity();
   if (state.view === 'form' && state.activePresetKey === 'recruit') renderActivePresetHeader();
@@ -3851,28 +4034,55 @@ function setTextById(id, value) {
 
 function renderCompanyIdentity() {
   const r = currentHrRequirement();
-  const profile = state.hrCompanyProfile;
-  const name = state.hrCompanyName || getPreset('recruit').companyName;
+  const profile = state.hrCompanyProfile || {};
+  const name = String(state.hrCompanyName || '').trim();
+  const identityItems = getFilledHrCompanyIdentityItems();
   const setText = (id, value) => setTextById(id, value);
+  const setTextOrHide = (id, value, parentSelector) => {
+    const element = document.getElementById(id);
+    if (!element) return;
+    const text = String(value || '').trim();
+    element.textContent = text;
+    element.classList.toggle('hidden', !text);
+    if (parentSelector) {
+      const parent = element.closest(parentSelector);
+      if (parent) parent.classList.toggle('hidden', !text);
+    }
+  };
+
+  const identityCard = document.querySelector('.brand-identity-card');
+  if (identityCard) identityCard.classList.toggle('hidden', !hasFilledHrCompanyIdentity());
+  const nameElement = document.getElementById('company-name-text');
+  if (nameElement) nameElement.classList.toggle('hidden', !name);
+  const metaDivider = document.querySelector('.brand-identity-card .meta-divider');
+  if (metaDivider) metaDivider.classList.toggle('hidden', !identityItems.length);
+  const identityItemsElement = document.getElementById('company-identity-items');
+  if (identityItemsElement) {
+    identityItemsElement.innerHTML = identityItems.map((item) => `
+      <span class="company-identity-item"><b>${escapeHtml(item.label)}</b><i>${escapeHtml(item.value)}</i></span>
+    `).join('');
+  }
+
   setCompanyLogoMarkup(document.getElementById('candidate-company-logo'), state.hrCompanyLogo, name);
   setCompanyLogoMarkup(document.getElementById('company-logo-box'), state.hrCompanyLogo, name);
   setCompanyLogoMarkup(document.getElementById('career-company-logo'), state.hrCompanyLogo, name);
-  setText('candidate-company-name', name);
-  setText('candidate-company-position', r.position);
-  setText('candidate-company-location', r.location);
+  setText('candidate-company-name', name || t('portal.companyLabel'));
+  setTextOrHide('candidate-company-position', r.position);
+  setTextOrHide('candidate-company-location', r.location);
   setText('company-name-text', name);
-  setText('hr-ribbon-status', `${name} • ${r.position} • ${r.location}`);
+  setTextOrHide('hr-ribbon-status', [name, r.position, r.location].filter(Boolean).join(' \u2022 '));
   const showcaseName = document.getElementById('showcase-company-name');
   if (showcaseName) {
-    if (getHrUiTemplate().theme === 'veilo') {
+    if (!name) showcaseName.textContent = '';
+    else if (getHrUiTemplate().theme === 'veilo') {
       showcaseName.innerHTML = `<span class="veilo-headline-strong">${escapeHtml(name)}</span><span class="veilo-headline-soft">${escapeHtml(t('hr.veiloLineTwo'))}</span><span class="veilo-headline-accent">${escapeHtml(t('hr.veiloLineThree'))}</span>`;
     } else {
       showcaseName.textContent = name;
     }
   }
-  setText('showcase-industry', profile.industry);
-  setText('showcase-description', profile.description);
-  setText('showcase-website', profile.website);
+  setTextOrHide('showcase-industry', profile.industry);
+  setTextOrHide('showcase-description', profile.description, '.career-profile-note');
+  setTextOrHide('showcase-website', profile.website);
   setText('showcase-role-summary', r.roleSummary);
   setText('showcase-responsibilities', r.responsibilities);
   setText('showcase-job-type', r.jobType);
@@ -4640,6 +4850,7 @@ function renderHrBuilder() {
   renderHrCoverLetterControl();
   renderHrLogoPreview();
   renderHrBannerPreview();
+  renderHrCompanyIdentityEditor();
   renderHrTemplateButtons();
   renderHrUiTemplateGallery();
   renderHrFontPairControl();
@@ -5060,7 +5271,6 @@ function renderActivePresetHeader() {
   const catBadge = document.getElementById('banner-category-badge');
   const logoBox = document.getElementById('company-logo-box');
   const companyName = document.getElementById('company-name-text');
-  const companySub = document.getElementById('company-sub-text');
   const headerPill = document.getElementById('header-link-pill');
   const ribbonTitle = document.getElementById('hr-ribbon-title');
   const ribbonStatus = document.getElementById('hr-ribbon-status');
@@ -5070,7 +5280,6 @@ function renderActivePresetHeader() {
   if (catBadge) catBadge.textContent = p.categoryTag;
   if (logoBox) logoBox.textContent = p.logo;
   if (companyName) companyName.textContent = p.companyName;
-  if (companySub) companySub.textContent = p.subText;
   if (headerPill) headerPill.textContent = `iziform.app/f/${p.slug}`;
   if (ribbonTitle) ribbonTitle.textContent = t('form.ribbonTitle');
   if (ribbonStatus) ribbonStatus.textContent = p.subText;
@@ -5469,6 +5678,7 @@ function buildSubmissionPayload() {
     companyName: state.hrCompanyName,
     companyLogoMode: state.hrCompanyLogo ? 'uploaded' : 'initials',
     companyProfile: isRecruit ? { ...state.hrCompanyProfile } : null,
+    companyIdentityItems: isRecruit ? getFilledHrCompanyIdentityItems() : [],
     hrUiTemplate: isRecruit ? state.hrUiTemplate : null,
     hrUiTier: isRecruit ? state.hrUiTier : null,
     benefit: isRecruit ? String(currentHrRequirement().benefit || '').trim() : '',
