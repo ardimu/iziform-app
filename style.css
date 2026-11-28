@@ -1165,6 +1165,19 @@ body.theme-midnight .hr-form-field select, body.theme-cyber .hr-form-field selec
 .hr-pricing-head .hr-price-label { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 0.5625rem; letter-spacing: 0.08em; }
 .hr-free-chip { flex-shrink: 0; padding: 0.25rem 0.5rem; border-radius: 999px; border: 1px solid var(--accent-ring); background: var(--accent-soft); color: var(--accent-color); font-family: inherit; font-size: 0.5rem; font-weight: 900; cursor: pointer; }
 .hr-free-note { margin: 0; font-size: 0.5625rem; line-height: 1.5; color: var(--text-faint); }
+.hr-tier-actions { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.15rem; }
+.hr-tier-action-btn { display: flex; flex-direction: column; align-items: flex-start; flex: 1 1 8rem; min-width: 0; gap: 0.2rem; padding: 0.55rem 0.65rem; border-radius: 0.8rem; border: 1px solid var(--border-subtle); background: var(--surface-soft); color: var(--text-body); font-family: inherit; text-align: left; cursor: pointer; transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease; }
+.hr-tier-action-btn small { font-size: 0.45rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); }
+.hr-tier-action-btn span { font-size: 0.625rem; font-weight: 900; line-height: 1.3; overflow-wrap: anywhere; }
+.hr-tier-action-btn:hover { transform: translateY(-1px); border-color: var(--accent-color); }
+.hr-tier-action-btn.is-primary { border-color: var(--accent-color); background: var(--accent-soft); box-shadow: 0 10px 24px -16px var(--accent-ring); }
+.hr-tier-action-btn.is-primary small { color: var(--accent-color); }
+.hr-tier-action-btn.is-active { box-shadow: 0 0 0 2px var(--accent-ring); }
+.hr-tier-actions.is-updating .hr-tier-action-btn { animation: hrTierSwap 0.42s cubic-bezier(0.2, 0.85, 0.25, 1) both; }
+.hr-tier-actions.is-updating .hr-tier-action-btn:nth-child(2) { animation-delay: 0.06s; }
+.hr-tier-actions.is-updating .hr-tier-action-btn:nth-child(3) { animation-delay: 0.12s; }
+@keyframes hrTierSwap { from { opacity: 0; transform: translateY(7px) scale(0.97); } to { opacity: 1; transform: translateY(0) scale(1); } }
+.hr-tier-action-hint { margin: 0; font-size: 0.5rem; line-height: 1.45; color: var(--text-faint); }
 .hr-pricing-mini-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem; }
 .hr-pricing-mini-card { position: relative; display: flex; flex-direction: column; align-items: flex-start; min-width: 0; padding: 0.75rem; border-radius: 0.9rem; border: 1px solid var(--border-subtle); background: var(--surface-soft); }
 .hr-pricing-mini-business { border-color: var(--accent-ring); background: var(--accent-soft); }
@@ -1188,11 +1201,24 @@ body.theme-midnight .hr-form-field select, body.theme-cyber .hr-form-field selec
 .hr-status-label { font-size: 0.5625rem; font-weight: 900; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-faint); }
 .hr-status-list { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 0.5rem; }
 .hr-status-pill { padding: 0.35rem 0.6rem; border-radius: 999px; border: 1px solid var(--border-subtle); background: var(--surface-soft); color: var(--text-faint); font-family: inherit; font-size: 0.5625rem; font-weight: 900; cursor: pointer; }
+.hr-status-pill { transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease; }
+.hr-status-pill:hover { transform: translateY(-1px); border-color: var(--accent-color); }
 .hr-status-pill.active { border-color: var(--accent-color); background: var(--accent-color); color: var(--accent-contrast, #ffffff); }
+.hr-status-hint { margin: 0.5rem 0 0; font-size: 0.5rem; line-height: 1.5; color: var(--text-faint); }
+.hr-recap-guide { margin-top: 0.85rem; padding: 0.55rem 0.65rem; border-radius: 0.8rem; border: 1px dashed var(--border-subtle); background: var(--surface-soft); }
+.hr-recap-guide summary { cursor: pointer; font-size: 0.5625rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-headline); }
+.hr-recap-guide-hint { margin: 0.5rem 0; font-size: 0.5rem; line-height: 1.5; color: var(--text-faint); }
+.hr-recap-guide-list { display: grid; gap: 0.4rem; }
+.hr-recap-guide-list div { display: flex; flex-direction: column; gap: 0.1rem; }
+.hr-recap-guide-list b { font-size: 0.5rem; font-weight: 900; color: var(--text-headline); }
+.hr-recap-guide-list span { font-size: 0.5rem; line-height: 1.45; color: var(--text-faint); }
 .hr-table-wrap { margin-top: 1rem; overflow-x: auto; }
 .hr-recap-table { width: 100%; border-collapse: collapse; font-size: 0.6875rem; }
 .hr-recap-table th { text-align: left; padding: 0.5rem; border-bottom: 1px solid var(--border-subtle); color: var(--text-faint); font-size: 0.5625rem; letter-spacing: 0.07em; text-transform: uppercase; }
 .hr-recap-table td { padding: 0.6rem 0.5rem; border-bottom: 1px dashed var(--border-subtle); color: var(--text-body); }
+.hr-recap-table td small { display: block; margin-top: 0.25rem; font-size: 0.5rem; line-height: 1.5; color: var(--text-faint); }
+.hr-recap-table tbody tr.is-updated { animation: hrRecapFlash 0.55s ease; }
+@keyframes hrRecapFlash { from { background: var(--accent-soft); } to { background: transparent; } }
 
 .candidate-company-sticky {
   position: sticky; top: 7.25rem; z-index: 38; display: flex; align-items: center; gap: 0.75rem;
@@ -2921,6 +2947,14 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template] .recruit-question-do
 .hr-package-status-copy i { margin-top: 0.15rem; font-size: 0.5625rem; font-style: normal; line-height: 1.45; color: var(--text-faint); overflow-wrap: anywhere; }
 .hr-package-status-badge { padding: 0.2rem 0.5rem; border-radius: 999px; background: var(--surface-raised); border: 1px solid var(--border-subtle); color: var(--text-faint); font-size: 0.5625rem; font-weight: 900; }
 .hr-package-status[data-plan="business"] .hr-package-status-badge { background: var(--accent-color); border-color: transparent; color: var(--accent-contrast, #ffffff); }
+.hr-package-status[data-plan="pro"] .hr-package-status-badge { border-color: var(--accent-ring); color: var(--accent-color); }
+.hr-package-status.is-updating { animation: hrStatusRefresh 0.5s ease; }
+@keyframes hrStatusRefresh { 0% { opacity: 0.65; transform: translateY(-3px); } 100% { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) {
+  .hr-tier-actions.is-updating .hr-tier-action-btn,
+  .hr-package-status.is-updating,
+  .hr-recap-table tbody tr.is-updated { animation: none; }
+}
 .hr-package-change-btn { padding: 0.25rem 0.55rem; border-radius: 999px; border: 1px solid var(--border-subtle); background: var(--surface-raised); color: var(--accent-color); font-family: inherit; font-size: 0.5625rem; font-weight: 900; cursor: pointer; }
 .hr-package-change-btn:hover { border-color: var(--accent-color); }
 .hr-pricing-mini-card.is-active { border-color: var(--accent-color); box-shadow: 0 0 0 2px var(--accent-ring); }
@@ -2929,8 +2963,6 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template] .recruit-question-do
 .hr-package-tier-prompt { margin-top: 0.65rem; color: var(--text-body); }
 .hr-package-next-btn { width: 100%; margin-top: 0.9rem; padding: 0.65rem 0.8rem; border-radius: 0.8rem; border: 1px solid var(--accent-color); background: var(--accent-color); color: var(--accent-contrast, #ffffff); box-shadow: 0 12px 22px -12px var(--accent-ring); font-family: inherit; font-size: 0.625rem; font-weight: 900; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; transition: all 0.2s ease; }
 .hr-package-next-btn:hover { transform: translateY(-1px); box-shadow: 0 16px 28px -12px var(--accent-ring); filter: brightness(1.05); }
-.hr-package-free-btn { width: 100%; margin-top: 0.75rem; padding: 0.5rem 0.75rem; border-radius: 0.8rem; border: 1px dashed var(--border-subtle); background: transparent; color: var(--text-faint); font-family: inherit; font-size: 0.5625rem; font-weight: 900; letter-spacing: 0.06em; text-transform: uppercase; cursor: pointer; }
-.hr-package-free-btn:hover { border-color: var(--accent-color); color: var(--accent-color); }
 .category-package-badge { display: inline-flex; margin-top: 0.35rem; padding: 0.2rem 0.5rem; border-radius: 999px; background: var(--accent-soft); border: 1px solid var(--accent-ring); color: var(--accent-color); font-size: 0.5rem; font-weight: 900; letter-spacing: 0.05em; }
 .hr-setup-readiness { display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem 0.65rem; margin-bottom: 1rem; padding: 0.6rem 0.75rem; border-radius: 0.95rem; background: var(--surface-soft); border: 1px solid var(--border-subtle); }
 .hr-setup-readiness-dot { width: 0.5rem; height: 0.5rem; flex-shrink: 0; border-radius: 999px; background: var(--text-faint); }

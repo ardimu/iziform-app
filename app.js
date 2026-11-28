@@ -1117,9 +1117,9 @@ const I18N = {
     'hr.uiPreviewLargeTitle': 'Pratinjau template UI',
     'hr.uiApplyPortal': 'Terapkan ke Sisi B',
     'hr.uiPreviewTagline': 'Tampilan portal kandidat mengikuti template yang dipilih.',
-    'hr.uiTemplate.pro01': 'Pro Tier — Warm Editorial Batik Accent',
-    'hr.uiTemplate.pro02': 'Pro Tier — Crisp Studio Frame',
-    'hr.uiTemplate.pro03': 'Pro Tier — Soft Executive Heritage',
+    'hr.uiTemplate.pro01': 'Pro — Warm Editorial Batik Accent',
+    'hr.uiTemplate.pro02': 'Pro — Crisp Studio Frame',
+    'hr.uiTemplate.pro03': 'Pro — Soft Executive Heritage',
     'hr.uiTemplate.business01': 'Business Tier — Obsidian Executive',
     'hr.uiTemplate.business02': 'Business Tier — Ivory & Champagne Atelier',
     'hr.uiTemplate.business03': 'Business Tier — Nordic Slate & Cobalt',
@@ -1178,6 +1178,17 @@ const I18N = {
     'hr.statusAccepted': 'Diterima',
     'hr.statusRejected': 'Ditolak',
     'hr.matchStatus': 'Status kecocokan',
+    'hr.statusHint': 'Klik status untuk menyaring kandidat dan menandai kandidat terakhir; status ini ikut tersimpan ke Sheet HR.',
+    'hr.recapGuideTitle': 'Panduan kolom rekap',
+    'hr.recapGuideHint': 'Kolom mengikuti field yang aktif di cardbox. Sel kosong ditampilkan sebagai "-".',
+    'hr.colCandidateHint': 'Identitas dan kontak kandidat dari jawaban Sisi B.',
+    'hr.matchStatusHint': 'Tingkat kecocokan CV: Tinggi, Sedang, atau Rendah, lengkap dengan skor bila tersedia.',
+    'hr.colSelectionHint': 'Status seleksi terpilih; berubah saat HR menekan pill status.',
+    'hr.colBenefitHint': 'Benefit yang diisi HR di pengaturan posisi; kosong berarti Belum diisi.',
+    'hr.colCustomHint': 'Jawaban untuk kolom tambahan buatan HR yang tampil di cardbox.',
+    'hr.colDocumentsHint': 'Tautan atau nama berkas CV dan surat lamaran dari Google Drive HR.',
+    'hr.noCandidateHint': 'Belum ada pengiriman dari Sisi B. Bagikan link portal untuk melihat baris contoh di sini.',
+    'hr.noCandidateForStatus': 'Belum ada kandidat dengan status {status}.',
     'hr.priceDesc': 'Akses builder + portal kandidat sekali pakai.',
     'hr.pricingTitle': 'Pro',
     'hr.accordionJobDetails': 'Detail Posisi & Profil Perusahaan',
@@ -1188,7 +1199,12 @@ const I18N = {
     'hr.starterName': 'Pro Tier',
     'hr.packageDraft': 'Paket belum diaktivasi',
     'hr.packageDraftHint': 'Pilih paket, lalu lanjutkan konfirmasi agar form HR siap dipakai.',
+    'hr.packageDraftPro': 'Pro siap diaktifkan',
+    'hr.packageDraftBusiness': 'Business siap diaktifkan',
+    'hr.packageDraftProHint': 'Template Pro dipilih. Selesaikan pembayaran Pro agar form HR siap dipakai.',
+    'hr.packageDraftBusinessHint': 'Template Business dipilih. Selesaikan pembayaran Business agar form HR siap dipakai.',
     'hr.packageActive': 'Paket aktif',
+    'hr.packageActiveTier': 'Paket aktif · {tier}',
     'hr.packageReady': 'Form HR siap digunakan',
     'hr.packageChange': 'Ubah paket',
     'hr.packageContinue': 'Lanjutkan paket ini',
@@ -1246,14 +1262,18 @@ const I18N = {
     'hr.finishingSummaryTitle': 'Ringkasan Setup HR',
     'hr.finishingPortalLink': 'Link portal',
     'hr.packageBadgeDraft': 'Paket: belum aktif',
+    'hr.packageBadgeDraftTier': 'Draft · {tier}',
     'hr.packageBadgeActive': '{plan} Tier - Aktif',
     'hr.tierFreeCta': 'Free Tier, Continue',
     'hr.tierProCta': 'Pro Tier',
     'hr.tierBusinessCta': 'Business Tier',
-    'hr.tierProNote': 'Mohon untuk menyelesaikan pembayaran agar paket Pro Tier dapat aktif.',
-    'hr.tierBusinessNote': 'Mohon untuk menyelesaikan pembayaran agar paket Business Tier dapat aktif.',
-    'hr.tierProPaymentCta': 'Pro Tier — Lanjut Pembayaran',
-    'hr.tierBusinessPaymentCta': 'Business Tier — Lanjut Pembayaran',
+    'hr.tierProNote': 'Mohon untuk menyelesaikan pembayaran Pro agar paket aktif dan form HR siap dipakai.',
+    'hr.tierBusinessNote': 'Mohon untuk menyelesaikan pembayaran Business agar paket aktif dan form HR siap dipakai.',
+    'hr.tierProPaymentCta': 'Pro — Lanjut Pembayaran',
+    'hr.tierBusinessPaymentCta': 'Business — Lanjut Pembayaran',
+    'hr.tierActionHint': 'Pilihan paket menyesuaikan template yang sedang dipilih.',
+    'hr.tierCurrent': 'Fokus saat ini',
+    'hr.tierAlternative': 'Paket lain',
     'hr.templatePaymentRequired': 'Template {template} membutuhkan paket {tier} Tier. Silakan selesaikan pembayaran untuk menggunakannya.',
     'hr.packageStorageStatus': 'Status Storage HR',
     'hr.packageSheetReady': 'Google Sheet HR: aktif',
@@ -1709,9 +1729,9 @@ const I18N = {
     'hr.uiPreviewLargeTitle': 'UI template preview',
     'hr.uiApplyPortal': 'Apply to candidate portal',
     'hr.uiPreviewTagline': 'The candidate portal follows the selected template.',
-    'hr.uiTemplate.pro01': 'Pro Tier — Warm Editorial Batik Accent',
-    'hr.uiTemplate.pro02': 'Pro Tier — Crisp Studio Frame',
-    'hr.uiTemplate.pro03': 'Pro Tier — Soft Executive Heritage',
+    'hr.uiTemplate.pro01': 'Pro — Warm Editorial Batik Accent',
+    'hr.uiTemplate.pro02': 'Pro — Crisp Studio Frame',
+    'hr.uiTemplate.pro03': 'Pro — Soft Executive Heritage',
     'hr.uiTemplate.business01': 'Business Tier — Obsidian Executive',
     'hr.uiTemplate.business02': 'Business Tier — Ivory & Champagne Atelier',
     'hr.uiTemplate.business03': 'Business Tier — Nordic Slate & Cobalt',
@@ -1770,6 +1790,17 @@ const I18N = {
     'hr.statusAccepted': 'Accepted',
     'hr.statusRejected': 'Rejected',
     'hr.matchStatus': 'Match status',
+    'hr.statusHint': 'Click a status to filter the recap and mark the latest candidate; the status is also saved to the HR Sheet.',
+    'hr.recapGuideTitle': 'Recap column guide',
+    'hr.recapGuideHint': 'Columns follow the fields visible in the cardbox. Empty cells are shown as "-".',
+    'hr.colCandidateHint': 'Candidate identity and contact details from Side B answers.',
+    'hr.matchStatusHint': 'CV match level: High, Medium, or Low, with a score when available.',
+    'hr.colSelectionHint': 'Selected selection status; updates when an HR status pill is pressed.',
+    'hr.colBenefitHint': 'Benefits set by HR in the role settings; blank means Not specified.',
+    'hr.colCustomHint': 'Answers to HR-added custom fields shown in the cardbox.',
+    'hr.colDocumentsHint': 'Links or file names for the CV and cover letter from HR Google Drive.',
+    'hr.noCandidateHint': 'No submission from Side B yet. Share the portal link to see a sample row here.',
+    'hr.noCandidateForStatus': 'No candidate with status {status} yet.',
     'hr.priceDesc': 'One-time builder + candidate portal access.',
     'hr.pricingTitle': 'Pro',
     'hr.accordionJobDetails': 'Job Details & Company Profile',
@@ -1780,7 +1811,12 @@ const I18N = {
     'hr.starterName': 'Pro Tier',
     'hr.packageDraft': 'Package not activated',
     'hr.packageDraftHint': 'Choose a package, then continue the confirmation so the HR form is ready.',
+    'hr.packageDraftPro': 'Pro ready to activate',
+    'hr.packageDraftBusiness': 'Business ready to activate',
+    'hr.packageDraftProHint': 'Pro template selected. Complete the Pro payment to make the HR form ready.',
+    'hr.packageDraftBusinessHint': 'Business template selected. Complete the Business payment to make the HR form ready.',
     'hr.packageActive': 'Package active',
+    'hr.packageActiveTier': 'Active package · {tier}',
     'hr.packageReady': 'HR form is ready to use',
     'hr.packageChange': 'Change package',
     'hr.packageContinue': 'Continue this package',
@@ -1838,14 +1874,18 @@ const I18N = {
     'hr.finishingSummaryTitle': 'HR Setup Recap',
     'hr.finishingPortalLink': 'Portal link',
     'hr.packageBadgeDraft': 'Package: not active',
+    'hr.packageBadgeDraftTier': 'Draft · {tier}',
     'hr.packageBadgeActive': '{plan} Tier - Active',
     'hr.tierFreeCta': 'Free Tier, Continue',
     'hr.tierProCta': 'Pro Tier',
     'hr.tierBusinessCta': 'Business Tier',
-    'hr.tierProNote': 'Please complete the payment so the Pro Tier package can be activated.',
-    'hr.tierBusinessNote': 'Please complete the payment so the Business Tier package can be activated.',
-    'hr.tierProPaymentCta': 'Pro Tier — Continue to Payment',
-    'hr.tierBusinessPaymentCta': 'Business Tier — Continue to Payment',
+    'hr.tierProNote': 'Please complete the Pro payment so the package is active and the HR form is ready.',
+    'hr.tierBusinessNote': 'Please complete the Business payment so the package is active and the HR form is ready.',
+    'hr.tierProPaymentCta': 'Pro — Continue to Payment',
+    'hr.tierBusinessPaymentCta': 'Business — Continue to Payment',
+    'hr.tierActionHint': 'Package options follow the template currently selected.',
+    'hr.tierCurrent': 'Current focus',
+    'hr.tierAlternative': 'Other package',
     'hr.templatePaymentRequired': 'The {template} template requires the {tier} Tier package. Please complete the payment to use it.',
     'hr.packageStorageStatus': 'HR Storage Status',
     'hr.packageSheetReady': 'HR Google Sheet: active',
@@ -2301,9 +2341,9 @@ const I18N = {
     'hr.uiPreviewLargeTitle': '界面模板预览',
     'hr.uiApplyPortal': '应用到候选人端',
     'hr.uiPreviewTagline': '候选人门户将跟随所选模板。',
-    'hr.uiTemplate.pro01': 'Pro Tier — 暖色编辑蜡染',
-    'hr.uiTemplate.pro02': 'Pro Tier — 清晰工作室框线',
-    'hr.uiTemplate.pro03': 'Pro Tier — 柔和传承行政风',
+    'hr.uiTemplate.pro01': 'Pro — 暖色编辑蜡染',
+    'hr.uiTemplate.pro02': 'Pro — 清晰工作室框线',
+    'hr.uiTemplate.pro03': 'Pro — 柔和传承行政风',
     'hr.uiTemplate.business01': 'Business Tier — 黑曜行政风',
     'hr.uiTemplate.business02': 'Business Tier — 象牙香槟工坊',
     'hr.uiTemplate.business03': 'Business Tier — 北欧石板钴蓝',
@@ -2362,6 +2402,17 @@ const I18N = {
     'hr.statusAccepted': '已录用',
     'hr.statusRejected': '未通过',
     'hr.matchStatus': '匹配状态',
+    'hr.statusHint': '点击状态可筛选汇总并标记最新候选人；状态也会写入 HR 表格。',
+    'hr.recapGuideTitle': '汇总列说明',
+    'hr.recapGuideHint': '列会跟随卡片中可见的字段。空白单元格显示为 "-"。',
+    'hr.colCandidateHint': '来自 B 侧回答的候选人身份与联系方式。',
+    'hr.matchStatusHint': '简历匹配等级：高、中或低；有分数时会一并显示。',
+    'hr.colSelectionHint': '当前选择的筛选状态；点击 HR 状态按钮后会更新。',
+    'hr.colBenefitHint': 'HR 在职位设置中填写的福利；空白表示未填写。',
+    'hr.colCustomHint': '卡片中显示的 HR 自定义字段回答。',
+    'hr.colDocumentsHint': '来自 HR Google Drive 的简历与求职信链接或文件名。',
+    'hr.noCandidateHint': 'B 侧还没有提交。分享门户链接后，这里会显示示例行。',
+    'hr.noCandidateForStatus': '暂无状态为 {status} 的候选人。',
     'hr.priceDesc': '一次性开通构建器 + 候选人门户。',
     'hr.pricingTitle': 'Pro',
     'hr.accordionJobDetails': '职位详情与公司资料',
@@ -2372,7 +2423,12 @@ const I18N = {
     'hr.starterName': 'Pro Tier',
     'hr.packageDraft': '套餐尚未激活',
     'hr.packageDraftHint': '选择套餐后继续确认，即可启用 HR 表单。',
+    'hr.packageDraftPro': 'Pro 可激活',
+    'hr.packageDraftBusiness': 'Business 可激活',
+    'hr.packageDraftProHint': '已选择 Pro 模板。完成 Pro 付款后，HR 表单即可使用。',
+    'hr.packageDraftBusinessHint': '已选择 Business 模板。完成 Business 付款后，HR 表单即可使用。',
     'hr.packageActive': '套餐已激活',
+    'hr.packageActiveTier': '套餐已激活 · {tier}',
     'hr.packageReady': 'HR 表单已可使用',
     'hr.packageChange': '更换套餐',
     'hr.packageContinue': '继续此套餐',
@@ -2430,14 +2486,18 @@ const I18N = {
     'hr.finishingSummaryTitle': 'HR 设置汇总',
     'hr.finishingPortalLink': '门户链接',
     'hr.packageBadgeDraft': '套餐：未激活',
+    'hr.packageBadgeDraftTier': '草稿 · {tier}',
     'hr.packageBadgeActive': '{plan} 套餐 - 已激活',
     'hr.tierFreeCta': 'Free Tier, Continue',
     'hr.tierProCta': 'Pro Tier',
     'hr.tierBusinessCta': 'Business Tier',
-    'hr.tierProNote': '请完成付款，以启用 Pro Tier 套餐。',
-    'hr.tierBusinessNote': '请完成付款，以启用 Business Tier 套餐。',
-    'hr.tierProPaymentCta': 'Pro Tier — 继续付款',
-    'hr.tierBusinessPaymentCta': 'Business Tier — 继续付款',
+    'hr.tierProNote': '请完成 Pro 付款，以启用套餐并让 HR 表单可用。',
+    'hr.tierBusinessNote': '请完成 Business 付款，以启用套餐并让 HR 表单可用。',
+    'hr.tierProPaymentCta': 'Pro — 继续付款',
+    'hr.tierBusinessPaymentCta': 'Business — 继续付款',
+    'hr.tierActionHint': '套餐选项会跟随当前选择的模板更新。',
+    'hr.tierCurrent': '当前焦点',
+    'hr.tierAlternative': '其他套餐',
     'hr.templatePaymentRequired': '模板 {template} 需要 {tier} Tier 套餐。请完成付款后再使用该模板。',
     'hr.packageStorageStatus': 'HR 存储状态',
     'hr.packageSheetReady': 'HR Google Sheet：已启用',
@@ -2923,6 +2983,9 @@ function setLanguage(lang) {
   }
   renderSyncStatus();
   renderHrPackageStatus();
+  renderHrStatusList();
+  renderHrRecapGuide();
+  renderHrRecap();
   renderCvMatchPanel();
   updateCandidatePortalOffsets();
   showToast(t('toast.language', { name: LANGUAGE_LABELS[lang] }));
@@ -3932,6 +3995,8 @@ function selectHrUiTemplate(templateKey) {
   if (state.view === 'form' && state.activePresetKey === 'recruit') renderActivePresetHeader();
   renderCandidatePortal();
   renderHrFinishingSummary();
+  renderHrPackageStatus(true);
+  animateHrTierActions();
   showToast(`${t('toast.hrTemplate')}: ${getHrTemplateLabel(template)}`);
 }
 
@@ -4337,6 +4402,82 @@ function getHrTierRank(planKey) {
   return { free: 0, pro: 1, business: 2 }[normalizeHrPackagePlan(planKey)] || 0;
 }
 
+function getHrTemplateTier() {
+  return normalizeHrPackagePlan(getHrUiTemplate().tier || state.hrUiTier || 'free');
+}
+
+function getHrDraftPackageTier() {
+  const selected = normalizeHrPackagePlan(state.hrPackageModalPlan || 'free');
+  return selected === 'free' ? getHrTemplateTier() : selected;
+}
+
+function getHrContextualTierCta(planKey) {
+  const plan = normalizeHrPackagePlan(planKey);
+  const focusTier = getHrDraftPackageTier();
+  const activePlan = state.hrPackage.active ? normalizeHrPackagePlan(state.hrPackage.plan) : '';
+  if (plan !== focusTier || activePlan === plan) return getHrTierCtaLabel(plan);
+  if (plan === 'pro') return t('hr.tierProPaymentCta');
+  if (plan === 'business') return t('hr.tierBusinessPaymentCta');
+  return t('hr.tierFreeCta');
+}
+
+let hrTierAnimationTimer = null;
+
+function animateHrTierActions() {
+  const box = document.getElementById('hr-tier-actions');
+  if (!box) return;
+  if (hrTierAnimationTimer) window.clearTimeout(hrTierAnimationTimer);
+  box.classList.remove('is-updating');
+  void box.offsetWidth;
+  box.classList.add('is-updating');
+  hrTierAnimationTimer = window.setTimeout(() => box.classList.remove('is-updating'), 520);
+}
+
+function renderHrDynamicTierActions() {
+  const box = document.getElementById('hr-tier-actions');
+  if (!box) return;
+  const focusTier = getHrDraftPackageTier();
+  const activePlan = state.hrPackage.active ? normalizeHrPackagePlan(state.hrPackage.plan) : '';
+  const plans = [focusTier, ...['free', 'pro', 'business'].filter((plan) => plan !== focusTier)];
+  box.dataset.tier = focusTier;
+  box.innerHTML = plans.map((plan, index) => {
+    const primary = index === 0;
+    const isActive = activePlan === plan;
+    return `
+      <button type="button" data-hr-dynamic-tier="${plan}" class="hr-tier-action-btn ${primary ? 'is-primary' : 'is-alternative'} ${isActive ? 'is-active' : ''}" ${isActive ? 'aria-current="true"' : ''}>
+        <small>${escapeHtml(primary ? t('hr.tierCurrent') : t('hr.tierAlternative'))}</small>
+        <span>${escapeHtml(getHrContextualTierCta(plan))}</span>
+      </button>`;
+  }).join('');
+}
+
+function animateHrPackageStatus() {
+  const status = document.getElementById('hr-package-status');
+  if (!status) return;
+  status.classList.remove('is-updating');
+  void status.offsetWidth;
+  status.classList.add('is-updating');
+  window.setTimeout(() => status.classList.remove('is-updating'), 520);
+}
+
+function getHrPackageStatusCopy(active, plan) {
+  if (active) {
+    const meta = getHrPackageMeta(plan);
+    return {
+      label: t('hr.packageActiveTier', { tier: meta.tier }),
+      detail: `${t('hr.packageReady')} · ${meta.name} · ${meta.price}`
+    };
+  }
+  const draftTier = getHrDraftPackageTier();
+  if (draftTier === 'pro') {
+    return { label: t('hr.packageDraftPro'), detail: t('hr.packageDraftProHint') };
+  }
+  if (draftTier === 'business') {
+    return { label: t('hr.packageDraftBusiness'), detail: t('hr.packageDraftBusinessHint') };
+  }
+  return { label: t('hr.packageDraft'), detail: t('hr.packageDraftHint') };
+}
+
 function getHrRequiredTemplatePlan() {
   const templateTier = normalizeHrPackagePlan(getHrUiTemplate().tier || state.hrUiTier || 'free');
   const activePlan = state.hrPackage.active ? normalizeHrPackagePlan(state.hrPackage.plan) : 'free';
@@ -4353,6 +4494,8 @@ function runHrPaidTemplateGuard(action, requestedPlan) {
   state.hrPackageModalPlan = targetPlan;
   closeHrFinishingModal();
   openHrPackageModal(targetPlan);
+  renderHrPackageStatus(true);
+  animateHrTierActions();
   return false;
 }
 
@@ -4400,6 +4543,7 @@ function renderHrPackageSummary() {
 
 function renderHrPackageTriggerLabels() {
   document.querySelectorAll('[data-hr-package-trigger]').forEach((button) => {
+    if (button.closest('#hr-tier-actions')) return;
     const plan = button.getAttribute('data-hr-package-trigger');
     if (plan === 'checkout') {
       button.textContent = t('hr.packageContinueCheckout');
@@ -4457,20 +4601,28 @@ function renderHrPackageReceipt() {
     <div><span>${escapeHtml(label)}</span><b>${escapeHtml(value)}</b></div>`).join('');
 }
 
-function renderHrPackageStatus() {
+function renderHrPackageStatus(animate = false) {
   const active = state.hrPackage.active === true;
   const plan = active ? normalizeHrPackagePlan(state.hrPackage.plan) : '';
+  const draftTier = getHrDraftPackageTier();
   if (active && !getHrRequiredTemplatePlan()) state.hrPackageModalPlan = plan;
   const meta = active ? getHrPackageMeta(plan) : null;
+  const copy = getHrPackageStatusCopy(active, plan);
   const status = document.getElementById('hr-package-status');
   if (status) {
-    status.dataset.plan = active ? plan : 'draft';
+    const contextKey = active ? `active:${plan}` : `draft:${draftTier}`;
+    const contextChanged = Boolean(status.dataset.context) && status.dataset.context !== contextKey;
+    status.dataset.context = contextKey;
+    status.dataset.plan = active ? plan : draftTier;
     const label = document.getElementById('hr-package-status-label');
     const detail = document.getElementById('hr-package-status-detail');
     const badge = document.getElementById('hr-package-status-badge');
-    if (label) label.textContent = active ? t('hr.packageActive') : t('hr.packageDraft');
-    if (detail) detail.textContent = active ? `${t('hr.packageReady')} · ${meta.name} · ${meta.price}` : t('hr.packageDraftHint');
-    if (badge) badge.textContent = active ? t('hr.packageBadgeActive', { plan: meta.tier }) : t('hr.packageBadgeDraft');
+    if (label) label.textContent = copy.label;
+    if (detail) detail.textContent = copy.detail;
+    if (badge) badge.textContent = active
+      ? t('hr.packageBadgeActive', { plan: meta.tier })
+      : t('hr.packageBadgeDraftTier', { tier: t(`pricing.${draftTier}`) });
+    if (animate && contextChanged) animateHrPackageStatus();
   }
   const changeButton = document.getElementById('hr-package-change-btn');
   if (changeButton) changeButton.classList.toggle('hidden', !active);
@@ -4480,8 +4632,11 @@ function renderHrPackageStatus() {
   const freeChip = document.getElementById('hr-free-try-btn');
   if (freeChip) freeChip.classList.toggle('is-active', active && plan === 'free');
   const dashboardBadge = document.getElementById('hr-package-dashboard-badge');
-  if (dashboardBadge) dashboardBadge.textContent = active ? t('hr.packageBadgeActive', { plan: meta.tier }) : t('hr.packageBadgeDraft');
+  if (dashboardBadge) dashboardBadge.textContent = active
+    ? t('hr.packageBadgeActive', { plan: meta.tier })
+    : t('hr.packageBadgeDraftTier', { tier: t(`pricing.${draftTier}`) });
   renderHrPackageTriggerLabels();
+  renderHrDynamicTierActions();
   renderHrPackageStorageStatus();
   renderHrPackageReceipt();
   renderHrFinishingSummary();
@@ -4701,6 +4856,15 @@ function setupHrFinishingTriggers() {
   });
 }
 
+function triggerHrPackage(planKey) {
+  const plan = normalizeHrPackagePlan(planKey);
+  runHrPaidTemplateGuard(() => {
+    openHrPackageModal(plan);
+    renderHrPackageStatus(true);
+    animateHrTierActions();
+  }, plan);
+}
+
 function setupHrPackageTriggers() {
   document.querySelectorAll('[data-hr-package-trigger]').forEach((button) => {
     button.addEventListener('click', () => {
@@ -4712,14 +4876,22 @@ function setupHrPackageTriggers() {
         );
         return;
       }
-      runHrPaidTemplateGuard(() => openHrPackageModal(plan), plan);
+      triggerHrPackage(plan);
     });
   });
+  const tierActions = document.getElementById('hr-tier-actions');
+  if (tierActions) {
+    tierActions.addEventListener('click', (event) => {
+      const button = event.target.closest('[data-hr-dynamic-tier]');
+      if (button) triggerHrPackage(button.getAttribute('data-hr-dynamic-tier'));
+    });
+  }
   document.querySelectorAll('[data-hr-package-plan]').forEach((card) => {
     card.addEventListener('click', () => {
       state.hrPackageModalPlan = normalizeHrPackagePlan(card.getAttribute('data-hr-package-plan'));
       renderHrPackageModalTier();
-      renderHrFinishingSummary();
+      renderHrPackageStatus(true);
+      animateHrTierActions();
     });
   });
   const changeButton = document.getElementById('hr-package-change-btn');
@@ -4784,7 +4956,8 @@ function confirmHrPackage() {
   updateHrCompanyName(company);
   syncHrPackageFromSettings();
   renderSyncStatus();
-  renderHrPackageStatus();
+  renderHrPackageStatus(true);
+  animateHrTierActions();
   const form = document.getElementById('hr-package-form');
   const success = document.getElementById('hr-package-success');
   if (form) form.classList.add('hidden');
@@ -4860,6 +5033,7 @@ function renderHrBuilder() {
   renderHrCardboxOverview();
   renderHrPricing();
   renderHrStatusList();
+  renderHrRecapGuide();
   renderHrRecap();
 }
 
@@ -4867,7 +5041,23 @@ function renderHrStatusList() {
   const list = document.getElementById('hr-status-list');
   if (!list) return;
   list.innerHTML = HR_STATUS_KEYS.map((key) => `
-    <button type="button" onclick="setHrSelectionStatus('${key}')" class="hr-status-pill ${key === state.hrSelectionStatus ? 'active' : ''}">${escapeHtml(hrStatusLabel(key))}</button>
+    <button type="button" onclick="setHrSelectionStatus('${key}')" class="hr-status-pill ${key === state.hrSelectionStatus ? 'active' : ''}" aria-pressed="${key === state.hrSelectionStatus}" title="${escapeHtml(t('hr.statusHint'))}">${escapeHtml(hrStatusLabel(key))}</button>
+  `).join('');
+}
+
+function renderHrRecapGuide() {
+  const list = document.getElementById('hr-recap-guide-list');
+  if (!list) return;
+  const rows = [
+    ['hr.colCandidate', 'hr.colCandidateHint'],
+    ['hr.matchStatus', 'hr.matchStatusHint'],
+    ['hr.colSelection', 'hr.colSelectionHint'],
+    ['hr.colBenefit', 'hr.colBenefitHint'],
+    ['hr.colCustom', 'hr.colCustomHint'],
+    ['hr.colDocuments', 'hr.colDocumentsHint']
+  ];
+  list.innerHTML = rows.map(([labelKey, hintKey]) => `
+    <div><b>${escapeHtml(t(labelKey))}</b><span>${escapeHtml(t(hintKey))}</span></div>
   `).join('');
 }
 
@@ -4876,7 +5066,7 @@ function setHrSelectionStatus(status) {
   state.hrSelectionStatus = status;
   if (state.hrLastCandidate) state.hrLastCandidate.status = status;
   renderHrStatusList();
-  renderHrRecap();
+  renderHrRecap(true);
   showToast(`${t('toast.hrStatus')}: ${hrStatusLabel(status)}`);
 }
 
@@ -4923,12 +5113,18 @@ function renderHrDocumentCell(label, documentValue) {
   return `<b>${escapeHtml(label)}:</b> ${value}`;
 }
 
-function renderHrRecap() {
+function renderHrRecap(animate = false) {
   const body = document.getElementById('hr-recap-body');
   if (!body) return;
   const candidate = state.hrLastCandidate;
   if (!candidate) {
-    body.innerHTML = `<tr><td colspan="6">${escapeHtml(t('hr.noCandidate'))}</td></tr>`;
+    body.innerHTML = `<tr><td colspan="6"><b>${escapeHtml(t('hr.noCandidate'))}</b><small>${escapeHtml(t('hr.noCandidateHint'))}</small></td></tr>`;
+    return;
+  }
+  const activeStatus = HR_STATUS_KEYS.includes(state.hrSelectionStatus) ? state.hrSelectionStatus : 'new';
+  if (!HR_STATUS_KEYS.includes(candidate.status)) candidate.status = 'new';
+  if (candidate.status !== activeStatus) {
+    body.innerHTML = `<tr><td colspan="6"><b>${escapeHtml(t('hr.noCandidateForStatus', { status: hrStatusLabel(activeStatus) }))}</b><small>${escapeHtml(t('hr.statusHint'))}</small></td></tr>`;
     return;
   }
   const score = candidate.score ? ` (${candidate.score})` : '';
@@ -4945,10 +5141,10 @@ function renderHrRecap() {
     renderHrDocumentCell(t('hr.docCover'), candidate.coverLetter)
   ].join('<br>');
   body.innerHTML = `
-    <tr>
+    <tr${animate ? ' class="is-updated"' : ''}>
       <td><b>${escapeHtml(candidate.name || '-')}</b><br><span>${escapeHtml(candidate.email || '-')} · ${escapeHtml(candidate.wa || '-')}</span></td>
       <td>${escapeHtml(candidate.match || t('cv.levelLow'))}${escapeHtml(score)}</td>
-      <td>${escapeHtml(hrStatusLabel(candidate.status || 'new'))}</td>
+      <td>${escapeHtml(hrStatusLabel(candidate.status))}</td>
       <td>${escapeHtml(benefit)}</td>
       <td>${customAnswers}</td>
       <td>${documents}</td>

@@ -707,11 +707,13 @@
                   <span class="hr-package-status-badge" id="hr-package-status-badge">—</span>
                   <button type="button" id="hr-package-change-btn" class="hr-package-change-btn hidden" data-i18n="hr.packageChange">Ubah paket</button>
                 </div>
+                <div id="hr-tier-actions" class="hr-tier-actions" aria-live="polite"></div>
+                <p class="hr-tier-action-hint" data-i18n="hr.tierActionHint">Pilihan paket menyesuaikan template yang sedang dipilih.</p>
                 <p class="hr-free-note" data-i18n="hr.freeNote">Mode dasar gratis tetap tersedia untuk mencoba alur Sisi A ↔ Sisi B.</p>
                 <div class="hr-pricing-mini-grid">
                   <article class="hr-pricing-mini-card" data-hr-package-plan="pro">
                     <span class="hr-pricing-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
-                    <strong class="hr-pricing-mini-name" data-i18n="hr.starterName">Pro Tier</strong>
+                    <strong class="hr-pricing-mini-name" data-i18n="hr.pricingTitle">Pro</strong>
                     <span class="start-from"><i aria-hidden="true"></i><span data-i18n="pricing.startFrom">Mulai dari</span></span>
                     <span class="price-amount-wrap hr-pricing-amount">
                       <del class="price-old" id="hr-price-old">Rp79.000</del>
@@ -723,7 +725,7 @@
                       <li data-i18n="hr.benefitCv">Auto-fill PDF CV + kecocokan Tinggi/Sedang/Rendah</li>
                       <li data-i18n="hr.benefitSheet">Rekap 1 Google Sheet HR</li>
                     </ul>
-                    <p class="hr-tier-note" data-i18n="hr.tierProNote">Mohon untuk menyelesaikan pembayaran agar paket Pro Tier dapat aktif.</p>
+                    <p class="hr-tier-note" data-i18n="hr.tierProNote">Mohon untuk menyelesaikan pembayaran Pro agar paket aktif dan form HR siap dipakai.</p>
                     <button type="button" data-hr-package-trigger="pro" class="hr-package-next-btn">Pro Tier</button>
                   </article>
                   <article class="hr-pricing-mini-card hr-pricing-mini-business" data-hr-package-plan="business">
@@ -740,11 +742,10 @@
                       <li data-i18n="hr.benefitBusinessTemplate">Template portal karier Business</li>
                       <li data-i18n="hr.benefitFilter">Rekap &amp; penyaringan kandidat lebih leluasa</li>
                     </ul>
-                    <p class="hr-tier-note" data-i18n="hr.tierBusinessNote">Mohon untuk menyelesaikan pembayaran agar paket Business Tier dapat aktif.</p>
+                    <p class="hr-tier-note" data-i18n="hr.tierBusinessNote">Mohon untuk menyelesaikan pembayaran Business agar paket aktif dan form HR siap dipakai.</p>
                     <button type="button" data-hr-package-trigger="business" class="hr-package-next-btn">Business Tier</button>
                   </article>
                 </div>
-                <button type="button" data-hr-package-trigger="free" class="hr-package-free-btn">Free Tier, Continue</button>
               </section>
               <article class="hr-recap-card">
                 <span class="custom-track-label" data-i18n="hr.previewTitle">Pratinjau rekap Google Sheet HR</span>
@@ -763,7 +764,13 @@
                 <div class="hr-status-block">
                   <span class="hr-status-label" data-i18n="hr.statusLabel">Status seleksi</span>
                   <div id="hr-status-list" class="hr-status-list"></div>
+                  <p class="hr-status-hint" data-i18n="hr.statusHint">Klik status untuk menyaring kandidat dan menandai kandidat terakhir; status ini ikut tersimpan ke Sheet HR.</p>
                 </div>
+                <details class="hr-recap-guide">
+                  <summary data-i18n="hr.recapGuideTitle">Panduan kolom rekap</summary>
+                  <p class="hr-recap-guide-hint" data-i18n="hr.recapGuideHint">Kolom mengikuti field yang aktif di cardbox. Sel kosong ditampilkan sebagai "-"</p>
+                  <div id="hr-recap-guide-list" class="hr-recap-guide-list"></div>
+                </details>
                 <div class="hr-table-wrap">
                   <table class="hr-recap-table">
                     <thead><tr>
