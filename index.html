@@ -673,7 +673,7 @@
               </details>
               </div>
               <div class="custom-actions hr-builder-actions">
-                <button type="button" id="hr-finish-btn" data-hr-open-finishing class="btn btn-primary hr-finish-btn" data-i18n="hr.finishCta">Selesaikan &amp; Ringkas</button>
+                <button type="button" id="hr-finish-btn" data-hr-open-finishing class="btn btn-primary hr-finish-btn" data-i18n="hr.finishCta">Simpan &amp; Tinjau Form</button>
                 <button type="button" onclick="setHrActiveSide('b')" class="btn btn-secondary" data-i18n="hr.openPortal">Buka Portal Kandidat</button>
                 <button type="button" onclick="previewCategory('recruit')" class="btn btn-secondary" data-i18n="hr.demoPortal">Demo Portal Kandidat</button>
                 <button type="button" onclick="closeInfoPanel()" class="btn btn-secondary" data-i18n="panel.back">Kembali ke Kategori</button>
@@ -710,7 +710,8 @@
                       <li data-i18n="hr.benefitCv">Auto-fill PDF CV + kecocokan Tinggi/Sedang/Rendah</li>
                       <li data-i18n="hr.benefitSheet">Rekap 1 Google Sheet HR</li>
                     </ul>
-                    <button type="button" data-hr-package-trigger="pro" class="hr-package-next-btn">Aktifkan Paket Pro</button>
+                    <p class="hr-tier-note" data-i18n="hr.tierProNote">Form tetap bisa disusun dulu. Selesaikan pembayaran Pro di langkah konfirmasi untuk mengunci tier ini.</p>
+                    <button type="button" data-hr-package-trigger="pro" class="hr-package-next-btn">Pro Tier — Lanjut Pembayaran</button>
                   </article>
                   <article class="hr-pricing-mini-card hr-pricing-mini-business" data-hr-package-plan="business">
                     <span class="hr-pricing-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
@@ -726,10 +727,11 @@
                       <li data-i18n="hr.benefitBusinessTemplate">Template portal karier Business</li>
                       <li data-i18n="hr.benefitFilter">Rekap &amp; penyaringan kandidat lebih leluasa</li>
                     </ul>
-                    <button type="button" data-hr-package-trigger="business" class="hr-package-next-btn">Aktifkan Paket Business</button>
+                    <p class="hr-tier-note" data-i18n="hr.tierBusinessNote">Template dan requirement bisa disiapkan lebih dulu. Selesaikan pembayaran Business di langkah konfirmasi untuk mengunci tier ini.</p>
+                    <button type="button" data-hr-package-trigger="business" class="hr-package-next-btn">Business Tier — Lanjut Pembayaran</button>
                   </article>
                 </div>
-                <button type="button" data-hr-package-trigger="free" class="hr-package-free-btn">Aktifkan Paket Free</button>
+                <button type="button" data-hr-package-trigger="free" class="hr-package-free-btn">Free Tier, Continue</button>
               </section>
               <article class="hr-recap-card">
                 <span class="custom-track-label" data-i18n="hr.previewTitle">Pratinjau rekap Google Sheet HR</span>
@@ -973,6 +975,10 @@
           <span id="question-next-label">Lanjutkan</span>
           <span>&rarr;</span>
         </button>
+        <button type="button" onclick="finishApplicantApplication()" id="question-btn-finish" class="dock-btn dock-btn-primary dock-btn-finish hidden">
+          <span data-i18n="form.finishApplication">Selesaikan &amp; Kirim Lamaran</span>
+          <span>&rarr;</span>
+        </button>
       </div>
           </div>
         </div>
@@ -1207,8 +1213,8 @@
       <p id="hr-finishing-note" class="hr-finishing-note hidden"></p>
 
       <div class="hr-finishing-actions">
-        <button type="button" id="hr-finishing-preview-btn" class="modal-primary" data-i18n="hr.finishingPreview">Pratinjau Portal Kandidat</button>
-        <button type="button" id="hr-finishing-copy-btn" class="modal-secondary" data-i18n="hr.finishingCopy">Salin Ringkasan / Link</button>
+        <button type="button" id="hr-finishing-preview-btn" class="modal-primary" data-i18n="hr.finishingPreview">Lihat Portal Pelamar</button>
+        <button type="button" id="hr-finishing-copy-btn" class="modal-secondary" data-i18n="hr.finishingCopy">Salin Link Form</button>
         <button type="button" id="hr-finishing-back-btn" class="modal-secondary" data-i18n="hr.finishingBack">Kembali ke Pengaturan HR</button>
         <button type="button" id="hr-finishing-activate-btn" class="hr-finishing-activate hidden" data-i18n="hr.finishingActivate">Aktifkan paket dulu</button>
       </div>

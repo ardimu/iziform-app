@@ -1204,7 +1204,7 @@ const I18N = {
     'hr.packageReceiptStorageValue': 'Google Sheet HR + Google Drive HR',
     'hr.packageReceiptNotes': 'Catatan',
     'hr.packageDone': 'Selesai',
-    'hr.finishCta': 'Selesaikan & Ringkas',
+    'hr.finishCta': 'Simpan & Tinjau Form',
     'hr.packageViewFinishing': 'Lihat Ringkasan & Tindak Lanjut',
     'hr.finishingEyebrow': 'Tahap Akhir HR',
     'hr.finishingTitle': 'Ringkasan & tindak lanjut setup HR',
@@ -1223,8 +1223,8 @@ const I18N = {
     'hr.finishingStorage': 'Tujuan penyimpanan HR',
     'hr.finishingSheetDetail': '1 Google Sheet milik HR · Rekap Kandidat, Screening, Detail',
     'hr.finishingDriveDetail': 'Google Drive milik HR · CV & surat lamaran',
-    'hr.finishingPreview': 'Pratinjau Portal Kandidat',
-    'hr.finishingCopy': 'Salin Ringkasan / Link',
+    'hr.finishingPreview': 'Lihat Portal Pelamar',
+    'hr.finishingCopy': 'Salin Link Form',
     'hr.finishingBack': 'Kembali ke Pengaturan HR',
     'hr.finishingActivate': 'Aktifkan paket dulu',
     'hr.finishingNoteDraft': 'Aktifkan paket agar status Siap Pakai dan link siap dibagikan.',
@@ -1235,6 +1235,11 @@ const I18N = {
     'hr.packageBadgeDraft': 'Paket: belum aktif',
     'hr.packageBadgeActive': '{plan} Tier - Aktif',
     'hr.packageActivate': 'Aktifkan Paket {plan}',
+    'hr.tierFreeCta': 'Free Tier, Continue',
+    'hr.tierProCta': 'Pro Tier — Lanjut Pembayaran',
+    'hr.tierBusinessCta': 'Business Tier — Lanjut Pembayaran',
+    'hr.tierProNote': 'Form tetap bisa disusun dulu. Selesaikan pembayaran Pro di langkah konfirmasi untuk mengunci tier ini.',
+    'hr.tierBusinessNote': 'Template dan requirement bisa disiapkan lebih dulu. Selesaikan pembayaran Business di langkah konfirmasi untuk mengunci tier ini.',
     'hr.packageStorageStatus': 'Status Storage HR',
     'hr.packageSheetReady': 'Google Sheet HR: aktif',
     'hr.packageSheetPending': 'Google Sheet HR: belum diisi',
@@ -1469,6 +1474,7 @@ const I18N = {
     'form.optional': 'Opsional',
     'form.continue': 'Lanjutkan',
     'form.submit': 'Kirim ke Google Sheet',
+    'form.finishApplication': 'Selesaikan & Kirim Lamaran',
     'form.hint': 'Pilih kartu atau tekan',
     'form.questionCounter': 'Pertanyaan {current} dari {total}',
     'form.ratingSelect': 'Pilih rating',
@@ -1777,7 +1783,7 @@ const I18N = {
     'hr.packageReceiptStorageValue': 'HR Google Sheet + HR Google Drive',
     'hr.packageReceiptNotes': 'Notes',
     'hr.packageDone': 'Done',
-    'hr.finishCta': 'Finish & Recap',
+    'hr.finishCta': 'Save & Review Form',
     'hr.packageViewFinishing': 'View Recap & Next Steps',
     'hr.finishingEyebrow': 'HR Finishing',
     'hr.finishingTitle': 'HR setup recap & next steps',
@@ -1796,8 +1802,8 @@ const I18N = {
     'hr.finishingStorage': 'HR storage destination',
     'hr.finishingSheetDetail': '1 HR-owned Google Sheet · Candidate Recap, Screening, Details',
     'hr.finishingDriveDetail': 'HR-owned Google Drive · CV & cover letter',
-    'hr.finishingPreview': 'Preview Candidate Portal',
-    'hr.finishingCopy': 'Copy Recap / Link',
+    'hr.finishingPreview': 'View Applicant Portal',
+    'hr.finishingCopy': 'Copy Form Link',
     'hr.finishingBack': 'Back to HR Settings',
     'hr.finishingActivate': 'Activate a package first',
     'hr.finishingNoteDraft': 'Activate a package to mark it Ready to Use and share the portal link.',
@@ -1808,6 +1814,11 @@ const I18N = {
     'hr.packageBadgeDraft': 'Package: not active',
     'hr.packageBadgeActive': '{plan} Tier - Active',
     'hr.packageActivate': 'Activate {plan} Package',
+    'hr.tierFreeCta': 'Free Tier, Continue',
+    'hr.tierProCta': 'Pro Tier — Continue to Payment',
+    'hr.tierBusinessCta': 'Business Tier — Continue to Payment',
+    'hr.tierProNote': 'You can still prepare your form first. Complete the Pro payment at confirmation to secure this tier.',
+    'hr.tierBusinessNote': 'Templates and requirements can be prepared first. Complete the Business payment at confirmation to secure this tier.',
     'hr.packageStorageStatus': 'HR Storage Status',
     'hr.packageSheetReady': 'HR Google Sheet: active',
     'hr.packageSheetPending': 'HR Google Sheet: not set',
@@ -2042,6 +2053,7 @@ const I18N = {
     'form.optional': 'Optional',
     'form.continue': 'Continue',
     'form.submit': 'Send to Google Sheet',
+    'form.finishApplication': 'Finish & Submit Application',
     'form.hint': 'Pick a card or press',
     'form.questionCounter': 'Question {current} of {total}',
     'form.ratingSelect': 'Choose a rating',
@@ -2350,7 +2362,7 @@ const I18N = {
     'hr.packageReceiptStorageValue': 'HR Google Sheet + HR Google Drive',
     'hr.packageReceiptNotes': '备注',
     'hr.packageDone': '完成',
-    'hr.finishCta': '完成并汇总',
+    'hr.finishCta': '保存并查看表单',
     'hr.packageViewFinishing': '查看汇总与后续操作',
     'hr.finishingEyebrow': 'HR 收尾阶段',
     'hr.finishingTitle': 'HR 设置汇总与后续操作',
@@ -2369,8 +2381,8 @@ const I18N = {
     'hr.finishingStorage': 'HR 存储目标',
     'hr.finishingSheetDetail': '1 个 HR 自有的 Google Sheet · 候选人汇总、筛选、详情',
     'hr.finishingDriveDetail': 'HR 自有的 Google Drive · 简历与求职信',
-    'hr.finishingPreview': '预览候选人门户',
-    'hr.finishingCopy': '复制汇总 / 链接',
+    'hr.finishingPreview': '查看申请者门户',
+    'hr.finishingCopy': '复制表单链接',
     'hr.finishingBack': '返回 HR 设置',
     'hr.finishingActivate': '请先激活套餐',
     'hr.finishingNoteDraft': '激活套餐后才会标记为可投入使用并分享门户链接。',
@@ -2381,6 +2393,11 @@ const I18N = {
     'hr.packageBadgeDraft': '套餐：未激活',
     'hr.packageBadgeActive': '{plan} 套餐 - 已激活',
     'hr.packageActivate': '激活 {plan} 套餐',
+    'hr.tierFreeCta': 'Free Tier, Continue',
+    'hr.tierProCta': 'Pro Tier — 继续付款',
+    'hr.tierBusinessCta': 'Business Tier — 继续付款',
+    'hr.tierProNote': '您可以先完成表单配置。确认时完成 Pro 付款即可锁定该套餐。',
+    'hr.tierBusinessNote': '模板与要求可先准备好。确认时完成 Business 付款即可锁定该套餐。',
     'hr.packageStorageStatus': 'HR 存储状态',
     'hr.packageSheetReady': 'HR Google Sheet：已启用',
     'hr.packageSheetPending': 'HR Google Sheet：未填写',
@@ -2615,6 +2632,7 @@ const I18N = {
     'form.optional': '选填',
     'form.continue': '继续',
     'form.submit': '发送到 Google Sheet',
+    'form.finishApplication': '完成并提交申请',
     'form.hint': '选择卡片或按',
     'form.questionCounter': '第 {current} 题，共 {total} 题',
     'form.ratingSelect': '请选择评分',
@@ -4133,7 +4151,14 @@ function renderHrPackageTriggerLabels() {
       button.textContent = t('hr.packageContinueCheckout');
       return;
     }
-    button.textContent = t('hr.packageActivate', { plan: getHrPackageMeta(plan).tier });
+    const tierCtaKey = plan === 'free'
+      ? 'hr.tierFreeCta'
+      : plan === 'pro'
+        ? 'hr.tierProCta'
+        : plan === 'business'
+          ? 'hr.tierBusinessCta'
+          : '';
+    button.textContent = tierCtaKey ? t(tierCtaKey) : t('hr.packageActivate', { plan: getHrPackageMeta(plan).tier });
   });
 }
 
@@ -5252,15 +5277,12 @@ function nextStepQuestion() {
     renderCurrentQuestion();
     return;
   }
-  if (state.activePresetKey === 'recruit' && !state.isSimulation) {
-    const invalidIndex = p.questions.findIndex((item) => !isQuestionAnswerValid(item));
-    if (invalidIndex >= 0) {
-      state.currentStepIndex = invalidIndex;
-      renderCurrentQuestion();
-      showToast(t('toast.requiredFieldsMissing'));
-      return;
-    }
-  }
+  finishApplicantApplication();
+}
+
+function finishApplicantApplication() {
+  if (state.view !== 'form') return;
+  clearAdvanceTimer();
   triggerFormSubmissionSuccess();
 }
 
@@ -5280,7 +5302,9 @@ function updateFloatingDock() {
   const percent = Math.round(((idx + 1) / total) * 100);
 
   const prevBtn = document.getElementById('question-btn-prev');
+  const nextBtn = document.getElementById('question-btn-next');
   const nextLabel = document.getElementById('question-next-label');
+  const finishBtn = document.getElementById('question-btn-finish');
   const progressBar = document.getElementById('question-progress-bar');
   const percentText = document.getElementById('question-percent-text');
 
@@ -5291,8 +5315,11 @@ function updateFloatingDock() {
       : 'dock-btn dock-btn-secondary cursor-pointer';
   }
 
+  if (nextBtn) nextBtn.classList.toggle('hidden', idx === total - 1);
+  if (finishBtn) finishBtn.classList.toggle('hidden', idx !== total - 1);
+
   if (nextLabel) {
-    nextLabel.textContent = idx === total - 1 ? t('form.submit') : t('form.continue');
+    nextLabel.textContent = t('form.continue');
   }
 
   if (progressBar) progressBar.style.width = `${percent}%`;
