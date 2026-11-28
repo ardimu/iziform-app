@@ -1102,7 +1102,6 @@ const I18N = {
     'hr.qualification': 'Kualifikasi latar belakang',
     'hr.certification': 'Sertifikasi',
     'hr.plusPoints': 'Nilai plus',
-    'hr.cvRequired': 'Wajib unggah CV PDF',
     'hr.matchThreshold': 'Batas kriteria Match Score',
     'hr.uiTemplateLabel': 'Template UI HR',
     'hr.uiPreviewLabel': 'Pratinjau langsung',
@@ -1715,7 +1714,6 @@ const I18N = {
     'hr.qualification': 'Background qualification',
     'hr.certification': 'Certification',
     'hr.plusPoints': 'Plus points',
-    'hr.cvRequired': 'PDF CV upload required',
     'hr.matchThreshold': 'Match Score threshold',
     'hr.uiTemplateLabel': 'HR UI template',
     'hr.uiPreviewLabel': 'Live preview',
@@ -2328,7 +2326,6 @@ const I18N = {
     'hr.qualification': '背景资质',
     'hr.certification': '证书',
     'hr.plusPoints': '加分项',
-    'hr.cvRequired': '必须上传 PDF 简历',
     'hr.matchThreshold': '匹配分门槛',
     'hr.uiTemplateLabel': 'HR 界面模板',
     'hr.uiPreviewLabel': '实时预览',
@@ -5080,8 +5077,6 @@ function renderHrBuilder() {
   if (jobType) jobType.value = r.jobType || 'Full-time';
   const matchThreshold = document.getElementById('hr-match-threshold-input');
   if (matchThreshold) matchThreshold.value = r.matchThreshold || 'medium';
-  const cvRequired = document.getElementById('hr-cv-required-input');
-  if (cvRequired) cvRequired.checked = r.cvRequired !== false;
   renderHrCoverLetterControl();
   renderHrLogoPreview();
   renderHrBannerPreview();
