@@ -2551,8 +2551,8 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-prof
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-hero-actions .btn-primary { padding: 0.6rem 1rem; border: 1px solid #111111; border-radius: 999px; background: #111111; color: #ffffff; font-weight: 800; letter-spacing: 0; text-transform: none; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-hero::before { content: 'VEILO'; position: absolute; top: 1rem; right: 1rem; z-index: 2; padding: 0.28rem 0.6rem; border-radius: 999px; background: #fbd5a0; color: #111111; font-family: var(--font-outfit); font-size: 0.55rem; font-weight: 900; letter-spacing: 0.14em; }
 
-body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-showcase-grid { gap: 1rem; }
-body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-showcase-card { padding: 1.15rem; border: 1px solid rgba(17, 17, 17, 0.12); border-radius: 1.5rem; background: #ffffff; box-shadow: var(--shadow-soft); }
+body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-showcase-grid { gap: 1.25rem; }
+body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-showcase-card { padding: 1.35rem 1.25rem; border: 1px solid rgba(17, 17, 17, 0.12); border-radius: 1.5rem; background: #ffffff; box-shadow: var(--shadow-soft); }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-showcase-card h2 { font-size: 1rem; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-showcase-card p { margin-top: 0.7rem; font-size: 0.75rem; line-height: 1.6; color: #5a5a5a; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-showcase-card p span { overflow-wrap: anywhere; }
@@ -2597,16 +2597,16 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .candidate-c
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .candidate-cv-card p { color: #6b6b6b; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .candidate-match-badge { border: 1px solid rgba(17, 17, 17, 0.1); background: #dceaa0; color: #111111; font-variant-numeric: tabular-nums; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .candidate-match-badge.matched { border-color: transparent; background: #d8e89e; color: #111111; }
-body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .brand-cover-wrapper { display: block; height: 11rem; border: 1px solid rgba(17, 17, 17, 0.12); border-radius: 1.5rem; background: #e6f0c0; }
+body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .brand-cover-wrapper { display: block; height: 9.5rem; border: 1px solid rgba(17, 17, 17, 0.12); border-radius: 1.5rem; background: #e6f0c0; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .brand-cover-overlay { background: linear-gradient(180deg, rgba(230, 240, 192, 0.12), rgba(247, 246, 236, 0.8)); }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .cover-badge { border-radius: 999px; background: #111111; color: #ffffff; }
-body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .brand-identity-card { display: flex; padding: 1rem; border: 1px solid rgba(17, 17, 17, 0.12); border-radius: 1.5rem; background: #cfe0e4; box-shadow: var(--shadow-soft); }
+body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .brand-identity-card { display: flex; padding: 0.9rem 1rem; border: 1px solid rgba(17, 17, 17, 0.12); border-radius: 1.5rem; background: #cfe0e4; box-shadow: var(--shadow-soft); }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .company-logo-avatar { border-radius: 1rem; background: #ffffff; color: #111111; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .company-name { font-family: var(--career-font-heading); color: #111111; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .company-subtitle,
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .brand-meta-row { color: #5a5a5a; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .verified-badge { border-color: transparent; background: #dceaa0; color: #111111; }
-body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .open-question-card { margin-top: 1rem; padding: 1.25rem; border: 1px solid rgba(17, 17, 17, 0.12); border-radius: 1.75rem; background: #ffffff; box-shadow: var(--shadow-soft); }
+body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .open-question-card { margin-top: 1.25rem; padding: 1.25rem; border: 1px solid rgba(17, 17, 17, 0.12); border-radius: 1.75rem; background: #ffffff; box-shadow: var(--shadow-soft); }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .open-question-card::before { left: 1.25rem; right: 1.25rem; background: linear-gradient(90deg, transparent, #dceaa0, transparent); }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .question-topline { color: #8a8a8a; font-variant-numeric: tabular-nums; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .question-headline { font-size: 1.1rem; font-weight: 800; }
@@ -2634,11 +2634,11 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-fact
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .question-topline { gap: 0.5rem 0.75rem; line-height: 1.35; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .question-nav-row { gap: 0.5rem; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .dock-btn { font-size: 0.6875rem; line-height: 1.2; }
-body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] :is(.career-showcase-card, .candidate-portal, .brand-identity-card, .open-question-card) { min-width: 0; max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
-body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] :is(.career-showcase-card, .candidate-portal, .brand-identity-card, .open-question-card) * { min-width: 0; max-width: 100%; overflow-wrap: anywhere; word-break: break-word; }
+body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] :is(.career-showcase-card, .candidate-portal, .brand-identity-card, .open-question-card) { min-width: 0; max-width: 100%; overflow-wrap: break-word; word-break: normal; }
+body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] :is(.career-showcase-card, .candidate-portal, .brand-identity-card, .open-question-card) * { min-width: 0; max-width: 100%; overflow-wrap: break-word; word-break: normal; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] :is(.career-showcase-card, .candidate-portal, .brand-identity-card, .open-question-card) :is(input, textarea, select, button, span, b, i, strong, small, p, div, li, label) { font-family: var(--career-font-body); }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] :is(.career-showcase-card, .candidate-portal, .brand-identity-card, .open-question-card) :is(h1, h2, h3, h4) { font-family: var(--career-font-heading); }
-body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .question-subtitle { overflow-wrap: anywhere; word-break: break-word; }
+body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .question-subtitle { overflow-wrap: break-word; word-break: normal; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .choice-tile-grid { min-width: 0; width: 100%; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .choice-tile > div { min-width: 0; }
 body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .file-input-row { min-width: 0; width: 100%; }
@@ -2653,45 +2653,22 @@ body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .dock-percen
 #hr-ui-preview[data-template="veilo"] .hr-ui-preview-bar { background: #111111; }
 #hr-ui-preview[data-template="veilo"] .hr-ui-preview-logo { background: #dceaa0; color: #111111; }
 body[data-preset] .hr-template-preview-stage[data-ornament="veilo"]::after { opacity: 0.34; background: radial-gradient(circle at 88% 10%, rgba(221, 232, 160, 0.9), transparent 40%), radial-gradient(circle at 8% 96%, rgba(214, 228, 232, 0.9), transparent 44%); filter: blur(18px); -webkit-mask-image: none; mask-image: none; }
-.hr-template-preview-stage[data-template="veilo"] { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr) minmax(0, 0.9fr); gap: 0.5rem; background: linear-gradient(135deg, #f7f6ec, #e6f0c0); }
-.hr-template-preview-stage[data-template="veilo"] .hr-template-stage-hero { grid-column: 1; grid-row: 1 / span 2; flex-direction: column; align-items: flex-start; background: #d6e4e8; border-color: rgba(17, 17, 17, 0.12); }
+.hr-template-preview-stage[data-template="veilo"] { background: linear-gradient(135deg, #f7f6ec, #e6f0c0); }
+.hr-template-preview-stage[data-template="veilo"] .hr-template-stage-hero { background: #d6e4e8; border-color: rgba(17, 17, 17, 0.12); }
 .hr-template-preview-stage[data-template="veilo"] .hr-template-stage-hero-copy b { font-family: var(--font-outfit); }
-.hr-template-preview-stage[data-template="veilo"] .hr-template-stage-badge { margin-left: 0; background: #dceaa0; color: #111111; }
-.hr-template-preview-stage[data-template="veilo"] .hr-template-stage-grid { display: flex; flex-direction: column; grid-column: 3; grid-row: 1 / span 2; margin-top: 0; }
+.hr-template-preview-stage[data-template="veilo"] .hr-template-stage-badge { background: #dceaa0; color: #111111; }
 .hr-template-preview-stage[data-template="veilo"] .hr-template-stage-grid article { background: #ffffff; border-color: rgba(17, 17, 17, 0.12); }
 .hr-template-preview-stage[data-template="veilo"] .hr-template-stage-grid article:first-child { background: #f5e9b8; }
-.hr-template-preview-stage[data-template="veilo"] .hr-template-stage-form { grid-column: 2; grid-row: 1; margin-top: 0; border-top: 0; border-radius: 0.9rem; background: #ffffff; border-color: rgba(17, 17, 17, 0.12); }
+.hr-template-preview-stage[data-template="veilo"] .hr-template-stage-form { background: #ffffff; border-color: rgba(17, 17, 17, 0.12); }
 .hr-template-preview-stage[data-template="veilo"] .hr-template-stage-form span { color: #5a5a5a; }
 
-@media (min-width: 1025px) {
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .recruit-portal-layout { grid-template-columns: minmax(0, 0.95fr) minmax(22rem, 1.15fr) minmax(0, 0.95fr); gap: 1rem 1.25rem; align-items: start; }
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-portal-shell,
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .recruit-apply-column,
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-showcase-grid { display: contents; }
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-hero { grid-column: 1; grid-row: 1 / span 2; margin-bottom: 0; }
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-card-overview { grid-column: 1; grid-row: 3; margin-top: 0; }
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .candidate-portal { grid-column: 2; grid-row: 1; margin-top: 0; padding-top: 1.25rem; border-top: 1px solid rgba(17, 17, 17, 0.12); }
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .brand-cover-wrapper { grid-column: 2; grid-row: 2; margin-top: 0; }
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .brand-identity-card { grid-column: 2; grid-row: 3; margin-top: 0; }
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .open-question-card { grid-column: 2; grid-row: 4; }
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-card-requirement { grid-column: 3; grid-row: 1; margin-top: 0; }
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-card-qualification { grid-column: 3; grid-row: 2; }
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-card-benefit { grid-column: 3; grid-row: 3; }
-}
 @media (max-width: 1024px) {
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .recruit-portal-layout { display: flex; flex-direction: column; gap: 0.9rem; }
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-portal-shell,
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .recruit-apply-column,
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-showcase-grid { display: flex; flex-direction: column; gap: 0.9rem; }
   body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-hero,
   body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-showcase-card,
   body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .candidate-portal,
   body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .brand-cover-wrapper,
   body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .brand-identity-card,
   body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .open-question-card { width: 100%; min-width: 0; max-width: 100%; margin: 0; }
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .recruit-apply-column { padding-top: 0.5rem; }
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .candidate-portal { margin-top: 0.75rem; }
-  body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .open-question-card { margin-top: 1rem; }
   body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-company-banner { height: 5.5rem; border-radius: 1rem 1rem 0.75rem 0.75rem; }
   body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-hero-body { margin-top: -1.5rem; padding: 0 0.9rem 0.9rem; }
   body[data-preset="recruit"] #form-view[data-hr-ui-template="veilo"] .career-hero .career-company-logo { width: 3.5rem; height: 3.5rem; border-width: 3px; }
