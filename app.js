@@ -1204,6 +1204,34 @@ const I18N = {
     'hr.packageReceiptStorageValue': 'Google Sheet HR + Google Drive HR',
     'hr.packageReceiptNotes': 'Catatan',
     'hr.packageDone': 'Selesai',
+    'hr.finishCta': 'Selesaikan & Ringkas',
+    'hr.packageViewFinishing': 'Lihat Ringkasan & Tindak Lanjut',
+    'hr.finishingEyebrow': 'Tahap Akhir HR',
+    'hr.finishingTitle': 'Ringkasan & tindak lanjut setup HR',
+    'hr.finishingDesc': 'Periksa hasil konfigurasi sebelum membuka portal kandidat atau menyalin ringkasan.',
+    'hr.finishingReady': 'Siap Pakai',
+    'hr.finishingDraft': 'Belum Selesai',
+    'hr.finishingPackage': 'Paket & pembayaran',
+    'hr.finishingPaymentConfirmed': 'Aktif · pembayaran terkonfirmasi',
+    'hr.finishingPaymentFree': 'Aktif · tanpa pembayaran',
+    'hr.finishingPaymentPending': 'Belum diaktivasi',
+    'hr.finishingPaymentStatus': 'Status pembayaran',
+    'hr.finishingRole': 'Posisi & perusahaan',
+    'hr.finishingFields': 'Field pelamar',
+    'hr.finishingFieldsCount': '{visible} dari {total} field tampil · {custom} kolom tambahan · {required} wajib',
+    'hr.finishingAppearance': 'Template & font',
+    'hr.finishingStorage': 'Tujuan penyimpanan HR',
+    'hr.finishingSheetDetail': '1 Google Sheet milik HR · Rekap Kandidat, Screening, Detail',
+    'hr.finishingDriveDetail': 'Google Drive milik HR · CV & surat lamaran',
+    'hr.finishingPreview': 'Pratinjau Portal Kandidat',
+    'hr.finishingCopy': 'Salin Ringkasan / Link',
+    'hr.finishingBack': 'Kembali ke Pengaturan HR',
+    'hr.finishingActivate': 'Aktifkan paket dulu',
+    'hr.finishingNoteDraft': 'Aktifkan paket agar status Siap Pakai dan link siap dibagikan.',
+    'hr.finishingCopied': 'Ringkasan HR dan link portal disalin.',
+    'hr.finishingCopyFailed': 'Clipboard tidak tersedia. Link portal: {url}',
+    'hr.finishingSummaryTitle': 'Ringkasan Setup HR',
+    'hr.finishingPortalLink': 'Link portal',
     'hr.packageBadgeDraft': 'Paket: belum aktif',
     'hr.packageBadgeActive': '{plan} Tier - Aktif',
     'hr.packageActivate': 'Aktifkan Paket {plan}',
@@ -1749,6 +1777,34 @@ const I18N = {
     'hr.packageReceiptStorageValue': 'HR Google Sheet + HR Google Drive',
     'hr.packageReceiptNotes': 'Notes',
     'hr.packageDone': 'Done',
+    'hr.finishCta': 'Finish & Recap',
+    'hr.packageViewFinishing': 'View Recap & Next Steps',
+    'hr.finishingEyebrow': 'HR Finishing',
+    'hr.finishingTitle': 'HR setup recap & next steps',
+    'hr.finishingDesc': 'Review the configuration before opening the candidate portal or copying the recap.',
+    'hr.finishingReady': 'Ready to Use',
+    'hr.finishingDraft': 'Not Finished',
+    'hr.finishingPackage': 'Package & payment',
+    'hr.finishingPaymentConfirmed': 'Active · payment confirmed',
+    'hr.finishingPaymentFree': 'Active · no payment',
+    'hr.finishingPaymentPending': 'Not activated',
+    'hr.finishingPaymentStatus': 'Payment status',
+    'hr.finishingRole': 'Position & company',
+    'hr.finishingFields': 'Applicant fields',
+    'hr.finishingFieldsCount': '{visible} of {total} fields shown · {custom} custom fields · {required} required',
+    'hr.finishingAppearance': 'Template & font',
+    'hr.finishingStorage': 'HR storage destination',
+    'hr.finishingSheetDetail': '1 HR-owned Google Sheet · Candidate Recap, Screening, Details',
+    'hr.finishingDriveDetail': 'HR-owned Google Drive · CV & cover letter',
+    'hr.finishingPreview': 'Preview Candidate Portal',
+    'hr.finishingCopy': 'Copy Recap / Link',
+    'hr.finishingBack': 'Back to HR Settings',
+    'hr.finishingActivate': 'Activate a package first',
+    'hr.finishingNoteDraft': 'Activate a package to mark it Ready to Use and share the portal link.',
+    'hr.finishingCopied': 'HR recap and portal link copied.',
+    'hr.finishingCopyFailed': 'Clipboard unavailable. Portal link: {url}',
+    'hr.finishingSummaryTitle': 'HR Setup Recap',
+    'hr.finishingPortalLink': 'Portal link',
     'hr.packageBadgeDraft': 'Package: not active',
     'hr.packageBadgeActive': '{plan} Tier - Active',
     'hr.packageActivate': 'Activate {plan} Package',
@@ -2294,6 +2350,34 @@ const I18N = {
     'hr.packageReceiptStorageValue': 'HR Google Sheet + HR Google Drive',
     'hr.packageReceiptNotes': '备注',
     'hr.packageDone': '完成',
+    'hr.finishCta': '完成并汇总',
+    'hr.packageViewFinishing': '查看汇总与后续操作',
+    'hr.finishingEyebrow': 'HR 收尾阶段',
+    'hr.finishingTitle': 'HR 设置汇总与后续操作',
+    'hr.finishingDesc': '在打开候选人门户或复制汇总前，请检查配置结果。',
+    'hr.finishingReady': '可投入使用',
+    'hr.finishingDraft': '尚未完成',
+    'hr.finishingPackage': '套餐与付款',
+    'hr.finishingPaymentConfirmed': '已激活 · 付款已确认',
+    'hr.finishingPaymentFree': '已激活 · 无需付款',
+    'hr.finishingPaymentPending': '尚未激活',
+    'hr.finishingPaymentStatus': '付款状态',
+    'hr.finishingRole': '职位与公司',
+    'hr.finishingFields': '申请人字段',
+    'hr.finishingFieldsCount': '显示 {visible} / {total} 个字段 · {custom} 个自定义字段 · {required} 个必填',
+    'hr.finishingAppearance': '模板与字体',
+    'hr.finishingStorage': 'HR 存储目标',
+    'hr.finishingSheetDetail': '1 个 HR 自有的 Google Sheet · 候选人汇总、筛选、详情',
+    'hr.finishingDriveDetail': 'HR 自有的 Google Drive · 简历与求职信',
+    'hr.finishingPreview': '预览候选人门户',
+    'hr.finishingCopy': '复制汇总 / 链接',
+    'hr.finishingBack': '返回 HR 设置',
+    'hr.finishingActivate': '请先激活套餐',
+    'hr.finishingNoteDraft': '激活套餐后才会标记为可投入使用并分享门户链接。',
+    'hr.finishingCopied': 'HR 汇总与门户链接已复制。',
+    'hr.finishingCopyFailed': '剪贴板不可用。门户链接：{url}',
+    'hr.finishingSummaryTitle': 'HR 设置汇总',
+    'hr.finishingPortalLink': '门户链接',
     'hr.packageBadgeDraft': '套餐：未激活',
     'hr.packageBadgeActive': '{plan} 套餐 - 已激活',
     'hr.packageActivate': '激活 {plan} 套餐',
@@ -3007,6 +3091,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderPricing();
   updateQrisPreview();
   setupHrPackageTriggers();
+  setupHrFinishingTriggers();
   setupKeyboardNavigation();
   window.addEventListener('resize', updateCandidatePortalOffsets);
   observeCandidatePortalOffsets();
@@ -3596,6 +3681,45 @@ function getHrTemplateLabel(template) {
   return template.label || (template.labelKey ? t(template.labelKey) : template.key);
 }
 
+function getHrFontPairLabel() {
+  const pair = getHrFontPair();
+  if (pair === 'clean') return t('hr.fontPairTemplate');
+  return t(`hr.fontPair${pair.charAt(0).toUpperCase()}${pair.slice(1)}`);
+}
+
+function getHrFinishingData() {
+  const active = state.hrPackage.active === true;
+  const plan = normalizeHrPackagePlan(active ? state.hrPackage.plan : 'free');
+  const meta = getHrPackageMeta(plan);
+  const manifest = getHrCardboxManifest();
+  const visibleFields = manifest.filter((item) => item.visible);
+  const customFields = getHrCustomFieldsRaw().filter((field) => isHrCardboxVisible(field.id));
+  const currency = state.hrPackage.currency || state.paymentMethod;
+  const paymentStatus = !active
+    ? t('hr.finishingPaymentPending')
+    : plan === 'free'
+      ? t('hr.finishingPaymentFree')
+      : `${t('hr.finishingPaymentConfirmed')} · ${t(`payment.${currency}`)}`;
+  return {
+    active,
+    plan,
+    meta,
+    paymentStatus,
+    company: state.hrPackage.companyName || state.hrCompanyName || getPreset('recruit').companyName,
+    position: currentHrRequirement().position || '-',
+    visibleCount: visibleFields.length,
+    totalCount: manifest.length,
+    requiredCount: visibleFields.filter((item) => item.required).length,
+    customCount: customFields.length,
+    templateLabel: getHrTemplateLabel(getHrUiTemplate()),
+    fontLabel: getHrFontPairLabel(),
+    email: state.hrPackage.email || state.googleEmail || '-',
+    sheetReady: Boolean(state.webhookUrl),
+    driveReady: Boolean(state.hrDriveFolderUrl),
+    portalUrl: `https://iziform.app/f/${getPreset('recruit').slug}`
+  };
+}
+
 function selectHrUiTemplate(templateKey) {
   const template = HR_UI_TEMPLATES.find((item) => item.key === templateKey);
   if (!template) return;
@@ -4068,6 +4192,7 @@ function renderHrPackageStatus() {
   renderHrPackageTriggerLabels();
   renderHrPackageStorageStatus();
   renderHrPackageReceipt();
+  renderHrFinishingSummary();
   const modal = document.getElementById('hr-package-modal');
   if (modal && !modal.classList.contains('hidden')) renderHrPackageSummary();
 }
@@ -4113,6 +4238,167 @@ function openHrPackageModal(planKey) {
 function closeHrPackageModal() {
   const modal = document.getElementById('hr-package-modal');
   if (modal) modal.classList.add('hidden');
+}
+
+function renderHrFinishingReadiness() {
+  const data = getHrFinishingData();
+  const chip = document.getElementById('hr-setup-readiness');
+  if (chip) {
+    chip.dataset.state = data.active ? 'ready' : 'draft';
+    chip.innerHTML = `
+      <span class="hr-setup-readiness-dot" aria-hidden="true"></span>
+      <b>${escapeHtml(data.active ? t('hr.finishingReady') : t('hr.finishingDraft'))}</b>
+      <small>${escapeHtml(data.active ? `${t('hr.packageActive')} · ${data.meta.tier}` : t('hr.finishingNoteDraft'))}</small>`;
+  }
+  const finishButton = document.getElementById('hr-finish-btn');
+  if (finishButton) {
+    finishButton.classList.toggle('is-ready', data.active);
+    finishButton.setAttribute('aria-label', `${t('hr.finishCta')} · ${data.active ? t('hr.finishingReady') : t('hr.finishingDraft')}`);
+  }
+}
+
+function renderHrFinishingSummary() {
+  const box = document.getElementById('hr-finishing-summary');
+  if (!box) return;
+  const data = getHrFinishingData();
+  const status = document.getElementById('hr-finishing-status');
+  if (status) {
+    status.dataset.state = data.active ? 'ready' : 'draft';
+    status.innerHTML = `
+      <span class="hr-finishing-status-badge">${escapeHtml(data.active ? t('hr.finishingReady') : t('hr.finishingDraft'))}</span>
+      <span class="hr-finishing-status-copy">
+        <b>${escapeHtml(data.active ? t('hr.packageActive') : t('hr.packageDraft'))}</b>
+        <small>${escapeHtml(data.paymentStatus)}</small>
+      </span>`;
+  }
+  const rows = [
+    [t('hr.finishingPackage'), `${data.meta.tier} · ${data.meta.name} · ${data.meta.price}`, data.paymentStatus],
+    [t('hr.finishingRole'), data.company, `${t('hr.position')}: ${data.position}`],
+    [
+      t('hr.finishingFields'),
+      t('hr.finishingFieldsCount', { visible: data.visibleCount, total: data.totalCount, custom: data.customCount, required: data.requiredCount }),
+      `${t('hr.cardboxSheetIncluded')}`
+    ],
+    [t('hr.finishingAppearance'), data.templateLabel, `${t('hr.fontPairLabel')}: ${data.fontLabel}`]
+  ];
+  box.innerHTML = rows.map(([label, value, note]) => `
+    <div class="hr-finishing-row">
+      <span>${escapeHtml(label)}</span>
+      <div><b>${escapeHtml(value)}</b><small>${escapeHtml(note)}</small></div>
+    </div>`).join('');
+
+  const storage = document.getElementById('hr-finishing-storage');
+  if (storage) {
+    storage.innerHTML = `
+      <div class="hr-finishing-storage-head">
+        <b>${escapeHtml(t('hr.finishingStorage'))}</b>
+        <small>${escapeHtml(data.email)}</small>
+      </div>
+      <div class="hr-finishing-storage-row">
+        <span class="hr-finishing-storage-icon">S</span>
+        <div>
+          <b>${escapeHtml(t('hr.finishingSheetDetail'))}</b>
+          <small>${escapeHtml(data.sheetReady ? t('hr.packageSheetReady') : t('hr.packageSheetPending'))}</small>
+        </div>
+      </div>
+      <div class="hr-finishing-storage-row">
+        <span class="hr-finishing-storage-icon">D</span>
+        <div>
+          <b>${escapeHtml(t('hr.finishingDriveDetail'))}</b>
+          <small>${escapeHtml(data.driveReady ? t('hr.packageDriveReady') : t('hr.packageDrivePending'))}</small>
+        </div>
+      </div>`;
+  }
+  const note = document.getElementById('hr-finishing-note');
+  if (note) {
+    note.textContent = data.active ? '' : t('hr.finishingNoteDraft');
+    note.classList.toggle('hidden', data.active);
+  }
+  const activate = document.getElementById('hr-finishing-activate-btn');
+  if (activate) activate.classList.toggle('hidden', data.active);
+  renderHrFinishingReadiness();
+}
+
+function buildHrFinishingText() {
+  const data = getHrFinishingData();
+  return [
+    t('hr.finishingSummaryTitle'),
+    `${t('hr.finishingPaymentStatus')}: ${data.paymentStatus}`,
+    `${t('hr.finishingPackage')}: ${data.meta.tier} · ${data.meta.name} · ${data.meta.price}`,
+    `${t('hr.packageReceiptName')}: ${data.company}`,
+    `${t('hr.position')}: ${data.position}`,
+    `${t('hr.finishingFields')}: ${t('hr.finishingFieldsCount', { visible: data.visibleCount, total: data.totalCount, custom: data.customCount, required: data.requiredCount })}`,
+    `${t('hr.finishingAppearance')}: ${data.templateLabel} · ${data.fontLabel}`,
+    `${t('hr.finishingStorage')}: ${t('hr.packageReceiptStorageValue')}`,
+    `${t('hr.finishingPortalLink')}: ${data.portalUrl}`
+  ].join('\n');
+}
+
+function openHrFinishingModal() {
+  closeHrPackageModal();
+  renderHrFinishingSummary();
+  const modal = document.getElementById('hr-finishing-modal');
+  if (modal) modal.classList.remove('hidden');
+}
+
+function closeHrFinishingModal() {
+  const modal = document.getElementById('hr-finishing-modal');
+  if (modal) modal.classList.add('hidden');
+}
+
+function previewHrFinishingPortal() {
+  closeHrFinishingModal();
+  setHrActiveSide('b');
+}
+
+function backHrFinishingToSettings() {
+  closeHrFinishingModal();
+  setHrActiveSide('a', true);
+  const target = document.getElementById('hr-finish-btn') || document.getElementById('panel-hr-builder');
+  if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function copyHrFinishingSummary() {
+  const data = getHrFinishingData();
+  const text = buildHrFinishingText();
+  if (!navigator.clipboard || !navigator.clipboard.writeText) {
+    showToast(t('hr.finishingCopyFailed', { url: data.portalUrl }));
+    return;
+  }
+  navigator.clipboard.writeText(text).then(() => {
+    showToast(t('hr.finishingCopied'));
+  }).catch(() => {
+    showToast(t('hr.finishingCopyFailed', { url: data.portalUrl }));
+  });
+}
+
+function activateHrPackageFromFinishing() {
+  closeHrFinishingModal();
+  openHrPackageModal(state.hrPackage.plan || state.hrPackageModalPlan || 'pro');
+}
+
+function setupHrFinishingTriggers() {
+  document.querySelectorAll('[data-hr-open-finishing]').forEach((button) => {
+    button.addEventListener('click', openHrFinishingModal);
+  });
+  document.querySelectorAll('[data-hr-finishing-close]').forEach((button) => {
+    button.addEventListener('click', closeHrFinishingModal);
+  });
+  const modal = document.getElementById('hr-finishing-modal');
+  if (modal) {
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) closeHrFinishingModal();
+    });
+  }
+  [
+    ['hr-finishing-preview-btn', previewHrFinishingPortal],
+    ['hr-finishing-copy-btn', copyHrFinishingSummary],
+    ['hr-finishing-back-btn', backHrFinishingToSettings],
+    ['hr-finishing-activate-btn', activateHrPackageFromFinishing]
+  ].forEach(([id, handler]) => {
+    const button = document.getElementById(id);
+    if (button) button.addEventListener('click', handler);
+  });
 }
 
 function setupHrPackageTriggers() {

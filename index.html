@@ -409,6 +409,7 @@
             <button type="button" onclick="setHrActiveSide('a')" id="hr-side-a-btn" class="recruit-side-btn active" role="tab" aria-selected="true"><span data-i18n="hr.sideA">Sisi A · HR / Builder</span></button>
             <button type="button" onclick="setHrActiveSide('b')" id="hr-side-b-btn" class="recruit-side-btn" role="tab" aria-selected="false"><span data-i18n="hr.sideB">Sisi B · Portal Kandidat</span></button>
           </div>
+          <div id="hr-setup-readiness" class="hr-setup-readiness" data-state="draft"></div>
           <div class="hr-builder-grid">
             <div class="hr-builder-form">
               <details class="hr-accordion" id="hr-accordion-job-details">
@@ -757,7 +758,8 @@
             </aside>
           </div>
           <div class="custom-actions">
-            <button type="button" onclick="setHrActiveSide('b')" class="btn btn-primary" data-i18n="hr.openPortal">Buka Portal Kandidat</button>
+            <button type="button" id="hr-finish-btn" data-hr-open-finishing class="btn btn-primary hr-finish-btn" data-i18n="hr.finishCta">Selesaikan &amp; Ringkas</button>
+            <button type="button" onclick="setHrActiveSide('b')" class="btn btn-secondary" data-i18n="hr.openPortal">Buka Portal Kandidat</button>
             <button type="button" onclick="previewCategory('recruit')" class="btn btn-secondary" data-i18n="hr.demoPortal">Demo Portal Kandidat</button>
           </div>
           <button type="button" onclick="closeInfoPanel()" class="btn btn-secondary panel-inline-cta" data-i18n="panel.back">Kembali ke Kategori</button>
@@ -1182,7 +1184,31 @@
         <h4 data-i18n="hr.packageSuccessTitle">Setup HR selesai</h4>
         <p class="modal-description" data-i18n="hr.packageSuccessDesc">Paket aktif dan form HR siap digunakan.</p>
         <div id="hr-package-receipt" class="hr-package-receipt"></div>
-        <button type="button" data-hr-package-close class="modal-primary" data-i18n="hr.packageDone">Selesai</button>
+        <div class="hr-package-actions">
+          <button type="button" data-hr-package-close class="modal-secondary" data-i18n="hr.packageDone">Selesai</button>
+          <button type="button" data-hr-open-finishing class="modal-primary" data-i18n="hr.packageViewFinishing">Lihat Ringkasan &amp; Tindak Lanjut</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="hr-finishing-modal" class="modal-overlay hidden">
+    <div class="modal-card modal-card-wide hr-finishing-modal">
+      <button type="button" data-hr-finishing-close class="modal-close" data-i18n-aria="common.close" aria-label="Tutup">&#10005;</button>
+      <span class="modal-eyebrow" data-i18n="hr.finishingEyebrow">Tahap Akhir HR</span>
+      <h3 class="modal-title" data-i18n="hr.finishingTitle">Ringkasan &amp; tindak lanjut setup HR</h3>
+      <p class="modal-description" data-i18n="hr.finishingDesc">Periksa hasil konfigurasi sebelum membuka portal kandidat atau menyalin ringkasan.</p>
+
+      <div id="hr-finishing-status" class="hr-finishing-status"></div>
+      <div id="hr-finishing-summary" class="hr-finishing-summary"></div>
+      <div id="hr-finishing-storage" class="hr-finishing-storage"></div>
+      <p id="hr-finishing-note" class="hr-finishing-note hidden"></p>
+
+      <div class="hr-finishing-actions">
+        <button type="button" id="hr-finishing-preview-btn" class="modal-primary" data-i18n="hr.finishingPreview">Pratinjau Portal Kandidat</button>
+        <button type="button" id="hr-finishing-copy-btn" class="modal-secondary" data-i18n="hr.finishingCopy">Salin Ringkasan / Link</button>
+        <button type="button" id="hr-finishing-back-btn" class="modal-secondary" data-i18n="hr.finishingBack">Kembali ke Pengaturan HR</button>
+        <button type="button" id="hr-finishing-activate-btn" class="hr-finishing-activate hidden" data-i18n="hr.finishingActivate">Aktifkan paket dulu</button>
       </div>
     </div>
   </div>
