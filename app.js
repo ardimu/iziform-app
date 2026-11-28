@@ -1191,7 +1191,7 @@ const I18N = {
     'hr.packageDriveConfirm': 'Google Drive HR dipakai untuk CV & surat lamaran',
     'hr.packageNotes': 'Catatan opsional',
     'hr.packageNotesPlaceholder': 'Contoh: kebutuhan kolom tambahan atau catatan tim',
-    'hr.packageConfirm': 'Konfirmasi & selesaikan',
+    'hr.packageConfirm': 'Konfirmasi & Selesaikan Form',
     'hr.packageErrorCompany': 'Nama perusahaan wajib diisi.',
     'hr.packageErrorEmail': 'Email HR tidak valid.',
     'hr.packageErrorStorage': 'Konfirmasi Google Sheet dan Google Drive HR terlebih dahulu.',
@@ -1205,7 +1205,13 @@ const I18N = {
     'hr.packageReceiptNotes': 'Catatan',
     'hr.packageDone': 'Selesai',
     'hr.packageBadgeDraft': 'Paket: belum aktif',
-    'hr.packageBadgeActive': 'Paket: {plan}',
+    'hr.packageBadgeActive': '{plan} Tier - Aktif',
+    'hr.packageActivate': 'Aktifkan Paket {plan}',
+    'hr.packageStorageStatus': 'Status Storage HR',
+    'hr.packageSheetReady': 'Google Sheet HR: aktif',
+    'hr.packageSheetPending': 'Google Sheet HR: belum diisi',
+    'hr.packageDriveReady': 'Google Drive HR: aktif',
+    'hr.packageDrivePending': 'Google Drive HR: belum diisi',
     'hr.benefit': 'Benefit / tunjangan',
     'hr.benefitPlaceholder': 'Contoh: BPJS, asuransi, flexible working, learning budget',
     'hr.benefitHint': 'Kosongkan untuk menyembunyikan bagian Benefit di portal kandidat.',
@@ -1730,7 +1736,7 @@ const I18N = {
     'hr.packageDriveConfirm': 'HR Google Drive is used for CV & cover letter',
     'hr.packageNotes': 'Optional notes',
     'hr.packageNotesPlaceholder': 'Example: extra columns or team notes',
-    'hr.packageConfirm': 'Confirm & finish',
+    'hr.packageConfirm': 'Confirm & Finish Form',
     'hr.packageErrorCompany': 'Company name is required.',
     'hr.packageErrorEmail': 'Enter a valid HR email.',
     'hr.packageErrorStorage': 'Confirm HR Google Sheet and Drive first.',
@@ -1744,7 +1750,13 @@ const I18N = {
     'hr.packageReceiptNotes': 'Notes',
     'hr.packageDone': 'Done',
     'hr.packageBadgeDraft': 'Package: not active',
-    'hr.packageBadgeActive': 'Package: {plan}',
+    'hr.packageBadgeActive': '{plan} Tier - Active',
+    'hr.packageActivate': 'Activate {plan} Package',
+    'hr.packageStorageStatus': 'HR Storage Status',
+    'hr.packageSheetReady': 'HR Google Sheet: active',
+    'hr.packageSheetPending': 'HR Google Sheet: not set',
+    'hr.packageDriveReady': 'HR Google Drive: active',
+    'hr.packageDrivePending': 'HR Google Drive: not set',
     'hr.benefit': 'Benefits / perks',
     'hr.benefitPlaceholder': 'Example: health insurance, flexible work, learning budget',
     'hr.benefitHint': 'Leave blank to hide the Benefits section on the candidate portal.',
@@ -2269,7 +2281,7 @@ const I18N = {
     'hr.packageDriveConfirm': '使用 HR Google Drive 保存简历与求职信',
     'hr.packageNotes': '可选备注',
     'hr.packageNotesPlaceholder': '例如：额外列需求或团队备注',
-    'hr.packageConfirm': '确认并完成',
+    'hr.packageConfirm': '确认并完成表单',
     'hr.packageErrorCompany': '公司名称必填。',
     'hr.packageErrorEmail': '请输入有效的 HR 邮箱。',
     'hr.packageErrorStorage': '请先确认 HR Google Sheet 与 Drive。',
@@ -2283,7 +2295,13 @@ const I18N = {
     'hr.packageReceiptNotes': '备注',
     'hr.packageDone': '完成',
     'hr.packageBadgeDraft': '套餐：未激活',
-    'hr.packageBadgeActive': '套餐：{plan}',
+    'hr.packageBadgeActive': '{plan} 套餐 - 已激活',
+    'hr.packageActivate': '激活 {plan} 套餐',
+    'hr.packageStorageStatus': 'HR 存储状态',
+    'hr.packageSheetReady': 'HR Google Sheet：已启用',
+    'hr.packageSheetPending': 'HR Google Sheet：未填写',
+    'hr.packageDriveReady': 'HR Google Drive：已启用',
+    'hr.packageDrivePending': 'HR Google Drive：未填写',
     'hr.benefit': '福利 / 待遇',
     'hr.benefitPlaceholder': '例如：社保、商业保险、弹性办公、学习津贴',
     'hr.benefitHint': '留空即可在候选人门户隐藏福利区块。',
@@ -2988,6 +3006,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderPaymentMethod();
   renderPricing();
   updateQrisPreview();
+  setupHrPackageTriggers();
   setupKeyboardNavigation();
   window.addEventListener('resize', updateCandidatePortalOffsets);
   observeCandidatePortalOffsets();
@@ -3982,6 +4001,27 @@ function renderHrPackageSummary() {
     <ul>${benefits}</ul>`;
 }
 
+function renderHrPackageTriggerLabels() {
+  document.querySelectorAll('[data-hr-package-trigger]').forEach((button) => {
+    const plan = button.getAttribute('data-hr-package-trigger');
+    if (plan === 'checkout') {
+      button.textContent = t('hr.packageContinueCheckout');
+      return;
+    }
+    button.textContent = t('hr.packageActivate', { plan: getHrPackageMeta(plan).tier });
+  });
+}
+
+function renderHrPackageStorageStatus() {
+  const box = document.getElementById('hr-package-storage-status');
+  if (!box) return;
+  const items = [
+    state.webhookUrl ? t('hr.packageSheetReady') : t('hr.packageSheetPending'),
+    state.hrDriveFolderUrl ? t('hr.packageDriveReady') : t('hr.packageDrivePending')
+  ];
+  box.innerHTML = `<b>${escapeHtml(t('hr.packageStorageStatus'))}</b><span>${items.map((item) => escapeHtml(item)).join(' · ')}</span>`;
+}
+
 function renderHrPackageReceipt() {
   const receipt = document.getElementById('hr-package-receipt');
   if (!receipt) return;
@@ -4013,7 +4053,7 @@ function renderHrPackageStatus() {
     const badge = document.getElementById('hr-package-status-badge');
     if (label) label.textContent = active ? t('hr.packageActive') : t('hr.packageDraft');
     if (detail) detail.textContent = active ? `${t('hr.packageReady')} · ${meta.name} · ${meta.price}` : t('hr.packageDraftHint');
-    if (badge) badge.textContent = active ? t('hr.packageBadgeActive', { plan: meta.name }) : t('hr.packageBadgeDraft');
+    if (badge) badge.textContent = active ? t('hr.packageBadgeActive', { plan: meta.tier }) : t('hr.packageBadgeDraft');
   }
   const changeButton = document.getElementById('hr-package-change-btn');
   if (changeButton) changeButton.classList.toggle('hidden', !active);
@@ -4023,7 +4063,9 @@ function renderHrPackageStatus() {
   const freeChip = document.getElementById('hr-free-try-btn');
   if (freeChip) freeChip.classList.toggle('is-active', active && plan === 'free');
   const dashboardBadge = document.getElementById('hr-package-dashboard-badge');
-  if (dashboardBadge) dashboardBadge.textContent = active ? t('hr.packageBadgeActive', { plan: meta.name }) : t('hr.packageBadgeDraft');
+  if (dashboardBadge) dashboardBadge.textContent = active ? t('hr.packageBadgeActive', { plan: meta.tier }) : t('hr.packageBadgeDraft');
+  renderHrPackageTriggerLabels();
+  renderHrPackageStorageStatus();
   renderHrPackageReceipt();
   const modal = document.getElementById('hr-package-modal');
   if (modal && !modal.classList.contains('hidden')) renderHrPackageSummary();
@@ -4063,12 +4105,39 @@ function openHrPackageModal(planKey) {
   if (sheetCheck) sheetCheck.checked = reuse;
   if (driveCheck) driveCheck.checked = reuse;
   renderHrPackageSummary();
+  renderHrPackageStorageStatus();
   modal.classList.remove('hidden');
 }
 
 function closeHrPackageModal() {
   const modal = document.getElementById('hr-package-modal');
   if (modal) modal.classList.add('hidden');
+}
+
+function setupHrPackageTriggers() {
+  document.querySelectorAll('[data-hr-package-trigger]').forEach((button) => {
+    button.addEventListener('click', () => {
+      const plan = button.getAttribute('data-hr-package-trigger');
+      if (plan === 'checkout') continueHrPackageFromCheckout();
+      else openHrPackageModal(plan);
+    });
+  });
+  const changeButton = document.getElementById('hr-package-change-btn');
+  if (changeButton) changeButton.addEventListener('click', () => openActiveHrPackageModal());
+  const checkoutConfirm = document.getElementById('checkout-confirm-btn');
+  if (checkoutConfirm) checkoutConfirm.addEventListener('click', confirmQrisPayment);
+  const confirmButton = document.getElementById('hr-package-confirm-btn');
+  if (confirmButton) confirmButton.addEventListener('click', confirmHrPackage);
+  document.querySelectorAll('[data-hr-package-close]').forEach((button) => {
+    button.addEventListener('click', closeHrPackageModal);
+  });
+  const modal = document.getElementById('hr-package-modal');
+  if (modal) {
+    modal.addEventListener('click', (event) => {
+      if (event.target === modal) closeHrPackageModal();
+    });
+  }
+  renderHrPackageTriggerLabels();
 }
 
 function continueHrPackageFromCheckout() {

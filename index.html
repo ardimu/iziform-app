@@ -683,7 +683,7 @@
                     <i id="hr-package-status-detail">Pilih paket, lalu lanjutkan konfirmasi agar form HR siap dipakai.</i>
                   </span>
                   <span class="hr-package-status-badge" id="hr-package-status-badge">—</span>
-                  <button type="button" onclick="openActiveHrPackageModal()" id="hr-package-change-btn" class="hr-package-change-btn hidden" data-i18n="hr.packageChange">Ubah paket</button>
+                  <button type="button" id="hr-package-change-btn" class="hr-package-change-btn hidden" data-i18n="hr.packageChange">Ubah paket</button>
                 </div>
                 <p class="hr-free-note" data-i18n="hr.freeNote">Mode dasar gratis tetap tersedia untuk mencoba alur Sisi A ↔ Sisi B.</p>
                 <div class="hr-pricing-mini-grid">
@@ -701,7 +701,7 @@
                       <li data-i18n="hr.benefitCv">Auto-fill PDF CV + kecocokan Tinggi/Sedang/Rendah</li>
                       <li data-i18n="hr.benefitSheet">Rekap 1 Google Sheet HR</li>
                     </ul>
-                    <button type="button" onclick="openHrPackageModal('pro')" class="hr-package-next-btn" data-i18n="hr.packageContinue">Lanjutkan paket ini</button>
+                    <button type="button" data-hr-package-trigger="pro" class="hr-package-next-btn">Aktifkan Paket Pro</button>
                   </article>
                   <article class="hr-pricing-mini-card hr-pricing-mini-business" data-hr-package-plan="business">
                     <span class="hr-pricing-ribbon promo-badge" data-i18n="pricing.promoBadge">PROMO NEW LAUNCHING</span>
@@ -717,10 +717,10 @@
                       <li data-i18n="hr.benefitBusinessTemplate">Template portal karier Business</li>
                       <li data-i18n="hr.benefitFilter">Rekap &amp; penyaringan kandidat lebih leluasa</li>
                     </ul>
-                    <button type="button" onclick="openHrPackageModal('business')" class="hr-package-next-btn" data-i18n="hr.packageContinue">Lanjutkan paket ini</button>
+                    <button type="button" data-hr-package-trigger="business" class="hr-package-next-btn">Aktifkan Paket Business</button>
                   </article>
                 </div>
-                <button type="button" onclick="openHrPackageModal('free')" class="hr-package-free-btn" data-i18n="hr.packageContinue">Lanjutkan paket ini</button>
+                <button type="button" data-hr-package-trigger="free" class="hr-package-free-btn">Aktifkan Paket Free</button>
               </section>
               <article class="hr-recap-card">
                 <span class="custom-track-label" data-i18n="hr.previewTitle">Pratinjau rekap Google Sheet HR</span>
@@ -1116,8 +1116,8 @@
         <a id="checkout-web-link" href="https://checkout.example.com/iziform-pro-usd" target="_blank" rel="noopener" class="modal-primary support-web-link" data-i18n="checkout.webCta">Lanjutkan ke Web ($)</a>
       </div>
 
-      <button id="checkout-confirm-btn" onclick="confirmQrisPayment()" class="modal-primary" data-i18n="qris.confirm">Saya sudah transfer</button>
-      <button type="button" onclick="continueHrPackageFromCheckout()" class="modal-secondary" data-i18n="hr.packageContinueCheckout">Lanjutkan ke setup HR</button>
+      <button id="checkout-confirm-btn" class="modal-primary" data-i18n="qris.confirm">Saya sudah transfer</button>
+      <button type="button" id="hr-package-continue-checkout-btn" data-hr-package-trigger="checkout" class="modal-secondary">Lanjutkan ke setup HR</button>
     </div>
   </div>
 
@@ -1134,14 +1134,15 @@
     </div>
   </div>
 
-  <div id="hr-package-modal" class="modal-overlay hidden" onclick="if (event.target === this) closeHrPackageModal()">
+  <div id="hr-package-modal" class="modal-overlay hidden">
     <div class="modal-card modal-card-wide hr-package-modal">
-      <button onclick="closeHrPackageModal()" class="modal-close" data-i18n-aria="common.close" aria-label="Tutup">&#10005;</button>
+      <button type="button" data-hr-package-close class="modal-close" data-i18n-aria="common.close" aria-label="Tutup">&#10005;</button>
       <span class="modal-eyebrow" data-i18n="hr.packageModalEyebrow">Aktivasi Paket HR</span>
       <h3 class="modal-title" data-i18n="hr.packageModalTitle">Selesaikan paket HR Anda</h3>
       <p class="modal-description" data-i18n="hr.packageModalDesc">Periksa ringkasan paket dan tujuan penyimpanan sebelum form HR dinyatakan siap.</p>
 
       <div id="hr-package-summary" class="hr-package-summary"></div>
+      <div id="hr-package-storage-status" class="hr-package-storage-status"></div>
 
       <div id="hr-package-form">
         <div class="modal-form">
@@ -1171,8 +1172,8 @@
         </div>
         <p id="hr-package-error" class="hr-package-error hidden"></p>
         <div class="hr-package-actions">
-          <button type="button" onclick="closeHrPackageModal()" class="modal-secondary" data-i18n="common.cancel">Batal</button>
-          <button type="button" onclick="confirmHrPackage()" class="modal-primary" data-i18n="hr.packageConfirm">Konfirmasi &amp; selesaikan</button>
+          <button type="button" data-hr-package-close class="modal-secondary" data-i18n="common.cancel">Batal</button>
+          <button type="button" id="hr-package-confirm-btn" class="modal-primary" data-i18n="hr.packageConfirm">Konfirmasi &amp; Selesaikan Form</button>
         </div>
       </div>
 
@@ -1181,7 +1182,7 @@
         <h4 data-i18n="hr.packageSuccessTitle">Setup HR selesai</h4>
         <p class="modal-description" data-i18n="hr.packageSuccessDesc">Paket aktif dan form HR siap digunakan.</p>
         <div id="hr-package-receipt" class="hr-package-receipt"></div>
-        <button type="button" onclick="closeHrPackageModal()" class="modal-primary" data-i18n="hr.packageDone">Selesai</button>
+        <button type="button" data-hr-package-close class="modal-primary" data-i18n="hr.packageDone">Selesai</button>
       </div>
     </div>
   </div>
